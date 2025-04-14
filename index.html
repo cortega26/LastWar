@@ -1,0 +1,2259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Last War: Season 1 - The Crimson Plague Ultimate Guide</title>
+  <!-- Modern Font Selection -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #c10000;
+      --primary-dark: #900000;
+      --secondary: #1d1d1d;
+      --accent: #ff3333;
+      --text: #333;
+      --text-light: #666;
+      --bg: #f9f9f9;
+      --card-bg: #fff;
+      --border: #e0e0e0;
+      --success: #06d6a0;
+      --warning: #ffd166;
+      --danger: #ef476f;
+      --shadow: 0 4px 6px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+
+    [data-theme="dark"] {
+      --primary: #ff3b3b;
+      --primary-dark: #b50000;
+      --secondary: #2d2d2d;
+      --accent: #ff5555;
+      --text: #f0f0f0;
+      --text-light: #b0b0b0;
+      --bg: #121212;
+      --card-bg: #1e1e1e;
+      --border: #333;
+      --shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Open Sans', Arial, sans-serif;
+      line-height: 1.7;
+      background: var(--bg);
+      color: var(--text);
+      transition: var(--transition);
+      scroll-behavior: smooth;
+      padding-bottom: 40px;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.3;
+      color: var(--primary);
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Header & Navigation */
+    .main-header {
+      background-color: var(--primary);
+      background-image: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      padding: 2rem 1rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      z-index: 1;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .main-header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .main-header p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .nav-container {
+      background-color: var(--card-bg);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary) var(--bg);
+      justify-content: flex-start;
+      padding: 0.5rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    nav::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    nav::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    nav::-webkit-scrollbar-thumb {
+      background-color: var(--primary);
+      border-radius: 4px;
+    }
+
+    nav a {
+      flex: 0 0 auto;
+      padding: 0.75rem 1.25rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      border-radius: 4px;
+      transition: var(--transition);
+      white-space: nowrap;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover {
+      background-color: rgba(193, 0, 0, 0.1);
+      color: var(--primary);
+    }
+
+    nav a.active {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    /* Container for content */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Card Styles */
+    .card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      transition: var(--transition);
+      border: 1px solid var(--border);
+    }
+
+    .card:hover {
+      box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Section Styles */
+    section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 5rem;
+    }
+
+    section h2 {
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+      display: inline-block;
+      font-size: 1.7rem;
+    }
+
+    /* List & Text Styling */
+    ul, ol {
+      margin: 1rem 0 1rem 1.5rem;
+    }
+
+    ul li, ol li {
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin: 1rem 0;
+      color: var(--text);
+    }
+
+    .highlight {
+      background-color: rgba(193, 0, 0, 0.1);
+      padding: 1.25rem;
+      border-radius: 6px;
+      margin: 1.5rem 0;
+      position: relative;
+      border-left: 4px solid var(--primary);
+    }
+
+    .highlight::before {
+      content: "PRO TIP";
+      position: absolute;
+      top: -12px;
+      left: 10px;
+      background: var(--primary);
+      color: white;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    /* FAQ Styling */
+    .faq-container {
+      margin: 1.5rem 0;
+    }
+
+    .faq-item {
+      background-color: var(--card-bg);
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      color: var(--text);
+      user-select: none;
+    }
+
+    .faq-question:hover {
+      background-color: rgba(0,0,0,0.02);
+    }
+
+    .faq-question::after {
+      content: '\f107';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      transition: var(--transition);
+    }
+
+    .faq-question.active::after {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0 1.25rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-answer.show {
+      padding: 1rem 1.25rem;
+      max-height: 1000px;
+    }
+
+    /* Table Styles */
+    .table-container {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    table, th, td {
+      border: 1px solid var(--border);
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+
+    th {
+      background-color: rgba(193, 0, 0, 0.1);
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(0,0,0,0.02);
+    }
+
+    /* Countdown Info Box */
+    #countdownInfo {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    /* Resource Calculator */
+    #resourceCalculator {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      margin: 2rem 0;
+      border: 1px solid var(--border);
+    }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .input-group {
+      margin-bottom: 1rem;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 0.95rem;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .results {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: rgba(0,0,0,0.03);
+      border-radius: 4px;
+    }
+
+    /* Progress tracker */
+    .progress-container {
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-bar {
+      height: 8px;
+      width: 100%;
+      background-color: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background-color: var(--primary);
+      transition: width 0.5s ease;
+    }
+
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin: 0.5rem 0;
+    }
+
+    .toggle-label {
+      margin-right: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .theme-toggle {
+      position: relative;
+      width: 60px;
+      height: 30px;
+      border-radius: 15px;
+      background: var(--text-light);
+      cursor: pointer;
+    }
+
+    .toggle-thumb {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: white;
+      transition: var(--transition);
+    }
+
+    [data-theme="dark"] .toggle-thumb {
+      transform: translateX(30px);
+    }
+
+    /* Resource icons */
+    .resource-icon {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(193, 0, 0, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-right: 0.5rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .resource-icon i {
+      margin-right: 0.3rem;
+    }
+
+    /* Profession selection showcase */
+    .profession-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .profession-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--card-bg);
+      transition: var(--transition);
+    }
+
+    .profession-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .profession-header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .profession-content {
+      padding: 1rem;
+    }
+
+    .profession-pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .pros, .cons {
+      padding: 0.75rem;
+      border-radius: 4px;
+    }
+
+    .pros {
+      background: rgba(6, 214, 160, 0.1);
+      border-left: 3px solid var(--success);
+    }
+
+    .cons {
+      background: rgba(239, 71, 111, 0.1);
+      border-left: 3px solid var(--danger);
+    }
+
+    .pros h4, .cons h4 {
+      margin-top: 0;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .main-header h1 {
+        font-size: 2rem;
+      }
+      
+      #countdownInfo {
+        position: static;
+        margin: 1rem auto;
+        max-width: 100%;
+      }
+      
+      .profession-pros-cons {
+        grid-template-columns: 1fr;
+      }
+      
+      .table-container table {
+        font-size: 0.85rem;
+      }
+      
+      .calculator-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Tooltip styles */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted var(--text);
+      cursor: help;
+    }
+
+    .tooltip .tooltip-text {
+      visibility: hidden;
+      width: 200px;
+      background-color: var(--secondary);
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 0.5rem;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -100px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.85rem;
+    }
+
+    .tooltip .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: var(--secondary) transparent transparent transparent;
+    }
+
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 3rem;
+      padding: 2rem;
+      background-color: var(--secondary);
+      text-align: center;
+      color: rgba(255,255,255,0.7);
+    }
+
+    footer p {
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* Skill tree visual */
+    .skill-tree {
+      position: relative;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .skill-node {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card-bg);
+      position: relative;
+    }
+
+    .skill-node::before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 15%;
+      width: 2px;
+      height: 1rem;
+      background: var(--primary);
+    }
+
+    .skill-node:last-child::before {
+      display: none;
+    }
+
+    .skill-node h4 {
+      margin-top: 0;
+      color: var(--primary);
+    }
+
+    .skill-level {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(193, 0, 0, 0.1);
+      color: var(--primary);
+      font-size: 0.85rem;
+      margin-left: 0.5rem;
+    }
+
+    /* Timeline visual */
+    .timeline {
+      position: relative;
+      margin: 2rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -8px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    .timeline-date {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Jump to top button */
+    #jumpToTop {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 999;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    #jumpToTop.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* New structural elements */
+    .two-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .two-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .resource-box {
+      display: flex;
+      align-items: center;
+      margin: 0.75rem 0;
+      padding: 0.5rem;
+      border-radius: 4px;
+      background: rgba(0,0,0,0.02);
+    }
+
+    .resource-icon-large {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .resource-details {
+      flex-grow: 1;
+    }
+
+    .resource-name {
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .resource-description {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* Virus resistance meter */
+    .meter-container {
+      margin: 1.5rem 0;
+    }
+
+    .meter {
+      height: 24px;
+      background: var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .meter-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ef476f 0%, #ffd166 50%, #06d6a0 100%);
+      transition: width 0.5s ease;
+    }
+
+    .meter-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.25rem;
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    /* Building planner */
+    .building-planner {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+
+    .building-header {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+    }
+
+    .building-levels {
+      display: flex;
+      overflow-x: auto;
+      padding: 1rem;
+      background: var(--card-bg);
+    }
+
+    .building-level {
+      flex: 0 0 auto;
+      width: 80px;
+      text-align: center;
+      margin-right: 1rem;
+      padding: 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .building-level:hover, .building-level.active {
+      background: rgba(193, 0, 0, 0.1);
+      border-color: var(--primary);
+    }
+
+    .building-level-number {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .building-level-cost {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .building-details {
+      padding: 1rem;
+      border-top: 1px solid var(--border);
+      background: var(--card-bg);
+    }
+  </style>
+</head>
+<body>
+  <!-- Theme Toggle -->
+  <div class="toggle-container container">
+    <span class="toggle-label">Dark Mode</span>
+    <div class="theme-toggle" id="themeToggle">
+      <div class="toggle-thumb"></div>
+    </div>
+  </div>
+
+  <!-- Countdown Information Box -->
+  <div id="countdownInfo">
+    <p><strong>Server:</strong> 1309</p>
+    <p><strong>Server Day:</strong> <span id="dayCount"></span></p>
+    <p><strong>Season 1 starts in:</strong> <span id="countdown"></span></p>
+    <div class="progress-container">
+      <small>Server Progress to Season Start</small>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="header-overlay"></div>
+    <div class="header-content">
+      <h1>Last War: Survival – Season 1</h1>
+      <p>The Ultimate Guide to Mastering The Crimson Plague</p>
+    </div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <div class="nav-container">
+    <nav id="mainNav">
+      <a href="#overview" class="nav-link">Overview</a>
+      <a href="#mechanics" class="nav-link">Game Mechanics</a>
+      <a href="#structures" class="nav-link">Structures</a>
+      <a href="#resources" class="nav-link">Resources</a>
+      <a href="#professions" class="nav-link">Professions</a>
+      <a href="#timeline" class="nav-link">Timeline</a>
+      <a href="#pvp" class="nav-link">PvP Strategy</a>
+      <a href="#growth" class="nav-link">Growth</a>
+      <a href="#alliance" class="nav-link">Alliance</a>
+      <a href="#advanced" class="nav-link">Advanced</a>
+      <a href="#calculator" class="nav-link">Calculator</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#glossary" class="nav-link">Glossary</a>
+    </nav>
+  </div>
+
+  <div class="container">
+    <!-- Section: Overview -->
+    <section id="overview" class="card">
+      <h2>🎮 Season Overview: The Crimson Plague</h2>
+      <p>
+        Welcome to the definitive guide for <strong>Last War: Survival – Season 1: The Crimson Plague</strong>. This guide has been crafted for competitive players, strategic alliance leaders, and anyone aiming to dominate the season leaderboards.
+      </p>
+      
+      <div class="highlight">
+        Season 1 introduces the RA Virus mechanic that fundamentally changes combat dynamics. Success requires both offensive strength and strategic defensive preparations against the virus effects.
+      </div>
+
+      <div class="two-columns">
+        <div>
+          <h3>Key Season Information</h3>
+          <ul>
+            <li><strong>Season Title:</strong> The Crimson Plague</li>
+            <li><strong>Duration:</strong> 60 days</li>
+            <li><strong>Main Feature:</strong> RA Virus mechanic</li>
+            <li><strong>New Resources:</strong> Immune Protein, Mutant Crystals, Genetic Fragments</li>
+            <li><strong>New Buildings:</strong> Protein Farm, Virus Research Institute</li>
+            <li><strong>New Enemies:</strong> Mutated zombies with enhanced abilities</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Season Success Factors</h3>
+          <ol>
+            <li>Virus resistance progression and management</li>
+            <li>Rapid early development of specialty buildings</li>
+            <li>Strategic profession choice based on playstyle</li>
+            <li>Effective coordination with alliance members</li>
+            <li>Efficient resource allocation priorities</li>
+            <li>Understanding zone control dynamics</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="meter-container">
+        <h4>RA Virus Resistance Effectiveness</h4>
+        <div class="meter">
+          <div class="meter-fill" style="width: 60%;"></div>
+        </div>
+        <div class="meter-labels">
+          <span>Vulnerable (0-30%)</span>
+          <span>Moderate (40-70%)</span>
+          <span>Protected (80-100%)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Game Mechanics -->
+    <section id="mechanics" class="card">
+      <h2>⚙️ In-Depth Game Mechanics</h2>
+      <p>
+        The RA Virus is the central mechanic of Season 1. Understanding its effects and countermeasures is fundamental to your success in both PvE and PvP encounters.
+      </p>
+
+      <h3>RA Virus System</h3>
+      <div class="two-columns">
+        <div>
+          <h4>Impact on Gameplay</h4>
+          <ul>
+            <li><strong>Base Effect:</strong> Reduces troop combat effectiveness by 20-50% depending on infection level</li>
+            <li><strong>Scaling:</strong> Virus potency increases with zombie level and city-level disparity</li>
+            <li><strong>Zone Effects:</strong> Higher infection rates in central map zones (up to 60% reduction)</li>
+            <li><strong>Progression Impact:</strong> Affects resource gathering rates and building efficiency</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resistance Mechanics</h4>
+          <ul>
+            <li><strong>Baseline Resistance:</strong> All players start with 15% resistance</li>
+            <li><strong>Resistance Cap:</strong> Maximum achievable resistance is 95%</li>
+            <li><strong>Diminishing Returns:</strong> Resistance upgrades become less effective after 65%</li>
+            <li><strong>Alliance Bonus:</strong> Each member with 50%+ resistance adds 0.5% to alliance resistance</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Virus Resistance Formula</h3>
+      <div class="highlight">
+        Effective Combat Power = Base Power × (1 - (Virus Potency × (1 - Resistance Factor)))
+        <br>
+        Example: 10,000 base power with 40% resistance against 30% virus potency = 10,000 × (1 - (0.3 × (1 - 0.4))) = 10,000 × (1 - 0.18) = 8,200 effective power
+      </div>
+
+      <h3>Resistance Improvement Sources</h3>
+      <div class="table-container">
+        <table>
+          <tr>
+            <th>Source</th>
+            <th>Max Resistance Boost</th>
+            <th>Unlocked Via</th>
+          </tr>
+          <tr>
+            <td>Virus Research Institute</td>
+            <td>40%</td>
+            <td>Building Level 25</td>
+          </tr>
+          <tr>
+            <td>Hero Skills</td>
+            <td>15%</td>
+            <td>Specialized anti-virus heroes</td>
+          </tr>
+          <tr>
+            <td>Technology</td>
+            <td>25%</td>
+            <td>Medical tech tree, Level 15</td>
+          </tr>
+          <tr>
+            <td>Equipment</td>
+            <td>10%</td>
+            <td>Specialized anti-virus gear sets</td>
+          </tr>
+          <tr>
+            <td>Consumables</td>
+            <td>5%</td>
+            <td>Temporary buff items</td>
+          </tr>
+          <tr>
+            <td>Alliance Bonuses</td>
+            <td>10%</td>
+            <td>Alliance Research Level 20</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section: New Structures & Systems -->
+    <section id="structures" class="card">
+      <h2>🏗️ New Structures & Systems</h2>
+      
+      <p>
+        Two critical new structures introduced in Season 1 form the foundation of your anti-virus strategy. Investing early in these buildings is essential for long-term success.
+      </p>
+
+      <div class="building-planner">
+        <div class="building-header">
+          <i class="fas fa-vial"></i> Protein Farm
+        </div>
+        <div class="building-levels">
+          <div class="building-level active">
+            <div class="building-level-number">L5</div>
+            <div class="building-level-cost">25K</div>
+          </div>
+          <div class="building-level">
+            <div class="building-level-number">L10</div>
+            <div class="building-level-cost">75K</div>
+          </div>
+          <div class="building-level">
+            <div class="building-level-number">L15</div>
+            <div class="building-level-cost">180K</div>
+          </div>
+          <div class="building-level">
+            <div class="building-level-number">L20</div>
+            <div class="building-level-cost">450K</div>
+          </div>
+          <div class="building-level">
+            <div class="building-level-number">L25</div>
+            <div class="building-level-cost">950K</div>
+          </div>
+        </div>
+        <div class="building-details">
+          <p><strong>Function:</strong> Produces Immune Protein at a rate determined by building level</p>
+          <p><strong>Key Breakpoints:</strong></p>
+          <ul>
+            <li><strong>Level 5:</strong> 240 Immune Protein per hour (+5% resistance)</li>
+            <li><strong>Level 10:</strong> 600 Immune Protein per hour (+10% resistance)</li>
+            <li><strong>Level 15:</strong> 1,200 Immune Protein per hour (+15% resistance)</li>
+            <li><strong>Level 20:</strong> 2,400 Immune Protein per hour (+20% resistance)</li>
+            <li><strong>Level 25:</strong> 5,000 Immune Protein per hour (+25% resistance)</li>
+          </ul>
+          <p><strong>Strategic Priority:</strong> ⭐⭐⭐⭐⭐ (Essential early build)</p>
+        </div>
+      </div>
+
+      <div class="building-planner">
+        <div class="building-header">
+          <i class="fas fa-microscope"></i> Virus Research Institute
+        </div>
+        <div class="building-levels">
+          <div class="building-level active">
+            <div class="building-level-number">L5</div>
+            <div class="building-level-cost">45K</div>
+          </div>
+          <div class="building-level">
+            <div class="building-level-number">L10</div>
+            <div class="building-level-cost">120K</div>
+          </div>
+          <div class="building-level">
+            <div class="building-level-number">L15</div>
+            <div class="building-level-cost">300K</div>
+          </div>
+          <div class="building-level">
+            <div class="building-level-number">L20</div>
+            <div class="building-level-cost">650K</div>
+          </div>
+          <div class="building-level">
+            <div class="building-level-number">L25</div>
+            <div class="building-level-cost">1.2M</div>
+          </div>
+        </div>
+        <div class="building-details">
+          <p><strong>Function:</strong> Enhances RA Virus Resistance and unlocks specialized research options</p>
+          <p><strong>Key Breakpoints:</strong></p>
+          <ul>
+            <li><strong>Level 5:</strong> +8% Virus Resistance, unlocks basic research</li>
+            <li><strong>Level 10:</strong> +16% Virus Resistance, unlocks Anti-Viral Ammunition</li>
+            <li><strong>Level 15:</strong> +24% Virus Resistance, unlocks Viral Analysis</li>
+            <li><strong>Level 20:</strong> +32% Virus Resistance, unlocks Advanced Immunology</li>
+            <li><strong>Level 25:</strong> +40% Virus Resistance, unlocks Gene Therapy</li>
+          </ul>
+          <p><strong>Strategic Priority:</strong> ⭐⭐⭐⭐⭐ (Essential for campaign progression)</p>
+        </div>
+      </div>
+
+      <div class="highlight">
+        For maximum efficiency, aim to have your Protein Farm at Level 10 and Virus Research Institute at Level 5 by day 3 of the season. This foundation provides the necessary resistance threshold (25%) to efficiently farm early-game resources in low-infection zones.
+      </div>
+    </section>
+
+    <!-- Section: Resource Management -->
+    <section id="resources" class="card">
+      <h2>💎 Resource Management & Economy</h2>
+      
+      <p>
+        Season 1 introduces three new critical resources that must be balanced alongside traditional resources. Strategic allocation becomes increasingly important as the season progresses.
+      </p>
+
+      <div class="resource-box">
+        <div class="resource-icon-large">
+          <i class="fas fa-dna"></i>
+        </div>
+        <div class="resource-details">
+          <h4 class="resource-name">Immune Protein</h4>
+          <p class="resource-description">Primary resource for virus resistance upgrades and specialized building construction</p>
+          <p><strong>Source:</strong> Protein Farms, infected zone farming, special events</p>
+          <p><strong>Daily Need (mid-game):</strong> ~20,000-30,000 for optimal progression</p>
+        </div>
+      </div>
+
+      <div class="resource-box">
+        <div class="resource-icon-large">
+          <i class="fas fa-gem"></i>
+        </div>
+        <div class="resource-details">
+          <h4 class="resource-name">Mutant Crystals</h4>
+          <p class="resource-description">Premium resource used for advanced upgrades and specialized unit training</p>
+          <p><strong>Source:</strong> Elite enemy encounters, alliance events, high-difficulty zones</p>
+          <p><strong>Daily Need (mid-game):</strong> ~500-800 for optimal progression</p>
+        </div>
+      </div>
+
+      <div class="resource-box">
+        <div class="resource-icon-large">
+          <i class="fas fa-vial"></i>
+        </div>
+        <div class="resource-details">
+          <h4 class="resource-name">Genetic Fragments</h4>
+          <p class="resource-description">Used for hero ability enhancements and research specialization</p>
+          <p><strong>Source:</strong> Elite enemies, research breakthroughs, alliance contributions</p>
+          <p><strong>Daily Need (mid-game):</strong> ~100-150 for optimal progression</p>
+        </div>
+      </div>
+
+      <h3>Resource Priority Matrix</h3>
+      <div class="table-container">
+        <table>
+          <tr>
+            <th>Game Phase</th>
+            <th>Primary Focus</th>
+            <th>Secondary Focus</th>
+            <th>Strategic Reserve</th>
+          </tr>
+          <tr>
+            <td>Early (Days 1-7)</td>
+            <td>Immune Protein (Protein Farm upgrades)</td>
+            <td>Traditional Resources (building foundation)</td>
+            <td>Genetic Fragments (save for later)</td>
+          </tr>
+          <tr>
+            <td>Mid (Days 8-21)</td>
+            <td>Mutant Crystals (tech research)</td>
+            <td>Immune Protein (resistance upgrades)</td>
+            <td>Traditional Resources (army building)</td>
+          </tr>
+          <tr>
+            <td>Late (Days 22+)</td>
+            <td>Genetic Fragments (hero specialization)</td>
+            <td>Mutant Crystals (advanced upgrades)</td>
+            <td>Immune Protein (maintain resistance)</td>
+          </tr>
+        </table>
+      </div>
+
+      <h3>Resource Efficiency Calculation</h3>
+      <div class="highlight">
+        <strong>Optimal Research Efficiency Formula:</strong><br>
+        Base Cost × (1 - (0.02 × Active Virus Research Level)) = Effective Cost<br><br>
+        Example: A research costing 10,000 Immune Protein with Level 10 Virus Research (20% discount):<br>
+        10,000 × (1 - (0.02 × 10)) = 10,000 × 0.8 = 8,000 Effective Cost
+      </div>
+    </section>
+
+    <!-- Section: Professions System -->
+    <section id="professions" class="card">
+      <h2>🧬 Professions: Choosing Your Path</h2>
+      
+      <p>
+        Your profession choice in Season 1 defines your gameplay strategy and specialization. This decision is permanent for the season and significantly impacts your contribution to alliance operations.
+      </p>
+
+      <div class="profession-cards">
+        <div class="profession-card">
+          <div class="profession-header">
+            <h3><i class="fas fa-wrench"></i> Engineer</h3>
+          </div>
+          <div class="profession-content">
+            <p>Specializes in building management, research acceleration, and resource optimization. Engineers form the backbone of alliance infrastructure.</p>
+            
+            <div class="profession-pros-cons">
+              <div class="pros">
+                <h4>STRENGTHS</h4>
+                <ul>
+                  <li>+25% building construction speed</li>
+                  <li>+15% resource production</li>
+                  <li>+20% research speed</li>
+                  <li>Special ability: Resource Conversion</li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h4>WEAKNESSES</h4>
+                <ul>
+                  <li>-10% troop attack power</li>
+                  <li>Higher resource costs for combat units</li>
+                  <li>Limited offensive capabilities</li>
+                </ul>
+              </div>
+            </div>
+
+            <h4>Skill Tree Highlights</h4>
+            <div class="skill-tree">
+              <div class="skill-node">
+                <h4>Resource Optimization <span class="skill-level">Lv.5</span></h4>
+                <p>Increases resource gathering speed by 25% and warehouse capacity by 15%</p>
+              </div>
+              <div class="skill-node">
+                <h4>Advanced Construction <span class="skill-level">Lv.10</span></h4>
+                <p>Reduces building material requirements by 20% and construction time by 15%</p>
+              </div>
+              <div class="skill-node">
+                <h4>Genetic Engineering <span class="skill-level">Lv.15</span></h4>
+                <p>Improves Virus Resistance research efficiency by 30% and maximum resist capacity by 5%</p>
+              </div>
+              <div class="skill-node">
+                <h4>Master Fabrication <span class="skill-level">Lv.20</span></h4>
+                <p>Enables construction of advanced defensive structures with 35% improved durability</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="profession-card">
+          <div class="profession-header">
+            <h3><i class="fas fa-khanda"></i> Warrior</h3>
+          </div>
+          <div class="profession-content">
+            <p>Focuses on combat prowess, troop leadership, and offensive capabilities. Warriors lead the vanguard in alliance operations and territorial conquest.</p>
+            
+            <div class="profession-pros-cons">
+              <div class="pros">
+                <h4>STRENGTHS</h4>
+                <ul>
+                  <li>+20% troop attack power</li>
+                  <li>+15% troop health</li>
+                  <li>+25% march speed</li>
+                  <li>Special ability: Combat Rally</li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h4>WEAKNESSES</h4>
+                <ul>
+                  <li>-15% research speed</li>
+                  <li>Slower building construction</li>
+                  <li>Higher maintenance costs</li>
+                </ul>
+              </div>
+            </div>
+
+            <h4>Skill Tree Highlights</h4>
+            <div class="skill-tree">
+              <div class="skill-node">
+                <h4>Battle Tactics <span class="skill-level">Lv.5</span></h4>
+                <p>Increases combat effectiveness against infected enemies by 20%</p>
+              </div>
+              <div class="skill-node">
+                <h4>Viral Resistance <span class="skill-level">Lv.10</span></h4>
+                <p>Grants 15% additional RA Virus resistance to troops during offensive operations</p>
+              </div>
+              <div class="skill-node">
+                <h4>Elite Training <span class="skill-level">Lv.15</span></h4>
+                <p>Reduces troop training time by 30% and resource cost by 15%</p>
+              </div>
+              <div class="skill-node">
+                <h4>Battlefield Command <span class="skill-level">Lv.20</span></h4>
+                <p>Enables specialized anti-virus combat formations with 25% improved effectiveness</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight">
+        Alliance Composition Strategy: Optimal alliance balance is approximately 40% Engineers for infrastructure development and 60% Warriors for offensive operations. Engineers should focus on early-game development while Warriors prepare for mid-game territorial control.
+      </div>
+    </section>
+
+    <!-- Section: Timeline Strategy -->
+    <section id="timeline" class="card">
+      <h2>📆 Timeline Strategy: Day-By-Day Planning</h2>
+      
+      <p>
+        Success in Season 1 requires precise timing of key developments. This expanded timeline provides day-by-day guidance for the first critical week, followed by phase strategies.
+      </p>
+
+      <h3>Critical First Week (Day-by-Day)</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">Day 1</div>
+          <p><strong>Priority:</strong> Establish basic infrastructure</p>
+          <ul>
+            <li>Construct Protein Farm (Level 5)</li>
+            <li>Complete initial hero recruitment</li>
+            <li>Join active alliance</li>
+            <li>Focus all speedups on Protein Farm</li>
+            <li>Complete 10 beginner quests</li>
+          </ul>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-date">Day 2</div>
+          <p><strong>Priority:</strong> Research foundation</p>
+          <ul>
+            <li>Construct Virus Research Institute (Level 3)</li>
+            <li>Research basic Resource Production (Level 5)</li>
+            <li>Upgrade Command Center (Level 7)</li>
+            <li>Begin hero training focused on resource skills</li>
+            <li>Join alliance territory operations</li>
+          </ul>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-date">Day 3</div>
+          <p><strong>Priority:</strong> Resource acceleration</p>
+          <ul>
+            <li>Upgrade Protein Farm (Level 8)</li>
+            <li>Upgrade Virus Research Institute (Level 5)</li>
+            <li>Establish resource gathering schedule</li>
+            <li>Begin basic viral resistance research</li>
+            <li>Coordinate first alliance technology contribution</li>
+          </ul>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-date">Day 4</div>
+          <p><strong>Priority:</strong> Military foundation</p>
+          <ul>
+            <li>Build Barracks and Training Grounds</li>
+            <li>Train initial combat units (focus on resistance)</li>
+            <li>Research Military Tech (Level 3)</li>
+            <li>Continue Protein Farm upgrades</li>
+            <li>Participate in first alliance hunt</li>
+          </ul>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-date">Day 5</div>
+          <p><strong>Priority:</strong> Resistance milestone</p>
+          <ul>
+            <li>Achieve 30% virus resistance</li>
+            <li>Explore first medium-infected zone</li>
+            <li>Collect initial Mutant Crystals</li>
+            <li>Complete Combat Basics quest line</li>
+            <li>Participate in alliance territory control</li>
+          </ul>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-date">Day 6</div>
+          <p><strong>Priority:</strong> Advanced buildings</p>
+          <ul>
+            <li>Construct specialization buildings</li>
+            <li>Research profession-specific tech</li>
+            <li>Upgrade Command Center (Level 10)</li>
+            <li>Begin hero specialization</li>
+            <li>Plan alliance zone defense</li>
+          </ul>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-date">Day 7</div>
+          <p><strong>Priority:</strong> Week 1 consolidation</p>
+          <ul>
+            <li>Evaluate progress against server metrics</li>
+            <li>Adjust strategy based on server dynamics</li>
+            <li>Complete all Week 1 events</li>
+            <li>Finalize profession skill tree path</li>
+            <li>Coordinate Week 2 alliance strategy</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Phase Strategies (Beyond Week 1)</h3>
+      <div class="two-columns">
+        <div>
+          <h4>Early Season (Days 8-14)</h4>
+          <ul>
+            <li>Focus on achieving 45% virus resistance</li>
+            <li>Develop specialized combat units</li>
+            <li>Establish alliance territory interconnection</li>
+            <li>Complete all early season events</li>
+            <li>Upgrade Protein Farm to Level 15</li>
+            <li>Upgrade Virus Research Institute to Level 10</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Mid Season (Days 15-30)</h4>
+          <ul>
+            <li>Achieve 65-70% virus resistance</li>
+            <li>Focus on territorial expansion</li>
+            <li>Begin specialized research tracks</li>
+            <li>Coordinate alliance defense networks</li>
+            <li>Upgrade key buildings to Level 20</li>
+            <li>Begin elite hunting operations</li>
+          </ul>
+        </div>
+      </div>
+      <div class="two-columns">
+        <div>
+          <h4>Late Season (Days 31-45)</h4>
+          <ul>
+            <li>Push for 80%+ virus resistance</li>
+            <li>Develop specialized attack strategies</li>
+            <li>Secure high-value map resources</li>
+            <li>Optimize alliance territory configuration</li>
+            <li>Prepare for final season events</li>
+            <li>Max out key research paths</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Endgame (Days 46-60)</h4>
+          <ul>
+            <li>Focus on strategic map control</li>
+            <li>Execute coordinated alliance operations</li>
+            <li>Max out virus resistance (90%+)</li>
+            <li>Complete all special research projects</li>
+            <li>Prepare for season transition bonuses</li>
+            <li>Finalize alliance positioning for rankings</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: PvP Strategy -->
+    <section id="pvp" class="card">
+      <h2>⚔️ PvP Strategy & Combat Tactics</h2>
+      
+      <p>
+        Season 1's RA Virus mechanic fundamentally changes PvP dynamics. Success requires understanding the new combat mathematics and strategic adaptations.
+      </p>
+
+      <h3>Virus-Enhanced Combat</h3>
+      <div class="two-columns">
+        <div>
+          <h4>Offensive Considerations</h4>
+          <ul>
+            <li><strong>Resistance Gap Advantage:</strong> Attacks against players with 20%+ less virus resistance gain a 30% combat bonus</li>
+            <li><strong>Specialized Units:</strong> Anti-viral troops gain 15% additional damage against infected targets</li>
+            <li><strong>Formation Adjustments:</strong> Standard formations require modification to account for virus effects</li>
+            <li><strong>Hero Selection:</strong> Utilize heroes with virus resistance skills for maximum effectiveness</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Defensive Strategies</h4>
+          <ul>
+            <li><strong>Territory Defense:</strong> Higher resistance allows for more efficient defender positioning</li>
+            <li><strong>Reinforcement Tactics:</strong> Prioritize reinforcing alliance members with lower resistance</li>
+            <li><strong>Strategic Retreats:</strong> Recognize when virus effects make defense untenable</li>
+            <li><strong>Counter-Formations:</strong> Deploy specialized anti-viral defensive formations</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Optimal Combat Unit Compositions</h3>
+      <div class="table-container">
+        <table>
+          <tr>
+            <th>Target Type</th>
+            <th>Infantry %</th>
+            <th>Ranged %</th>
+            <th>Cavalry %</th>
+            <th>Special %</th>
+          </tr>
+          <tr>
+            <td>Player Base (Low Resistance)</td>
+            <td>30%</td>
+            <td>40%</td>
+            <td>20%</td>
+            <td>10% Anti-Viral</td>
+          </tr>
+          <tr>
+            <td>Player Base (High Resistance)</td>
+            <td>20%</td>
+            <td>20%</td>
+            <td>40%</td>
+            <td>20% Anti-Viral</td>
+          </tr>
+          <tr>
+            <td>Alliance Territory</td>
+            <td>40%</td>
+            <td>30%</td>
+            <td>10%</td>
+            <td>20% Anti-Viral</td>
+          </tr>
+          <tr>
+            <td>Infected Zone Control</td>
+            <td>10%</td>
+            <td>30%</td>
+            <td>20%</td>
+            <td>40% Anti-Viral</td>
+          </tr>
+        </table>
+      </div>
+
+      <h3>Battle Tactics by Infection Zone</h3>
+      <div class="highlight">
+        <strong>Zone Tactics Guide:</strong>
+        <ul>
+          <li><strong>Low Infection (0-20%):</strong> Standard combat rules apply; focus on traditional counter units</li>
+          <li><strong>Medium Infection (21-40%):</strong> Deploy mixed forces with at least 25% anti-viral units</li>
+          <li><strong>High Infection (41-60%):</strong> Combat effectiveness drops significantly; require minimum 60% resistance to operate efficiently</li>
+          <li><strong>Critical Infection (61%+):</strong> Only specialized anti-viral units with 80%+ resistance can operate effectively</li>
+        </ul>
+      </div>
+
+      <h3>Hero Selection for Combat</h3>
+      <p>
+        Hero abilities and specializations are crucial for mitigating virus effects in combat. The following heroes excel in Season 1:
+      </p>
+      <ul>
+        <li><strong>Dr. Morgan (Scientist):</strong> Provides +15% virus resistance to all troops under command</li>
+        <li><strong>Commander Hayes (Military):</strong> Grants +20% damage bonus against infected targets</li>
+        <li><strong>Agent Carter (Specialist):</strong> Can bypass up to 15% of enemy virus resistance</li>
+        <li><strong>Medic Chen (Support):</strong> Reduces troop loss by 20% in high infection zones</li>
+      </ul>
+    </section>
+
+    <!-- Section: Maximizing Growth -->
+    <section id="growth" class="card">
+      <h2>📈 Maximizing Growth & Efficiency</h2>
+      
+      <p>
+        Optimal resource allocation and strategic planning are crucial for maximizing your growth rate. Focus on these high-impact activities:
+      </p>
+
+      <h3>Daily Optimization Checklist</h3>
+      <ul>
+        <li><strong>Resource Collection:</strong> Complete full gathering cycles every 8 hours</li>
+        <li><strong>Virus Research:</strong> Maintain continuous research queue focused on resistance</li>
+        <li><strong>Elite Hunting:</strong> Target 5-8 elite hunts daily for Mutant Crystals</li>
+        <li><strong>Alliance Contributions:</strong> Meet daily technology contribution quota</li>
+        <li><strong>Event Participation:</strong> Complete all daily and weekly events</li>
+        <li><strong>Zone Exploration:</strong> Scout new infection zones as resistance increases</li>
+      </ul>
+
+      <h3>Hero Development Strategy</h3>
+      <p>
+        Specialized hero development dramatically impacts your resistance capabilities and overall effectiveness:
+      </p>
+      <div class="two-columns">
+        <div>
+          <h4>Early Game Focus</h4>
+          <ul>
+            <li>Prioritize resource gathering heroes</li>
+            <li>Develop basic resistance skills</li>
+            <li>Focus on hero XP accumulation</li>
+            <li>Unlock essential hero abilities</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Mid/Late Game Focus</h4>
+          <ul>
+            <li>Specialize heroes by role</li>
+            <li>Develop elite virus resistance skills</li>
+            <li>Unlock specialized combat formations</li>
+            <li>Focus on genetic enhancement research</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Spending Efficiency (F2P vs. P2W)</h3>
+      <div class="table-container">
+        <table>
+          <tr>
+            <th>Player Type</th>
+            <th>Resource Focus</th>
+            <th>Building Priority</th>
+            <th>Research Priority</th>
+          </tr>
+          <tr>
+            <td>Free-to-Play</td>
+            <td>Immune Protein & Traditional Resources</td>
+            <td>Protein Farm → Research Institute → Defense</td>
+            <td>Resistance → Resource Production → Combat</td>
+          </tr>
+          <tr>
+            <td>Low Spender</td>
+            <td>Balanced across all resources</td>
+            <td>Research Institute → Protein Farm → Military</td>
+            <td>Balanced approach with combat focus</td>
+          </tr>
+          <tr>
+            <td>Premium Player</td>
+            <td>Genetic Fragments & Mutant Crystals</td>
+            <td>Research Institute → Military → Protein Farm</td>
+            <td>Combat → Resistance → Advanced Tech</td>
+          </tr>
+        </table>
+      </div>
+      
+      <div class="highlight">
+        F2P Growth Strategy: For non-spending players, the key to competitiveness is maintaining optimal resistance levels at each game phase. Aim to be within 10% of the server average resistance level, focusing on efficient resource usage rather than trying to match premium player building levels. Alliance contribution and active participation can close much of the resource gap.
+      </div>
+      
+      <h3>Speedup Usage Strategy</h3>
+      <p>
+        Strategic use of speedups is critical for optimal progression. Follow this priority system:
+      </p>
+      <div class="two-columns">
+        <div>
+          <h4>High-Value Speedup Targets</h4>
+          <ul>
+            <li>Protein Farm upgrades (especially to levels 5, 10, 15)</li>
+            <li>Virus Research Institute upgrades (priority during events)</li>
+            <li>Research projects with resistance benefits</li>
+            <li>Time-sensitive event requirements</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Low-Value Speedup Targets</h4>
+          <ul>
+            <li>Standard resource buildings (except during events)</li>
+            <li>Basic troop training (non-specialized units)</li>
+            <li>Secondary research projects</li>
+            <li>Non-critical building upgrades</li>
+          </ul>
+        </div>
+      </div>
+      
+      <h3>Progress Tracking System</h3>
+      <p>
+        Use this self-assessment chart to measure your progression against server benchmarks:
+      </p>
+      <div class="table-container">
+        <table>
+          <tr>
+            <th>Milestone</th>
+            <th>Casual Progress</th>
+            <th>Standard Progress</th>
+            <th>Competitive Progress</th>
+          </tr>
+          <tr>
+            <td>30% Virus Resistance</td>
+            <td>Day 7-9</td>
+            <td>Day 4-6</td>
+            <td>Day 2-3</td>
+          </tr>
+          <tr>
+            <td>50% Virus Resistance</td>
+            <td>Day 14-18</td>
+            <td>Day 10-13</td>
+            <td>Day 6-9</td>
+          </tr>
+          <tr>
+            <td>75% Virus Resistance</td>
+            <td>Day 30-35</td>
+            <td>Day 21-29</td>
+            <td>Day 14-20</td>
+          </tr>
+          <tr>
+            <td>90% Virus Resistance</td>
+            <td>Day 50+</td>
+            <td>Day 40-49</td>
+            <td>Day 30-39</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+    
+    <!-- Section: Alliance Strategy -->
+    <section id="alliance" class="card">
+      <h2>🤝 Alliance Strategy & Coordination</h2>
+      
+      <p>
+        Alliance coordination is more important than ever in Season 1 due to the virus resistance sharing mechanics and specialized role requirements.
+      </p>
+      
+      <h3>Alliance Composition Framework</h3>
+      <div class="highlight">
+        Optimal Alliance Structure: An effective alliance should balance roles for maximum synergy:
+        <ul>
+          <li><strong>Engineers (35-40%):</strong> Focus on resource production, building development and research acceleration</li>
+          <li><strong>Warriors (45-50%):</strong> Lead offensive operations, territory control, and elite hunting</li>
+          <li><strong>Specialists (10-15%):</strong> Hybrid builds focused on strategic support functions</li>
+        </ul>
+      </div>
+      
+      <h3>Territory Management</h3>
+      <p>
+        Effective territory control requires strategic planning and coordination based on infection zones:
+      </p>
+      <div class="two-columns">
+        <div>
+          <h4>Territory Selection Priorities</h4>
+          <ul>
+            <li>Secure low-infection resource nodes first</li>
+            <li>Create contiguous territories for defense bonuses</li>
+            <li>Establish defensive perimeters around high-value nodes</li>
+            <li>Place alliance buildings strategically for maximum coverage</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Defense Coordination</h4>
+          <ul>
+            <li>Assign dedicated defense teams by zone</li>
+            <li>Implement rotating guard duty schedules</li>
+            <li>Establish reinforcement protocols</li>
+            <li>Create rapid response teams for emergencies</li>
+          </ul>
+        </div>
+      </div>
+      
+      <h3>Alliance Technology Strategy</h3>
+      <p>
+        Coordinated research focus significantly impacts alliance performance:
+      </p>
+      <div class="table-container">
+        <table>
+          <tr>
+            <th>Phase</th>
+            <th>Primary Research</th>
+            <th>Secondary Research</th>
+            <th>Resource Focus</th>
+          </tr>
+          <tr>
+            <td>Early (Week 1-2)</td>
+            <td>Resource Production</td>
+            <td>Basic Resistance</td>
+            <td>Immune Protein</td>
+          </tr>
+          <tr>
+            <td>Mid (Week 3-5)</td>
+            <td>Advanced Resistance</td>
+            <td>Territory Control</td>
+            <td>Mutant Crystals</td>
+          </tr>
+          <tr>
+            <td>Late (Week 6+)</td>
+            <td>Combat Enhancement</td>
+            <td>Advanced Specialization</td>
+            <td>Genetic Fragments</td>
+          </tr>
+        </table>
+      </div>
+      
+      <h3>Alliance Events & Coordination</h3>
+      <p>
+        Key alliance events provide significant advantages when approached strategically:
+      </p>
+      <ul>
+        <li><strong>Viral Outbreak Events:</strong> Occur every 3 days - coordinate to maximize resistance bonuses</li>
+        <li><strong>Elite Hunting Operations:</strong> Daily rotations required for optimal resource gathering</li>
+        <li><strong>Alliance Territory Wars:</strong> Scheduled weekly - require coordinated attack/defense strategies</li>
+        <li><strong>Resource Donation Drives:</strong> Critical for accelerating alliance technology</li>
+        <li><strong>Joint Research Projects:</strong> Provide resistance bonuses to all participating members</li>
+      </ul>
+      
+      <div class="highlight">
+        Communication is key to alliance success. Establish clear communication channels, role assignments, and operational protocols. Regular strategy meetings and coordinated activity times can significantly improve alliance performance.
+      </div>
+    </section>
+    
+    <!-- Section: Advanced Strategies -->
+    <section id="advanced" class="card">
+      <h2>🧠 Advanced Strategies & Techniques</h2>
+      
+      <p>
+        These advanced strategies are designed for experienced players seeking to maximize efficiency and gain competitive advantages.
+      </p>
+      
+      <h3>Advanced Combat Mechanics</h3>
+      <div class="two-columns">
+        <div>
+          <h4>Resistance Penetration</h4>
+          <p>
+            Some specialized units and heroes can bypass enemy virus resistance:
+          </p>
+          <ul>
+            <li><strong>Viral Agents:</strong> Special units with 15% resistance penetration</li>
+            <li><strong>Specialized Equipment:</strong> Can provide up to 10% penetration</li>
+            <li><strong>Research Bonuses:</strong> "Viral Analysis" tech tree provides penetration bonuses</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resistance Formula</h4>
+          <p>
+            The complete virus resistance calculation:
+          </p>
+          <div class="highlight">
+            Effective Resistance = (Base Resistance + Building Bonus + Research Bonus + Hero Bonus + Equipment Bonus) × Alliance Modifier × (1 - Enemy Penetration)
+          </div>
+          <p>Example: (40% + 25% + 15% + 10% + 5%) × 1.1 × (1 - 0.15) = 95% × 1.1 × 0.85 = 88.83% effective resistance</p>
+        </div>
+      </div>
+      
+      <h3>Resource Optimization Techniques</h3>
+      <p>
+        Advanced resource management can provide significant competitive advantages:
+      </p>
+      <ul>
+        <li><strong>Resource Conversion:</strong> Convert excess traditional resources to specialized resources at a 4:1 ratio</li>
+        <li><strong>Tiered Production:</strong> Rotate gathering between zones based on infection levels to maximize efficiency</li>
+        <li><strong>Pulsed Upgrades:</strong> Coordinate building and research upgrades to maximize event rewards</li>
+        <li><strong>Resource Concentration:</strong> Strategically funnel resources to designated alliance members for rapid advancement</li>
+        <li><strong>Resistance Breakpoints:</strong> Target specific resistance levels that unlock new zones or capabilities</li>
+      </ul>
+      
+      <h3>Strategic Zone Control</h3>
+      <p>
+        Map control requires understanding the complex infection dynamics:
+      </p>
+      <div class="meter-container">
+        <h4>Zone Infection Levels</h4>
+        <div class="meter">
+          <div class="meter-fill" style="width: 100%;"></div>
+        </div>
+        <div class="meter-labels">
+          <span>Zone 1 (10-20%)</span>
+          <span>Zone 2 (20-40%)</span>
+          <span>Zone 3 (40-60%)</span>
+          <span>Zone 4 (60-80%)</span>
+        </div>
+      </div>
+      
+      <div class="highlight">
+        <strong>Zone Control Strategy:</strong> The most efficient approach is to maintain presence in multiple zones simultaneously:
+        <ul>
+          <li>Establish gathering operations in zones where your resistance exceeds infection by at least 25%</li>
+          <li>Conduct combat operations in zones where your resistance exceeds infection by at least 15%</li>
+          <li>Focus alliance territory control on zones with strategic resources</li>
+          <li>Create buffer territories around high-value zones</li>
+        </ul>
+      </div>
+      
+      <h3>Counter-Strategy Framework</h3>
+      <p>
+        Adapting to opponent strategies is crucial for competitive play:
+      </p>
+      <div class="table-container">
+        <table>
+          <tr>
+            <th>Opponent Strategy</th>
+            <th>Recognition Signs</th>
+            <th>Effective Counter</th>
+          </tr>
+          <tr>
+            <td>Rush Expansion</td>
+            <td>Rapid territory acquisition in first week</td>
+            <td>Targeted resistance development and strategic territory blocking</td>
+          </tr>
+          <tr>
+            <td>Resource Hoarding</td>
+            <td>Minimal early development, sudden power spikes</td>
+            <td>Early pressure and aggressive resource node control</td>
+          </tr>
+          <tr>
+            <td>Alliance Dominance</td>
+            <td>Coordinated territory control in key zones</td>
+            <td>Form counter-alliances and focus on resistance development</td>
+          </tr>
+          <tr>
+            <td>Specialized Rushing</td>
+            <td>Early focus on specific virus-resistant units</td>
+            <td>Diversified unit composition and defensive positioning</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+    
+    <!-- Section: Resource Calculator -->
+    <section id="calculator" class="card">
+      <h2>🧮 Resource Calculator</h2>
+      
+      <p>
+        Plan your development efficiently with this interactive resource calculator. Input your current statistics to receive customized resource requirements and timelines.
+      </p>
+      
+      <div id="resourceCalculator">
+        <h3>Development Planner</h3>
+        
+        <div class="calculator-grid">
+          <div class="input-group">
+            <label for="currentLevel">Current Command Center Level:</label>
+            <input type="number" id="currentLevel" min="1" max="25" value="10">
+          </div>
+          
+          <div class="input-group">
+            <label for="targetLevel">Target Command Center Level:</label>
+            <input type="number" id="targetLevel" min="1" max="25" value="15">
+          </div>
+          
+          <div class="input-group">
+            <label for="currentResistance">Current Virus Resistance (%):</label>
+            <input type="number" id="currentResistance" min="0" max="100" value="35">
+          </div>
+          
+          <div class="input-group">
+            <label for="targetResistance">Target Virus Resistance (%):</label>
+            <input type="number" id="targetResistance" min="0" max="100" value="50">
+          </div>
+          
+          <div class="input-group">
+            <label for="proteinRate">Immune Protein/Hour:</label>
+            <input type="number" id="proteinRate" min="0" value="800">
+          </div>
+          
+          <div class="input-group">
+            <label for="crystalRate">Mutant Crystals/Day:</label>
+            <input type="number" id="crystalRate" min="0" value="120">
+          </div>
+        </div>
+        
+        <button class="btn" id="calculateBtn">Calculate Requirements</button>
+        
+        <div class="results" id="calculationResults">
+          <p><strong>Required Resources:</strong></p>
+          <ul>
+            <li>Immune Protein: <span id="proteinRequired">--</span></li>
+            <li>Mutant Crystals: <span id="crystalRequired">--</span></li>
+            <li>Genetic Fragments: <span id="fragmentsRequired">--</span></li>
+          </ul>
+          
+          <p><strong>Estimated Time:</strong> <span id="timeRequired">--</span></p>
+          <p><strong>Recommended Actions:</strong> <span id="recommendations">--</span></p>
+        </div>
+      </div>
+      
+      <div class="highlight">
+        Use this calculator when planning major upgrades or setting development targets. The tool factors in diminishing returns on resistance upgrades and alliance bonuses to provide realistic estimates.
+      </div>
+    </section>
+    
+    <!-- Section: FAQ -->
+    <section id="faq" class="card">
+      <h2>❓ Frequently Asked Questions</h2>
+      
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">What is the optimal early-game strategy for F2P players?</div>
+          <div class="faq-answer">
+            <p>For F2P players, focus on rapid development of your Protein Farm (to level 10) and Virus Research Institute (to level 5) within the first 5 days. Join an active alliance immediately and prioritize virus resistance research over combat power initially. Resource gathering efficiency and targeted speedup usage are critical for maintaining competitive progression.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">How does the RA Virus resistance work exactly?</div>
+          <div class="faq-answer">
+            <p>RA Virus resistance is a percentage value that directly counters the negative effects of zone infection. For example, if you're in a zone with 40% infection level and you have 60% resistance, the effective debuff is only 16% (40% × (1 - 0.6)). Resistance is gained through specialized buildings, research, hero abilities, equipment, and alliance bonuses. The maximum theoretical resistance is capped at 95%.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Which profession is better, Engineer or Warrior?</div>
+          <div class="faq-answer">
+            <p>Neither profession is universally better - they serve different strategic roles. Engineers excel at resource production, research acceleration, and infrastructure development, making them vital for alliance growth. Warriors excel at combat operations, territory control, and elite hunting. For individual players, the choice should match your playstyle. For alliances, a balanced composition of approximately 40% Engineers and 60% Warriors is recommended for optimal performance.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">How important is alliance membership in Season 1?</div>
+          <div class="faq-answer">
+            <p>Alliance membership is critically important in Season 1 due to the virus resistance sharing mechanics and specialized role requirements. Active alliances provide resource assistance, strategic coordination, territory protection, and resistance bonuses. The collective alliance resistance bonus can contribute up to 10% additional resistance to all members, which is a significant advantage in higher infection zones. Solo play is extremely challenging in this season and not recommended for competitive progress.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">What's the best way to increase virus resistance quickly?</div>
+          <div class="faq-answer">
+            <p>The fastest path to increased virus resistance is a multi-faceted approach:
+              <ol>
+                <li>Prioritize Virus Research Institute upgrades to at least level 10</li>
+                <li>Focus research on the "Viral Immunity" tech tree</li>
+                <li>Recruit and level heroes with resistance bonuses (Dr. Morgan, Medic Chen)</li>
+                <li>Collect and equip specialized anti-viral gear sets</li>
+                <li>Join an active alliance with high collective resistance</li>
+              </ol>
+              For a major resistance boost, complete the "Viral Adaptation" event series which occurs weekly, providing up to 3% permanent resistance upon completion.
+            </p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">How do I effectively counter players with higher resistance?</div>
+          <div class="faq-answer">
+            <p>When facing opponents with higher virus resistance, consider these strategies:
+              <ul>
+                <li>Deploy specialized viral agent units that can bypass 15% of enemy resistance</li>
+                <li>Research and employ resistance penetration technologies</li>
+                <li>Use heroes with abilities that target resistance mechanics</li>
+                <li>Coordinate with alliance members for multi-pronged attacks</li>
+                <li>Focus on attacking during times when zone infection levels are higher (typically during server events)</li>
+              </ul>
+              Remember that resistance advantages diminish in direct proportion to the gap - a 10% resistance advantage typically translates to only a 3-5% combat advantage.
+            </p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">What happens to my progress after Season 1 ends?</div>
+          <div class="faq-answer">
+            <p>At the conclusion of Season 1, players receive season rewards based on individual and alliance rankings. A portion of your development converts to permanent account benefits:
+              <ul>
+                <li>10% of your maximum achieved virus resistance becomes a permanent resistance bonus</li>
+                <li>Special season heroes remain in your roster with slightly reduced abilities</li>
+                <li>Season-specific research provides partial permanent bonuses to related technologies</li>
+                <li>Season achievement badges provide permanent passive bonuses</li>
+              </ul>
+              These benefits give returning players an advantage in future seasons while maintaining balance for new players.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Section: Glossary -->
+    <section id="glossary" class="card">
+      <h2>📚 Glossary of Terms</h2>
+      
+      <p>
+        Master the unique terminology of Season 1 to better understand game mechanics and communication.
+      </p>
+      
+      <div class="table-container">
+        <table>
+          <tr>
+            <th>Term</th>
+            <th>Definition</th>
+          </tr>
+          <tr>
+            <td>RA Virus</td>
+            <td>The central game mechanic of Season 1 that reduces combat effectiveness and resource gathering efficiency</td>
+          </tr>
+          <tr>
+            <td>Resistance</td>
+            <td>The percentage value representing your immunity to virus effects</td>
+          </tr>
+          <tr>
+            <td>Immune Protein</td>
+            <td>Primary season-specific resource used for resistance upgrades and specialized buildings</td>
+          </tr>
+          <tr>
+            <td>Mutant Crystals</td>
+            <td>Premium season-specific resource for advanced upgrades and specialized units</td>
+          </tr>
+          <tr>
+            <td>Genetic Fragments</td>
+            <td>Rare resource used for hero abilities and research specialization</td>
+          </tr>
+          <tr>
+            <td>Infection Zone</td>
+            <td>Map regions with varying levels of virus presence, affecting combat and gathering</td>
+          </tr>
+          <tr>
+            <td>Viral Agents</td>
+            <td>Specialized combat units with resistance penetration abilities</td>
+          </tr>
+          <tr>
+            <td>Resistance Cap</td>
+            <td>The maximum achievable virus resistance (95%)</td>
+          </tr>
+          <tr>
+            <td>Penetration</td>
+            <td>The ability to bypass a percentage of enemy virus resistance</td>
+          </tr>
+          <tr>
+            <td>Elite Hunting</td>
+            <td>Coordinated attacks against high-level infected targets for premium resources</td>
+          </tr>
+          <tr>
+            <td>Protein Farm</td>
+            <td>Essential building that produces Immune Protein</td>
+          </tr>
+          <tr>
+            <td>Virus Research Institute</td>
+            <td>Building that enhances resistance and unlocks specialized research</td>
+          </tr>
+          <tr>
+            <td>Viral Outbreak</td>
+            <td>Periodic server event with increased infection levels and special rewards</td>
+          </tr>
+          <tr>
+            <td>Alliance Resistance</td>
+            <td>Collective bonus providing additional resistance to all alliance members</td>
+          </tr>
+          <tr>
+            <td>Resistance Breakpoint</td>
+            <td>Specific resistance levels that unlock new capabilities or zones</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+      <p>Last War: Season 1 - The Crimson Plague Ultimate Guide</p>
+      <p>Updated for Server 1309 - April 2025</p>
+      <p>Created by Last War Strategy Guild</p>
+    </footer>
+    
+    <!-- Jump to Top Button -->
+    <div id="jumpToTop">
+      <i class="fas fa-chevron-up"></i>
+    </div>
+  </div>
+  
+  <!-- JavaScript for Interactive Elements -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Theme Toggle
+      $('#themeToggle').click(function() {
+        $('body').toggleClass('dark-mode');
+        if ($('body').hasClass('dark-mode')) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      });
+      
+      // Navigation Active State
+      $('.nav-link').click(function() {
+        $('.nav-link').removeClass('active');
+        $(this).addClass('active');
+      });
+      
+      // FAQ Toggle
+      $('.faq-question').click(function() {
+        $(this).toggleClass('active');
+        $(this).next('.faq-answer').toggleClass('show');
+      });
+      
+      // Scroll to Top Button
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 300) {
+          $('#jumpToTop').addClass('visible');
+        } else {
+          $('#jumpToTop').removeClass('visible');
+        }
+      });
+      
+      $('#jumpToTop').click(function() {
+        $('html, body').animate({scrollTop: 0}, 500);
+      });
+      
+      // Countdown Timer
+      function updateCountdown() {
+        const now = new Date();
+        const seasonStart = new Date(2025, 5, 1); // May 1, 2025
+        const diff = seasonStart - now;
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        
+        $('#countdown').text(`${days}d ${hours}h ${minutes}m`);
+        
+        // Current day calculation
+        const serverStart = new Date(2024, 12, 31); // April 14, 2025
+        const daysSinceStart = Math.floor((now - serverStart) / (1000 * 60 * 60 * 24)) + 1;
+        $('#dayCount').text(daysSinceStart);
+        
+        // Progress calculation
+        const totalDays = Math.floor((seasonStart - serverStart) / (1000 * 60 * 60 * 24));
+        const progress = (daysSinceStart / totalDays) * 100;
+        $('#progressFill').css('width', progress + '%');
+      }
+      
+      updateCountdown();
+      setInterval(updateCountdown, 60000);
+      
+      // Resource Calculator
+      $('#calculateBtn').click(function() {
+        const currentLevel = parseInt($('#currentLevel').val());
+        const targetLevel = parseInt($('#targetLevel').val());
+        const currentResistance = parseInt($('#currentResistance').val());
+        const targetResistance = parseInt($('#targetResistance').val());
+        const proteinRate = parseInt($('#proteinRate').val());
+        const crystalRate = parseInt($('#crystalRate').val());
+        
+        // Basic calculation logic
+        const levelDiff = targetLevel - currentLevel;
+        const resistanceDiff = targetResistance - currentResistance;
+        
+        let proteinRequired = levelDiff * 15000 + (resistanceDiff * 10000);
+        let crystalRequired = levelDiff * 200 + (resistanceDiff * 150);
+        let fragmentsRequired = levelDiff * 50 + (resistanceDiff * 75);
+        
+        // Apply diminishing returns for high resistance
+        if (targetResistance > 65) {
+          const extraResistance = targetResistance - 65;
+          proteinRequired += extraResistance * 5000;
+          crystalRequired += extraResistance * 100;
+          fragmentsRequired += extraResistance * 50;
+        }
+        
+        // Calculate time required
+        const daysForProtein = Math.ceil(proteinRequired / (proteinRate * 24));
+        const daysForCrystals = Math.ceil(crystalRequired / crystalRate);
+        const timeRequired = Math.max(daysForProtein, daysForCrystals);
+        
+        // Display results
+        $('#proteinRequired').text(proteinRequired.toLocaleString());
+        $('#crystalRequired').text(crystalRequired.toLocaleString());
+        $('#fragmentsRequired').text(fragmentsRequired.toLocaleString());
+        $('#timeRequired').text(timeRequired + ' days');
+        
+        // Generate recommendations
+        let recommendations = '';
+        if (daysForProtein > daysForCrystals) {
+          recommendations = 'Focus on improving Protein Farm production.';
+        } else {
+          recommendations = 'Focus on increasing Mutant Crystal gathering efficiency.';
+        }
+        
+        if (targetResistance > 75 && currentResistance < 60) {
+          recommendations += ' Consider a more gradual resistance upgrade path for better efficiency.';
+        }
+        
+        $('#recommendations').text(recommendations);
+      });
+      
+      // Building level selector
+      $('.building-level').click(function() {
+        $(this).parent().find('.building-level').removeClass('active');
+        $(this).addClass('active');
+      });
+    });
+  </script>
+</body>
+</html>
+<!-- End of HTML Document -->
