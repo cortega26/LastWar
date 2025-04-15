@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Last War: Season 1 - The Crimson Plague Ultimate Guide</title>
   <!-- Modern Font Selection -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <!-- Font Awesome for icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
+    /* Mobile-First Base Styles */
     :root {
       --primary: #c10000;
       --primary-dark: #900000;
@@ -24,6 +25,118 @@
       --danger: #ef476f;
       --shadow: 0 4px 6px rgba(0,0,0,0.1);
       --transition: all 0.3s ease;
+    }
+
+    /* Base font and body settings */
+    body {
+      font-family: 'Open Sans', Arial, sans-serif;
+      line-height: 1.5;
+      background: var(--bg);
+      color: var(--text);
+      padding: 1rem;
+      margin: 0;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4, h5 {
+      font-family: 'Montserrat', sans-serif;
+      margin: 1rem 0 0.5rem;
+      color: var(--primary);
+    }
+
+    /* Mobile-first container */
+    .container {
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Navigation styles for mobile */
+    .nav-container {
+      position: relative;
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-toggle {
+      display: block;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      padding: 0.5rem;
+    }
+
+    /* Hide the full nav by default on mobile */
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+    }
+    .nav-links.active {
+      display: flex;
+    }
+
+    /* Improve clickable areas */
+    .nav-links a {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    /* Buttons & form inputs */
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 1rem;
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+    }
+    .input-group input,
+    .input-group label {
+      display: block;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    /* Card & Section Styles */
+    .card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    /* Use grid with one column by default */
+    .two-columns {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    /* Larger devices */
+    @media (min-width: 768px) {
+      .container {
+        max-width: 1200px;
+      }
+      .nav-links {
+        display: flex;
+        flex-direction: row;
+      }
+      .nav-links a {
+        border: none;
+        padding: 0.75rem 1.25rem;
+        white-space: nowrap;
+      }
+      .two-columns {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     [data-theme="dark"] {
@@ -112,16 +225,9 @@
     }
 
     nav {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      scrollbar-color: var(--primary) var(--bg);
-      justify-content: flex-start;
-      padding: 0.5rem 1rem;
       max-width: 1200px;
       margin: 0 auto;
+      padding: 0.5rem 1rem;
     }
 
     nav::-webkit-scrollbar {
@@ -308,7 +414,7 @@
     th {
       background-color: rgba(193, 0, 0, 0.1);
       font-weight: 600;
-      color: var(--text);
+      color: var (--text);
     }
 
     tr:nth-child(even) {
@@ -844,6 +950,47 @@
       border-top: 1px solid var(--border);
       background: var(--card-bg);
     }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-right: 1rem;
+    }
+    
+    .nav-links {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary) var(--bg);
+      justify-content: flex-start;
+      padding: 0.5rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    /* Hide nav links and show hamburger on small screens */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .nav-links a {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+    }
   </style>
 </head>
 <body>
@@ -879,7 +1026,10 @@
 
   <!-- Navigation Bar -->
   <div class="nav-container">
-    <nav id="mainNav">
+    <button id="navToggle" class="nav-toggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav id="mainNav" class="nav-links">
       <a href="#overview" class="nav-link">Overview</a>
       <a href="#mechanics" class="nav-link">Game Mechanics</a>
       <a href="#structures" class="nav-link">Structures</a>
@@ -992,8 +1142,7 @@
           </tr>
           <tr>
             <td>Virus Research Institute</td>
-            <td>40%</td>
-            <td>Building Level 25</td>
+            <td>40%</            <td>Building Level 25</td>
           </tr>
           <tr>
             <td>Hero Skills</td>
@@ -2135,43 +2284,51 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
     $(document).ready(function() {
-      // Theme Toggle
-      $('#themeToggle').click(function() {
-        $('body').toggleClass('dark-mode');
-        if ($('body').hasClass('dark-mode')) {
-          document.documentElement.setAttribute('data-theme', 'dark');
+    // Theme Toggle
+    $("#themeToggle").click(function() {
+        $("body").toggleClass("dark-mode");
+        if ($("body").hasClass("dark-mode")) {
+            document.documentElement.setAttribute("data-theme", "dark");
         } else {
-          document.documentElement.setAttribute('data-theme', 'light');
+            document.documentElement.setAttribute("data-theme", "light");
         }
-      });
-      
-      // Navigation Active State
-      $('.nav-link').click(function() {
-        $('.nav-link').removeClass('active');
-        $(this).addClass('active');
-      });
-      
-      // FAQ Toggle
-      $('.faq-question').click(function() {
-        $(this).toggleClass('active');
-        $(this).next('.faq-answer').toggleClass('show');
-      });
-      
-      // Scroll to Top Button
-      $(window).scroll(function() {
+    });
+    
+    // Navigation Active State
+    $(".nav-link").click(function() {
+        $(".nav-link").removeClass("active");
+        $(this).addClass("active");
+    });
+    
+    // Navigation Toggle for Hamburger Menu
+    $("#navToggle").on("click", function() {
+        $("#mainNav").toggleClass("active");
+        // update aria attribute for accessibility
+        const expanded = $("#mainNav").hasClass("active");
+        $(this).attr("aria-expanded", expanded);
+    });
+    
+    // FAQ Toggle
+    $(".faq-question").click(function() {
+        $(this).toggleClass("active");
+        $(this).next(".faq-answer").toggleClass("show");
+    });
+    
+    // Scroll to Top Button
+    $(window).scroll(function() {
         if ($(this).scrollTop() > 300) {
-          $('#jumpToTop').addClass('visible');
+            $("#jumpToTop").addClass("visible");
         } else {
-          $('#jumpToTop').removeClass('visible');
+            $("#jumpToTop").removeClass("visible");
         }
-      });
-      
-      $('#jumpToTop').click(function() {
-        $('html, body').animate({scrollTop: 0}, 500);
-      });
-      
-      // Countdown Timer
-      function updateCountdown() {
+    });
+    
+    $("#jumpToTop").click(function() {
+        $("html, body").animate({scrollTop: 0}, 500);
+    });
+    
+    // Countdown Timer
+    function updateCountdown() {
         const now = new Date();
         const seasonStart = new Date(2025, 5, 1); // May 1, 2025
         const diff = seasonStart - now;
@@ -2180,30 +2337,30 @@
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         
-        $('#countdown').text(`${days}d ${hours}h ${minutes}m`);
+        $("#countdown").text(`${days}d ${hours}h ${minutes}m`);
         
         // Current day calculation
         const serverStart = new Date(2024, 12, 31); // April 14, 2025
         const daysSinceStart = Math.floor((now - serverStart) / (1000 * 60 * 60 * 24)) + 1;
-        $('#dayCount').text(daysSinceStart);
+        $("#dayCount").text(daysSinceStart);
         
         // Progress calculation
         const totalDays = Math.floor((seasonStart - serverStart) / (1000 * 60 * 60 * 24));
         const progress = (daysSinceStart / totalDays) * 100;
-        $('#progressFill').css('width', progress + '%');
-      }
-      
-      updateCountdown();
-      setInterval(updateCountdown, 60000);
-      
-      // Resource Calculator
-      $('#calculateBtn').click(function() {
-        const currentLevel = parseInt($('#currentLevel').val());
-        const targetLevel = parseInt($('#targetLevel').val());
-        const currentResistance = parseInt($('#currentResistance').val());
-        const targetResistance = parseInt($('#targetResistance').val());
-        const proteinRate = parseInt($('#proteinRate').val());
-        const crystalRate = parseInt($('#crystalRate').val());
+        $("#progressFill").css("width", progress + "%");
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 60000);
+    
+    // Resource Calculator
+    $("#calculateBtn").click(function() {
+        const currentLevel = parseInt($("#currentLevel").val());
+        const targetLevel = parseInt($("#targetLevel").val());
+        const currentResistance = parseInt($("#currentResistance").val());
+        const targetResistance = parseInt($("#targetResistance").val());
+        const proteinRate = parseInt($("#proteinRate").val());
+        const crystalRate = parseInt($("#crystalRate").val());
         
         // Basic calculation logic
         const levelDiff = targetLevel - currentLevel;
@@ -2215,10 +2372,10 @@
         
         // Apply diminishing returns for high resistance
         if (targetResistance > 65) {
-          const extraResistance = targetResistance - 65;
-          proteinRequired += extraResistance * 5000;
-          crystalRequired += extraResistance * 100;
-          fragmentsRequired += extraResistance * 50;
+            const extraResistance = targetResistance - 65;
+            proteinRequired += extraResistance * 5000;
+            crystalRequired += extraResistance * 100;
+            fragmentsRequired += extraResistance * 50;
         }
         
         // Calculate time required
@@ -2227,31 +2384,31 @@
         const timeRequired = Math.max(daysForProtein, daysForCrystals);
         
         // Display results
-        $('#proteinRequired').text(proteinRequired.toLocaleString());
-        $('#crystalRequired').text(crystalRequired.toLocaleString());
-        $('#fragmentsRequired').text(fragmentsRequired.toLocaleString());
-        $('#timeRequired').text(timeRequired + ' days');
+        $("#proteinRequired").text(proteinRequired.toLocaleString());
+        $("#crystalRequired").text(crystalRequired.toLocaleString());
+        $("#fragmentsRequired").text(fragmentsRequired.toLocaleString());
+        $("#timeRequired").text(timeRequired + " days");
         
         // Generate recommendations
-        let recommendations = '';
+        let recommendations = "";
         if (daysForProtein > daysForCrystals) {
-          recommendations = 'Focus on improving Protein Farm production.';
+            recommendations = "Focus on improving Protein Farm production.";
         } else {
-          recommendations = 'Focus on increasing Mutant Crystal gathering efficiency.';
+            recommendations = "Focus on increasing Mutant Crystal gathering efficiency.";
         }
         
         if (targetResistance > 75 && currentResistance < 60) {
-          recommendations += ' Consider a more gradual resistance upgrade path for better efficiency.';
+            recommendations += " Consider a more gradual resistance upgrade path for better efficiency.";
         }
         
-        $('#recommendations').text(recommendations);
-      });
-      
-      // Building level selector
-      $('.building-level').click(function() {
-        $(this).parent().find('.building-level').removeClass('active');
-        $(this).addClass('active');
-      });
+        $("#recommendations").text(recommendations);
+    });
+    
+    // Building level selector
+    $(".building-level").click(function() {
+        $(this).parent().find(".building-level").removeClass("active");
+        $(this).addClass("active");
+    });
     });
   </script>
 </body>
