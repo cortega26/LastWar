@@ -318,14 +318,14 @@
     /* Countdown Info Box */
     #countdownInfo {
       position: fixed;
-      top: 15px;
+      top: 70px; /* increased from 15px to avoid navbar overlap */
       right: 15px;
       background: var(--card-bg);
       border: 1px solid var(--border);
       padding: 1rem 1.25rem;
       border-radius: 8px;
       box-shadow: var(--shadow);
-      z-index: 1000;
+      z-index: 1100; /* increased so it sits above the navbar */
       font-size: 0.95rem;
       transition: var(--transition);
     }
@@ -464,7 +464,7 @@
     /* Profession selection showcase */
     .profession-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* changed auto-fill to auto-fit */
       gap: 1.5rem;
       margin: 1.5rem 0;
     }
