@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protein Farm Production Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: #f5f7fa;
+            color: #2c3e50;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            padding: 1.5rem;
+            border: 1px solid #e1e8ed;
+        }
+
+        .card-header {
+            border-bottom: 1px solid #e1e8ed;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .controls-section {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+
+        .controls-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .control-group {
+            flex: 1;
+        }
+
+        .control-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            background: white;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .farm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .farm-item {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 1rem;
+        }
+
+        .farm-item.active {
+            border-color: #667eea;
+            background: #f8faff;
+        }
+
+        .farm-name {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        .production-info {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+
+        .results-panel {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e1e8ed;
+            overflow: hidden;
+        }
+
+        .results-header {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        .results-content {
+            padding: 1.5rem;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .metric:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .metric-value {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .time-estimate {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 6px;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .time-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0369a1;
+            margin-bottom: 0.25rem;
+        }
+
+        .time-label {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a67d8;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .summary-table th,
+        .summary-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .summary-table th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .alert-info {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1e40af;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .controls-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            margin-left: 0.25rem;
+            color: #6b7280;
+        }
+
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1f2937;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+
+        .settings-panel {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Protein Farm Production Calculator</h1>
+        <p>Optimize your production planning with precise calculations</p>
+    </div>
+
+    <div class="container">
+        <div class="action-buttons">
+            <button class="btn btn-secondary" onclick="clearAll()">Clear All</button>
+            <button class="btn btn-secondary" onclick="exportData()">Export Data</button>
+            <button class="btn btn-secondary" onclick="importData()">Import Configuration</button>
+            <button class="btn btn-primary" onclick="savePreset()">Save as Preset</button>
+        </div>
+
+        <div class="main-content">
+            <div class="input-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Production Facilities</h2>
+                    </div>
+
+                    <div class="settings-panel">
+                        <div class="controls-row">
+                            <div class="control-group">
+                                <label class="control-label">Target Production Amount</label>
+                                <input 
+                                    type="number" 
+                                    id="targetAmount" 
+                                    class="form-input" 
+                                    placeholder="Enter required protein amount"
+                                    min="1"
+                                    oninput="calculateProduction()"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="farm-grid">
+                        <div class="farm-item" id="farm1-container">
+                            <div class="farm-name">
+                                Primary Facility
+                                <span class="tooltip" data-tooltip="Main production facility - always active">ⓘ</span>
+                            </div>
+                            <select id="farm1" class="form-select" onchange="calculateProduction()">
+                                <!-- Options populated by JavaScript -->
+                            </select>
+                            <div class="production-info" id="farm1-info"></div>
+                        </div>
+
+                        <div class="farm-item" id="farm2-container">
+                            <div class="farm-name">
+                                Secondary Facility
+                                <span class="tooltip" data-tooltip="Additional production capacity">ⓘ</span>
+                            </div>
+                            <select id="farm2" class="form-select" onchange="calculateProduction()">
+                                <option value="0">Not Operational</option>
+                                <!-- Options populated by JavaScript -->
+                            </select>
+                            <div class="production-info" id="farm2-info"></div>
+                        </div>
+
+                        <div class="farm-item" id="farm3-container">
+                            <div class="farm-name">
+                                Tertiary Facility
+                                <span class="tooltip" data-tooltip="Additional production capacity">ⓘ</span>
+                            </div>
+                            <select id="farm3" class="form-select" onchange="calculateProduction()">
+                                <option value="0">Not Operational</option>
+                                <!-- Options populated by JavaScript -->
+                            </select>
+                            <div class="production-info" id="farm3-info"></div>
+                        </div>
+
+                        <div class="farm-item" id="farm4-container">
+                            <div class="farm-name">
+                                Quaternary Facility
+                                <span class="tooltip" data-tooltip="Additional production capacity">ⓘ</span>
+                            </div>
+                            <select id="farm4" class="form-select" onchange="calculateProduction()">
+                                <option value="0">Not Operational</option>
+                                <!-- Options populated by JavaScript -->
+                            </select>
+                            <div class="production-info" id="farm4-info"></div>
+                        </div>
+
+                        <div class="farm-item" id="farm5-container">
+                            <div class="farm-name">
+                                Premium Facility
+                                <span class="tooltip" data-tooltip="Enhanced production facility">ⓘ</span>
+                            </div>
+                            <select id="farm5" class="form-select" onchange="calculateProduction()">
+                                <option value="0">Not Operational</option>
+                                <!-- Options populated by JavaScript -->
+                            </select>
+                            <div class="production-info" id="farm5-info"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Facility Summary</h3>
+                        </div>
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th>Facility</th>
+                                    <th>Level</th>
+                                    <th>Production Rate</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="facility-summary">
+                                <!-- Populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="results-panel">
+                    <div class="results-header">
+                        Production Analysis
+                    </div>
+                    <div class="results-content" id="results-content">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📊</div>
+                            <p>Enter your facility levels and target amount to view production analysis</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="card-header">
+                        <h3 class="card-title">Efficiency Metrics</h3>
+                    </div>
+                    <div id="efficiency-metrics">
+                        <div class="alert alert-info">
+                            Configure your facilities to view efficiency analysis
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Production rates per hour by facility level
+        const productionRates = {
+            1: 720, 2: 1440, 3: 2160, 4: 2880, 5: 3600,
+            6: 4320, 7: 5040, 8: 5760, 9: 6480, 10: 7200,
+            11: 7920, 12: 8640, 13: 9360, 14: 10080, 15: 10800,
+            16: 11520, 17: 12240, 18: 12960, 19: 13680, 20: 14400,
+            21: 15120, 22: 15840, 23: 16560, 24: 17280, 25: 18000,
+            26: 18720, 27: 19440, 28: 20160, 29: 20880, 30: 21600
+        };
+
+        // Initialize calculator
+        function initializeCalculator() {
+            populateDropdowns();
+            calculateProduction();
+        }
+
+        // Populate facility level dropdowns
+        function populateDropdowns() {
+            const farm1 = document.getElementById('farm1');
+            
+            // Primary facility (always operational, starts at level 1)
+            for (let i = 1; i <= 30; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Level ${i}`;
+                farm1.appendChild(option);
+            }
+
+            // Other facilities (can be inactive or levels 1-30)
+            for (let farmNum = 2; farmNum <= 5; farmNum++) {
+                const farmSelect = document.getElementById(`farm${farmNum}`);
+                
+                for (let i = 1; i <= 30; i++) {
+                    const option = document.createElement('option');
+                    option.value = i;
+                    option.textContent = `Level ${i}`;
+                    farmSelect.appendChild(option);
+                }
+            }
+        }
+
+        // Update production info for each facility
+        function updateProductionInfo() {
+            for (let i = 1; i <= 5; i++) {
+                const level = parseInt(document.getElementById(`farm${i}`).value) || 0;
+                const infoElement = document.getElementById(`farm${i}-info`);
+                const containerElement = document.getElementById(`farm${i}-container`);
+                
+                if (level > 0) {
+                    const rate = productionRates[level];
+                    infoElement.textContent = `${rate.toLocaleString()} units/hour`;
+                    containerElement.classList.add('active');
+                } else {
+                    infoElement.textContent = 'Inactive';
+                    containerElement.classList.remove('active');
+                }
+            }
+        }
+
+        // Calculate production metrics
+        function calculateProduction() {
+            updateProductionInfo();
+            updateFacilitySummary();
+            
+            const targetAmount = parseInt(document.getElementById('targetAmount').value) || 0;
+            const resultsContent = document.getElementById('results-content');
+            const efficiencyMetrics = document.getElementById('efficiency-metrics');
+
+            if (targetAmount <= 0) {
+                resultsContent.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📊</div>
+                        <p>Enter your facility levels and target amount to view production analysis</p>
+                    </div>
+                `;
+                efficiencyMetrics.innerHTML = `
+                    <div class="alert alert-info">
+                        Configure your facilities to view efficiency analysis
+                    </div>
+                `;
+                return;
+            }
+
+            let totalProduction = 0;
+            let activeFacilities = 0;
+            let facilityDetails = [];
+
+            // Calculate total production from all active facilities
+            for (let i = 1; i <= 5; i++) {
+                const level = parseInt(document.getElementById(`farm${i}`).value) || 0;
+                if (level > 0) {
+                    const rate = productionRates[level];
+                    totalProduction += rate;
+                    activeFacilities++;
+                    facilityDetails.push({
+                        name: `Facility ${i}`,
+                        level: level,
+                        rate: rate
+                    });
+                }
+            }
+
+            if (totalProduction === 0) {
+                resultsContent.innerHTML = `
+                    <div class="alert alert-info">
+                        No active facilities detected. Please configure at least one facility.
+                    </div>
+                `;
+                return;
+            }
+
+            // Calculate time needed
+            const hoursNeeded = targetAmount / totalProduction;
+            const hours = Math.floor(hoursNeeded);
+            const minutes = Math.ceil((hoursNeeded - hours) * 60);
+            const days = Math.floor(hoursNeeded / 24);
+            const remainingHours = Math.floor(hoursNeeded % 24);
+
+            let timeDisplay;
+            if (days > 0) {
+                timeDisplay = `${days}d ${remainingHours}h ${minutes}m`;
+            } else if (hours === 0) {
+                timeDisplay = `${minutes} minutes`;
+            } else {
+                timeDisplay = `${hours}h ${minutes}m`;
+            }
+
+            // Display results
+            resultsContent.innerHTML = `
+                <div class="metric">
+                    <span class="metric-label">Active Facilities</span>
+                    <span class="metric-value">${activeFacilities}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Total Production Rate</span>
+                    <span class="metric-value">${totalProduction.toLocaleString()}/hour</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Target Amount</span>
+                    <span class="metric-value">${targetAmount.toLocaleString()} units</span>
+                </div>
+                <div class="time-estimate">
+                    <div class="time-value">${timeDisplay}</div>
+                    <div class="time-label">Estimated completion time</div>
+                </div>
+            `;
+
+            // Calculate efficiency metrics
+            const avgProductionPerFacility = totalProduction / activeFacilities;
+            const productionEfficiency = (totalProduction / (21600 * activeFacilities)) * 100; // Assuming max level 30 as 100%
+            
+            efficiencyMetrics.innerHTML = `
+                <div class="metric">
+                    <span class="metric-label">Average Production per Facility</span>
+                    <span class="metric-value">${Math.round(avgProductionPerFacility).toLocaleString()}/hour</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Overall Efficiency</span>
+                    <span class="metric-value">${productionEfficiency.toFixed(1)}%</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Daily Production Potential</span>
+                    <span class="metric-value">${(totalProduction * 24).toLocaleString()} units</span>
+                </div>
+            `;
+        }
+
+        // Update facility summary table
+        function updateFacilitySummary() {
+            const summaryBody = document.getElementById('facility-summary');
+            summaryBody.innerHTML = '';
+
+            const facilityNames = ['Primary', 'Secondary', 'Tertiary', 'Quaternary', 'Premium'];
+
+            for (let i = 1; i <= 5; i++) {
+                const level = parseInt(document.getElementById(`farm${i}`).value) || 0;
+                const row = document.createElement('tr');
+                
+                const status = level > 0 ? 'Active' : 'Inactive';
+                const rate = level > 0 ? `${productionRates[level].toLocaleString()}/hour` : '-';
+                const levelDisplay = level > 0 ? level : '-';
+
+                row.innerHTML = `
+                    <td>${facilityNames[i-1]} Facility</td>
+                    <td>${levelDisplay}</td>
+                    <td>${rate}</td>
+                    <td><span style="color: ${level > 0 ? '#059669' : '#6b7280'}">${status}</span></td>
+                `;
+                
+                summaryBody.appendChild(row);
+            }
+        }
+
+        // Clear all inputs
+        function clearAll() {
+            if (confirm('Are you sure you want to clear all configurations?')) {
+                document.getElementById('targetAmount').value = '';
+                document.getElementById('farm1').value = '1';
+                for (let i = 2; i <= 5; i++) {
+                    document.getElementById(`farm${i}`).value = '0';
+                }
+                calculateProduction();
+            }
+        }
+
+        // Export data as JSON
+        function exportData() {
+            const config = {
+                targetAmount: document.getElementById('targetAmount').value,
+                facilities: {}
+            };
+            
+            for (let i = 1; i <= 5; i++) {
+                config.facilities[`facility${i}`] = document.getElementById(`farm${i}`).value;
+            }
+            
+            const dataStr = JSON.stringify(config, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `protein_farm_config_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Import configuration
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const config = JSON.parse(e.target.result);
+                            
+                            document.getElementById('targetAmount').value = config.targetAmount || '';
+                            
+                            if (config.facilities) {
+                                for (let i = 1; i <= 5; i++) {
+                                    const value = config.facilities[`facility${i}`] || (i === 1 ? '1' : '0');
+                                    document.getElementById(`farm${i}`).value = value;
+                                }
+                            }
+                            
+                            calculateProduction();
+                            alert('Configuration imported successfully!');
+                        } catch (error) {
+                            alert('Error importing configuration. Please check the file format.');
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            
+            input.click();
+        }
+
+        // Save preset (simplified - would integrate with backend in real app)
+        function savePreset() {
+            const presetName = prompt('Enter a name for this preset:');
+            if (presetName) {
+                exportData(); // For now, just export the data
+                alert(`Preset "${presetName}" configuration exported successfully!`);
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializeCalculator);
+    </script>
+</body>
+</html>
