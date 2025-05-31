@@ -1,3 +1,7 @@
 .qodo
 *.py
 *.png
+*.log
+logs/
+.venv/
+
