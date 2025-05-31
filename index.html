@@ -285,7 +285,7 @@
             <div class="farms-grid">
                 <div class="farm-input">
                     <label class="farm-label" for="farm1">
-                        Farm 1 (Always Available)
+                        Farm 1
                         <span class="info-tooltip" data-tooltip="Your main protein farm">ℹ️</span>
                     </label>
                     <select id="farm1" class="farm-select" onchange="calculateTime()">
@@ -361,13 +361,14 @@
     <script>
         // Protein production rates per hour by level
         const productionRates = {
-            1: 500, 2: 1200, 3: 1900, 4: 2600, 5: 3300,
-            6: 4000, 7: 4700, 8: 5400, 9: 6100, 10: 6800,
-            11: 7500, 12: 8200, 13: 8900, 14: 9600, 15: 10300,
-            16: 11000, 17: 11700, 18: 12400, 19: 13100, 20: 13800,
-            21: 14500, 22: 15200, 23: 15900, 24: 16600, 25: 17300,
-            26: 18000, 27: 18700, 28: 19400, 29: 20100, 30: 20800
+            1: 720, 2: 1440, 3: 2160, 4: 2880, 5: 3600,
+            6: 4320, 7: 5040, 8: 5760, 9: 6480, 10: 7200,
+            11: 7920, 12: 8640, 13: 9360, 14: 10080, 15: 10800,
+            16: 11520, 17: 12240, 18: 12960, 19: 13680, 20: 14400,
+            21: 15120, 22: 15840, 23: 16560, 24: 17280, 25: 18000,
+            26: 18720, 27: 19440, 28: 20160, 29: 20880, 30: 21600
         };
+
 
         let isDarkTheme = true;
 
