@@ -434,31 +434,57 @@
         }
 
         .footer {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             text-align: center;
-            padding: 2rem 1rem 1rem 1rem;
-            color: #6b7280;
+            padding: 1.5rem 1rem;
+            color: #64748b;
             font-size: 0.85rem;
             border-top: 1px solid #e5e7eb;
             margin-top: 2rem;
-        }
-
-        .dark-theme .footer {
-            color: #9ca3af;
-            border-top-color: #374151;
-        }
-
-        .footer a {
-            color: #667eea;
-            text-decoration: none;
             font-weight: 500;
         }
 
-        .dark-theme .footer a {
-            color: #90cdf4;
+        .dark-theme .footer {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: #94a3b8;
+            border-top-color: #475569;
         }
 
-        .footer a:hover {
-            text-decoration: underline;
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-divider {
+            color: #cbd5e1;
+            font-weight: 300;
+        }
+
+        .dark-theme .footer-divider {
+            color: #64748b;
+        }
+
+        .server-badge {
+            background: #667eea;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .dark-theme .server-badge {
+            background: #4c51bf;
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -564,7 +590,13 @@
     </div>
 
     <div class="footer">
-    Created by Killeramn • Server 1039 • 2024
+        <div class="footer-content">
+            <span>💡 Created by <strong>Killeramn</strong></span>
+            <span class="footer-divider">•</span>
+            <span class="server-badge">🌐 Server 1039</span>
+            <span class="footer-divider">•</span>
+            <span>📅 2024</span>
+        </div>
     </div>
 
     <script>
