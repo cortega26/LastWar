@@ -77,23 +77,19 @@
         }
 
         .tech-level {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: grid;
             width: 100%;
+            max-width: 1000px;
         }
 
         .tech-level-1 {
-            order: 1;
+            grid-template-columns: 1fr;
+            justify-items: center;
         }
 
         .tech-level-2 {
-            order: 2;
-            display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
-            width: 100%;
-            max-width: 1000px;
         }
 
         .tech-node {
@@ -103,6 +99,7 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             border: 1px solid #e2e8f0;
             transition: all 0.2s ease;
+            width: 100%;
         }
 
         .tech-node:hover {
@@ -110,9 +107,9 @@
             border-color: #3b82f6;
         }
 
+        /* Ensure Advanced Protection card has same width as others */
         .tech-node.top-tier {
-            max-width: 400px;
-            width: 100%;
+            max-width: calc((1000px - 48px) / 3); /* Same width as grid items */
         }
 
         .tech-node label {
@@ -300,8 +297,14 @@
                 font-size: 1.25rem;
             }
             
+            .tech-level-1,
             .tech-level-2 {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .tech-node.top-tier {
+                max-width: 100%;
             }
             
             .totals-grid {
@@ -338,7 +341,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🛡️ Last War: Survival</h1>
+            <h1>Last War: Survival</h1>
             <h2>Tier 10 Research Calculator</h2>
             <p>Enter your current research levels, including those in progress, to see how many resources you still need to complete the remaining researches to unlock Tier 10 troops.</p>
             <div class="disclaimer">
