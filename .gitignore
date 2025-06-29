@@ -3,4 +3,4 @@
 *.log
 logs/
 .venv/
-
+.json
