@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protein Farm Production Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: #f5f7fa;
+            color: #2c3e50;
+            line-height: 1.5;
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-theme {
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            font-size: 0.9rem;
+        }
+
+        .theme-toggle:hover {
+            background: #5a67d8;
+        }
+
+        .dark-theme .theme-toggle {
+            background: #4a5568;
+        }
+
+        .dark-theme .theme-toggle:hover {
+            background: #2d3748;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .dark-theme .header {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 1.5rem;
+            border: 1px solid #e1e8ed;
+        }
+
+        .dark-theme .card {
+            background: #16213e;
+            border-color: #2d3748;
+            color: #e0e0e0;
+        }
+
+        .card-header {
+            border-bottom: 1px solid #e1e8ed;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dark-theme .card-header {
+            border-bottom-color: #2d3748;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .dark-theme .card-title {
+            color: #e0e0e0;
+        }
+
+        .progress-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 8px;
+            margin: 0 auto 1.5rem auto;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 2px solid #e1e8ed;
+        }
+
+        .dark-theme .progress-image {
+            border-color: #2d3748;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .target-section {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dark-theme .target-section {
+            background: #1a202c;
+            border-color: #2d3748;
+        }
+
+        .control-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-size: 0.95rem;
+        }
+
+        .dark-theme .control-label {
+            color: #cbd5e0;
+        }
+
+        .control-description {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .dark-theme .control-description {
+            color: #a0aec0;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            background: white;
+            transition: border-color 0.2s ease;
+        }
+
+        .dark-theme .form-input,
+        .dark-theme .form-select {
+            background: #2d3748;
+            border-color: #4a5568;
+            color: #e0e0e0;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .farm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .farm-item {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .dark-theme .farm-item {
+            background: #1a202c;
+            border-color: #2d3748;
+        }
+
+        .farm-item.active {
+            border-color: #667eea;
+            background: #f8faff;
+        }
+
+        .dark-theme .farm-item.active {
+            border-color: #4a5568;
+            background: #2a4365;
+        }
+
+        .farm-name {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        .dark-theme .farm-name {
+            color: #cbd5e0;
+        }
+
+        .production-info {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+
+        .dark-theme .production-info {
+            color: #a0aec0;
+        }
+
+        .results-panel {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e1e8ed;
+            overflow: hidden;
+            height: fit-content;
+        }
+
+        .dark-theme .results-panel {
+            background: #16213e;
+            border-color: #2d3748;
+        }
+
+        .results-header {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .dark-theme .results-header {
+            background: #2d3748;
+        }
+
+        .results-content {
+            padding: 1.5rem;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .dark-theme .metric {
+            border-bottom-color: #2d3748;
+        }
+
+        .metric:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-weight: 500;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        .dark-theme .metric-label {
+            color: #cbd5e0;
+        }
+
+        .metric-value {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 0.9rem;
+        }
+
+        .dark-theme .metric-value {
+            color: #90cdf4;
+        }
+
+        .time-estimate {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 6px;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .dark-theme .time-estimate {
+            background: #1a365d;
+            border-color: #2c5282;
+        }
+
+        .time-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0369a1;
+            margin-bottom: 0.25rem;
+        }
+
+        .dark-theme .time-value {
+            color: #90cdf4;
+        }
+
+        .time-label {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .dark-theme .time-label {
+            color: #a0aec0;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 1.5rem;
+            color: #6b7280;
+        }
+
+        .dark-theme .empty-state {
+            color: #a0aec0;
+        }
+
+        .empty-state-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .disclaimer {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-left: 4px solid #f59e0b;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #92400e;
+        }
+
+        .dark-theme .disclaimer {
+            background: #1f2937;
+            border-color: #4b5563;
+            border-left-color: #f59e0b;
+            color: #fbbf24;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header p {
+                font-size: 0.9rem;
+            }
+            
+            .farm-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0.75rem;
+            }
+
+            .card {
+                padding: 1rem;
+            }
+
+            .theme-toggle {
+                top: 0.5rem;
+                right: 0.5rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 1rem 0.5rem;
+            }
+            
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .container {
+                padding: 0.5rem;
+            }
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            text-align: center;
+            padding: 1.5rem 1rem;
+            color: #64748b;
+            font-size: 0.85rem;
+            border-top: 1px solid #e5e7eb;
+            margin-top: 2rem;
+            font-weight: 500;
+        }
+
+        .dark-theme .footer {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: #94a3b8;
+            border-top-color: #475569;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-divider {
+            color: #cbd5e1;
+            font-weight: 300;
+        }
+
+        .dark-theme .footer-divider {
+            color: #64748b;
+        }
+
+        .server-badge {
+            background: #667eea;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .dark-theme .server-badge {
+            background: #4c51bf;
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+    
+    <div class="header">
+        <h1>Protein Farm Production Calculator</h1>
+        <p>Calculate production time for Virus Research Institute upgrades</p>
+    </div>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="input-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Farm Configuration</h2>
+                    </div>
+
+                    <img src="../assets/images/mip.png" alt="Immune Protein Progress" class="progress-image" />
+
+                    <div class="target-section">
+                        <label class="control-label">Missing Immune Protein for Next Upgrade</label>
+                        <div class="control-description">
+                            Enter the amount shown in red letters on your progress bar. This represents how much immune protein you still need to collect for your next upgrade.
+                        </div>
+                        <input 
+                            type="number" 
+                            id="targetAmount" 
+                            class="form-input" 
+                            placeholder="Enter the red number from your progress bar"
+                            min="1"
+                            oninput="calculateProduction()"
+                        />
+                    </div>
+
+                    <div class="farm-grid">
+                        <div class="farm-item" id="farm1-container">
+                            <div class="farm-name">Protein Farm I</div>
+                            <select id="farm1" class="form-select" onchange="calculateProduction()">
+                                <!-- Options populated by JavaScript -->
+                            </select>
+                            <div class="production-info" id="farm1-info"></div>
+                        </div>
+
+                        <div class="farm-item" id="farm2-container">
+                            <div class="farm-name">Protein Farm II</div>
+                            <select id="farm2" class="form-select" onchange="calculateProduction()">
+                                <option value="0">Not Built</option>
+                                <!-- Options populated by JavaScript -->
+                            </select>
+                            <div class="production-info" id="farm2-info"></div>
+                        </div>
+
+                        <div class="farm-item" id="farm3-container">
+                            <div class="farm-name">Protein Farm III</div>
+                            <select id="farm3" class="form-select" onchange="calculateProduction()">
+                                <option value="0">Not Built</option>
+                                <!-- Options populated by JavaScript -->
+                            </select>
+                            <div class="production-info" id="farm3-info"></div>
+                        </div>
+
+                        <div class="farm-item" id="farm4-container">
+                            <div class="farm-name">Protein Farm IV</div>
+                            <select id="farm4" class="form-select" onchange="calculateProduction()">
+                                <option value="0">Not Built</option>
+                                <!-- Options populated by JavaScript -->
+                            </select>
+                            <div class="production-info" id="farm4-info"></div>
+                        </div>
+
+                        <div class="farm-item" id="farm5-container">
+                            <div class="farm-name">Protein Farm V</div>
+                            <select id="farm5" class="form-select" onchange="calculateProduction()">
+                                <option value="0">Not Built</option>
+                                <!-- Options populated by JavaScript -->
+                            </select>
+                            <div class="production-info" id="farm5-info"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="results-panel">
+                    <div class="results-header">
+                        Production Analysis
+                    </div>
+                    <div class="results-content" id="results-content">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📊</div>
+                            <p>Configure your farms and enter target amount</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="disclaimer">
+            <strong>Note:</strong> This calculation is based solely on protein farm production. The estimated time does not include proteins from mines, zombie hunting, events, or any other sources that could reduce the actual time required.
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-content">
+            <span>💡 Created by <strong>Killeramn</strong></span>
+            <span class="footer-divider">•</span>
+            <span class="server-badge">🌐 Server 1309</span>
+            <span class="footer-divider">•</span>
+            <span>📅 2024</span>
+        </div>
+    </div>
+
+    <script>
+        // Production rates per hour by farm level
+        const productionRates = {
+            1: 720, 2: 1440, 3: 2160, 4: 2880, 5: 3600,
+            6: 4320, 7: 5040, 8: 5760, 9: 6480, 10: 7200,
+            11: 7920, 12: 8640, 13: 9360, 14: 10080, 15: 10800,
+            16: 11520, 17: 12240, 18: 12960, 19: 13680, 20: 14400,
+            21: 15120, 22: 15840, 23: 16560, 24: 17280, 25: 18000,
+            26: 18720, 27: 19440, 28: 20160, 29: 20880, 30: 21600
+        };
+
+        let isDarkTheme = false;
+
+        // Initialize calculator
+        function initializeCalculator() {
+            populateDropdowns();
+            calculateProduction();
+        }
+
+        // Populate farm level dropdowns
+        function populateDropdowns() {
+            const farm1 = document.getElementById('farm1');
+            
+            // Protein Farm I (always available, starts at level 1)
+            for (let i = 1; i <= 30; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Level ${i} (${productionRates[i].toLocaleString()}/hr)`;
+                farm1.appendChild(option);
+            }
+
+            // Farms II-V (can be not built or levels 1-30)
+            for (let farmNum = 2; farmNum <= 5; farmNum++) {
+                const farmSelect = document.getElementById(`farm${farmNum}`);
+                
+                for (let i = 1; i <= 30; i++) {
+                    const option = document.createElement('option');
+                    option.value = i;
+                    option.textContent = `Level ${i} (${productionRates[i].toLocaleString()}/hr)`;
+                    farmSelect.appendChild(option);
+                }
+            }
+        }
+
+        // Update production info for each farm
+        function updateProductionInfo() {
+            for (let i = 1; i <= 5; i++) {
+                const level = parseInt(document.getElementById(`farm${i}`).value) || 0;
+                const infoElement = document.getElementById(`farm${i}-info`);
+                const containerElement = document.getElementById(`farm${i}-container`);
+                
+                if (level > 0) {
+                    const rate = productionRates[level];
+                    infoElement.textContent = `${rate.toLocaleString()} units/hour`;
+                    containerElement.classList.add('active');
+                } else {
+                    infoElement.textContent = 'Not operational';
+                    containerElement.classList.remove('active');
+                }
+            }
+        }
+
+        // Calculate production metrics
+        function calculateProduction() {
+            updateProductionInfo();
+            
+            const targetAmount = parseInt(document.getElementById('targetAmount').value) || 0;
+            const resultsContent = document.getElementById('results-content');
+
+            if (targetAmount <= 0) {
+                resultsContent.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📊</div>
+                        <p>Configure your farms and enter target amount</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let totalProduction = 0;
+
+            // Calculate total production from all active farms
+            for (let i = 1; i <= 5; i++) {
+                const level = parseInt(document.getElementById(`farm${i}`).value) || 0;
+                if (level > 0) {
+                    totalProduction += productionRates[level];
+                }
+            }
+
+            if (totalProduction === 0) {
+                resultsContent.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">⚠️</div>
+                        <p>No active farms detected. Please configure at least one farm.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Calculate time needed
+            const hoursNeeded = targetAmount / totalProduction;
+            const hours = Math.floor(hoursNeeded);
+            const minutes = Math.ceil((hoursNeeded - hours) * 60);
+            const days = Math.floor(hoursNeeded / 24);
+            const remainingHours = Math.floor(hoursNeeded % 24);
+
+            let timeDisplay;
+            if (days > 0) {
+                timeDisplay = `${days}d ${remainingHours}h ${minutes}m`;
+            } else if (hours === 0) {
+                timeDisplay = `${minutes} minutes`;
+            } else {
+                timeDisplay = `${hours}h ${minutes}m`;
+            }
+
+            // Display results
+            resultsContent.innerHTML = `
+                <div class="metric">
+                    <span class="metric-label">Total Production Rate</span>
+                    <span class="metric-value">${totalProduction.toLocaleString()}/hour</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Target Amount</span>
+                    <span class="metric-value">${targetAmount.toLocaleString()} units</span>
+                </div>
+                <div class="time-estimate">
+                    <div class="time-value">${timeDisplay}</div>
+                    <div class="time-label">Estimated completion time</div>
+                </div>
+            `;
+        }
+
+        // Theme toggle functionality
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            const body = document.body;
+            const themeToggle = document.querySelector('.theme-toggle');
+            
+            if (isDarkTheme) {
+                body.classList.add('dark-theme');
+                themeToggle.textContent = '☀️ Light';
+            } else {
+                body.classList.remove('dark-theme');
+                themeToggle.textContent = '🌙 Dark';
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializeCalculator);
+    </script>
+</body>
+</html>
