@@ -10,6 +10,7 @@ window.toggleDarkMode = toggleDarkMode;
 $(document).ready(function() {
     const isSubpage = window.location.pathname.includes('/pages/');
     const prefix = isSubpage ? '../' : '';
+    const savedTheme = localStorage.getItem("theme");
     $("#nav-placeholder").load(prefix + "partials/nav.html", function() {
         if (isSubpage) {
             $("#nav-placeholder a").each(function() {
@@ -19,16 +20,16 @@ $(document).ready(function() {
                 }
             });
         }
+        if (savedTheme === "dark" || savedTheme === "light") {
+            $("#themeToggle").attr("aria-pressed", savedTheme === "dark");
+        }
     });
     $("#footer-placeholder").load(prefix + "partials/footer.html");
-    const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark" || savedTheme === "light") {
         document.documentElement.setAttribute("data-theme", savedTheme);
-        $("#themeToggle").attr("aria-pressed", savedTheme === "dark");
     }
-    if (document.getElementById("themeToggle")) {
-        $("#themeToggle").on("click", toggleDarkMode);
-    }
+
+    $(document).on("click", "#themeToggle", toggleDarkMode);
     
     // Navigation Active State for links
     $(".nav-link").click(function() {
