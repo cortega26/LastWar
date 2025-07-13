@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <title>Alliance Rules</title>
+</head>
+<body>
+    <header class="site-header">
+        <div id="nav-placeholder"></div>
+    </header>
+
+    <div class="header">
+        <h1>Alliance Rules</h1>
+        <p>Guidelines to keep our community strong and organized.</p>
+    </div>
+
+    <div class="container">
+        <ol>
+            <li>Be always polite and respectful.</li>
+            <li>Be active (specially if you're F2P).</li>
+            <li>Donate to alliance tech everyday.</li>
+            <li>Meet the required minimums of the alliance.</li>
+            <li>During Zombie Invasion (golden zombies): if you can't tank a boss, don't rally it.</li>
+            <li>Be disciplined and organized: learn how to place your base in a grid, aligned with other bases.</li>
+            <li>Participate in Events: Marshall's Guard, Desert Storm, Winter Storm, Capitol War, SVS and any other relevant event introduced in the game.</li>
+        </ol>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>
