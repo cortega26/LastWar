@@ -18,8 +18,9 @@
             line-height: 1.5;
             min-height: 100vh;
             transition: all 0.3s ease;
-            padding-bottom: 6rem;
             margin: 0;
+            display: flex;
+            flex-direction: column;
         }
 
         body.dark-theme {
@@ -443,11 +444,8 @@
             font-size: 0.85rem;
             border-top: 1px solid #e5e7eb;
             font-weight: 500;
-            position: fixed;
-            bottom: 0;
-            left: 0;
+            margin-top: auto;
             width: 100%;
-            z-index: 100;
         }
 
         .dark-theme .footer {
