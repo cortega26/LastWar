@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,9 @@
             document.documentElement.setAttribute('data-theme', savedTheme);
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
     <title>Last War: Survival - Tier 10 Progress Calculator</title>
     <style>
@@ -87,7 +90,8 @@
 
         /* Ensure Advanced Protection card has same width as others */
         .tech-node.top-tier {
-            max-width: calc((1000px - 48px) / 3); /* Same width as grid items */
+            max-width: calc((1000px - 48px) / 3);
+            /* Same width as grid items */
         }
 
         .tech-node label {
@@ -263,22 +267,22 @@
             .container {
                 padding: 16px;
             }
-            
-            
+
+
             .tech-level-1,
             .tech-level-2 {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            
+
             .tech-node.top-tier {
                 max-width: 100%;
             }
-            
+
             .totals-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+
             .total-value {
                 font-size: 1.25rem;
             }
@@ -295,10 +299,23 @@
             opacity: 0.7;
         }
 
+        /* Override h2 color for this page */
+        .header h2 {
+            color: white;
+        }
+
         @keyframes pulse {
-            0% { opacity: 0.7; }
-            50% { opacity: 1; }
-            100% { opacity: 0.7; }
+            0% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.7;
+            }
         }
 
         .updating {
@@ -306,6 +323,7 @@
         }
     </style>
 </head>
+
 <body>
     <header class="site-header">
         <div id="nav-placeholder"></div>
@@ -314,9 +332,11 @@
         <div class="header">
             <h1>Last War: Survival</h1>
             <h2>Tier 10 Research Calculator</h2>
-            <p>Enter your current research levels, including those in progress, to see how many resources you still need to complete the remaining researches to unlock Tier 10 troops.</p>
+            <p>Enter your current research levels, including those in progress, to see how many resources you still need
+                to complete the remaining researches to unlock Tier 10 troops.</p>
             <div class="disclaimer">
-                ⚠️ Please note that these values may not be exact. There is conflicting information online for these researches.
+                ⚠️ Please note that these values may not be exact. There is conflicting information online for these
+                researches.
             </div>
         </div>
 
@@ -469,4 +489,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../script.js"></script>
 </body>
+
 </html>
