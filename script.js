@@ -2,13 +2,22 @@ function toggleDarkMode() {
     $("body").toggleClass("dark-mode");
     if ($("body").hasClass("dark-mode")) {
         document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
     } else {
         document.documentElement.setAttribute("data-theme", "light");
+        localStorage.setItem("theme", "light");
     }
 }
 window.toggleDarkMode = toggleDarkMode;
 
 $(document).ready(function() {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        $("body").addClass("dark-mode");
+        document.documentElement.setAttribute("data-theme", "dark");
+    } else if (savedTheme === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
     if (document.getElementById("themeToggle")) {
         $("#themeToggle").on("click", toggleDarkMode);
     }
