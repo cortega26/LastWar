@@ -11,6 +11,19 @@ function toggleDarkMode() {
 window.toggleDarkMode = toggleDarkMode;
 
 $(document).ready(function() {
+    const isSubpage = window.location.pathname.includes('/pages/');
+    const prefix = isSubpage ? '../' : '';
+    $("#nav-placeholder").load(prefix + "partials/nav.html", function() {
+        if (isSubpage) {
+            $("#nav-placeholder a").each(function() {
+                const href = $(this).attr('href');
+                if (!href.startsWith('http') && !href.startsWith('../')) {
+                    $(this).attr('href', '../' + href);
+                }
+            });
+        }
+    });
+    $("#footer-placeholder").load(prefix + "partials/footer.html");
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
         $("body").addClass("dark-mode");
