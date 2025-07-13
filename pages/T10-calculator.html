@@ -14,9 +14,9 @@
         }
 
         body {
-            background: #f8fafc;
+            background: var(--bg);
             min-height: 100vh;
-            color: #1e293b;
+            color: var(--text);
             line-height: 1.6;
             margin: 0;
             display: flex;
@@ -32,30 +32,30 @@
         .header {
             text-align: center;
             margin-bottom: 40px;
-            background: white;
+            background: var(--card-bg);
             padding: 40px;
             border-radius: 16px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border);
         }
 
         .header h1 {
             font-size: 2.5rem;
-            color: #1e293b;
+            color: var(--primary);
             margin-bottom: 12px;
             font-weight: 700;
         }
 
         .header h2 {
             font-size: 1.5rem;
-            color: #475569;
+            color: var(--text);
             margin-bottom: 20px;
             font-weight: 600;
         }
 
         .header p {
             font-size: 1rem;
-            color: #64748b;
+            color: var(--text-light);
             margin-bottom: 15px;
             max-width: 800px;
             margin-left: auto;
@@ -97,18 +97,18 @@
         }
 
         .tech-node {
-            background: white;
+            background: var(--card-bg);
             padding: 24px;
             border-radius: 12px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border);
             transition: all 0.2s ease;
             width: 100%;
         }
 
         .tech-node:hover {
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border-color: #3b82f6;
+            border-color: var(--primary);
         }
 
         /* Ensure Advanced Protection card has same width as others */
@@ -120,7 +120,7 @@
             display: block;
             font-size: 1.1rem;
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
             margin-bottom: 16px;
             text-align: center;
         }
@@ -132,18 +132,18 @@
         select {
             width: 100%;
             padding: 12px 16px;
-            border: 1px solid #d1d5db;
+            border: 1px solid var(--border);
             border-radius: 8px;
             font-size: 0.95rem;
-            background: white;
+            background: var(--card-bg);
             cursor: pointer;
             transition: all 0.2s ease;
-            color: #374151;
+            color: var(--text);
         }
 
         select:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
@@ -187,11 +187,11 @@
         }
 
         .totals-section {
-            background: white;
+            background: var(--card-bg);
             padding: 32px;
             border-radius: 16px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border);
         }
 
         .totals-grid {
@@ -204,7 +204,7 @@
             text-align: center;
             padding: 20px;
             border-radius: 12px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border);
             transition: transform 0.2s ease;
         }
 
@@ -242,13 +242,13 @@
         .total-value {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #1e293b;
+            color: var(--text);
         }
 
         .progress-bar {
             width: 100%;
             height: 6px;
-            background: #f1f5f9;
+            background: var(--border);
             border-radius: 3px;
             margin-top: 8px;
             overflow: hidden;
@@ -256,13 +256,13 @@
 
         .progress-fill {
             height: 100%;
-            background: #3b82f6;
+            background: var(--primary);
             border-radius: 3px;
             transition: width 0.3s ease;
         }
 
         .reset-button {
-            background: #3b82f6;
+            background: var(--primary);
             color: white;
             border: none;
             padding: 12px 24px;
@@ -276,7 +276,7 @@
         }
 
         .reset-button:hover {
-            background: #2563eb;
+            background: var(--primary-dark);
             transform: translateY(-1px);
         }
 

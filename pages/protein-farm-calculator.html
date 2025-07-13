@@ -14,8 +14,8 @@
         }
 
         body {
-            background-color: #f5f7fa;
-            color: #2c3e50;
+            background-color: var(--bg);
+            color: var(--text);
             line-height: 1.5;
             min-height: 100vh;
             transition: all 0.3s ease;
@@ -94,11 +94,11 @@
         }
 
         .card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             padding: 1.5rem;
-            border: 1px solid #e1e8ed;
+            border: 1px solid var(--border);
         }
 
         .dark-theme .card {
@@ -108,7 +108,7 @@
         }
 
         .card-header {
-            border-bottom: 1px solid #e1e8ed;
+            border-bottom: 1px solid var(--border);
             padding-bottom: 1rem;
             margin-bottom: 1.5rem;
         }
@@ -120,7 +120,7 @@
         .card-title {
             font-size: 1.2rem;
             font-weight: 600;
-            color: #2c3e50;
+            color: var(--text);
             margin: 0;
         }
 
@@ -136,7 +136,7 @@
             margin: 0 auto 1.5rem auto;
             display: block;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 2px solid #e1e8ed;
+            border: 2px solid var(--border);
         }
 
         .dark-theme .progress-image {
@@ -145,8 +145,8 @@
         }
 
         .target-section {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
+            background: var(--bg);
+            border: 1px solid var(--border);
             border-radius: 6px;
             padding: 1rem;
             margin-bottom: 1.5rem;
@@ -161,7 +161,7 @@
             display: block;
             font-weight: 500;
             margin-bottom: 0.5rem;
-            color: #374151;
+            color: var(--text);
             font-size: 0.95rem;
         }
 
@@ -171,7 +171,7 @@
 
         .control-description {
             font-size: 0.85rem;
-            color: #6b7280;
+            color: var(--text-light);
             margin-bottom: 0.75rem;
             line-height: 1.4;
         }
@@ -183,10 +183,10 @@
         .form-input, .form-select {
             width: 100%;
             padding: 0.75rem;
-            border: 1px solid #d1d5db;
+            border: 1px solid var(--border);
             border-radius: 6px;
             font-size: 0.9rem;
-            background: white;
+            background: var(--card-bg);
             transition: border-color 0.2s ease;
         }
 
@@ -210,8 +210,8 @@
         }
 
         .farm-item {
-            background: white;
-            border: 1px solid #e5e7eb;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
             border-radius: 6px;
             padding: 1rem;
             transition: all 0.2s ease;
@@ -235,7 +235,7 @@
         .farm-name {
             font-weight: 500;
             margin-bottom: 0.5rem;
-            color: #374151;
+            color: var(--text);
             font-size: 0.9rem;
         }
 
@@ -245,7 +245,7 @@
 
         .production-info {
             font-size: 0.8rem;
-            color: #6b7280;
+            color: var(--text-light);
             margin-top: 0.25rem;
         }
 
@@ -254,9 +254,9 @@
         }
 
         .results-panel {
-            background: white;
+            background: var(--card-bg);
             border-radius: 8px;
-            border: 1px solid #e1e8ed;
+            border: 1px solid var(--border);
             overflow: hidden;
             height: fit-content;
         }
@@ -267,7 +267,7 @@
         }
 
         .results-header {
-            background: #667eea;
+            background: var(--primary);
             color: white;
             padding: 1rem;
             font-weight: 600;
@@ -288,7 +288,7 @@
             align-items: center;
             margin-bottom: 1rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid #f3f4f6;
+            border-bottom: 1px solid var(--border);
         }
 
         .dark-theme .metric {
@@ -303,7 +303,7 @@
 
         .metric-label {
             font-weight: 500;
-            color: #374151;
+            color: var(--text);
             font-size: 0.9rem;
         }
 
@@ -358,7 +358,7 @@
         .empty-state {
             text-align: center;
             padding: 1.5rem;
-            color: #6b7280;
+            color: var(--text-light);
         }
 
         .dark-theme .empty-state {
