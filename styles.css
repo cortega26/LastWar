@@ -1,14 +1,15 @@
 /* Mobile-First Base Styles */
 :root {
-    --primary: #c10000;
-    --primary-dark: #900000;
-    --secondary: #1d1d1d;
-    --accent: #ff3333;
-    --text: #333;
-    --text-light: #666;
-    --bg: #f9f9f9;
-    --card-bg: #fff;
-    --border: #e0e0e0;
+    /* Updated color palette for improved contrast */
+    --primary: #b91c1c;
+    --primary-dark: #7f1d1d;
+    --secondary: #2f2f2f;
+    --accent: #ef4444;
+    --text: #111111;
+    --text-light: #4b5563;
+    --bg: #fafafa;
+    --card-bg: #ffffff;
+    --border: #d1d5db;
     --success: #06d6a0;
     --warning: #ffd166;
     --danger: #ef476f;
@@ -24,7 +25,8 @@
   
   /* Base font and body settings */
   body {
-    font-family: 'Open Sans', Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
     line-height: 1.7;
     background: var(--bg);
     color: var(--text);
@@ -37,8 +39,9 @@
   }
   
   /* Headings */
-  h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5 {
     font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
     line-height: 1.3;
     margin-top: 1.5rem;
     margin-bottom: 1rem;
@@ -458,17 +461,18 @@
     transition: var(--transition);
   }
   
-  [data-theme="dark"] {
-    --primary: #ff3b3b;
-    --primary-dark: #b50000;
-    --secondary: #2d2d2d;
-    --accent: #ff5555;
-    --text: #f0f0f0;
-    --text-light: #b0b0b0;
-    --bg: #121212;
-    --card-bg: #1e1e1e;
-    --border: #333;
-    --shadow: 0 4px 6px rgba(0,0,0,0.3);
+[data-theme="dark"] {
+    /* Dark theme palette with higher contrast */
+    --primary: #f87171;
+    --primary-dark: #b91c1c;
+    --secondary: #1f2937;
+    --accent: #fb7185;
+    --text: #e5e7eb;
+    --text-light: #9ca3af;
+    --bg: #111827;
+    --card-bg: #1f2937;
+    --border: #374151;
+    --shadow: 0 4px 6px rgba(0,0,0,0.4);
   }
   
   [data-theme="dark"] .toggle-thumb {
