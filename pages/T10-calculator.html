@@ -355,7 +355,13 @@
                 <li><a href="../pages/black-market-S1.html">Black Market Guide</a></li>
             </ul>
         </nav>
-    </header>
+</header>
+    <div class="toggle-container container">
+        <span class="toggle-label">Dark Mode</span>
+        <div class="theme-toggle" id="themeToggle">
+            <div class="toggle-thumb"></div>
+        </div>
+    </div>
     <div class="container">
         <div class="header">
             <h1>Last War: Survival</h1>
@@ -472,7 +478,7 @@
             </div>
         </div>
 
-        <button class="reset-button" onclick="resetAll()">
+        <button class="reset-button">
             <span class="icon">🔄</span>Reset All to Level 0
         </button>
 
@@ -520,221 +526,7 @@
         </div>
     </footer>
 
-    <script>
-        const advancedProtectionGold = [
-            64600000,92300000,92300000,158000000,158000000,221000000,221000000,287000000,287000000,403000000
-        ];
-
-        const advancedProtectionValor = [
-            1280,1440,1440,1600,1600,1800,1800,2000,2000,2000
-        ];
-
-        const advancedProtectionFoodIron = [
-            21700000,31000000,31000000,53000000,53000000,74000000,74000000,96000000,96000000,134000000
-        ];
-
-        const boostThreeGold = [
-            92300000,158000000,158000000,221000000,221000000,287000000,287000000,403000000,403000000,563000000
-        ];
-
-        const boostThreeFoodIron = [
-            31000000,53000000,53000000,74000000,74000000,96000000,96000000,134000000,134000000,175000000
-        ];
-
-        const boostThreeValor = [
-            1440,1600,1600,1800,1800,2000,2000,2200,2200,2400
-        ];
-
-        const tierTenGold = 563000000;
-        const tierTenFoodIron = 188000000;
-        const tierTenValor = 2400;
-
-        // Maximum totals for progress bars
-        const maxTotalGold = 2767800000;
-        const maxTotalValor = 16960;
-        const maxTotalFoodIron = 922000000;
-
-        const advProtLvl = document.getElementById('adv-prot-lvl');
-        const hLvl = document.getElementById('healthLvl');
-        const aLvl = document.getElementById('attackLvl');
-        const dLvl = document.getElementById('defenseLvl');
-        
-        // Labels
-        const goldLabel = "💰 Gold";
-        const valorLabel = "🏆 Valor Badges";
-        const foodLabel = "🍖 Food";
-        const ironLabel = "⚙️ Iron";
-
-        let protVal, protGold, protFood, protIron = 0;
-        let healthVal, healthGold, healthFood, healthIron = 0;
-        let attackVal, attackGold, attackFood, attackIron = 0;
-        let defenseVal, defenseGold, defenseFood, defenseIron = 0;
-
-        // Result divs
-        const advProtGoldResultDiv = document.getElementById('advProtGoldResultDiv');
-        const advProtValorResultDiv = document.getElementById('advProtValorResultDiv');
-        const advProtFoodResultDiv = document.getElementById('advProtFoodResultDiv');
-        const advProtIronResultDiv = document.getElementById('advProtIronResultDiv');
-
-        const healthGoldResultDiv = document.getElementById('healthGoldResultDiv');
-        const healthValorResultDiv = document.getElementById('healthValorResultDiv');
-        const healthFoodResultDiv = document.getElementById('healthFoodResultDiv');
-        const healthIronResultDiv = document.getElementById('healthIronResultDiv');
-
-        const attackGoldResultDiv = document.getElementById('attackGoldResultDiv');
-        const attackValorResultDiv = document.getElementById('attackValorResultDiv');
-        const attackFoodResultDiv = document.getElementById('attackFoodResultDiv');
-        const attackIronResultDiv = document.getElementById('attackIronResultDiv');
-
-        const defenseGoldResultDiv = document.getElementById('defenseGoldResultDiv');
-        const defenseValorResultDiv = document.getElementById('defenseValorResultDiv');
-        const defenseFoodResultDiv = document.getElementById('defenseFoodResultDiv');
-        const defenseIronResultDiv = document.getElementById('defenseIronResultDiv');
-
-        const totalGoldDiv = document.getElementById('totalGoldRemainingDiv');
-        const totalValorDiv = document.getElementById('totalValorRemainingDiv');
-        const totalFoodDiv = document.getElementById('totalFoodRemainingDiv');
-        const totalIronDiv = document.getElementById('totalIronRemainingDiv');
-
-        // Progress bars
-        const goldProgress = document.getElementById('goldProgress');
-        const valorProgress = document.getElementById('valorProgress');
-        const foodProgress = document.getElementById('foodProgress');
-        const ironProgress = document.getElementById('ironProgress');
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeCalculator();
-        });
-
-        function initializeCalculator() {
-            protGold = updateDiv(advProtLvl.value, advancedProtectionGold, advProtGoldResultDiv, goldLabel);
-            protVal = updateDiv(advProtLvl.value, advancedProtectionValor, advProtValorResultDiv, valorLabel);
-            protFood = updateDiv(advProtLvl.value, advancedProtectionFoodIron, advProtFoodResultDiv, foodLabel);
-            protIron = updateDiv(advProtLvl.value, advancedProtectionFoodIron, advProtIronResultDiv, ironLabel);
-
-            healthGold = updateDiv(hLvl.value, boostThreeGold, healthGoldResultDiv, goldLabel);
-            healthVal = updateDiv(hLvl.value, boostThreeValor, healthValorResultDiv, valorLabel);
-            healthFood = updateDiv(hLvl.value, boostThreeFoodIron, healthFoodResultDiv, foodLabel);
-            healthIron = updateDiv(hLvl.value, boostThreeFoodIron, healthIronResultDiv, ironLabel);
-
-            attackGold = updateDiv(aLvl.value, boostThreeGold, attackGoldResultDiv, goldLabel);
-            attackVal = updateDiv(aLvl.value, boostThreeValor, attackValorResultDiv, valorLabel);
-            attackFood = updateDiv(aLvl.value, boostThreeFoodIron, attackFoodResultDiv, foodLabel);
-            attackIron = updateDiv(aLvl.value, boostThreeFoodIron, attackIronResultDiv, ironLabel);
-            
-            defenseGold = updateDiv(dLvl.value, boostThreeGold, defenseGoldResultDiv, goldLabel);
-            defenseVal = updateDiv(dLvl.value, boostThreeValor, defenseValorResultDiv, valorLabel);
-            defenseFood = updateDiv(dLvl.value, boostThreeFoodIron, defenseFoodResultDiv, foodLabel);
-            defenseIron = updateDiv(dLvl.value, boostThreeFoodIron, defenseIronResultDiv, ironLabel);
-
-            updateTotals();
-        }
-
-        advProtLvl.addEventListener('change', (event) => {
-            protGold = updateDiv(event.target.value, advancedProtectionGold, advProtGoldResultDiv, goldLabel);
-            protVal = updateDiv(event.target.value, advancedProtectionValor, advProtValorResultDiv, valorLabel);
-            protFood = updateDiv(event.target.value, advancedProtectionFoodIron, advProtFoodResultDiv, foodLabel);
-            protIron = updateDiv(event.target.value, advancedProtectionFoodIron, advProtIronResultDiv, ironLabel);
-            updateTotals();
-        });
-
-        hLvl.addEventListener('change', (event) => {
-            healthGold = updateDiv(event.target.value, boostThreeGold, healthGoldResultDiv, goldLabel);
-            healthVal = updateDiv(event.target.value, boostThreeValor, healthValorResultDiv, valorLabel);
-            healthFood = updateDiv(event.target.value, boostThreeFoodIron, healthFoodResultDiv, foodLabel);
-            healthIron = updateDiv(event.target.value, boostThreeFoodIron, healthIronResultDiv, ironLabel);
-            updateTotals();
-        });
-
-        aLvl.addEventListener('change', (event) => {
-            attackGold = updateDiv(event.target.value, boostThreeGold, attackGoldResultDiv, goldLabel);
-            attackVal = updateDiv(event.target.value, boostThreeValor, attackValorResultDiv, valorLabel);
-            attackFood = updateDiv(event.target.value, boostThreeFoodIron, attackFoodResultDiv, foodLabel);
-            attackIron = updateDiv(event.target.value, boostThreeFoodIron, attackIronResultDiv, ironLabel);
-            updateTotals();
-        });
-
-        dLvl.addEventListener('change', (event) => {
-            defenseGold = updateDiv(event.target.value, boostThreeGold, defenseGoldResultDiv, goldLabel);
-            defenseVal = updateDiv(event.target.value, boostThreeValor, defenseValorResultDiv, valorLabel);
-            defenseFood = updateDiv(event.target.value, boostThreeFoodIron, defenseFoodResultDiv, foodLabel);
-            defenseIron = updateDiv(event.target.value, boostThreeFoodIron, defenseIronResultDiv, ironLabel);
-            updateTotals();
-        });
-
-        function updateDiv(newValue, valuesArray, targetDiv, resource) {
-            targetDiv.classList.add('updating');
-            setTimeout(() => {
-                let totaledValues = sumRange(valuesArray, newValue, valuesArray.length - 1);
-                targetDiv.textContent = totaledValues.toLocaleString() + " " + resource;
-                targetDiv.classList.remove('updating');
-            }, 100);
-            return sumRange(valuesArray, newValue, valuesArray.length - 1);
-        }
-
-        function updateTotals() {
-            // Update total values
-            let totalGoldNum = healthGold + protGold + attackGold + defenseGold + tierTenGold;
-            let totalValorNum = healthVal + protVal + attackVal + defenseVal + tierTenValor;
-            let totalFoodNum = healthFood + protFood + attackFood + defenseFood + tierTenFoodIron;
-            let totalIronNum = healthIron + protIron + attackIron + defenseIron + tierTenFoodIron;
-
-            // Update display with animation
-            animateValue(totalGoldDiv, totalGoldNum);
-            animateValue(totalValorDiv, totalValorNum);
-            animateValue(totalFoodDiv, totalFoodNum);
-            animateValue(totalIronDiv, totalIronNum);
-
-            // Update progress bars
-            updateProgressBar(goldProgress, maxTotalGold - totalGoldNum, maxTotalGold);
-            updateProgressBar(valorProgress, maxTotalValor - totalValorNum, maxTotalValor);
-            updateProgressBar(foodProgress, maxTotalFoodIron - totalFoodNum, maxTotalFoodIron);
-            updateProgressBar(ironProgress, maxTotalFoodIron - totalIronNum, maxTotalFoodIron);
-        }
-
-        function updateProgressBar(progressBar, current, max) {
-            const percentage = (current / max) * 100;
-            progressBar.style.width = percentage + '%';
-        }
-
-        function animateValue(element, targetValue) {
-            element.classList.add('updating');
-            setTimeout(() => {
-                element.textContent = targetValue.toLocaleString();
-                element.classList.remove('updating');
-            }, 100);
-        }
-
-        function sumRange(arr, start, end) {
-            if (start < 0 || end >= arr.length || start > end) {
-                return 0;
-            }
-
-            let sum = 0;
-            for (let i = start; i <= end; i++) {
-                sum += arr[i];
-            }
-            return sum;
-        }
-
-        function resetAll() {
-            // Reset all selects to 0
-            advProtLvl.value = '0';
-            hLvl.value = '0';
-            aLvl.value = '0';
-            dLvl.value = '0';
-            
-            // Reinitialize calculator
-            initializeCalculator();
-            
-            // Add visual feedback
-            document.querySelectorAll('.tech-node').forEach(node => {
-                node.style.transform = 'scale(0.98)';
-                setTimeout(() => {
-                    node.style.transform = 'scale(1)';
-                }, 150);
-            });
-        }
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>

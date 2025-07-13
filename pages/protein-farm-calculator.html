@@ -453,7 +453,12 @@
             </ul>
         </nav>
     </header>
-    <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+    <div class="toggle-container container">
+        <span class="toggle-label">Dark Mode</span>
+        <div class="theme-toggle" id="themeToggle">
+            <div class="toggle-thumb"></div>
+        </div>
+    </div>
     
     <div class="header">
         <h1>Protein Farm Production Calculator</h1>
@@ -481,14 +486,13 @@
                             class="form-input" 
                             placeholder="Enter the red number from your progress bar"
                             min="1"
-                            oninput="calculateProduction()"
                         />
                     </div>
 
                     <div class="farm-grid">
                         <div class="farm-item" id="farm1-container">
                             <div class="farm-name">Protein Farm I</div>
-                            <select id="farm1" class="form-select" onchange="calculateProduction()">
+                            <select id="farm1" class="form-select">
                                 <!-- Options populated by JavaScript -->
                             </select>
                             <div class="production-info" id="farm1-info"></div>
@@ -496,7 +500,7 @@
 
                         <div class="farm-item" id="farm2-container">
                             <div class="farm-name">Protein Farm II</div>
-                            <select id="farm2" class="form-select" onchange="calculateProduction()">
+                            <select id="farm2" class="form-select">
                                 <option value="0">Not Built</option>
                                 <!-- Options populated by JavaScript -->
                             </select>
@@ -505,7 +509,7 @@
 
                         <div class="farm-item" id="farm3-container">
                             <div class="farm-name">Protein Farm III</div>
-                            <select id="farm3" class="form-select" onchange="calculateProduction()">
+                            <select id="farm3" class="form-select">
                                 <option value="0">Not Built</option>
                                 <!-- Options populated by JavaScript -->
                             </select>
@@ -514,7 +518,7 @@
 
                         <div class="farm-item" id="farm4-container">
                             <div class="farm-name">Protein Farm IV</div>
-                            <select id="farm4" class="form-select" onchange="calculateProduction()">
+                            <select id="farm4" class="form-select">
                                 <option value="0">Not Built</option>
                                 <!-- Options populated by JavaScript -->
                             </select>
@@ -523,7 +527,7 @@
 
                         <div class="farm-item" id="farm5-container">
                             <div class="farm-name">Protein Farm V</div>
-                            <select id="farm5" class="form-select" onchange="calculateProduction()">
+                            <select id="farm5" class="form-select">
                                 <option value="0">Not Built</option>
                                 <!-- Options populated by JavaScript -->
                             </select>
@@ -563,155 +567,7 @@
         </div>
     </footer>
 
-    <script>
-        // Production rates per hour by farm level
-        const productionRates = {
-            1: 720, 2: 1440, 3: 2160, 4: 2880, 5: 3600,
-            6: 4320, 7: 5040, 8: 5760, 9: 6480, 10: 7200,
-            11: 7920, 12: 8640, 13: 9360, 14: 10080, 15: 10800,
-            16: 11520, 17: 12240, 18: 12960, 19: 13680, 20: 14400,
-            21: 15120, 22: 15840, 23: 16560, 24: 17280, 25: 18000,
-            26: 18720, 27: 19440, 28: 20160, 29: 20880, 30: 21600
-        };
-
-        let isDarkTheme = false;
-
-        // Initialize calculator
-        function initializeCalculator() {
-            populateDropdowns();
-            calculateProduction();
-        }
-
-        // Populate farm level dropdowns
-        function populateDropdowns() {
-            const farm1 = document.getElementById('farm1');
-            
-            // Protein Farm I (always available, starts at level 1)
-            for (let i = 1; i <= 30; i++) {
-                const option = document.createElement('option');
-                option.value = i;
-                option.textContent = `Level ${i} (${productionRates[i].toLocaleString()}/hr)`;
-                farm1.appendChild(option);
-            }
-
-            // Farms II-V (can be not built or levels 1-30)
-            for (let farmNum = 2; farmNum <= 5; farmNum++) {
-                const farmSelect = document.getElementById(`farm${farmNum}`);
-                
-                for (let i = 1; i <= 30; i++) {
-                    const option = document.createElement('option');
-                    option.value = i;
-                    option.textContent = `Level ${i} (${productionRates[i].toLocaleString()}/hr)`;
-                    farmSelect.appendChild(option);
-                }
-            }
-        }
-
-        // Update production info for each farm
-        function updateProductionInfo() {
-            for (let i = 1; i <= 5; i++) {
-                const level = parseInt(document.getElementById(`farm${i}`).value) || 0;
-                const infoElement = document.getElementById(`farm${i}-info`);
-                const containerElement = document.getElementById(`farm${i}-container`);
-                
-                if (level > 0) {
-                    const rate = productionRates[level];
-                    infoElement.textContent = `${rate.toLocaleString()} units/hour`;
-                    containerElement.classList.add('active');
-                } else {
-                    infoElement.textContent = 'Not operational';
-                    containerElement.classList.remove('active');
-                }
-            }
-        }
-
-        // Calculate production metrics
-        function calculateProduction() {
-            updateProductionInfo();
-            
-            const targetAmount = parseInt(document.getElementById('targetAmount').value) || 0;
-            const resultsContent = document.getElementById('results-content');
-
-            if (targetAmount <= 0) {
-                resultsContent.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📊</div>
-                        <p>Configure your farms and enter target amount</p>
-                    </div>
-                `;
-                return;
-            }
-
-            let totalProduction = 0;
-
-            // Calculate total production from all active farms
-            for (let i = 1; i <= 5; i++) {
-                const level = parseInt(document.getElementById(`farm${i}`).value) || 0;
-                if (level > 0) {
-                    totalProduction += productionRates[level];
-                }
-            }
-
-            if (totalProduction === 0) {
-                resultsContent.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">⚠️</div>
-                        <p>No active farms detected. Please configure at least one farm.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            // Calculate time needed
-            const hoursNeeded = targetAmount / totalProduction;
-            const hours = Math.floor(hoursNeeded);
-            const minutes = Math.ceil((hoursNeeded - hours) * 60);
-            const days = Math.floor(hoursNeeded / 24);
-            const remainingHours = Math.floor(hoursNeeded % 24);
-
-            let timeDisplay;
-            if (days > 0) {
-                timeDisplay = `${days}d ${remainingHours}h ${minutes}m`;
-            } else if (hours === 0) {
-                timeDisplay = `${minutes} minutes`;
-            } else {
-                timeDisplay = `${hours}h ${minutes}m`;
-            }
-
-            // Display results
-            resultsContent.innerHTML = `
-                <div class="metric">
-                    <span class="metric-label">Total Production Rate</span>
-                    <span class="metric-value">${totalProduction.toLocaleString()}/hour</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-label">Target Amount</span>
-                    <span class="metric-value">${targetAmount.toLocaleString()} units</span>
-                </div>
-                <div class="time-estimate">
-                    <div class="time-value">${timeDisplay}</div>
-                    <div class="time-label">Estimated completion time</div>
-                </div>
-            `;
-        }
-
-        // Theme toggle functionality
-        function toggleTheme() {
-            isDarkTheme = !isDarkTheme;
-            const body = document.body;
-            const themeToggle = document.querySelector('.theme-toggle');
-            
-            if (isDarkTheme) {
-                body.classList.add('dark-theme');
-                themeToggle.textContent = '☀️ Light';
-            } else {
-                body.classList.remove('dark-theme');
-                themeToggle.textContent = '🌙 Dark';
-            }
-        }
-
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', initializeCalculator);
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>
