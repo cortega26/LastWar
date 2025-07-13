@@ -30,8 +30,10 @@
     color: var(--text);
     transition: var(--transition);
     scroll-behavior: smooth;
-    padding-bottom: 6rem;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
   
   /* Headings */
@@ -593,16 +595,12 @@
   
   /* Footer */
   footer {
-    margin-top: 3rem;
     padding: 2rem;
     background-color: var(--secondary);
     text-align: center;
     color: rgba(255,255,255,0.7);
-    position: fixed;
-    bottom: 0;
-    left: 0;
     width: 100%;
-    z-index: 100;
+    margin-top: auto;
   }
   
   footer p {
