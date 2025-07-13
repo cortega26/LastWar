@@ -1,12 +1,9 @@
 function toggleDarkMode() {
-    $("body").toggleClass("dark-mode");
-    if ($("body").hasClass("dark-mode")) {
-        document.documentElement.setAttribute("data-theme", "dark");
-        localStorage.setItem("theme", "dark");
-    } else {
-        document.documentElement.setAttribute("data-theme", "light");
-        localStorage.setItem("theme", "light");
-    }
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+    $("#themeToggle").attr("aria-pressed", newTheme === "dark");
 }
 window.toggleDarkMode = toggleDarkMode;
 
@@ -25,11 +22,9 @@ $(document).ready(function() {
     });
     $("#footer-placeholder").load(prefix + "partials/footer.html");
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-        $("body").addClass("dark-mode");
-        document.documentElement.setAttribute("data-theme", "dark");
-    } else if (savedTheme === "light") {
-        document.documentElement.setAttribute("data-theme", "light");
+    if (savedTheme === "dark" || savedTheme === "light") {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+        $("#themeToggle").attr("aria-pressed", savedTheme === "dark");
     }
     if (document.getElementById("themeToggle")) {
         $("#themeToggle").on("click", toggleDarkMode);
