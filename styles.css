@@ -996,3 +996,67 @@ footer {
   justify-content: center;
 }
 
+/* Shared page header styling */
+.header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.header p {
+  margin: 0;
+  color: rgba(255,255,255,0.9);
+}
+
+/* Results panel used in calculators */
+.results-panel {
+  background: var(--card-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  height: fit-content;
+}
+
+.results-header {
+  background: var(--primary);
+  color: #fff;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.results-content {
+  padding: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .header p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 1rem 0.5rem;
+  }
+
+  .header h1 {
+    font-size: 1.3rem;
+  }
+}
+
