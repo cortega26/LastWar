@@ -30,7 +30,7 @@
     color: var(--text);
     transition: var(--transition);
     scroll-behavior: smooth;
-    padding-bottom: 40px;
+    padding-bottom: 6rem;
     margin: 0;
   }
   
@@ -598,6 +598,11 @@
     background-color: var(--secondary);
     text-align: center;
     color: rgba(255,255,255,0.7);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
   }
   
   footer p {
