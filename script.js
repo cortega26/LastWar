@@ -305,10 +305,6 @@ function initTier10Calculator() {
     const totalValorDiv = document.getElementById('totalValorRemainingDiv');
     const totalFoodDiv = document.getElementById('totalFoodRemainingDiv');
     const totalIronDiv = document.getElementById('totalIronRemainingDiv');
-    const goldProgress = document.getElementById('goldProgress');
-    const valorProgress = document.getElementById('valorProgress');
-    const foodProgress = document.getElementById('foodProgress');
-    const ironProgress = document.getElementById('ironProgress');
 
     function initializeCalculator() {
         protGold = updateDiv(advProtLvl.value, advancedProtectionGold, advProtGoldResultDiv, '💰 Gold');
@@ -355,15 +351,6 @@ function initTier10Calculator() {
         animateValue(totalFoodDiv, totalFoodNum);
         animateValue(totalIronDiv, totalIronNum);
 
-        updateProgressBar(goldProgress, maxTotalGold - totalGoldNum, maxTotalGold);
-        updateProgressBar(valorProgress, maxTotalValor - totalValorNum, maxTotalValor);
-        updateProgressBar(foodProgress, maxTotalFoodIron - totalFoodNum, maxTotalFoodIron);
-        updateProgressBar(ironProgress, maxTotalFoodIron - totalIronNum, maxTotalFoodIron);
-    }
-
-    function updateProgressBar(progressBar, current, max) {
-        const percentage = (current / max) * 100;
-        progressBar.style.width = percentage + '%';
     }
 
     function animateValue(element, targetValue) {
