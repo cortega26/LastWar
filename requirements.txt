@@ -1,8 +1,0 @@
-pyautogui==0.9.54
-keyboard==0.13.5
-numpy==1.24.3
-Pillow==10.0.0
-opencv-python==4.8.0.74
-scapy[complete]==2.5.0  # For network packet capture
-requests==2.31.0  # For HTTP request monitoring
-# Note: Npcap must be installed separately from https://npcap.com
