@@ -1,19 +1,3 @@
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: var(--bg);
-            min-height: 100vh;
-            color: var(--text);
-            line-height: 1.6;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -21,15 +5,6 @@
         }
 
 
-        .disclaimer {
-            background: #fef3c7;
-            color: #92400e;
-            padding: 16px;
-            border-radius: 8px;
-            font-weight: 500;
-            border: 1px solid #fde047;
-            margin-top: 20px;
-        }
 
         .tech-tree {
             display: flex;
