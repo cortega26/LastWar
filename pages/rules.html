@@ -4,58 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        }
-    </script>
+    <script src="../theme.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../assets/css/rules.css">
+    <meta name="description" content="Alliance rules and guidelines for Last War: Survival players.">
+    <link rel="canonical" href="https://example.com/LastWar/pages/rules.html">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self';">
     <title>Alliance Rules - Last War: Survival</title>
-    <style>
-        .rules-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-
-        .rules-list {
-            margin: 2rem 0;
-        }
-
-        .rule {
-            margin-bottom: 2rem;
-        }
-
-        .rule-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .rule-content {
-            color: var(--text);
-            line-height: 1.6;
-            margin-left: 1.5rem;
-        }
-
-        .emphasis {
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .event-list {
-            margin: 0.5rem 0 0 1rem;
-            font-style: italic;
-        }
-    </style>
 </head>
 
 <body>
@@ -63,7 +21,7 @@
         <div id="nav-placeholder"></div>
     </header>
 
-    <main class="content">
+    <main class="content" role="main">
         <div class="header">
             <h1>🛡️ HxC Decalogue</h1>
             <p>Our ten commandments for a strong and united alliance.</p>
@@ -152,7 +110,7 @@
     </main>
 
     <div id="footer-placeholder"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="../script.js"></script>
 </body>
 

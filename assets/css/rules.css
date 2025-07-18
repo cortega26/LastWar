@@ -1,0 +1,40 @@
+        .rules-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .rules-list {
+            margin: 2rem 0;
+        }
+
+        .rule {
+            margin-bottom: 2rem;
+        }
+
+        .rule-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .rule-content {
+            color: var(--text);
+            line-height: 1.6;
+            margin-left: 1.5rem;
+        }
+
+        .emphasis {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .event-list {
+            margin: 0.5rem 0 0 1rem;
+            font-style: italic;
+        }
+
