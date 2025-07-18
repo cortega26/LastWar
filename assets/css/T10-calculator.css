@@ -1,0 +1,292 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+
+        .disclaimer {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid #fde047;
+            margin-top: 20px;
+        }
+
+        .tech-tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .tech-level {
+            display: grid;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .tech-level-1 {
+            grid-template-columns: 1fr;
+            justify-items: center;
+        }
+
+        .tech-level-2 {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .tech-node {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        .tech-node:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        /* Ensure Advanced Protection card has same width as others */
+        .tech-node.top-tier {
+            max-width: calc((1000px - 48px) / 3);
+            /* Same width as grid items */
+        }
+
+        .tech-node label {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .select-container {
+            margin-bottom: 20px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background: var(--card-bg);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text);
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .results-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .resource-result {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-align: center;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .gold-result {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde047;
+        }
+
+        .valor-result {
+            background: #fecaca;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        .food-result {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        .iron-result {
+            background: #e0e7ff;
+            color: #3730a3;
+            border: 1px solid #a5b4fc;
+        }
+
+        .totals-section {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+        }
+
+        .totals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .total-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease;
+        }
+
+        .total-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .total-gold {
+            background: #fffbeb;
+            border-color: #fde047;
+        }
+
+        .total-valor {
+            background: #fef2f2;
+            border-color: #fca5a5;
+        }
+
+        .total-food {
+            background: #f0fdf4;
+            border-color: #86efac;
+        }
+
+        .total-iron {
+            background: #f0f9ff;
+            border-color: #a5b4fc;
+        }
+
+        .total-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #64748b;
+        }
+
+        .total-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+
+
+        .reset-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin: 24px auto;
+            display: block;
+        }
+
+        .reset-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .icon {
+            margin-right: 6px;
+        }
+
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+
+
+            .tech-level-1,
+            .tech-level-2 {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .tech-node.top-tier {
+                max-width: 100%;
+            }
+
+            .totals-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .total-value {
+                font-size: 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .totals-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading animation */
+        .updating {
+            opacity: 0.7;
+        }
+
+        /* Override h2 color for this page */
+        .header h2 {
+            color: white;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.7;
+            }
+        }
+
+        .updating {
+            animation: pulse 0.3s ease-in-out;
+        }
+
