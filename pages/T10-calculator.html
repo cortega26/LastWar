@@ -1,173 +1,236 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="../theme.js"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="../assets/css/T10-calculator.css">
-    <meta name="description" content="Calculate resources needed to unlock Tier 10 troops in Last War: Survival.">
-    <link rel="canonical" href="https://example.com/LastWar/pages/T10-calculator.html">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self';">
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../assets/css/T10-calculator.css" />
+    <meta
+      name="description"
+      content="Calculate resources needed to unlock Tier 10 troops in Last War: Survival."
+    />
+    <link
+      rel="canonical"
+      href="https://example.com/LastWar/pages/T10-calculator.html"
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self';"
+    />
     <title>Last War: Survival - Tier 10 Progress Calculator</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header class="site-header">
-        <div id="nav-placeholder"></div>
+      <div id="nav-placeholder"></div>
     </header>
     <main class="container content" role="main">
-        <div class="header">
-            <h1>Last War: Survival</h1>
-            <h2>Tier 10 Research Calculator</h2>
-            <p>Enter your current research levels, including those in progress, to see how many resources you still need
-                to complete the remaining researches to unlock Tier 10 troops.</p>
-            <div class="disclaimer">
-                ⚠️ Please note that these values may not be exact. There is conflicting information online for these
-                researches.
+      <div class="header">
+        <h1>Last War: Survival</h1>
+        <h2>Tier 10 Research Calculator</h2>
+        <p>
+          Enter your current research levels, including those in progress, to
+          see how many resources you still need to complete the remaining
+          researches to unlock Tier 10 troops.
+        </p>
+        <div class="disclaimer">
+          ⚠️ Please note that these values may not be exact. There is
+          conflicting information online for these researches.
+        </div>
+      </div>
+
+      <div class="tech-tree">
+        <div class="tech-level tech-level-1">
+          <div class="tech-node top-tier">
+            <label for="adv-prot-lvl">Advanced Protection</label>
+            <div class="select-container">
+              <select name="adv-prot-lvl" id="adv-prot-lvl">
+                <option value="0">Level 0</option>
+                <option value="1">Level 1</option>
+                <option value="2">Level 2</option>
+                <option value="3">Level 3</option>
+                <option value="4">Level 4</option>
+                <option value="5">Level 5</option>
+                <option value="6">Level 6</option>
+                <option value="7">Level 7</option>
+                <option value="8">Level 8</option>
+                <option value="9">Level 9</option>
+                <option value="10">Level 10 (MAX)</option>
+              </select>
             </div>
+            <div class="results-container">
+              <div
+                id="advProtGoldResultDiv"
+                class="resource-result gold-result"
+              ></div>
+              <div
+                id="advProtValorResultDiv"
+                class="resource-result valor-result"
+              ></div>
+              <div
+                id="advProtFoodResultDiv"
+                class="resource-result food-result"
+              ></div>
+              <div
+                id="advProtIronResultDiv"
+                class="resource-result iron-result"
+              ></div>
+            </div>
+          </div>
         </div>
 
-        <div class="tech-tree">
-            <div class="tech-level tech-level-1">
-                <div class="tech-node top-tier">
-                    <label for="adv-prot-lvl">Advanced Protection</label>
-                    <div class="select-container">
-                        <select name="adv-prot-lvl" id="adv-prot-lvl">
-                            <option value="0">Level 0</option>
-                            <option value="1">Level 1</option>
-                            <option value="2">Level 2</option>
-                            <option value="3">Level 3</option>
-                            <option value="4">Level 4</option>
-                            <option value="5">Level 5</option>
-                            <option value="6">Level 6</option>
-                            <option value="7">Level 7</option>
-                            <option value="8">Level 8</option>
-                            <option value="9">Level 9</option>
-                            <option value="10">Level 10 (MAX)</option>
-                        </select>
-                    </div>
-                    <div class="results-container">
-                        <div id="advProtGoldResultDiv" class="resource-result gold-result"></div>
-                        <div id="advProtValorResultDiv" class="resource-result valor-result"></div>
-                        <div id="advProtFoodResultDiv" class="resource-result food-result"></div>
-                        <div id="advProtIronResultDiv" class="resource-result iron-result"></div>
-                    </div>
-                </div>
+        <div class="tech-level tech-level-2">
+          <div class="tech-node">
+            <label for="healthLvl">❤️ Health Boost III</label>
+            <div class="select-container">
+              <select name="healthLvl" id="healthLvl">
+                <option value="0">Level 0</option>
+                <option value="1">Level 1</option>
+                <option value="2">Level 2</option>
+                <option value="3">Level 3</option>
+                <option value="4">Level 4</option>
+                <option value="5">Level 5</option>
+                <option value="6">Level 6</option>
+                <option value="7">Level 7</option>
+                <option value="8">Level 8</option>
+                <option value="9">Level 9</option>
+                <option value="10">Level 10 (MAX)</option>
+              </select>
             </div>
-
-            <div class="tech-level tech-level-2">
-                <div class="tech-node">
-                    <label for="healthLvl">❤️ Health Boost III</label>
-                    <div class="select-container">
-                        <select name="healthLvl" id="healthLvl">
-                            <option value="0">Level 0</option>
-                            <option value="1">Level 1</option>
-                            <option value="2">Level 2</option>
-                            <option value="3">Level 3</option>
-                            <option value="4">Level 4</option>
-                            <option value="5">Level 5</option>
-                            <option value="6">Level 6</option>
-                            <option value="7">Level 7</option>
-                            <option value="8">Level 8</option>
-                            <option value="9">Level 9</option>
-                            <option value="10">Level 10 (MAX)</option>
-                        </select>
-                    </div>
-                    <div class="results-container">
-                        <div id="healthGoldResultDiv" class="resource-result gold-result"></div>
-                        <div id="healthValorResultDiv" class="resource-result valor-result"></div>
-                        <div id="healthFoodResultDiv" class="resource-result food-result"></div>
-                        <div id="healthIronResultDiv" class="resource-result iron-result"></div>
-                    </div>
-                </div>
-
-                <div class="tech-node">
-                    <label for="attackLvl">⚔️ Attack Boost III</label>
-                    <div class="select-container">
-                        <select name="attackLvl" id="attackLvl">
-                            <option value="0">Level 0</option>
-                            <option value="1">Level 1</option>
-                            <option value="2">Level 2</option>
-                            <option value="3">Level 3</option>
-                            <option value="4">Level 4</option>
-                            <option value="5">Level 5</option>
-                            <option value="6">Level 6</option>
-                            <option value="7">Level 7</option>
-                            <option value="8">Level 8</option>
-                            <option value="9">Level 9</option>
-                            <option value="10">Level 10 (MAX)</option>
-                        </select>
-                    </div>
-                    <div class="results-container">
-                        <div id="attackGoldResultDiv" class="resource-result gold-result"></div>
-                        <div id="attackValorResultDiv" class="resource-result valor-result"></div>
-                        <div id="attackFoodResultDiv" class="resource-result food-result"></div>
-                        <div id="attackIronResultDiv" class="resource-result iron-result"></div>
-                    </div>
-                </div>
-
-                <div class="tech-node">
-                    <label for="defenseLvl">🛡️ Defense Boost III</label>
-                    <div class="select-container">
-                        <select name="defenseLvl" id="defenseLvl">
-                            <option value="0">Level 0</option>
-                            <option value="1">Level 1</option>
-                            <option value="2">Level 2</option>
-                            <option value="3">Level 3</option>
-                            <option value="4">Level 4</option>
-                            <option value="5">Level 5</option>
-                            <option value="6">Level 6</option>
-                            <option value="7">Level 7</option>
-                            <option value="8">Level 8</option>
-                            <option value="9">Level 9</option>
-                            <option value="10">Level 10 (MAX)</option>
-                        </select>
-                    </div>
-                    <div class="results-container">
-                        <div id="defenseGoldResultDiv" class="resource-result gold-result"></div>
-                        <div id="defenseValorResultDiv" class="resource-result valor-result"></div>
-                        <div id="defenseFoodResultDiv" class="resource-result food-result"></div>
-                        <div id="defenseIronResultDiv" class="resource-result iron-result"></div>
-                    </div>
-                </div>
+            <div class="results-container">
+              <div
+                id="healthGoldResultDiv"
+                class="resource-result gold-result"
+              ></div>
+              <div
+                id="healthValorResultDiv"
+                class="resource-result valor-result"
+              ></div>
+              <div
+                id="healthFoodResultDiv"
+                class="resource-result food-result"
+              ></div>
+              <div
+                id="healthIronResultDiv"
+                class="resource-result iron-result"
+              ></div>
             </div>
+          </div>
+
+          <div class="tech-node">
+            <label for="attackLvl">⚔️ Attack Boost III</label>
+            <div class="select-container">
+              <select name="attackLvl" id="attackLvl">
+                <option value="0">Level 0</option>
+                <option value="1">Level 1</option>
+                <option value="2">Level 2</option>
+                <option value="3">Level 3</option>
+                <option value="4">Level 4</option>
+                <option value="5">Level 5</option>
+                <option value="6">Level 6</option>
+                <option value="7">Level 7</option>
+                <option value="8">Level 8</option>
+                <option value="9">Level 9</option>
+                <option value="10">Level 10 (MAX)</option>
+              </select>
+            </div>
+            <div class="results-container">
+              <div
+                id="attackGoldResultDiv"
+                class="resource-result gold-result"
+              ></div>
+              <div
+                id="attackValorResultDiv"
+                class="resource-result valor-result"
+              ></div>
+              <div
+                id="attackFoodResultDiv"
+                class="resource-result food-result"
+              ></div>
+              <div
+                id="attackIronResultDiv"
+                class="resource-result iron-result"
+              ></div>
+            </div>
+          </div>
+
+          <div class="tech-node">
+            <label for="defenseLvl">🛡️ Defense Boost III</label>
+            <div class="select-container">
+              <select name="defenseLvl" id="defenseLvl">
+                <option value="0">Level 0</option>
+                <option value="1">Level 1</option>
+                <option value="2">Level 2</option>
+                <option value="3">Level 3</option>
+                <option value="4">Level 4</option>
+                <option value="5">Level 5</option>
+                <option value="6">Level 6</option>
+                <option value="7">Level 7</option>
+                <option value="8">Level 8</option>
+                <option value="9">Level 9</option>
+                <option value="10">Level 10 (MAX)</option>
+              </select>
+            </div>
+            <div class="results-container">
+              <div
+                id="defenseGoldResultDiv"
+                class="resource-result gold-result"
+              ></div>
+              <div
+                id="defenseValorResultDiv"
+                class="resource-result valor-result"
+              ></div>
+              <div
+                id="defenseFoodResultDiv"
+                class="resource-result food-result"
+              ></div>
+              <div
+                id="defenseIronResultDiv"
+                class="resource-result iron-result"
+              ></div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <button class="reset-button">
-            <span class="icon">🔄</span>Reset All to Level 0
-        </button>
+      <button class="reset-button">
+        <span class="icon">🔄</span>Reset All to Level 0
+      </button>
 
-        <div class="totals-section">
-            <div class="totals-grid">
-                <div class="total-item total-gold">
-                    <div class="total-label">💰 Total Gold Needed</div>
-                    <div class="total-value" id="totalGoldRemainingDiv">0</div>
-                </div>
-                <div class="total-item total-valor">
-                    <div class="total-label">🏆 Total Valor Badges Needed</div>
-                    <div class="total-value" id="totalValorRemainingDiv">0</div>
-                </div>
-                <div class="total-item total-food">
-                    <div class="total-label">🍖 Total Food Needed</div>
-                    <div class="total-value" id="totalFoodRemainingDiv">0</div>
-                </div>
-                <div class="total-item total-iron">
-                    <div class="total-label">⚙️ Total Iron Needed</div>
-                    <div class="total-value" id="totalIronRemainingDiv">0</div>
-                </div>
-            </div>
+      <div class="totals-section">
+        <div class="totals-grid">
+          <div class="total-item total-gold">
+            <div class="total-label">💰 Total Gold Needed</div>
+            <div class="total-value" id="totalGoldRemainingDiv">0</div>
+          </div>
+          <div class="total-item total-valor">
+            <div class="total-label">🏆 Total Valor Badges Needed</div>
+            <div class="total-value" id="totalValorRemainingDiv">0</div>
+          </div>
+          <div class="total-item total-food">
+            <div class="total-label">🍖 Total Food Needed</div>
+            <div class="total-value" id="totalFoodRemainingDiv">0</div>
+          </div>
+          <div class="total-item total-iron">
+            <div class="total-label">⚙️ Total Iron Needed</div>
+            <div class="total-value" id="totalIronRemainingDiv">0</div>
+          </div>
         </div>
+      </div>
     </main>
 
     <div id="footer-placeholder"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
     <script src="../script.js"></script>
-</body>
-
+  </body>
 </html>
