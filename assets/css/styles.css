@@ -926,7 +926,7 @@ h1, h2, h3, h4, h5 {
   text-align: center;
   margin: 0 auto 2rem auto;
   padding: 3rem 1rem;
-  background: url("assets/images/logo.jpg") center/cover no-repeat;
+  background: url("../images/logo.jpg") center/cover no-repeat;
   border-radius: 8px;
   color: #fff;
 }

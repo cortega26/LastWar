@@ -8,7 +8,7 @@ Open `index.html` in a modern web browser. The navigation links lead to addition
 
 ## Development
 
-No build step is required. Simply edit the HTML, CSS, or JavaScript files and reload your browser. The `script.js` file uses jQuery to fetch the navigation and footer from the `partials/` directory, keeping all pages consistent.
+No build step is required. Simply edit the HTML, CSS, or JavaScript files and reload your browser. The `assets/js/script.js` file uses jQuery to fetch the navigation and footer from the `partials/` directory, keeping all pages consistent.
 
 ## Monetization Ideas
 
