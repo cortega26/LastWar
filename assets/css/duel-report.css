@@ -1,0 +1,48 @@
+.report-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.report-section {
+  margin-bottom: 2rem;
+}
+
+.report-section h2 {
+  color: var(--primary);
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+}
+
+.report-section ol,
+.report-section ul {
+  margin-left: 1.5rem;
+  line-height: 1.6;
+}
+
+.player-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.player-table th,
+.player-table td {
+  border: 1px solid var(--border);
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.player-table th {
+  background: var(--bg);
+  font-weight: 600;
+}
+
+.stats {
+  margin-top: 0.5rem;
+  color: var(--text-light);
+  font-style: italic;
+}
