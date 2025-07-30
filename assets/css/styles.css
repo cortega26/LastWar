@@ -1193,3 +1193,21 @@ footer {
   font-size: 1.2rem;
   font-weight: 600;
 }
+
+/* Dashboard & updates */
+.updates-list {
+  list-style: none;
+  margin: 1rem 0 0 0;
+  padding: 0;
+}
+.updates-list li {
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+.updates-list li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+}
