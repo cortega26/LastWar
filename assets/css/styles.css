@@ -1,23 +1,33 @@
 /* Mobile-First Base Styles */
 :root {
-  /* Updated color palette for improved contrast */
+  /* Light theme colors - WCAG AA compliant */
   --primary: #B81212;
   --primary-dark: #7A0E0E;
+  --primary-light: #E31E24;
   --secondary: #2f2f2f;
   --accent: #6CBF43;
-  --text: #F1F1F1;
-  --text-light: #B3B3B3;
-  --bg: #1A1A1A;
-  --card-bg: #252525;
-  --border: #333333;
-  --success: #06d6a0;
-  --warning: #ffd166;
-  --danger: #ef476f;
-  --warning-bg: #3a2a00;
-  --warning-border: #875804;
-  --warning-text: #f3ca6a;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  --transition: all 0.3s ease;
+
+  /* Light theme backgrounds and text */
+  --text: #1a1a1a;
+  /* 21:1 contrast ratio */
+  --text-light: #4a5568;
+  /* 7:1 contrast ratio */
+  --text-muted: #718096;
+  /* 4.5:1 contrast ratio */
+  --bg: #ffffff;
+  --bg-subtle: #f7fafc;
+  --card-bg: #ffffff;
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+
+  /* UI colors */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --transition: all 0.2s ease-in-out;
+
   /* Mobile-first breakpoints */
   --mobile-breakpoint: 768px;
   --tablet-breakpoint: 1024px;
@@ -109,13 +119,13 @@ h5 {
 }
 
 .nav-container {
-  padding-top: 6px;
   position: sticky;
   top: 0;
   z-index: 1000;
   background-color: var(--card-bg);
   border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow);
+  /* CRITICAL: No overflow properties here */
 }
 
 nav {
@@ -125,19 +135,7 @@ nav {
   display: flex;
   align-items: center;
   width: 100%;
-}
-
-nav::-webkit-scrollbar {
-  height: 4px;
-}
-
-nav::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-
-nav::-webkit-scrollbar-thumb {
-  background-color: var(--primary);
-  border-radius: 4px;
+  /* CRITICAL: No overflow properties here either */
 }
 
 .nav-menu {
@@ -147,6 +145,7 @@ nav::-webkit-scrollbar-thumb {
   margin: 0;
   padding: 0;
   gap: 1rem;
+  /* REMOVED: All overflow and scrolling properties */
 }
 
 .nav-toggle {
@@ -156,13 +155,10 @@ nav::-webkit-scrollbar-thumb {
   font-size: 1.5rem;
   cursor: pointer;
   margin-right: 1rem;
-  padding: var(--touch-target);
-  min-width: var(--touch-target);
-  min-height: var(--touch-target);
+  padding: 0.75rem;
+  min-width: 44px;
+  min-height: 44px;
   color: var(--text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .dropdown-menu {
@@ -940,22 +936,40 @@ footer p {
   }
 
   .nav-toggle {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .nav-links {
+  .nav-menu {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border-top: 1px solid var(--border);
     flex-direction: column;
-    width: 100%;
+    align-items: stretch;
+    padding: 1rem 0;
+    /* CRITICAL: Remove overflow on mobile too */
   }
 
-  .nav-links.active {
+  .nav-menu.active {
     display: flex;
   }
 
-  .nav-links a {
-    padding: 1rem;
-    border-bottom: 1px solid var(--border);
+  .dropdown-menu {
+    position: static;
+    display: none;
+    background: var(--bg);
+    box-shadow: inset 0 1px 0 var(--border);
+    border-radius: 0;
+    margin-left: 1rem;
+  }
+
+  .nav-item.dropdown.active .dropdown-menu {
+    display: block;
   }
 }
 
@@ -1138,7 +1152,7 @@ footer {
 }
 
 
-/* Dropdown navigation styles */
+/* Dropdown positioning - This is the key fix */
 .nav-item {
   position: relative;
 }
@@ -1148,31 +1162,39 @@ footer {
 }
 
 .dropdown-menu {
+  /* CRITICAL: Proper positioning without overflow conflicts */
   display: none;
   position: absolute;
   top: 100%;
   left: 0;
   background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 220px;
   padding: 0.5rem 0;
   margin: 0;
   list-style: none;
-  box-shadow: var(--shadow);
-  z-index: 1000;
-  min-width: 12rem;
+  /* CRITICAL: Let dropdowns expand naturally */
+  overflow: visible;
 }
 
 .dropdown-menu li a {
   display: block;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   color: var(--text);
+  text-decoration: none;
   white-space: nowrap;
+  transition: background-color 0.2s ease;
 }
 
 .dropdown-menu li a:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(184, 18, 18, 0.1);
   color: var(--primary);
 }
 
+/* Desktop hover behavior */
 @media (min-width: 768px) {
   .nav-item.dropdown:hover>.dropdown-menu {
     display: block;

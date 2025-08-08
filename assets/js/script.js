@@ -29,36 +29,6 @@ function optimizePerformance() {
     images.forEach(img => imageObserver.observe(img));
 }
 
-// Enhanced mobile navigation
-function enhanceMobileNavigation() {
-    const navToggle = document.getElementById('navToggle');
-    const navMenu = document.getElementById('navMenu');
-
-    if (navToggle && navMenu) {
-        // Close menu when clicking outside
-        function closeMenuOutside(event) {
-            const nav = document.getElementById('mainNav');
-            if (nav && !nav.contains(event.target)) {
-                navMenu.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
-                document.removeEventListener('click', closeMenuOutside);
-            }
-        }
-
-        navToggle.addEventListener('click', function () {
-            const isExpanded = navMenu.classList.contains('active');
-            navMenu.classList.toggle('active');
-            navToggle.setAttribute('aria-expanded', !isExpanded);
-
-            if (!isExpanded) {
-                document.addEventListener('click', closeMenuOutside);
-            } else {
-                document.removeEventListener('click', closeMenuOutside);
-            }
-        });
-    }
-}
-
 // SEO Enhancement functions
 function enhanceSEO() {
     addReadingTime();
@@ -171,7 +141,6 @@ window.toggleDarkMode = toggleDarkMode;
 $(document).ready(function () {
     // Initialize new enhancements
     optimizePerformance();
-    enhanceMobileNavigation();
     enhanceSEO();
     enhanceUserExperience();
 
@@ -201,29 +170,54 @@ $(document).ready(function () {
 
     $(document).on("click", "#themeToggle", toggleDarkMode);
 
-    // Navigation Active State for links
-    $(".nav-link").click(function () {
-        $(".nav-link").removeClass("active");
-        $(this).addClass("active");
-    });
+    // Clean mobile navigation toggle - no conflicts
+    $("#navToggle").on("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
 
-    // Hamburger Menu Toggle (for mobile) with keydown support
-    $("#navToggle").on("click keydown", function (e) {
-        if (e.type === "keydown" && !/(13|32)/.test(e.keyCode)) return; // respond to Enter (13) or Space (32)
-        var navMenu = $("#mainNav .nav-menu");
+        const navMenu = $("#navMenu, .nav-menu");
+        const isActive = navMenu.hasClass("active");
+
         navMenu.toggleClass("active");
-        const expanded = navMenu.hasClass("active");
-        $(this).attr("aria-expanded", expanded);
-        e.preventDefault();
+        $(this).attr("aria-expanded", !isActive);
     });
 
-    // Dropdown Toggle for Mobile with keydown support
-    $(".nav-item.dropdown > .nav-link").on("click keydown", function (e) {
-        if (e.type === "keydown" && !/(13|32)/.test(e.keyCode)) return;
-        e.preventDefault();
-        const expanded = $(this).attr("aria-expanded") === "true";
-        $(this).attr("aria-expanded", !expanded);
-        $(this).next(".dropdown-menu").slideToggle();
+    // Mobile dropdown handling - clean event delegation
+    $(".nav-item.dropdown > .nav-link").on("click", function (e) {
+        // Only handle on mobile
+        if (window.innerWidth <= 767) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const parentItem = $(this).parent();
+            const isActive = parentItem.hasClass("active");
+
+            // Close other dropdowns
+            $(".nav-item.dropdown").removeClass("active");
+
+            // Toggle current dropdown
+            if (!isActive) {
+                parentItem.addClass("active");
+            }
+        }
+    });
+
+    // Close mobile menu when clicking outside
+    $(document).on("click", function (e) {
+        if (!$(e.target).closest("nav").length) {
+            $(".nav-menu").removeClass("active");
+            $(".nav-item.dropdown").removeClass("active");
+            $("#navToggle").attr("aria-expanded", "false");
+        }
+    });
+
+    // Handle window resize - close mobile menu if switching to desktop
+    $(window).on("resize", function () {
+        if (window.innerWidth > 767) {
+            $(".nav-menu").removeClass("active");
+            $(".nav-item.dropdown").removeClass("active");
+            $("#navToggle").attr("aria-expanded", "false");
+        }
     });
 
     // FAQ Toggle with ARIA enhancement
