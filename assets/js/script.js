@@ -1,3 +1,164 @@
+// Utility function for debouncing
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Performance optimization functions
+function optimizePerformance() {
+    // Lazy load images
+    const images = document.querySelectorAll('img[data-src]');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+
+    images.forEach(img => imageObserver.observe(img));
+}
+
+// Enhanced mobile navigation
+function enhanceMobileNavigation() {
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if (navToggle && navMenu) {
+        // Close menu when clicking outside
+        function closeMenuOutside(event) {
+            const nav = document.getElementById('mainNav');
+            if (nav && !nav.contains(event.target)) {
+                navMenu.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
+                document.removeEventListener('click', closeMenuOutside);
+            }
+        }
+
+        navToggle.addEventListener('click', function () {
+            const isExpanded = navMenu.classList.contains('active');
+            navMenu.classList.toggle('active');
+            navToggle.setAttribute('aria-expanded', !isExpanded);
+
+            if (!isExpanded) {
+                document.addEventListener('click', closeMenuOutside);
+            } else {
+                document.removeEventListener('click', closeMenuOutside);
+            }
+        });
+    }
+}
+
+// SEO Enhancement functions
+function enhanceSEO() {
+    addReadingTime();
+    generateTableOfContents();
+}
+
+function generateTableOfContents() {
+    const headings = document.querySelectorAll('h2, h3');
+    if (headings.length < 3) return;
+
+    const tocContainer = document.createElement('div');
+    tocContainer.className = 'table-of-contents';
+    tocContainer.innerHTML = '<h3>📋 Table of Contents</h3>';
+
+    const tocList = document.createElement('ul');
+    tocContainer.appendChild(tocList);
+
+    headings.forEach((heading, index) => {
+        if (!heading.id) {
+            heading.id = 'heading-' + index;
+        }
+
+        const li = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = '#' + heading.id;
+        link.textContent = heading.textContent;
+        link.className = heading.tagName.toLowerCase();
+
+        li.appendChild(link);
+        tocList.appendChild(li);
+    });
+
+    const intro = document.querySelector('.intro, .guide-intro');
+    if (intro) {
+        intro.insertAdjacentElement('afterend', tocContainer);
+    }
+}
+
+function addReadingTime() {
+    const content = document.querySelector('main .content, main .container');
+    if (!content) return;
+
+    const text = content.textContent;
+    const wordCount = text.trim().split(/\s+/).length;
+    const readingTime = Math.ceil(wordCount / 200);
+
+    const readingTimeEl = document.createElement('div');
+    readingTimeEl.className = 'reading-time';
+    readingTimeEl.innerHTML = `📖 ${readingTime} min read`;
+
+    const title = document.querySelector('h1');
+    if (title) {
+        title.insertAdjacentElement('afterend', readingTimeEl);
+    }
+}
+
+// User experience enhancements
+function enhanceUserExperience() {
+    addSmoothScrolling();
+    addCopyButtons();
+}
+
+function addSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
+
+function addCopyButtons() {
+    const codeBlocks = document.querySelectorAll('pre, .resource-result');
+    codeBlocks.forEach(block => {
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'copy-btn';
+        copyBtn.innerHTML = '📋';
+        copyBtn.title = 'Copy to clipboard';
+
+        copyBtn.addEventListener('click', () => {
+            const text = block.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                copyBtn.innerHTML = '✅';
+                setTimeout(() => {
+                    copyBtn.innerHTML = '📋';
+                }, 2000);
+            });
+        });
+
+        block.style.position = 'relative';
+        block.appendChild(copyBtn);
+    });
+}
+
 function toggleDarkMode() {
     const currentTheme = document.documentElement.getAttribute("data-theme");
     const newTheme = currentTheme === "dark" ? "light" : "dark";
@@ -7,13 +168,22 @@ function toggleDarkMode() {
 }
 window.toggleDarkMode = toggleDarkMode;
 
-$(document).ready(function() {
+$(document).ready(function () {
+    // Initialize new enhancements
+    optimizePerformance();
+    enhanceMobileNavigation();
+    enhanceSEO();
+    enhanceUserExperience();
+
+    // Add loading indicator
+    document.body.classList.add('loaded');
+
     const isSubpage = window.location.pathname.includes('/pages/');
     const prefix = isSubpage ? '../' : '';
     const savedTheme = localStorage.getItem("theme");
-    $("#nav-placeholder").load(prefix + "partials/nav.html", function() {
+    $("#nav-placeholder").load(prefix + "partials/nav.html", function () {
         if (isSubpage) {
-            $("#nav-placeholder a").each(function() {
+            $("#nav-placeholder a").each(function () {
                 const href = $(this).attr('href');
                 if (!href.startsWith('http') && !href.startsWith('../')) {
                     $(this).attr('href', '../' + href);
@@ -30,15 +200,15 @@ $(document).ready(function() {
     }
 
     $(document).on("click", "#themeToggle", toggleDarkMode);
-    
+
     // Navigation Active State for links
-    $(".nav-link").click(function() {
+    $(".nav-link").click(function () {
         $(".nav-link").removeClass("active");
         $(this).addClass("active");
     });
-    
+
     // Hamburger Menu Toggle (for mobile) with keydown support
-    $("#navToggle").on("click keydown", function(e) {
+    $("#navToggle").on("click keydown", function (e) {
         if (e.type === "keydown" && !/(13|32)/.test(e.keyCode)) return; // respond to Enter (13) or Space (32)
         var navMenu = $("#mainNav .nav-menu");
         navMenu.toggleClass("active");
@@ -46,18 +216,18 @@ $(document).ready(function() {
         $(this).attr("aria-expanded", expanded);
         e.preventDefault();
     });
-    
+
     // Dropdown Toggle for Mobile with keydown support
-    $(".nav-item.dropdown > .nav-link").on("click keydown", function(e) {
+    $(".nav-item.dropdown > .nav-link").on("click keydown", function (e) {
         if (e.type === "keydown" && !/(13|32)/.test(e.keyCode)) return;
         e.preventDefault();
         const expanded = $(this).attr("aria-expanded") === "true";
         $(this).attr("aria-expanded", !expanded);
         $(this).next(".dropdown-menu").slideToggle();
     });
-    
+
     // FAQ Toggle with ARIA enhancement
-    $(".faq-question").on("click keydown", function(e) {
+    $(".faq-question").on("click keydown", function (e) {
         if (e.type === "keydown" && !/(13|32)/.test(e.keyCode)) return;
         e.preventDefault();
         const isExpanded = $(this).attr("aria-expanded") === "true";
@@ -65,66 +235,66 @@ $(document).ready(function() {
         $(this).toggleClass("active");
         $(this).next(".faq-answer").toggleClass("show");
     }).attr("tabindex", "0").attr("role", "button").attr("aria-expanded", "false");
-    
+
     // Jump to Top Button: add aria-label for accessibility
     $("#jumpToTop").attr("aria-label", "Scroll to Top");
-    
+
     // Scroll to Top Button Behavior
-    $(window).scroll(function() {
+    $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
             $("#jumpToTop").addClass("visible");
         } else {
             $("#jumpToTop").removeClass("visible");
         }
     });
-    
-    $("#jumpToTop").click(function() {
-        $("html, body").animate({scrollTop: 0}, 500);
+
+    $("#jumpToTop").click(function () {
+        $("html, body").animate({ scrollTop: 0 }, 500);
     });
-    
+
     // Countdown Timer
     function updateCountdown() {
         const now = new Date();
         const seasonStart = new Date(2025, 5, 1); // May 1, 2025
         const diff = seasonStart - now;
-        
+
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        
+
         $("#countdown").text(`${days}d ${hours}h ${minutes}m`);
-        
+
         // Current day calculation
         const serverStart = new Date(2024, 12, 31); // April 14, 2025
         const daysSinceStart = Math.floor((now - serverStart) / (1000 * 60 * 60 * 24)) + 1;
         $("#dayCount").text(daysSinceStart);
-        
+
         // Progress calculation
         const totalDays = Math.floor((seasonStart - serverStart) / (1000 * 60 * 60 * 24));
         const progress = (daysSinceStart / totalDays) * 100;
         $("#progressFill").css("width", progress + "%");
     }
-    
+
     updateCountdown();
     setInterval(updateCountdown, 60000);
-    
+
     // Resource Calculator
-    $("#calculateBtn").click(function() {
+    $("#calculateBtn").click(function () {
         const currentLevel = parseInt($("#currentLevel").val());
         const targetLevel = parseInt($("#targetLevel").val());
         const currentResistance = parseInt($("#currentResistance").val());
         const targetResistance = parseInt($("#targetResistance").val());
         const proteinRate = parseInt($("#proteinRate").val());
         const crystalRate = parseInt($("#crystalRate").val());
-        
+
         // Basic calculation logic
         const levelDiff = targetLevel - currentLevel;
         const resistanceDiff = targetResistance - currentResistance;
-        
+
         let proteinRequired = levelDiff * 15000 + (resistanceDiff * 10000);
         let crystalRequired = levelDiff * 200 + (resistanceDiff * 150);
         let fragmentsRequired = levelDiff * 50 + (resistanceDiff * 75);
-        
+
         // Apply diminishing returns for high resistance
         if (targetResistance > 65) {
             const extraResistance = targetResistance - 65;
@@ -132,18 +302,18 @@ $(document).ready(function() {
             crystalRequired += extraResistance * 100;
             fragmentsRequired += extraResistance * 50;
         }
-        
+
         // Calculate time required
         const daysForProtein = Math.ceil(proteinRequired / (proteinRate * 24));
         const daysForCrystals = Math.ceil(crystalRequired / crystalRate);
         const timeRequired = Math.max(daysForProtein, daysForCrystals);
-        
+
         // Display results
         $("#proteinRequired").text(proteinRequired.toLocaleString());
         $("#crystalRequired").text(crystalRequired.toLocaleString());
         $("#fragmentsRequired").text(fragmentsRequired.toLocaleString());
         $("#timeRequired").text(timeRequired + " days");
-        
+
         // Generate recommendations
         let recommendations = "";
         if (daysForProtein > daysForCrystals) {
@@ -156,9 +326,9 @@ $(document).ready(function() {
         }
         $("#recommendations").text(recommendations);
     });
-    
+
     // Building level selector
-    $(".building-level").click(function() {
+    $(".building-level").click(function () {
         $(this).parent().find(".building-level").removeClass("active");
         $(this).addClass("active");
     });
@@ -267,18 +437,26 @@ function initProteinCalculator() {
 }
 
 function initTier10Calculator() {
-    const advancedProtectionGold = [64600000,92300000,92300000,158000000,158000000,221000000,221000000,287000000,287000000,403000000];
-    const advancedProtectionValor = [1280,1440,1440,1600,1600,1800,1800,2000,2000,2000];
-    const advancedProtectionFoodIron = [21700000,31000000,31000000,53000000,53000000,74000000,74000000,96000000,96000000,134000000];
-    const boostThreeGold = [92300000,158000000,158000000,221000000,221000000,287000000,287000000,403000000,403000000,563000000];
-    const boostThreeFoodIron = [31000000,53000000,53000000,74000000,74000000,96000000,96000000,134000000,134000000,175000000];
-    const boostThreeValor = [1440,1600,1600,1800,1800,2000,2000,2200,2200,2400];
+    const advancedProtectionGold = [64600000, 92300000, 92300000, 158000000, 158000000, 221000000, 221000000, 287000000, 287000000, 403000000];
+    const advancedProtectionValor = [1280, 1440, 1440, 1600, 1600, 1800, 1800, 2000, 2000, 2000];
+    const advancedProtectionFoodIron = [21700000, 31000000, 31000000, 53000000, 53000000, 74000000, 74000000, 96000000, 96000000, 134000000];
+    const boostThreeGold = [92300000, 158000000, 158000000, 221000000, 221000000, 287000000, 287000000, 403000000, 403000000, 563000000];
+    const boostThreeFoodIron = [31000000, 53000000, 53000000, 74000000, 74000000, 96000000, 96000000, 134000000, 134000000, 175000000];
+    const boostThreeValor = [1440, 1600, 1600, 1800, 1800, 2000, 2000, 2200, 2200, 2400];
     const tierTenGold = 563000000;
     const tierTenFoodIron = 188000000;
     const tierTenValor = 2400;
     const maxTotalGold = 2767800000;
     const maxTotalValor = 16960;
     const maxTotalFoodIron = 922000000;
+
+    // State variables for resource tracking
+    const state = {
+        prot: { val: 0, gold: 0, food: 0, iron: 0 },
+        health: { val: 0, gold: 0, food: 0, iron: 0 },
+        attack: { val: 0, gold: 0, food: 0, iron: 0 },
+        defense: { val: 0, gold: 0, food: 0, iron: 0 }
+    };
 
     const advProtLvl = document.getElementById('adv-prot-lvl');
     const hLvl = document.getElementById('healthLvl');
@@ -307,25 +485,25 @@ function initTier10Calculator() {
     const totalIronDiv = document.getElementById('totalIronRemainingDiv');
 
     function initializeCalculator() {
-        protGold = updateDiv(advProtLvl.value, advancedProtectionGold, advProtGoldResultDiv, '💰 Gold');
-        protVal = updateDiv(advProtLvl.value, advancedProtectionValor, advProtValorResultDiv, '🏆 Valor Badges');
-        protFood = updateDiv(advProtLvl.value, advancedProtectionFoodIron, advProtFoodResultDiv, '🍖 Food');
-        protIron = updateDiv(advProtLvl.value, advancedProtectionFoodIron, advProtIronResultDiv, '⚙️ Iron');
+        state.prot.gold = updateDiv(advProtLvl.value, advancedProtectionGold, advProtGoldResultDiv, '💰 Gold');
+        state.prot.val = updateDiv(advProtLvl.value, advancedProtectionValor, advProtValorResultDiv, '🏆 Valor Badges');
+        state.prot.food = updateDiv(advProtLvl.value, advancedProtectionFoodIron, advProtFoodResultDiv, '🍖 Food');
+        state.prot.iron = updateDiv(advProtLvl.value, advancedProtectionFoodIron, advProtIronResultDiv, '⚙️ Iron');
 
-        healthGold = updateDiv(hLvl.value, boostThreeGold, healthGoldResultDiv, '💰 Gold');
-        healthVal = updateDiv(hLvl.value, boostThreeValor, healthValorResultDiv, '🏆 Valor Badges');
-        healthFood = updateDiv(hLvl.value, boostThreeFoodIron, healthFoodResultDiv, '🍖 Food');
-        healthIron = updateDiv(hLvl.value, boostThreeFoodIron, healthIronResultDiv, '⚙️ Iron');
+        state.health.gold = updateDiv(hLvl.value, boostThreeGold, healthGoldResultDiv, '💰 Gold');
+        state.health.val = updateDiv(hLvl.value, boostThreeValor, healthValorResultDiv, '🏆 Valor Badges');
+        state.health.food = updateDiv(hLvl.value, boostThreeFoodIron, healthFoodResultDiv, '🍖 Food');
+        state.health.iron = updateDiv(hLvl.value, boostThreeFoodIron, healthIronResultDiv, '⚙️ Iron');
 
-        attackGold = updateDiv(aLvl.value, boostThreeGold, attackGoldResultDiv, '💰 Gold');
-        attackVal = updateDiv(aLvl.value, boostThreeValor, attackValorResultDiv, '🏆 Valor Badges');
-        attackFood = updateDiv(aLvl.value, boostThreeFoodIron, attackFoodResultDiv, '🍖 Food');
-        attackIron = updateDiv(aLvl.value, boostThreeFoodIron, attackIronResultDiv, '⚙️ Iron');
+        state.attack.gold = updateDiv(aLvl.value, boostThreeGold, attackGoldResultDiv, '💰 Gold');
+        state.attack.val = updateDiv(aLvl.value, boostThreeValor, attackValorResultDiv, '🏆 Valor Badges');
+        state.attack.food = updateDiv(aLvl.value, boostThreeFoodIron, attackFoodResultDiv, '🍖 Food');
+        state.attack.iron = updateDiv(aLvl.value, boostThreeFoodIron, attackIronResultDiv, '⚙️ Iron');
 
-        defenseGold = updateDiv(dLvl.value, boostThreeGold, defenseGoldResultDiv, '💰 Gold');
-        defenseVal = updateDiv(dLvl.value, boostThreeValor, defenseValorResultDiv, '🏆 Valor Badges');
-        defenseFood = updateDiv(dLvl.value, boostThreeFoodIron, defenseFoodResultDiv, '🍖 Food');
-        defenseIron = updateDiv(dLvl.value, boostThreeFoodIron, defenseIronResultDiv, '⚙️ Iron');
+        state.defense.gold = updateDiv(dLvl.value, boostThreeGold, defenseGoldResultDiv, '💰 Gold');
+        state.defense.val = updateDiv(dLvl.value, boostThreeValor, defenseValorResultDiv, '🏆 Valor Badges');
+        state.defense.food = updateDiv(dLvl.value, boostThreeFoodIron, defenseFoodResultDiv, '🍖 Food');
+        state.defense.iron = updateDiv(dLvl.value, boostThreeFoodIron, defenseIronResultDiv, '⚙️ Iron');
 
         updateTotals();
     }
@@ -341,16 +519,15 @@ function initTier10Calculator() {
     }
 
     function updateTotals() {
-        const totalGoldNum = healthGold + protGold + attackGold + defenseGold + tierTenGold;
-        const totalValorNum = healthVal + protVal + attackVal + defenseVal + tierTenValor;
-        const totalFoodNum = healthFood + protFood + attackFood + defenseFood + tierTenFoodIron;
-        const totalIronNum = healthIron + protIron + attackIron + defenseIron + tierTenFoodIron;
+        const totalGoldNum = state.health.gold + state.prot.gold + state.attack.gold + state.defense.gold + tierTenGold;
+        const totalValorNum = state.health.val + state.prot.val + state.attack.val + state.defense.val + tierTenValor;
+        const totalFoodNum = state.health.food + state.prot.food + state.attack.food + state.defense.food + tierTenFoodIron;
+        const totalIronNum = state.health.iron + state.prot.iron + state.attack.iron + state.defense.iron + tierTenFoodIron;
 
         animateValue(totalGoldDiv, totalGoldNum);
         animateValue(totalValorDiv, totalValorNum);
         animateValue(totalFoodDiv, totalFoodNum);
         animateValue(totalIronDiv, totalIronNum);
-
     }
 
     function animateValue(element, targetValue) {
@@ -386,42 +563,37 @@ function initTier10Calculator() {
         });
     }
 
-    let protVal = 0, protGold = 0, protFood = 0, protIron = 0;
-    let healthVal = 0, healthGold = 0, healthFood = 0, healthIron = 0;
-    let attackVal = 0, attackGold = 0, attackFood = 0, attackIron = 0;
-    let defenseVal = 0, defenseGold = 0, defenseFood = 0, defenseIron = 0;
-
     initializeCalculator();
 
     advProtLvl.addEventListener('change', e => {
-        protGold = updateDiv(e.target.value, advancedProtectionGold, advProtGoldResultDiv, '💰 Gold');
-        protVal = updateDiv(e.target.value, advancedProtectionValor, advProtValorResultDiv, '🏆 Valor Badges');
-        protFood = updateDiv(e.target.value, advancedProtectionFoodIron, advProtFoodResultDiv, '🍖 Food');
-        protIron = updateDiv(e.target.value, advancedProtectionFoodIron, advProtIronResultDiv, '⚙️ Iron');
+        state.prot.gold = updateDiv(e.target.value, advancedProtectionGold, advProtGoldResultDiv, '💰 Gold');
+        state.prot.val = updateDiv(e.target.value, advancedProtectionValor, advProtValorResultDiv, '🏆 Valor Badges');
+        state.prot.food = updateDiv(e.target.value, advancedProtectionFoodIron, advProtFoodResultDiv, '🍖 Food');
+        state.prot.iron = updateDiv(e.target.value, advancedProtectionFoodIron, advProtIronResultDiv, '⚙️ Iron');
         updateTotals();
     });
 
     hLvl.addEventListener('change', e => {
-        healthGold = updateDiv(e.target.value, boostThreeGold, healthGoldResultDiv, '💰 Gold');
-        healthVal = updateDiv(e.target.value, boostThreeValor, healthValorResultDiv, '🏆 Valor Badges');
-        healthFood = updateDiv(e.target.value, boostThreeFoodIron, healthFoodResultDiv, '🍖 Food');
-        healthIron = updateDiv(e.target.value, boostThreeFoodIron, healthIronResultDiv, '⚙️ Iron');
+        state.health.gold = updateDiv(e.target.value, boostThreeGold, healthGoldResultDiv, '💰 Gold');
+        state.health.val = updateDiv(e.target.value, boostThreeValor, healthValorResultDiv, '🏆 Valor Badges');
+        state.health.food = updateDiv(e.target.value, boostThreeFoodIron, healthFoodResultDiv, '🍖 Food');
+        state.health.iron = updateDiv(e.target.value, boostThreeFoodIron, healthIronResultDiv, '⚙️ Iron');
         updateTotals();
     });
 
     aLvl.addEventListener('change', e => {
-        attackGold = updateDiv(e.target.value, boostThreeGold, attackGoldResultDiv, '💰 Gold');
-        attackVal = updateDiv(e.target.value, boostThreeValor, attackValorResultDiv, '🏆 Valor Badges');
-        attackFood = updateDiv(e.target.value, boostThreeFoodIron, attackFoodResultDiv, '🍖 Food');
-        attackIron = updateDiv(e.target.value, boostThreeFoodIron, attackIronResultDiv, '⚙️ Iron');
+        state.attack.gold = updateDiv(e.target.value, boostThreeGold, attackGoldResultDiv, '💰 Gold');
+        state.attack.val = updateDiv(e.target.value, boostThreeValor, attackValorResultDiv, '🏆 Valor Badges');
+        state.attack.food = updateDiv(e.target.value, boostThreeFoodIron, attackFoodResultDiv, '🍖 Food');
+        state.attack.iron = updateDiv(e.target.value, boostThreeFoodIron, attackIronResultDiv, '⚙️ Iron');
         updateTotals();
     });
 
     dLvl.addEventListener('change', e => {
-        defenseGold = updateDiv(e.target.value, boostThreeGold, defenseGoldResultDiv, '💰 Gold');
-        defenseVal = updateDiv(e.target.value, boostThreeValor, defenseValorResultDiv, '🏆 Valor Badges');
-        defenseFood = updateDiv(e.target.value, boostThreeFoodIron, defenseFoodResultDiv, '🍖 Food');
-        defenseIron = updateDiv(e.target.value, boostThreeFoodIron, defenseIronResultDiv, '⚙️ Iron');
+        state.defense.gold = updateDiv(e.target.value, boostThreeGold, defenseGoldResultDiv, '💰 Gold');
+        state.defense.val = updateDiv(e.target.value, boostThreeValor, defenseValorResultDiv, '🏆 Valor Badges');
+        state.defense.food = updateDiv(e.target.value, boostThreeFoodIron, defenseFoodResultDiv, '🍖 Food');
+        state.defense.iron = updateDiv(e.target.value, boostThreeFoodIron, defenseIronResultDiv, '⚙️ Iron');
         updateTotals();
     });
 
