@@ -168,7 +168,6 @@ $(document).ready(function () {
         document.documentElement.setAttribute("data-theme", savedTheme);
     }
 
-    $(document).on("click", "#themeToggle", toggleDarkMode);
 
     // Clean mobile navigation toggle - no conflicts
     $("#navToggle").on("click", function (e) {
@@ -591,5 +590,38 @@ function initTier10Calculator() {
         updateTotals();
     });
 
-    document.querySelector('.reset-button').addEventListener('click', resetAll);
+document.querySelector('.reset-button').addEventListener('click', resetAll);
 }
+
+// Theme toggle initialization
+$(document).ready(function() {
+    // Initialize theme toggle click handler
+    $(document).on("click", "#themeToggle", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Call the global toggle function
+        if (typeof window.toggleDarkMode === 'function') {
+            window.toggleDarkMode();
+        }
+    });
+
+    // Keyboard support for theme toggle
+    $(document).on("keydown", "#themeToggle", function(e) {
+        if (e.keyCode === 13 || e.keyCode === 32) { // Enter or Space
+            e.preventDefault();
+            if (typeof window.toggleDarkMode === 'function') {
+                window.toggleDarkMode();
+            }
+        }
+    });
+
+    // Initialize theme state when navigation loads
+    $("#nav-placeholder").on("DOMNodeInserted", function() {
+        const savedTheme = localStorage.getItem("theme") || 'light';
+        const toggle = document.getElementById('themeToggle');
+        if (toggle) {
+            toggle.setAttribute('aria-pressed', savedTheme === 'dark');
+        }
+    });
+});
