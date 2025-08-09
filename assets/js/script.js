@@ -36,6 +36,9 @@ function enhanceSEO() {
 }
 
 function generateTableOfContents() {
+    const path = window.location.pathname;
+    if (path === '/' || path.endsWith('index.html')) return;
+
     const headings = document.querySelectorAll('h2, h3');
     if (headings.length < 3) return;
 
