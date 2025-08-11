@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://YOUR-DOMAIN.com/sitemap.xml
+
+# Crawl-delay for bots
+Crawl-delay: 1
