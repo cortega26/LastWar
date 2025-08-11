@@ -167,11 +167,7 @@ nav {
 
 .nav-links {
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary) var(--bg);
+  flex-wrap: wrap;
   justify-content: flex-start;
   padding: 0.5rem 1rem;
   max-width: 1200px;
