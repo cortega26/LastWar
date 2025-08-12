@@ -335,6 +335,7 @@ class LastWarCalculators {
                 level_gap: targetLevel - currentLevel,
                 playstyle: playstyle
             });
+            window.lastWarAnalytics.trackEvent('calc_run', { calculator: 'hero_optimization' });
         }
     }
 
@@ -471,6 +472,10 @@ class LastWarCalculators {
         );
 
         this.displayResourceEfficiency(efficiency);
+
+        if (window.lastWarAnalytics) {
+            window.lastWarAnalytics.trackEvent('calc_run', { calculator: 'resource_efficiency' });
+        }
     }
 
     // Utility methods

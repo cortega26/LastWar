@@ -1321,3 +1321,27 @@ footer {
 .skip-link:focus {
   top: 6px;
 }
+
+/* Quick access toolbar for calculators */
+.quick-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.quick-toolbar a {
+  padding: 0.25rem 0.5rem;
+  background: var(--card-bg);
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+/* Buy Me a Game button */
+.bmc-button {
+  background: #B81212;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  display: inline-block;
+  text-decoration: none;
+}
