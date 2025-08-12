@@ -6,6 +6,8 @@
       var saved = localStorage.getItem('theme');
       if (saved === 'dark' || saved === 'light') {
         document.documentElement.setAttribute('data-theme', saved);
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
       }
     } catch (e) {
       // Silent fail - use default theme
@@ -14,6 +16,8 @@
     var saved = StorageUtils.getItem('theme');
     if (saved === 'dark' || saved === 'light') {
       document.documentElement.setAttribute('data-theme', saved);
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
     }
   }
 })();
@@ -22,9 +26,9 @@
   // Get saved theme or default to light
   function getSavedTheme() {
     try {
-      return localStorage.getItem('theme') || 'light';
+      return localStorage.getItem('theme') || 'dark';
     } catch (e) {
-      return 'light';
+      return 'dark';
     }
   }
 

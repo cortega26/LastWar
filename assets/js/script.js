@@ -162,6 +162,17 @@ $(document).ready(function () {
 
     const isSubpage = window.location.pathname.includes('/pages/');
     const prefix = isSubpage ? '../' : '';
+
+    // Register service worker for PWA
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register(prefix + 'sw.js');
+    }
+
+    // Load analytics module
+    const analytics = document.createElement('script');
+    analytics.src = prefix + 'assets/js/analytics.js';
+    analytics.defer = true;
+    document.head.appendChild(analytics);
     const savedTheme = localStorage.getItem("theme");
     $("#nav-placeholder").load(prefix + "partials/nav.html", function () {
         if (isSubpage) {
