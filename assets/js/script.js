@@ -136,10 +136,20 @@ function toggleDarkMode() {
     const currentTheme = document.documentElement.getAttribute("data-theme");
     const newTheme = currentTheme === "dark" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
+
+    // Use StorageUtils if available, fallback to try-catch
+    if (typeof StorageUtils !== 'undefined') {
+        StorageUtils.setItem("theme", newTheme);
+    } else {
+        try {
+            localStorage.setItem("theme", newTheme);
+        } catch (e) {
+            // Theme will reset on page reload but won't crash
+        }
+    }
+
     $("#themeToggle").attr("aria-pressed", newTheme === "dark");
 }
-window.toggleDarkMode = toggleDarkMode;
 
 $(document).ready(function () {
     // Initialize new enhancements
@@ -593,13 +603,13 @@ function initTier10Calculator() {
         updateTotals();
     });
 
-document.querySelector('.reset-button').addEventListener('click', resetAll);
+    document.querySelector('.reset-button').addEventListener('click', resetAll);
 }
 
 // Theme toggle initialization
-$(document).ready(function() {
+$(document).ready(function () {
     // Initialize theme toggle click handler
-    $(document).on("click", "#themeToggle", function(e) {
+    $(document).on("click", "#themeToggle", function (e) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -610,7 +620,7 @@ $(document).ready(function() {
     });
 
     // Keyboard support for theme toggle
-    $(document).on("keydown", "#themeToggle", function(e) {
+    $(document).on("keydown", "#themeToggle", function (e) {
         if (e.keyCode === 13 || e.keyCode === 32) { // Enter or Space
             e.preventDefault();
             if (typeof window.toggleDarkMode === 'function') {
@@ -620,7 +630,7 @@ $(document).ready(function() {
     });
 
     // Initialize theme state when navigation loads
-    $("#nav-placeholder").on("DOMNodeInserted", function() {
+    $("#nav-placeholder").on("DOMNodeInserted", function () {
         const savedTheme = localStorage.getItem("theme") || 'light';
         const toggle = document.getElementById('themeToggle');
         if (toggle) {
