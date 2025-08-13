@@ -407,7 +407,7 @@ function gtag() { dataLayer.push(arguments); }
 gtag('js', new Date());
 
 // Replace with actual GA4 measurement ID
-gtag('config', 'G-XXXXXXXXXX', {
+gtag('config', 'G-TV9L6C3VN7', {
     page_title: document.title,
     page_location: window.location.href
 });
