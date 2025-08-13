@@ -12,7 +12,7 @@ Allow: /assets/images/
 Allow: /assets/img/
 
 # Sitemap location
-Sitemap: https://cortega26.github.io/LastWar/sitemap.xml
+Sitemap: https://tooltician.com/LastWar/sitemap.xml
 
 # Crawl-delay for politeness
 Crawl-delay: 1
