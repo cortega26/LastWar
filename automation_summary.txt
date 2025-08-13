@@ -48,7 +48,7 @@ Backup Location: C:\Users\corte\VS Code Projects\LastWar\backups\automation_2025
 
 2. COMPLETE GA4 SETUP:
    • Go to analytics.google.com and verify G-TV9L6C3VN7 is configured
-   • Submit sitemap to Google Search Console: https://cortega26.github.io/LastWar/sitemap.xml
+   • Submit sitemap to Google Search Console: https://tooltician.com/sitemap.xml
    • Test calculator events are firing in GA4 real-time reports
 
 3. LAUNCH DISCORD COMMUNITY:
