@@ -1,0 +1,53 @@
+name: AI Task
+description: Plan & implement a task from SCOREBOARD using AI-first delivery
+title: "[AI]: <short task name>"
+labels: ["ai","planning"]
+body:
+  - type: input
+    id: scoreboard-ref
+    attributes:
+      label: Scoreboard row (Category + Task)
+      placeholder: "Category — Task"
+    validations:
+      required: true
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact
+      options:
+        - H
+        - M
+        - L
+    validations:
+      required: true
+  - type: input
+    id: target-score
+    attributes:
+      label: Score target after merge (0–10)
+      placeholder: "e.g., 7"
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User story
+      placeholder: "As a player..., I want..., so that..."
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: One bullet per criterion
+      placeholder: "- [ ] ..."
+  - type: textarea
+    id: pages
+    attributes:
+      label: Pages / files affected
+      placeholder: "pages/..., partials/..., scripts/..."
+  - type: textarea
+    id: telemetry
+    attributes:
+      label: Telemetry
+      placeholder: "GA4 event name + parameters"
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      placeholder: "Risks, dependencies, perf/SEO constraints"
