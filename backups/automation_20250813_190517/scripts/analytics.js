@@ -3,8 +3,8 @@ window.dataLayer = window.dataLayer || [];
 function gtag() { dataLayer.push(arguments); }
 gtag('js', new Date());
 
-// Production GA4 measurement ID
-gtag('config', 'G-TV9L6C3VN7', {
+// Replace with actual GA4 measurement ID
+gtag('config', 'G-XXXXXXXXXX', {
     page_title: document.title,
     page_location: window.location.href
 });

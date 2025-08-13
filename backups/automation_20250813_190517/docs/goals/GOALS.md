@@ -8,7 +8,7 @@ _Strategic goals grouped by area, with top next actions pulled from the scoreboa
 **Top Next Actions:**
 | Task                        | Impact   |   Score (0-10) | Next Step                               | Due   |
 |:----------------------------|:---------|---------------:|:----------------------------------------|:------|
-| GA4 + Google Search Console | H        |              8 | Submit sitemap to GSC; verify real-time events |       |
+| GA4 + Google Search Console | H        |              0 | Install GA4; verify GSC; submit sitemap |       |
 | Event Tracking (tools/CTAs) | H        |              1 | Track tool_open/calc_run/discord_click  |       |
 | A/B Testing Framework       | M        |              0 | Pick first test & wire toggles          |       |
 
@@ -21,7 +21,7 @@ _Strategic goals grouped by area, with top next actions pulled from the scoreboa
 **Top Next Actions:**
 | Task                   | Impact   |   Score (0-10) | Next Step                             | Due   |
 |:-----------------------|:---------|---------------:|:--------------------------------------|:------|
-| Discord Server         | H        |              6 | Create server; generate invite; replace placeholder |       |
+| Discord Server         | H        |              0 | Publish invite link and banner        |       |
 | Feedback Form → Issues | M        |              0 | Embed form and route to GitHub issues |       |
 | Newsletter (bi-weekly) | M        |              0 | Add signup block & send v1            |       |
 
@@ -47,7 +47,7 @@ _Strategic goals grouped by area, with top next actions pulled from the scoreboa
 **Top Next Actions:**
 | Task                     | Impact   |   Score (0-10) | Next Step                         | Due   |
 |:-------------------------|:---------|---------------:|:----------------------------------|:------|
-| Content Calendar         | H        |              5 | Begin Q1 production; adjust for events |       |
+| Content Calendar         | H        |              0 | Approve monthly topics            |       |
 | Pillar: Base Building    | H        |              0 | Approve outline & add screenshots |       |
 | Pillar: Events & Seasons | H        |              0 | Add upcoming dates                |       |
 
