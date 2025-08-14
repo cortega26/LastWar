@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LastWar Tools - Strategic Command Center for Last War: Survival</title>
-    <meta name="description" content="The ultimate toolkit for Last War: Survival. Interactive calculators, comprehensive guides, and strategic tools to dominate the battlefield.">
+    <meta name="description" content="The ultimate strategic toolkit for Last War: Survival. Interactive calculators, comprehensive guides, and real-time tools to dominate every season.">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/visual-enhancements.css">
     
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +19,7 @@
     
     <!-- Open Graph -->
     <meta property="og:title" content="LastWar Tools - Strategic Command Center">
-    <meta property="og:description" content="Interactive calculators, guides, and tools for Last War: Survival">
+    <meta property="og:description" content="Interactive calculators, guides, and strategic tools for Last War: Survival">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tooltician.com">
     
@@ -32,27 +33,63 @@
     </script>
 </head>
 <body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div>
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Initializing Strategic Command Center...</div>
+        </div>
+    </div>
+    
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+    
     <!-- Navigation -->
     <div id="nav-placeholder"></div>
     
-    <!-- Hero Section -->
-    <main class="content">
-        <section class="hero-section">
+    <!-- Main Content -->
+    <main class="content" id="main-content">
+        <!-- Enhanced Hero Section -->
+        <section class="hero-enhanced">
             <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title">
+                <div class="hero-content-enhanced fade-in">
+                    <h1 class="hero-title-enhanced">
                         Strategic Command Center for
-                        <span class="text-primary">Last War: Survival</span>
+                        Last War: Survival
                     </h1>
-                    <p class="hero-description">
+                    <p class="hero-subtitle">
                         Master the battlefield with our comprehensive toolkit. Interactive calculators, 
                         strategic guides, and real-time tools to dominate every season.
                     </p>
-                    <div class="hero-actions">
-                        <a href="pages/hero-optimizer.html" class="btn">
-                            🏆 Start Optimizing
+                    
+                    <!-- Enhanced Search -->
+                    <div class="search-enhanced">
+                        <input type="search" class="search-input-enhanced" placeholder="Search tools, guides, strategies..." id="heroSearch">
+                        <div class="search-icon-enhanced">🔍</div>
+                    </div>
+                    
+                    <!-- Hero Stats -->
+                    <div class="hero-stats">
+                        <div class="hero-stat bounce-in" style="animation-delay: 0.1s;">
+                            <span class="hero-stat-number" data-count="2500">0</span>
+                            <span class="hero-stat-label">Active Players</span>
+                        </div>
+                        <div class="hero-stat bounce-in" style="animation-delay: 0.2s;">
+                            <span class="hero-stat-number" data-count="75000">0</span>
+                            <span class="hero-stat-label">Calculations Run</span>
+                        </div>
+                        <div class="hero-stat bounce-in" style="animation-delay: 0.3s;">
+                            <span class="hero-stat-number">Daily</span>
+                            <span class="hero-stat-label">Updates</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Hero Actions -->
+                    <div class="hero-actions" style="margin-top: 2rem;">
+                        <a href="pages/protein-farm-calculator.html" class="btn-enhanced" onclick="trackAction('hero_cta_calculator')">
+                            🧮 Start Calculating
                         </a>
-                        <a href="pages/discord.html" class="btn btn-secondary">
+                        <a href="pages/discord.html" class="btn-enhanced" style="background: linear-gradient(135deg, #5865f2, #3b47cc);" onclick="trackAction('hero_cta_discord')">
                             💬 Join Community
                         </a>
                     </div>
@@ -60,105 +97,132 @@
             </div>
         </section>
         
-        <!-- Featured Tools -->
-        <section class="featured-tools">
+        <!-- Enhanced Tools Section -->
+        <section style="padding: 4rem 0;">
             <div class="container">
-                <h2 class="text-center mb-3">Essential Tools</h2>
-                <div class="grid grid-3">
-                    <div class="card tool-card">
-                        <div class="tool-icon">🧮</div>
+                <h2 class="text-center mb-3 slide-in-left">Essential Strategic Tools</h2>
+                <p class="text-center text-muted mb-3 slide-in-right">Optimize your gameplay with precision calculations and strategic planning</p>
+                
+                <div class="tool-grid">
+                    <div class="tool-card gaming-border fade-in" style="animation-delay: 0.1s;" onclick="navigateToTool('protein-farm-calculator.html')">
+                        <div class="tool-icon float-animation">🧮</div>
+                        <div class="tool-category">Calculator</div>
                         <h3>Protein Farm Calculator</h3>
-                        <p>Optimize your protein production with precise calculations for maximum efficiency.</p>
-                        <a href="pages/protein-farm-calculator.html" class="btn">Calculate Now</a>
+                        <p class="tool-description">Optimize your protein production with precision calculations for maximum efficiency and resource allocation.</p>
+                        <div class="tool-stats">
+                            <span class="tool-stat">⚡ Instant Results</span>
+                            <span class="tool-stat">📊 Precision Accurate</span>
+                            <span class="tool-stat">🎯 Optimized Output</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 95%;"></div>
+                        </div>
+                        <a href="pages/protein-farm-calculator.html" class="btn-enhanced">Calculate Now</a>
                     </div>
                     
-                    <div class="card tool-card">
-                        <div class="tool-icon">⚗️</div>
+                    <div class="tool-card gaming-border fade-in" style="animation-delay: 0.2s;" onclick="navigateToTool('T10-calculator.html')">
+                        <div class="tool-icon float-animation" style="animation-delay: 0.5s;">⚗️</div>
+                        <div class="tool-category">Research</div>
                         <h3>Tier 10 Research</h3>
-                        <p>Plan your research progression and calculate exact requirements for T10 troops.</p>
-                        <a href="pages/T10-calculator.html" class="btn">Research Now</a>
+                        <p class="tool-description">Plan your research progression and calculate exact requirements for T10 troops and advanced technologies.</p>
+                        <div class="tool-stats">
+                            <span class="tool-stat">🔬 Advanced Planning</span>
+                            <span class="tool-stat">⏱️ Time Optimization</span>
+                            <span class="tool-stat">💎 Resource Efficient</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 88%;"></div>
+                        </div>
+                        <a href="pages/T10-calculator.html" class="btn-enhanced">Research Now</a>
                     </div>
                     
-                    <div class="card tool-card">
-                        <div class="tool-icon">⚔️</div>
+                    <div class="tool-card gaming-border fade-in" style="animation-delay: 0.3s;" onclick="navigateToTool('team-builder.html')">
+                        <div class="tool-icon float-animation" style="animation-delay: 1s;">⚔️</div>
+                        <div class="tool-category">Strategy</div>
                         <h3>Team Builder</h3>
-                        <p>Create optimal team compositions and formations for maximum combat effectiveness.</p>
-                        <a href="pages/team-builder.html" class="btn">Build Team</a>
+                        <p class="tool-description">Create optimal team compositions and formations for maximum combat effectiveness in any situation.</p>
+                        <div class="tool-stats">
+                            <span class="tool-stat">🏆 Victory Focused</span>
+                            <span class="tool-stat">⚡ Real-time Analysis</span>
+                            <span class="tool-stat">🎯 Meta Optimized</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 92%;"></div>
+                        </div>
+                        <a href="pages/team-builder.html" class="btn-enhanced">Build Team</a>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- Latest Guides -->
-        <section class="latest-guides">
+        <!-- Enhanced Guides Section -->
+        <section style="padding: 4rem 0; background: var(--bg-secondary);">
             <div class="container">
-                <h2 class="text-center mb-3">Strategic Guides</h2>
-                <div class="grid grid-2">
-                    <div class="card guide-card">
-                        <div class="guide-meta">
-                            <span class="guide-category">Latest</span>
-                            <span class="guide-date">Season 4</span>
-                        </div>
+                <h2 class="text-center mb-3">Strategic Intelligence Hub</h2>
+                <p class="text-center text-muted mb-3">Master the game with our comprehensive strategic guides</p>
+                
+                <div class="grid grid-2" style="margin-top: 3rem;">
+                    <div class="card tool-card holographic-effect fade-in" style="animation-delay: 0.1s;">
+                        <div class="tool-category" style="background: linear-gradient(135deg, #10b981, #059669);">Latest</div>
                         <h3>Complete Season 4 Guide</h3>
-                        <p>Master the latest season with comprehensive strategies, event schedules, and optimization tips.</p>
-                        <a href="pages/season4.html" class="btn">Read Guide</a>
+                        <p>Master the latest season with comprehensive strategies, event schedules, and optimization tips for competitive dominance.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <a href="pages/season4.html" class="btn-enhanced">Read Guide</a>
                     </div>
                     
-                    <div class="card guide-card">
-                        <div class="guide-meta">
-                            <span class="guide-category">Essential</span>
-                            <span class="guide-date">Updated</span>
-                        </div>
+                    <div class="card tool-card holographic-effect fade-in" style="animation-delay: 0.2s;">
+                        <div class="tool-category" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">Essential</div>
                         <h3>Heroes & Tier List</h3>
-                        <p>Discover the best heroes, their optimal builds, and current tier rankings for competitive play.</p>
-                        <a href="pages/heroes.html" class="btn">View Tier List</a>
+                        <p>Discover the best heroes, their optimal builds, and current tier rankings for competitive play in the current meta.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 95%;"></div>
+                        </div>
+                        <a href="pages/heroes.html" class="btn-enhanced">View Tier List</a>
                     </div>
                     
-                    <div class="card guide-card">
-                        <div class="guide-meta">
-                            <span class="guide-category">Foundation</span>
-                            <span class="guide-date">Core</span>
-                        </div>
+                    <div class="card tool-card holographic-effect fade-in" style="animation-delay: 0.3s;">
+                        <div class="tool-category" style="background: linear-gradient(135deg, #f59e0b, #d97706);">Foundation</div>
                         <h3>Base Building Mastery</h3>
-                        <p>Learn optimal building sequences, resource management, and defensive strategies.</p>
-                        <a href="pages/base-building.html" class="btn">Master Bases</a>
+                        <p>Learn optimal building sequences, resource management strategies, and defensive positioning for maximum efficiency.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%;"></div>
+                        </div>
+                        <a href="pages/base-building.html" class="btn-enhanced">Master Bases</a>
                     </div>
                     
-                    <div class="card guide-card">
-                        <div class="guide-meta">
-                            <span class="guide-category">Community</span>
-                            <span class="guide-date">Active</span>
+                    <div class="card tool-card holographic-effect fade-in" style="animation-delay: 0.4s;">
+                        <div class="tool-category" style="background: linear-gradient(135deg, #ef4444, #dc2626);">Community</div>
+                        <h3>Alliance Warfare</h3>
+                        <p>Coordinate with your alliance for maximum effectiveness in wars, events, and territorial control strategies.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%;"></div>
                         </div>
-                        <h3>Alliance Strategies</h3>
-                        <p>Coordinate with your alliance for maximum effectiveness in wars and events.</p>
-                        <a href="pages/alliances.html" class="btn">Join Forces</a>
+                        <a href="pages/alliances.html" class="btn-enhanced">Join Forces</a>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- Community Section -->
-        <section class="community-section">
-            <div class="container">
-                <div class="community-content">
-                    <h2>Join Our Strategic Community</h2>
-                    <p>Connect with fellow commanders, share strategies, and stay updated with the latest meta developments.</p>
-                    <div class="community-stats">
-                        <div class="stat">
-                            <div class="stat-number">1,500+</div>
-                            <div class="stat-label">Active Players</div>
+        <!-- Community CTA -->
+        <section style="padding: 4rem 0;">
+            <div class="container text-center">
+                <div class="card tool-card neon-glow" style="max-width: 600px; margin: 0 auto;">
+                    <h2>Join the Strategic Elite</h2>
+                    <p>Connect with top commanders, share winning strategies, and stay ahead of the meta with real-time intelligence updates.</p>
+                    <div class="hero-stats" style="margin: 2rem 0;">
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">500+</span>
+                            <span class="hero-stat-label">Expert Players</span>
                         </div>
-                        <div class="stat">
-                            <div class="stat-number">50k+</div>
-                            <div class="stat-label">Calculations Run</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-number">Daily</div>
-                            <div class="stat-label">Updates</div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">24/7</span>
+                            <span class="hero-stat-label">Live Support</span>
                         </div>
                     </div>
-                    <a href="pages/discord.html" class="btn discord-link">
-                        💬 Join Discord
+                    <a href="pages/discord.html" class="btn-enhanced pulse-effect" style="background: linear-gradient(135deg, #5865f2, #3b47cc);">
+                        💬 Join Discord Elite
                     </a>
                 </div>
             </div>
@@ -171,168 +235,6 @@
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/visual-interactions.js"></script>
 </body>
 </html>
-
-<style>
-/* Hero Section */
-.hero-section {
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
-    padding: 4rem 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,107,53,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-    opacity: 0.3;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.hero-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    line-height: 1.1;
-}
-
-.hero-description {
-    font-size: 1.25rem;
-    color: var(--text-secondary);
-    margin-bottom: 2.5rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.hero-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-/* Tool Cards */
-.featured-tools {
-    padding: 4rem 0;
-}
-
-.tool-card {
-    text-align: center;
-    transition: var(--transition-normal);
-}
-
-.tool-card:hover {
-    transform: translateY(-8px);
-}
-
-.tool-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-/* Guide Cards */
-.latest-guides {
-    padding: 4rem 0;
-    background: var(--bg-secondary);
-}
-
-.guide-card {
-    transition: var(--transition-normal);
-}
-
-.guide-card:hover {
-    transform: translateY(-4px);
-}
-
-.guide-meta {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.guide-category {
-    background: var(--primary);
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.guide-date {
-    background: var(--bg-tertiary);
-    color: var(--text-muted);
-    padding: 0.25rem 0.75rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-}
-
-/* Community Section */
-.community-section {
-    padding: 4rem 0;
-    text-align: center;
-}
-
-.community-stats {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin: 2rem 0;
-    flex-wrap: wrap;
-}
-
-.stat {
-    text-align: center;
-}
-
-.stat-number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 0.5rem;
-}
-
-.stat-label {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .hero-description {
-        font-size: 1.1rem;
-    }
-    
-    .hero-actions {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .community-stats {
-        gap: 2rem;
-    }
-    
-    .stat-number {
-        font-size: 2rem;
-    }
-}
-</style>
