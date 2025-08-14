@@ -4,13 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        [data-theme="dark"] { background: #0a0a0a; color: #e5e5e5; }
-        [data-theme="light"] { background: #ffffff; color: #1a1a1a; }
-        .loading-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-        .loading-overlay.active { opacity: 1; pointer-events: auto; }
+        [data-theme="dark"] {
+            background: #0a0a0a;
+            color: #e5e5e5;
+        }
+
+        [data-theme="light"] {
+            background: #ffffff;
+            color: #1a1a1a;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
     </style>
     <script>
-        (function(){const t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t)})();
+        (function () { const t = localStorage.getItem('theme') || 'dark'; document.documentElement.setAttribute('data-theme', t) })();
     </script>
     <style>
         [data-theme="dark"] {
@@ -45,10 +68,11 @@
         (function () { const t = localStorage.getItem('theme') || 'dark'; document.documentElement.setAttribute('data-theme', t) })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com" media="print" onload="this.media=\'all\'">
+    <link rel="preconnect" href="https://fonts.googleapis.com" media="print" onload="this.media='all'">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://www.googletagmanager.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com" media="print" onload="this.media='all'" media="print" onload="this.media=\'all\'">
+    <link rel="preconnect" href="https://fonts.googleapis.com" media="print" onload="this.media='all'" media="print"
+        onload="this.media='all'">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <title>LastWar Tools - Strategic Command Center for Last War: Survival</title>
@@ -63,7 +87,8 @@
     <link rel="stylesheet" href="assets/css/visual-enhancements.css">
 
     <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" media="print" onload="this.media='all'" media="print" onload="this.media=\'all\'">
+    <link rel="preconnect" href="https://fonts.googleapis.com" media="print" onload="this.media='all'" media="print"
+        onload="this.media='all'">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- Open Graph -->
