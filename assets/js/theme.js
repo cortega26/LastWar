@@ -23,7 +23,7 @@
 })();
 
 (function () {
-  // Get saved theme or default to light
+  // Get saved theme or default to dark
   function getSavedTheme() {
     try {
       return localStorage.getItem('theme') || 'dark';
@@ -40,16 +40,6 @@
     const toggle = document.getElementById('themeToggle');
     if (toggle) {
       toggle.setAttribute('aria-pressed', theme === 'dark');
-
-      // Update visual state
-      const thumb = toggle.querySelector('.toggle-thumb');
-      if (thumb) {
-        if (theme === 'dark') {
-          thumb.style.transform = 'translateX(30px)';
-        } else {
-          thumb.style.transform = 'translateX(0)';
-        }
-      }
     }
   }
 
@@ -72,6 +62,15 @@
       console.warn('Could not save theme preference');
     }
 
+    // Track the theme change
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'theme_toggle', {
+        event_category: 'ui_interaction',
+        event_label: newTheme,
+        new_theme: newTheme
+      });
+    }
+
     // Smooth transition effect
     document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
     setTimeout(() => {
@@ -79,10 +78,44 @@
     }, 300);
   };
 
+  // Setup theme toggle when DOM is ready
+  function setupThemeToggle() {
+    const toggle = document.getElementById('themeToggle');
+    if (toggle) {
+      // Remove any existing listeners
+      toggle.removeEventListener('click', window.toggleDarkMode);
+      
+      // Add click listener
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.toggleDarkMode();
+      });
+
+      // Add keyboard support
+      toggle.addEventListener('keydown', function(e) {
+        if (e.keyCode === 13 || e.keyCode === 32) { // Enter or Space
+          e.preventDefault();
+          window.toggleDarkMode();
+        }
+      });
+
+      // Set initial state
+      applyTheme(savedTheme);
+    }
+  }
+
   // Auto-initialize when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-      applyTheme(savedTheme);
+    document.addEventListener('DOMContentLoaded', setupThemeToggle);
+  } else {
+    setupThemeToggle();
+  }
+
+  // Also setup when navigation placeholder loads (for SPAs)
+  if (typeof $ !== 'undefined') {
+    $(document).ready(function() {
+      $("#nav-placeholder").on("DOMNodeInserted", setupThemeToggle);
     });
   }
 })();

@@ -75,3 +75,7 @@ _Merged from internal/progress CSVs; prefers higher Impact/Score, earliest Due, 
 | Monetization                   | Donations (Buy Me a Coffee)                       | L        | AI      |              1 | Create account & add button                                                            |       |               9 |
 | Performance                    | HTTP Hints (preconnect/prefetch)                  | L        | AI      |              1 | Insert resource hints                                                                  |       |               9 |
 | UX                             | Dark/Light Theme Toggle                           | L        | AI      |              1 | Implement preference toggle                                                            |       |               9 |
+| Quality & Maintenance (Audits) | Fix Theme Toggle Functionality | H | AI | 10 | COMPLETE - Theme toggle working properly | | 0 |
+| Quality & Maintenance (Audits) | Fix T10 Calculator Totals | H | AI | 10 | COMPLETE - Calculator updating totals and displaying resources | | 0 |
+| Quality & Maintenance (Audits) | Fix Protein Calculator | H | AI | 10 | COMPLETE - Calculator working with proper time calculations | | 0 |
+| Quality & Maintenance (Audits) | Merge JavaScript Files | M | AI | 10 | COMPLETE - Consolidated script.js and script-optimized.js | | 0 |
