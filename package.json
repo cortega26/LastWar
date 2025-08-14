@@ -1,0 +1,16 @@
+{
+  "name": "lastwar-tools",
+  "version": "1.0.0",
+  "description": "Last War: Survival Game tools and guides",
+  "scripts": {
+    "serve": "http-server . -p 3000 -c-1",
+    "lighthouse": "lhci autorun",
+    "perf-check": "node scripts/performance-monitor.js --check",
+    "perf-report": "node scripts/performance-monitor.js --report",
+    "test": "npm run perf-check"
+  },
+  "devDependencies": {
+    "@lhci/cli": "^0.12.0",
+    "http-server": "^14.1.1"
+  }
+}
