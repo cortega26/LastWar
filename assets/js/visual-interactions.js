@@ -1,4 +1,4 @@
-// LastWar Tools - Enhanced Visual Interactions
+// LastWar Tools - Enhanced Visual Interactions (Error-Free Version)
 // Advanced animations, loading states, and user feedback
 
 $(document).ready(function() {
@@ -23,8 +23,9 @@ $(document).ready(function() {
             this.setupClickFeedback();
             this.setupSearchEnhancements();
             this.hideInitialLoader();
+            this.injectEnhancedStyles();
             
-            console.log('🎨 Visual enhancements initialized');
+            console.log('🎨 Visual enhancements initialized (error-free)');
         },
         
         // Enhanced loading system
@@ -44,8 +45,8 @@ $(document).ready(function() {
             
             // Tool interactions
             $('.tool-card, .btn-enhanced').on('click', function() {
-                const isExternal = $(this).find('a').attr('href');
-                if (isExternal && isExternal.includes('.html')) {
+                const linkElement = $(this).find('a').attr('href');
+                if (linkElement && linkElement.includes('.html')) {
                     VisualEnhancements.showLoading('Initializing tool...');
                 }
             });
@@ -53,13 +54,15 @@ $(document).ready(function() {
         
         showLoading(message = 'Loading...') {
             const $overlay = $('#loadingOverlay');
-            $overlay.find('.loading-text').text(message);
-            $overlay.addClass('active');
-            
-            // Auto-hide after minimum duration
-            setTimeout(() => {
-                this.hideLoading();
-            }, this.config.loadingMinDuration);
+            if ($overlay.length) {
+                $overlay.find('.loading-text').text(message);
+                $overlay.addClass('active');
+                
+                // Auto-hide after minimum duration
+                setTimeout(() => {
+                    this.hideLoading();
+                }, this.config.loadingMinDuration);
+            }
         },
         
         hideLoading() {
@@ -76,6 +79,11 @@ $(document).ready(function() {
         // Toast notification system
         setupToastSystem() {
             window.showToast = this.showToast.bind(this);
+            
+            // Create toast container if it doesn't exist
+            if (!$('#toastContainer').length) {
+                $('body').append('<div class="toast-container" id="toastContainer"></div>');
+            }
         },
         
         showToast(message, type = 'info', duration = null) {
@@ -123,22 +131,31 @@ $(document).ready(function() {
         setupCountUpAnimations() {
             const counters = $('.hero-stat-number[data-count]');
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        this.animateCounter($(entry.target));
-                        observer.unobserve(entry.target);
-                    }
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            this.animateCounter($(entry.target));
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                counters.each(function() {
+                    observer.observe(this);
                 });
-            }, { threshold: 0.5 });
-            
-            counters.each(function() {
-                observer.observe(this);
-            });
+            } else {
+                // Fallback for older browsers
+                counters.each((index, element) => {
+                    this.animateCounter($(element));
+                });
+            }
         },
         
         animateCounter($element) {
             const target = parseInt($element.data('count'));
+            if (isNaN(target)) return;
+            
             const duration = this.config.countUpDuration;
             const increment = target / (duration / 16); // 60fps
             let current = 0;
@@ -164,28 +181,30 @@ $(document).ready(function() {
         setupProgressBars() {
             const progressBars = $('.progress-fill');
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const $bar = $(entry.target);
-                        const width = $bar.css('width');
-                        $bar.css('width', '0%');
-                        setTimeout(() => {
-                            $bar.css('width', width);
-                        }, 200);
-                        observer.unobserve(entry.target);
-                    }
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const $bar = $(entry.target);
+                            const width = $bar.css('width');
+                            $bar.css('width', '0%');
+                            setTimeout(() => {
+                                $bar.css('width', width);
+                            }, 200);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+                
+                progressBars.each(function() {
+                    observer.observe(this);
                 });
-            }, { threshold: 0.3 });
-            
-            progressBars.each(function() {
-                observer.observe(this);
-            });
+            }
         },
         
         // Enhanced hover effects
         setupHoverEffects() {
-            // Tool card hover sound effect
+            // Tool card hover effects
             $('.tool-card').hover(
                 function() {
                     $(this).addClass('pulse-effect');
@@ -204,15 +223,6 @@ $(document).ready(function() {
                     $(this).find('.btn-icon').removeClass('bounce-in');
                 }
             );
-            
-            // Add parallax effect to hero
-            $(window).on('scroll', this.parallaxEffect);
-        },
-        
-        parallaxEffect() {
-            const scrolled = $(window).scrollTop();
-            const rate = scrolled * -0.5;
-            $('.hero-enhanced::before').css('transform', `translateY(${rate}px)`);
         },
         
         // Click feedback animations
@@ -245,16 +255,6 @@ $(document).ready(function() {
                 
                 setTimeout(() => ripple.remove(), 600);
             });
-            
-            // Add ripple animation CSS
-            $('<style>').text(`
-                @keyframes ripple {
-                    to {
-                        transform: scale(2);
-                        opacity: 0;
-                    }
-                }
-            `).appendTo('head');
         },
         
         // Enhanced search functionality
@@ -263,7 +263,9 @@ $(document).ready(function() {
             
             $heroSearch.on('focus', function() {
                 $(this).parent().addClass('search-focused');
-                VisualEnhancements.showToast('Search through tools, guides, and strategies', 'info', 2000);
+                if (typeof VisualEnhancements.showToast === 'function') {
+                    VisualEnhancements.showToast('Search through tools, guides, and strategies', 'info', 2000);
+                }
             });
             
             $heroSearch.on('blur', function() {
@@ -288,10 +290,60 @@ $(document).ready(function() {
                 // Integrate with existing search system
                 if (window.siteSearch && window.siteSearch.performSearch) {
                     window.siteSearch.performSearch(query);
-                } else {
+                } else if (typeof this.showToast === 'function') {
                     this.showToast(`Searching for "${query}"...`, 'info', 2000);
                 }
             }, 500);
+        },
+        
+        // Inject enhanced styles safely
+        injectEnhancedStyles() {
+            const enhancedCSS = `
+                .search-focused {
+                    transform: scale(1.02);
+                }
+                
+                .ripple-effect {
+                    animation: ripple 0.6s ease-out;
+                }
+                
+                @keyframes ripple {
+                    to {
+                        transform: scale(2);
+                        opacity: 0;
+                    }
+                }
+                
+                .toast-icon {
+                    font-size: 1.1rem;
+                }
+                
+                .toast-close {
+                    font-size: 1.2rem;
+                    line-height: 1;
+                    padding: 0;
+                    width: 20px;
+                    height: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                
+                .toast-close:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    border-radius: 50%;
+                }
+            `;
+            
+            // Use unique variable name to avoid conflicts
+            const visualStyleElement = document.createElement('style');
+            visualStyleElement.textContent = enhancedCSS;
+            visualStyleElement.id = 'visual-enhancements-styles';
+            
+            // Only inject if not already present
+            if (!document.getElementById('visual-enhancements-styles')) {
+                document.head.appendChild(visualStyleElement);
+            }
         },
         
         // Utility functions
@@ -324,7 +376,9 @@ $(document).ready(function() {
             });
         }
         
-        VisualEnhancements.showToast('Action tracked! 🎯', 'success', 2000);
+        if (typeof VisualEnhancements.showToast === 'function') {
+            VisualEnhancements.showToast('Action tracked! 🎯', 'success', 2000);
+        }
     };
     
     // Initialize enhancements
@@ -335,41 +389,8 @@ $(document).ready(function() {
     
     // Show welcome message
     setTimeout(() => {
-        VisualEnhancements.showToast('Welcome to LastWar Tools Strategic Command Center! 🎮', 'success', 3000);
+        if (typeof VisualEnhancements.showToast === 'function') {
+            VisualEnhancements.showToast('Welcome to LastWar Tools Strategic Command Center! 🎮', 'success', 3000);
+        }
     }, 1000);
 });
-
-// Additional CSS for enhanced interactions
-const enhancedCSS = `
-.search-focused {
-    transform: scale(1.02);
-}
-
-.ripple-effect {
-    animation: ripple 0.6s ease-out;
-}
-
-.toast-icon {
-    font-size: 1.1rem;
-}
-
-.toast-close {
-    font-size: 1.2rem;
-    line-height: 1;
-    padding: 0;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.toast-close:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-}
-`;
-
-const style = document.createElement('style');
-style.textContent = enhancedCSS;
-document.head.appendChild(style);

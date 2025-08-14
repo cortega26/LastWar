@@ -31,6 +31,7 @@ $(document).ready(function() {
             
             // Load navigation
             $("#nav-placeholder").load(prefix + "partials/nav.html", () => {
+                // Async loading complete
                 // Fix subpage links
                 if (isSubpage) {
                     $("#nav-placeholder a").each(function() {
@@ -48,7 +49,9 @@ $(document).ready(function() {
             });
             
             // Load footer
-            $("#footer-placeholder").load(prefix + "partials/footer.html");
+            $("#footer-placeholder").load(prefix + "partials/footer.html", function() {
+                // Footer loaded asynchronously
+            });
         },
         
         // Enhanced navigation with mobile support
@@ -335,6 +338,6 @@ const navOpenCSS = `
 }
 `;
 
-const style = document.createElement('style');
-style.textContent = navOpenCSS;
-document.head.appendChild(style);
+const navStyle = document.createElement('style');
+navStyle.textContent = navOpenCSS;
+document.head.appendChild(navStyle);
