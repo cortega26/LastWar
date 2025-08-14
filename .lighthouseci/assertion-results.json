@@ -1,0 +1,86 @@
+[
+  {
+    "name": "maxNumericValue",
+    "expected": 0.05,
+    "actual": 0.4722177936821571,
+    "values": [
+      0.5803588041449133,
+      0.4722177936821571,
+      0.5803588041449133
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "cumulative-layout-shift",
+    "level": "error",
+    "url": "http://localhost:8080/",
+    "auditTitle": "Cumulative Layout Shift",
+    "auditDocumentationLink": "https://web.dev/cls/"
+  },
+  {
+    "name": "maxNumericValue",
+    "expected": 1200,
+    "actual": 1434.926,
+    "values": [
+      2680.365,
+      1434.926,
+      2623.7780000000002
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "first-contentful-paint",
+    "level": "error",
+    "url": "http://localhost:8080/",
+    "auditTitle": "First Contentful Paint",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/first-contentful-paint/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.75,
+    "values": [
+      0.57,
+      0.75,
+      0.55
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditProperty": "performance",
+    "auditId": "categories",
+    "level": "error",
+    "url": "http://localhost:8080/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.41,
+    "values": [
+      0.41,
+      0.38,
+      0.38
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "uses-text-compression",
+    "level": "error",
+    "url": "http://localhost:8080/",
+    "auditTitle": "Enable text compression",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/uses-text-compression/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0,
+      0,
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "color-contrast",
+    "level": "error",
+    "url": "http://localhost:8080/",
+    "auditTitle": "Background and foreground colors do not have a sufficient contrast ratio.",
+    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.6/color-contrast"
+  }
+]
