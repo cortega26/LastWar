@@ -1,0 +1,26 @@
+============================================================
+NAVIGATION LINK FIX REPORT
+============================================================
+Execution Time: 2025-08-14 17:21:59
+Project Root: C:\Users\corte\VS Code Projects\LastWar
+Dry Run Mode: False
+Backup Directory: C:\Users\corte\VS Code Projects\LastWar\backups\nav_fix_20250814_172159
+
+SUMMARY:
+- Files Processed: 20
+- Files Modified: 2
+- Total Changes: 2
+
+DETAILED CHANGES:
+----------------------------------------
+File: pages\nav.html
+Backup: backups\nav_fix_20250814_172159\pages\nav.html
+  ✅ Home navigation links: 1 replacements
+     From: href=["\']index\.html["\']
+     To: href="/"
+
+File: partials\nav.html
+Backup: backups\nav_fix_20250814_172159\partials\nav.html
+  ✅ Home navigation links: 2 replacements
+     From: href=["\']index\.html["\']
+     To: href="/"

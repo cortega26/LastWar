@@ -1,0 +1,28 @@
+[
+  {
+    "file": "pages\\nav.html",
+    "backup": "backups\\nav_fix_20250814_172159\\pages\\nav.html",
+    "changes": [
+      {
+        "pattern": "Home navigation links",
+        "replacements": 1,
+        "from": "href=[\"\\']index\\.html[\"\\']",
+        "to": "href=\"/\""
+      }
+    ],
+    "timestamp": "2025-08-14T17:21:59.309654"
+  },
+  {
+    "file": "partials\\nav.html",
+    "backup": "backups\\nav_fix_20250814_172159\\partials\\nav.html",
+    "changes": [
+      {
+        "pattern": "Home navigation links",
+        "replacements": 2,
+        "from": "href=[\"\\']index\\.html[\"\\']",
+        "to": "href=\"/\""
+      }
+    ],
+    "timestamp": "2025-08-14T17:21:59.323171"
+  }
+]
