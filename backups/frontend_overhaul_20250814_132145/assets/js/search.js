@@ -124,13 +124,9 @@ class SiteSearch {
             searchContainer.id = 'search-container';
             searchContainer.className = 'search-container';
             
-            // Insert into nav-search container or fallback to nav
-            const navSearch = document.getElementById('nav-search');
+            // Insert into navigation
             const nav = document.querySelector('nav') || document.querySelector('.navbar');
-            
-            if (navSearch) {
-                navSearch.appendChild(searchContainer);
-            } else if (nav) {
+            if (nav) {
                 nav.appendChild(searchContainer);
             }
         }

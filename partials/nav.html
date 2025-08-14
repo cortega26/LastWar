@@ -1,29 +1,58 @@
 <div class="nav-container">
-  <nav id="mainNav" role="navigation" aria-label="Main navigation">
-    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
-      <span class="hamburger-icon">☰</span>
+  <nav class="main-nav" role="navigation" aria-label="Main navigation">
+    <!-- Logo/Brand -->
+    <div class="nav-brand">
+      <a href="index.html" class="brand-link">
+        <span class="brand-icon">⚔️</span>
+        <span class="brand-text">LastWar<span class="brand-accent">Tools</span></span>
+      </a>
+    </div>
+
+    <!-- Search Integration -->
+    <div class="nav-search" id="nav-search">
+      <!-- Search will be injected here by search.js -->
+    </div>
+
+    <!-- Mobile Toggle -->
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
     </button>
 
-    <ul class="nav-menu nav-links" id="navMenu">
-      <li class="nav-item"><a class="nav-link" href="index.html">🏠 Home</a></li>
+    <!-- Navigation Menu -->
+    <ul class="nav-menu" id="navMenu">
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <span class="nav-icon">🏠</span>
+          <span class="nav-text">Home</span>
+        </a>
+      </li>
 
       <li class="nav-item dropdown">
-        <a class="nav-link" href="#" aria-expanded="false">🧮 Calculators</a>
+        <a class="nav-link" href="#" aria-expanded="false">
+          <span class="nav-icon">🧮</span>
+          <span class="nav-text">Calculators</span>
+          <span class="dropdown-arrow">▼</span>
+        </a>
         <ul class="dropdown-menu">
           <li><a href="pages/protein-farm-calculator.html">Protein Farm Calculator</a></li>
-          <li><a href="pages/T10-calculator.html">Tier 10 Calculator</a></li>
+          <li><a href="pages/T10-calculator.html">Tier 10 Research Calculator</a></li>
           <li><a href="pages/team-builder.html">Team Builder</a></li>
           <li><a href="pages/event-tracker.html">Event Tracker</a></li>
         </ul>
       </li>
 
       <li class="nav-item dropdown">
-        <a class="nav-link" href="#" aria-expanded="false">📚 Guides</a>
+        <a class="nav-link" href="#" aria-expanded="false">
+          <span class="nav-icon">📚</span>
+          <span class="nav-text">Guides</span>
+          <span class="dropdown-arrow">▼</span>
+        </a>
         <ul class="dropdown-menu">
           <li><a href="pages/base-building.html">Base Building</a></li>
-          <li><a href="pages/alliances.html">Alliances</a></li>
-          <li><a href="pages/seasons.html">Seasons</a></li>
           <li><a href="pages/heroes.html">Heroes & Tier List</a></li>
+          <li><a href="pages/alliances.html">Alliances</a></li>
           <li><a href="pages/resources.html">Resources</a></li>
           <li><a href="pages/events.html">Events</a></li>
           <li><a href="pages/tips.html">Tips & Tricks</a></li>
@@ -31,107 +60,34 @@
       </li>
 
       <li class="nav-item dropdown">
-        <a class="nav-link" href="#" aria-expanded="false">🆕 Latest</a>
+        <a class="nav-link" href="#" aria-expanded="false">
+          <span class="nav-icon">🆕</span>
+          <span class="nav-text">Latest</span>
+          <span class="dropdown-arrow">▼</span>
+        </a>
         <ul class="dropdown-menu">
           <li><a href="pages/season4.html">Season 4 Guide</a></li>
           <li><a href="pages/black-market-S1.html">Black Market Guide</a></li>
           <li><a href="pages/Season2.html">Season 2 Guide</a></li>
-          <li><a href="pages/S1-champion-duel-report.html">S1 Duel Report</a></li>
-          <li><a href="pages/rules.html">Our Rules</a></li>
+          <li><a href="pages/rules.html">Rules & Guidelines</a></li>
         </ul>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="pages/discord.html"
-          onclick="gtag('event', 'discord_click', { event_category: 'social', event_label: 'nav_link' });">
-          💬 Discord
+        <a class="nav-link discord-link" href="pages/discord.html"
+           onclick="gtag('event', 'discord_click', { event_category: 'social', event_label: 'nav_link' });">
+          <span class="nav-icon">💬</span>
+          <span class="nav-text">Discord</span>
         </a>
       </li>
 
-      <!-- Quick Access for Mobile -->
-      <li class="nav-item mobile-only">
-        <a class="nav-link" href="pages/heroes.html">🏆 Hero Tier List</a>
-      </li>
-      <li class="nav-item mobile-only">
-        <a class="nav-link" href="pages/season4.html">⚡ Season 4</a>
+      <!-- Theme Toggle -->
+      <li class="nav-item theme-toggle-item">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false">
+          <span class="theme-icon-light">☀️</span>
+          <span class="theme-icon-dark">🌙</span>
+        </button>
       </li>
     </ul>
-
-    <div class="toggle-container">
-      <span class="toggle-label">🌙</span>
-      <div class="theme-toggle" id="themeToggle" role="button" aria-pressed="false" tabindex="0">
-        <div class="toggle-thumb"></div>
-      </div>
-    </div>
   </nav>
 </div>
-
-<style>
-  /* Mobile-specific navigation styles */
-  .mobile-only {
-    display: block;
-  }
-
-  @media (min-width: 768px) {
-    .mobile-only {
-      display: none;
-    }
-  }
-
-  .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: var(--card-bg);
-    padding: 0.5rem 0;
-    margin: 0;
-    list-style: none;
-    box-shadow: var(--shadow);
-    z-index: 1000;
-    min-width: 12rem;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-  }
-
-  .dropdown-menu li a {
-    display: block;
-    padding: 0.75rem 1rem;
-    color: var(--text);
-    text-decoration: none;
-    white-space: nowrap;
-    transition: var(--transition);
-  }
-
-  .dropdown-menu li a:hover {
-    background-color: rgba(184, 18, 18, 0.1);
-    color: var(--primary);
-  }
-
-  /* Mobile dropdown behavior */
-  @media (max-width: 767px) {
-    .dropdown-menu {
-      position: static;
-      display: none;
-      background: var(--bg);
-      box-shadow: inset 0 1px 0 var(--border);
-      border-radius: 0;
-      margin-left: 1rem;
-    }
-
-    .nav-item.dropdown.active .dropdown-menu {
-      display: block;
-    }
-  }
-
-  /* Desktop hover behavior */
-  @media (min-width: 768px) {
-    .nav-item.dropdown:hover>.dropdown-menu {
-      display: block;
-    }
-  }
-
-  .hamburger-icon {
-    font-size: 1.5rem;
-  }
-</style>
