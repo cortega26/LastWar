@@ -702,3 +702,42 @@ footer {
     box-shadow: none;
   }
 }
+/* Navigation enhancements */
+.badge {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.badge.current {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0.5rem 0;
+}
+
+.featured-link {
+  font-weight: 600;
+}
+
+/* Brand styling updates */
+.nav-brand .brand-link {
+  cursor: default;
+  text-decoration: none;
+}
+
+.nav-brand .brand-link:hover {
+  text-decoration: none;
+}
