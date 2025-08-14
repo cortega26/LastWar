@@ -334,20 +334,7 @@ code {
   margin-left: 1rem;
 }
 
-.theme-toggle {
-  background: var(--bg-tertiary);
-  border: 2px solid var(--border);
-  border-radius: 50px;
-  padding: 0.5rem;
-  cursor: pointer;
-  transition: var(--transition-fast);
-  position: relative;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 
 .theme-toggle:hover {
   border-color: var(--primary);
@@ -740,4 +727,84 @@ footer {
 
 .nav-brand .brand-link:hover {
   text-decoration: none;
+}
+/* Theme Toggle Icon Styles */
+.theme-toggle-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.theme-toggle-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  background: var(--bg-hover, rgba(0, 0, 0, 0.05));
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.theme-toggle-icon:hover {
+  background: var(--bg-hover-strong, rgba(0, 0, 0, 0.1));
+  transform: scale(1.05);
+}
+
+.theme-toggle-icon:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.theme-icon {
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon changes based on theme */
+[data-theme="light"] .theme-icon::before {
+  content: "🌙";
+}
+
+[data-theme="dark"] .theme-icon::before {
+  content: "☀️";
+}
+
+/* Hide default content when using pseudo-elements */
+[data-theme="light"] .theme-icon,
+[data-theme="dark"] .theme-icon {
+  font-size: 0;
+}
+
+[data-theme="light"] .theme-icon::before,
+[data-theme="dark"] .theme-icon::before {
+  font-size: 1.2rem;
+}
+
+/* Animation for theme transitions */
+.theme-toggle-icon:active .theme-icon {
+  transform: scale(0.9);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .theme-toggle-icon {
+    margin-right: 0.5rem;
+  }
+}
+
+/* Dark theme specific adjustments */
+[data-theme="dark"] .theme-toggle-icon {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .theme-toggle-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
