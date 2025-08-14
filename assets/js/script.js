@@ -36,7 +36,7 @@ $(document).ready(function() {
                 if (isSubpage) {
                     $("#nav-placeholder a").each(function() {
                         const href = $(this).attr('href');
-                        if (!href.startsWith('http') && !href.startsWith('../')) {
+                        if (!href.startsWith('http') && !href.startsWith('../') && !href.startsWith('/')) {
                             $(this).attr('href', '../' + href);
                         }
                     });
