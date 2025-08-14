@@ -1,16 +1,19 @@
 {
   "name": "lastwar-tools",
-  "version": "1.0.0",
-  "description": "Last War: Survival Game tools and guides",
+  "version": "1.2.0",
+  "description": "Strategic Command Center for Last War: Survival",
   "scripts": {
-    "serve": "http-server . -p 3000 -c-1",
-    "lighthouse": "lhci autorun",
-    "perf-check": "node scripts/performance-monitor.js --check",
-    "perf-report": "node scripts/performance-monitor.js --report",
-    "test": "npm run perf-check"
+    "dev": "python -m http.server 8080",
+    "build": "echo 'Static site - no build needed'",
+    "test": "npm run test:lighthouse",
+    "test:lighthouse": "lhci autorun --config=lighthouserc-enhanced.js",
+    "test:performance": "node scripts/performance-budget-check.js",
+    "analyze": "npm run test:lighthouse && npm run test:performance"
   },
   "devDependencies": {
-    "@lhci/cli": "^0.12.0",
-    "http-server": "^14.1.1"
+    "@lhci/cli": "^0.12.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
