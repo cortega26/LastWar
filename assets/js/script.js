@@ -6,64 +6,41 @@
 (function() {
     'use strict';
     
-    // Utility to determine if we're in a subdirectory
-    function getBasePath() {
-        const path = window.location.pathname;
-        if (path === '/' || path.endsWith('index.html') || !path.includes('/pages/')) {
-            return '/';
-        }
-        return '../';
-    }
-    
-    // Enhanced jQuery-based component loader
-    function loadComponents() {
-        const basePath = getBasePath();
+    let partialsLoaded = false;
+
+    // Enhanced jQuery-based partial loader
+    function loadPartials() {
+        if (partialsLoaded) return;
+        partialsLoaded = true;
+
         const savedTheme = localStorage.getItem("theme");
-        
+
         // Load navigation
-        $("#nav-placeholder").load(basePath + "partials/nav.html", function(response, status, xhr) {
+        $("#nav-placeholder").load("/partials/nav.html", function(response, status, xhr) {
             if (status === "error") {
                 console.error("Failed to load navigation:", xhr.status, xhr.statusText);
-                // Fallback: create minimal navigation
                 $("#nav-placeholder").html(`
-                    <nav style="background: #1a1a2e; padding: 1rem;">
-                        <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center;">
-                            <a href="${basePath}" style="color: #fff; text-decoration: none; font-weight: bold;">
-                                ⚔️ LastWar Tools
-                            </a>
-                        </div>
+                    <nav style="background:#1a1a2e;padding:1rem;">
+                        <a href="/index.html" style="color:#fff;text-decoration:none;font-weight:bold;">Home</a>
                     </nav>
                 `);
                 return;
             }
-            
-            // Fix relative links in navigation for subpages
-            if (basePath === '../') {
-                $("#nav-placeholder a").each(function() {
-                    const href = $(this).attr('href');
-                    if (href && !href.startsWith('http') && !href.startsWith('/') && !href.startsWith('../')) {
-                        $(this).attr('href', '../' + href);
-                    }
-                });
-            }
-            
-            // Apply saved theme
+
             if (savedTheme === "dark" || savedTheme === "light") {
                 $("#themeToggle").attr("aria-pressed", savedTheme === "dark");
             }
-            
-            // Initialize navigation interactions
+
             initNavigationInteractions();
         });
-        
+
         // Load footer
-        $("#footer-placeholder").load(basePath + "partials/footer.html", function(response, status, xhr) {
+        $("#footer-placeholder").load("/partials/footer.html", function(response, status, xhr) {
             if (status === "error") {
                 console.error("Failed to load footer:", xhr.status, xhr.statusText);
-                // Fallback: create minimal footer
                 $("#footer-placeholder").html(`
-                    <footer style="background: #f8fafc; text-align: center; padding: 1rem; color: #64748b; border-top: 1px solid #e5e7eb;">
-                        <div>Created by <strong>Killeramn</strong> • Server 1309 • © 2025</div>
+                    <footer style="background:#f8fafc;text-align:center;padding:1rem;border-top:1px solid #e5e7eb;">
+                        <nav><a href="/index.html">Home</a></nav>
                     </footer>
                 `);
             }
@@ -123,8 +100,8 @@
             document.documentElement.setAttribute("data-theme", savedTheme);
         }
         
-        // Load components
-        loadComponents();
+        // Load partials
+        loadPartials();
         
         // Initialize search if available
         if (typeof window.SiteSearch !== 'undefined') {
@@ -139,17 +116,21 @@
                 console.error('jQuery not loaded - navigation may not work properly');
                 return;
             }
-            loadComponents();
+            loadPartials();
         });
     } else {
         if (typeof $ !== 'undefined') {
-            loadComponents();
+            loadPartials();
         }
     }
     
+    // Expose for manual triggering (idempotent)
+    window.loadPartials = loadPartials;
+
 })();
 
 // Legacy compatibility exports
 window.loadComponents = function() {
-    console.warn('loadComponents() is deprecated. Components load automatically.');
+    console.warn('loadComponents() is deprecated. Partials load automatically.');
+    window.loadPartials();
 };
