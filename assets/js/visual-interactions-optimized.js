@@ -52,7 +52,7 @@
             },
 
             hideInitialLoader() {
-                requestAnimationFrame(() => {
+                window.addEventListener('load', () => {
                     const overlay = document.getElementById('loadingOverlay');
                     if (overlay) {
                         overlay.classList.remove('active');

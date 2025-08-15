@@ -70,10 +70,9 @@ $(document).ready(function() {
         },
         
         hideInitialLoader() {
-            // Hide initial loading after page is ready
-            setTimeout(() => {
+            window.addEventListener('load', () => {
                 this.hideLoading();
-            }, 500);
+            });
         },
         
         // Toast notification system
