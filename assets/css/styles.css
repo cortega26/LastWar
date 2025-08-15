@@ -1,3 +1,19 @@
+/* Accessibility - Skip Links */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 10000;
+    border-radius: 0 0 4px 0;
+}
+.skip-link:focus {
+    top: 0;
+}
+
 /* Last War Tools - Modern Frontend Styles */
 /* Inspired by cpt-hedge.com and modern gaming websites */
 
@@ -770,11 +786,11 @@ footer {
 
 /* Icon changes based on theme */
 [data-theme="light"] .theme-icon::before {
-  content: "🌙";
+  content: "üåô";
 }
 
 [data-theme="dark"] .theme-icon::before {
-  content: "☀️";
+  content: "‚òÄÔ∏è";
 }
 
 /* Hide default content when using pseudo-elements */
