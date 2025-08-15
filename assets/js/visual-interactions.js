@@ -363,7 +363,7 @@ $(document).ready(function() {
     window.navigateToTool = function(toolPath) {
         VisualEnhancements.showLoading('Initializing tool...');
         setTimeout(() => {
-            window.location.href = `pages/${toolPath}`;
+            window.location.href = `/pages/${toolPath}`;
         }, 300);
     };
     

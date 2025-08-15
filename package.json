@@ -7,7 +7,7 @@
     "lighthouse": "lhci autorun",
     "perf-check": "node scripts/performance-monitor.js --check",
     "perf-report": "node scripts/performance-monitor.js --report",
-    "test": "npm run perf-check"
+    "test": "node tests/url-normalize.test.js && npm run perf-check"
   },
   "devDependencies": {
     "@lhci/cli": "^0.12.0",
