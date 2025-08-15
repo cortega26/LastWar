@@ -5,6 +5,5 @@ logs/
 .venv/
 .json
 requirements.txt
-/backups
-
+backups/
 node_modules/
