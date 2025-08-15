@@ -5,7 +5,12 @@
 
 (function() {
     'use strict';
-    
+    const configUrl = '/assets/js/partials.config.json';
+    const partialPaths = {
+        nav: '/partials/nav.html',
+        footer: '/partials/footer.html'
+    };
+
     let partialsLoaded = false;
 
     // Enhanced jQuery-based partial loader
@@ -15,36 +20,43 @@
 
         const savedTheme = localStorage.getItem("theme");
 
-        // Load navigation
-        $("#nav-placeholder").load("/partials/nav.html", function(response, status, xhr) {
-            if (status === "error") {
-                console.error("Failed to load navigation:", xhr.status, xhr.statusText);
-                $("#nav-placeholder").html(`
-                    <nav style="background:#1a1a2e;padding:1rem;">
-                        <a href="/index.html" style="color:#fff;text-decoration:none;font-weight:bold;">Home</a>
-                    </nav>
-                `);
-                return;
-            }
+        $.getJSON(configUrl)
+            .done(cfg => {
+                partialPaths.nav = cfg.nav || partialPaths.nav;
+                partialPaths.footer = cfg.footer || partialPaths.footer;
+            })
+            .always(() => {
+                // Load navigation
+                $("#nav-placeholder").load(partialPaths.nav, function(response, status, xhr) {
+                    if (status === "error") {
+                        console.error("Failed to load navigation:", xhr.status, xhr.statusText);
+                        $("#nav-placeholder").html(`
+                            <nav style="background:#1a1a2e;padding:1rem;">
+                                <a href="/index.html" style="color:#fff;text-decoration:none;font-weight:bold;">Home</a>
+                            </nav>
+                        `);
+                        return;
+                    }
 
-            if (savedTheme === "dark" || savedTheme === "light") {
-                $("#themeToggle").attr("aria-pressed", savedTheme === "dark");
-            }
+                    if (savedTheme === "dark" || savedTheme === "light") {
+                        $("#themeToggle").attr("aria-pressed", savedTheme === "dark");
+                    }
 
-            initNavigationInteractions();
-        });
+                    initNavigationInteractions();
+                });
 
-        // Load footer
-        $("#footer-placeholder").load("/partials/footer.html", function(response, status, xhr) {
-            if (status === "error") {
-                console.error("Failed to load footer:", xhr.status, xhr.statusText);
-                $("#footer-placeholder").html(`
-                    <footer style="background:#f8fafc;text-align:center;padding:1rem;border-top:1px solid #e5e7eb;">
-                        <nav><a href="/index.html">Home</a></nav>
-                    </footer>
-                `);
-            }
-        });
+                // Load footer
+                $("#footer-placeholder").load(partialPaths.footer, function(response, status, xhr) {
+                    if (status === "error") {
+                        console.error("Failed to load footer:", xhr.status, xhr.statusText);
+                        $("#footer-placeholder").html(`
+                            <footer style="background:#f8fafc;text-align:center;padding:1rem;border-top:1px solid #e5e7eb;">
+                                <nav><a href="/index.html">Home</a></nav>
+                            </footer>
+                        `);
+                    }
+                });
+            });
     }
     
     // Navigation interaction handlers
