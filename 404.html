@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Last War Tools</title>
+    <meta name="description" content="The page you're looking for doesn't exist. Return to Last War Tools for calculators and guides.">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 4rem 2rem;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 0;
+            animation: pulse 2s infinite;
+        }
+        .error-message {
+            font-size: 1.5rem;
+            margin: 1rem 0 2rem;
+            color: var(--text-secondary);
+        }
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .error-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+        .error-btn:hover {
+            transform: translateY(-2px);
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+    <script defer src="/assets/js/theme.js"></script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="nav-placeholder"></div>
+    
+    <main role="main" class="error-container" id="main-content">
+        <h1 class="error-code">404</h1>
+        <p class="error-message">Oops! This battlefield doesn't exist.</p>
+        <p>The page you're looking for has been moved or doesn't exist.</p>
+        
+        <div class="error-actions">
+            <a href="/" class="error-btn">Return to Base</a>
+            <a href="/pages/protein-farm-calculator.html" class="error-btn">Protein Calculator</a>
+            <a href="/pages/T10-calculator.html" class="error-btn">T10 Calculator</a>
+            <a href="/pages/heroes.html" class="error-btn">Hero Guides</a>
+        </div>
+    </main>
+    
+    <div id="footer-placeholder"></div>
+    <script src="/assets/js/script.js"></script>
+</body>
+</html>

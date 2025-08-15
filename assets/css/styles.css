@@ -1,3 +1,17 @@
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+}
+.skip-link:focus {
+    top: 0;
+}
+
 /* Last War Tools - Modern Frontend Styles */
 /* Inspired by cpt-hedge.com and modern gaming websites */
 

@@ -1,0 +1,29 @@
+LAST WAR TOOLS - DEFECT FIX REPORT
+============================================================
+Timestamp: 2025-08-14 23:05:23.318520
+Issues Fixed: 40
+Files Modified: 37
+Backup Location: backups\fixes_20250814_230517
+
+DETAILED CHANGES:
+----------------------------------------
+✅ Fixed canonical URL in pages\black-market-S1.html
+✅ Fixed canonical URL in pages\protein-farm-calculator.html
+✅ Fixed canonical URL in pages\rules.html
+✅ Fixed canonical URL in pages\S1-champion-duel-report.html
+✅ Fixed canonical URL in pages\Season2.html
+✅ Fixed canonical URL in pages\T10-calculator.html
+❌ Error in fix_canonical_urls: 'utf-8' codec can't decode byte 0x92 in position 1131: invalid start byte
+✅ Created custom 404.html page
+❌ Error in optimize_images_lazy_loading: look-behind requires fixed-width pattern
+✅ Added skip link CSS
+❌ Error in add_skip_links: 'utf-8' codec can't decode byte 0x92 in position 1131: invalid start byte
+✅ Fixed mixed content in .lighthouseci\lhr-1755213538118.html
+✅ Fixed mixed content in .lighthouseci\lhr-1755213563419.html
+✅ Fixed mixed content in .lighthouseci\lhr-1755213582670.html
+✅ Fixed mixed content in .venv\Lib\site-packages\win32comext\axscript\Demos\client\asp\interrupt\test.html
+✅ Fixed mixed content in .venv\Lib\site-packages\win32comext\axscript\Demos\client\asp\interrupt\test1.html
+❌ Error in fix_mixed_content: 'utf-8' codec can't decode byte 0x92 in position 1131: invalid start byte
+❌ Error in add_aria_labels: 'utf-8' codec can't decode byte 0x92 in position 1131: invalid start byte
+✅ Generated sitemap.xml
+✅ Created .htaccess with caching rules

@@ -34,11 +34,12 @@
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="site-header">
         <div id="nav-placeholder"></div>
     </header>
 
-    <main class="container content" role="main">
+    <main class="container content" role="main" id="main-content">
         <div class="header">
             <h1>🛠️ Interactive Team Builder</h1>
             <p>Build and optimize your Last War: Survival formations</p>
@@ -142,21 +143,21 @@
                         <h3>🛡️ Tank Heavy (S4 Meta)</h3>
                         <p>Kimberly, Schuyler, Glenn + DPS</p>
                         <div class="preset-stats">Meta Rating: 95/100</div>
-                        <button class="load-preset-btn">Load Formation</button>
+                        <button aria-label="Load Formation" class="load-preset-btn">Load Formation</button>
                     </div>
 
                     <div class="preset-card" data-preset="balanced">
                         <h3>⚖️ Balanced</h3>
                         <p>2 Tank, 2 DPS, 2 Support</p>
                         <div class="preset-stats">Meta Rating: 80/100</div>
-                        <button class="load-preset-btn">Load Formation</button>
+                        <button aria-label="Load Formation" class="load-preset-btn">Load Formation</button>
                     </div>
 
                     <div class="preset-card" data-preset="glass-cannon">
                         <h3>💥 Glass Cannon</h3>
                         <p>1 Tank, 4 DPS, 1 Support</p>
                         <div class="preset-stats">Meta Rating: 60/100</div>
-                        <button class="load-preset-btn">Load Formation</button>
+                        <button aria-label="Load Formation" class="load-preset-btn">Load Formation</button>
                     </div>
                 </div>
             </section>
@@ -188,9 +189,9 @@
                 </div>
 
                 <div class="share-section">
-                    <button id="shareFormation" class="btn-primary">📤 Share Formation</button>
-                    <button id="saveFormation" class="btn-secondary">💾 Save Build</button>
-                    <button id="clearFormation" class="btn-danger">🗑️ Clear All</button>
+                    <button aria-label="📤 Share Formation" id="shareFormation" class="btn-primary">📤 Share Formation</button>
+                    <button aria-label="💾 Save Build" id="saveFormation" class="btn-secondary">💾 Save Build</button>
+                    <button aria-label="🗑️ Clear All" id="clearFormation" class="btn-danger">🗑️ Clear All</button>
                 </div>
             </section>
         </div>
@@ -349,7 +350,7 @@
                         <div class="hero-name">${hero.name}</div>
                         <div class="hero-role ${hero.role.toLowerCase()}">${hero.role}</div>
                     </div>
-                    <button class="remove-hero" onclick="removeHero(${index})">×</button>
+                    <button aria-label="×" class="remove-hero" onclick="removeHero(${index})">×</button>
                 `;
                     slot.classList.add('filled');
                 } else {
