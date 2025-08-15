@@ -10,7 +10,7 @@
     function getBasePath() {
         const path = window.location.pathname;
         if (path === '/' || path.endsWith('index.html') || !path.includes('/pages/')) {
-            return './';
+            return '/';
         }
         return '../';
     }
