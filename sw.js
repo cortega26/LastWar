@@ -1,19 +1,19 @@
 // Service Worker for Last War Tools PWA
-const CACHE_NAME = 'last-war-tools-v1.0.0';
-const STATIC_CACHE = 'static-v1';
-const DYNAMIC_CACHE = 'dynamic-v1';
+const CACHE_VERSION = 'v3';
+const STATIC_CACHE = `static-${CACHE_VERSION}`;
+const DYNAMIC_CACHE = `dynamic-${CACHE_VERSION}`;
 
-// Critical resources to cache immediately
+// Critical resources to precache
 const STATIC_ASSETS = [
     '/',
     '/index.html',
+    '/offline.html',
     '/assets/css/styles.css',
     '/assets/js/script.js',
-    '/pages/protein-farm-calculator.html',
-    '/pages/T10-calculator.html',
-    '/pages/heroes.html',
-    '/pages/base-building.html',
-    'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
+    '/manifest.json',
+    '/assets/images/icon-192.png',
+    '/assets/images/icon-512.png',
+    '/assets/images/favicon.ico'
 ];
 
 // Install event - cache critical resources
@@ -58,19 +58,16 @@ self.addEventListener('fetch', event => {
 
     // Handle navigation requests (pages)
     if (request.mode === 'navigate') {
-        event.respondWith(
-            networkFirstWithFallback(request)
-        );
+        event.respondWith(networkFirstWithFallback(request));
         return;
     }
 
-    // Handle static assets (CSS, JS, images)
+    // Handle static assets (CSS, JS, images, manifest)
     if (request.destination === 'style' ||
         request.destination === 'script' ||
-        request.destination === 'image') {
-        event.respondWith(
-            cacheFirstWithUpdate(request)
-        );
+        request.destination === 'image' ||
+        request.destination === 'manifest') {
+        event.respondWith(cacheFirstWithUpdate(request));
         return;
     }
 
@@ -98,10 +95,7 @@ async function networkFirstWithFallback(request) {
         }
 
         if (request.mode === 'navigate') {
-            return new Response('Offline - Last War Tools', {
-                status: 200,
-                headers: { 'Content-Type': 'text/html' }
-            });
+            return caches.match('/offline.html');
         }
 
         throw error;
@@ -120,7 +114,7 @@ async function cacheFirstWithUpdate(request) {
         const networkResponse = await fetch(request);
 
         if (networkResponse.ok) {
-            const cache = await caches.open(DYNAMIC_CACHE);
+            const cache = await caches.open(STATIC_CACHE);
             cache.put(request, networkResponse.clone());
         }
 
@@ -134,7 +128,7 @@ async function updateCache(request) {
     try {
         const response = await fetch(request);
         if (response.ok) {
-            const cache = await caches.open(DYNAMIC_CACHE);
+            const cache = await caches.open(STATIC_CACHE);
             cache.put(request, response);
         }
     } catch (error) {
