@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Configuration
-const baseURL = 'https://cortega26.github.io/LastWar/';
+const baseURL = 'https://tooltician.com/';
 const outputPath = 'sitemap.xml';
 
 // Priority mappings based on page type
