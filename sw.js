@@ -17,6 +17,16 @@ const STATIC_ASSETS = [
     '/assets/images/favicon.ico'
 ];
 
+// App shell for top pages to warm cache
+const APP_SHELL = [
+    '/',
+    '/offline.html',
+    '/assets/pages.json',
+    '/pages/alliances.html',
+    '/pages/base-building.html',
+    '/pages/heroes.html'
+];
+
 // Install event - cache critical resources
 self.addEventListener('install', event => {
     console.log('[SW] Installing service worker...');
@@ -24,8 +34,11 @@ self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(STATIC_CACHE)
             .then(cache => {
-                console.log('[SW] Caching static assets...');
-                return cache.addAll(STATIC_ASSETS);
+                console.log('[SW] Caching static assets and app shell...');
+                return Promise.all([
+                    cache.addAll(STATIC_ASSETS),
+                    cache.addAll(APP_SHELL)
+                ]);
             })
             .catch(err => console.error('[SW] Failed to cache static assets:', err))
     );
