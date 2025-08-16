@@ -1,19 +1,70 @@
 [
-  { "title": "Alliance Strategy", "href": "/pages/alliances.html" },
-  { "title": "Alliance Rules", "href": "/pages/rules.html" },
-  { "title": "Base Building", "href": "/pages/base-building.html" },
-  { "title": "Black Market Guide", "href": "/pages/black-market-S1.html" },
-  { "title": "Discord Community", "href": "/pages/discord.html" },
-  { "title": "Events Guide", "href": "/pages/events.html" },
-  { "title": "Heroes & Tier List", "href": "/pages/heroes.html" },
-  { "title": "Offline", "href": "/pages/offline.html" },
-  { "title": "Protein Farm Calculator", "href": "/pages/protein-farm-calculator.html" },
-  { "title": "Resources", "href": "/pages/resources.html" },
-  { "title": "S1 Champion Duel Report", "href": "/pages/S1-champion-duel-report.html" },
-  { "title": "Season 2 Guide", "href": "/pages/Season2.html" },
-  { "title": "Season 4 Guide", "href": "/pages/season4.html" },
-  { "title": "Seasons Overview", "href": "/pages/seasons.html" },
-  { "title": "T10 Research Calculator", "href": "/pages/T10-calculator.html" },
-  { "title": "Team Builder", "href": "/pages/team-builder.html" },
-  { "title": "Tips & Tricks", "href": "/pages/tips.html" }
+  {
+    "title": "Alliance Rules - Last War: Survival",
+    "href": "/pages/rules.html"
+  },
+  {
+    "title": "Alliances - Last War Tools",
+    "href": "/pages/alliances.html"
+  },
+  {
+    "title": "Base Building - Last War Tools",
+    "href": "/pages/base-building.html"
+  },
+  {
+    "title": "Events - Last War Tools",
+    "href": "/pages/events.html"
+  },
+  {
+    "title": "Heroes &amp; Tier List - Last War Tools",
+    "href": "/pages/heroes.html"
+  },
+  {
+    "title": "Join Our Discord Community - Last War Tools",
+    "href": "/pages/discord.html"
+  },
+  {
+    "title": "Last War: S1 Champion Duel Report",
+    "href": "/pages/S1-champion-duel-report.html"
+  },
+  {
+    "title": "Last War: Survival - Black Market Guide",
+    "href": "/pages/black-market-S1.html"
+  },
+  {
+    "title": "Last War: Survival - Season 2 Guide",
+    "href": "/pages/Season2.html"
+  },
+  {
+    "title": "Last War: Survival - Tier 10 Progress Calculator",
+    "href": "/pages/T10-calculator.html"
+  },
+  {
+    "title": "Last War: Survival Season 4 Guide - Evernight Isle Strategies & Best Heroes 2025",
+    "href": "/pages/season4.html"
+  },
+  {
+    "title": "Last War: Survival Team Builder - Interactive Formation Tool & Hero Calculator",
+    "href": "/pages/team-builder.html"
+  },
+  {
+    "title": "Offline - Last War Tools",
+    "href": "/pages/offline.html"
+  },
+  {
+    "title": "Protein Farm Production Calculator",
+    "href": "/pages/protein-farm-calculator.html"
+  },
+  {
+    "title": "Resources - Last War Tools",
+    "href": "/pages/resources.html"
+  },
+  {
+    "title": "Seasons - Last War Tools",
+    "href": "/pages/seasons.html"
+  },
+  {
+    "title": "Tips &amp; Tricks - Last War Tools",
+    "href": "/pages/tips.html"
+  }
 ]

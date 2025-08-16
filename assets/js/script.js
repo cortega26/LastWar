@@ -43,7 +43,7 @@
                         $("#themeToggle").attr("aria-pressed", savedTheme === "dark");
                     }
 
-                    buildNavFromJson().always(initNavigationInteractions);
+                    buildNavFromJson().finally(initNavigationInteractions);
                 });
 
                 // Load footer
@@ -61,8 +61,12 @@
     }
 
     function buildNavFromJson() {
-        return $.getJSON(pagesUrl)
-            .done(pages => {
+        return fetch(pagesUrl)
+            .then(res => {
+                if (!res.ok) throw new Error('Failed to load pages.json');
+                return res.json();
+            })
+            .then(pages => {
                 const navMenu = $('#navMenu');
                 if (!navMenu.length) return;
                 navMenu.empty();
@@ -72,7 +76,7 @@
                     );
                 });
             })
-            .fail(() => {
+            .catch(() => {
                 console.warn('pages.json not found, using static navigation');
             });
     }

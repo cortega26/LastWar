@@ -1,0 +1,50 @@
+name: Verify pages
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Check pages.json
+        run: node scripts/generate-pages-json.js
+      - name: Check internal links
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const repo = process.cwd();
+          const pagesDir = path.join(repo, 'pages');
+          const files = [path.join(repo, 'index.html'), ...fs.readdirSync(pagesDir).filter(f => f.endsWith('.html')).map(f => path.join(pagesDir, f))];
+          const missing = [];
+          for (const file of files) {
+            const html = fs.readFileSync(file, 'utf8');
+            const regex = /<a\s+[^>]*href=["']([^"'#]+)["']/g;
+            let match;
+            while ((match = regex.exec(html)) !== null) {
+              let href = match[1];
+              if (href.startsWith('http') || href.startsWith('//') || href.startsWith('mailto:')) continue;
+              if (href.startsWith('#')) continue;
+              href = href.split('#')[0].split('?')[0];
+              if (href.startsWith('/')) href = href.slice(1);
+              if (href === '') href = 'index.html';
+              const target = path.join(repo, href);
+              if (!fs.existsSync(target)) {
+                missing.push(`${file.replace(repo + path.sep, '')} -> ${match[1]}`);
+              }
+            }
+          }
+          if (missing.length) {
+            console.error('Broken links:\n' + missing.join('\n'));
+            process.exit(1);
+          }
+          NODE
+
