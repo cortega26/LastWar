@@ -17,7 +17,8 @@ const path = require('path');
       const title = match[1].trim();
       pages.push({ title, href: `/pages/${file}` });
     }
-    pages.sort((a, b) => a.title.localeCompare(b.title));
+    // Use a fixed locale so sorting is deterministic across environments
+    pages.sort((a, b) => a.title.localeCompare(b.title, 'en'));
     const json = JSON.stringify(pages, null, 2) + '\n';
 
     let existing = null;
