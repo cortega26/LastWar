@@ -70,10 +70,12 @@
                 const navMenu = $('#navMenu');
                 if (!navMenu.length) return;
                 navMenu.empty();
+                const normalize = p => p.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
+                const currentPath = normalize(window.location.pathname);
                 pages.forEach(page => {
-                    navMenu.append(
-                        `<li class="nav-item"><a class="nav-link" href="${page.href}">${page.title}</a></li>`
-                    );
+                    const normalizedHref = normalize(page.href);
+                    const isCurrent = normalizedHref === currentPath;
+                    navMenu.append(`<li class="nav-item"><a class="nav-link" href="${page.href}"${isCurrent ? ' aria-current="page"' : ''}>${page.title}${isCurrent ? '<span class="sr-only"> (current)</span>' : ''}</a></li>`);
                 });
             })
             .catch(() => {
