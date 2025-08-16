@@ -1,10 +1,12 @@
-name: Lighthouse
+name: Lighthouse CI
 
 on:
   pull_request:
+  push:
+    branches: [ main, master ]
 
 jobs:
-  lhci:
+  lighthouse:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -21,10 +23,12 @@ jobs:
 
       - name: Run Lighthouse CI
         id: lhci
-        run: npx lhci autorun --config=lighthouserc.js
+        run: npm run lighthouse
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
         continue-on-error: true
 
-      - name: Upload HTML report
+      - name: Upload Lighthouse report
         if: always()
         uses: actions/upload-artifact@v4
         with:
