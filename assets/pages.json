@@ -1,0 +1,19 @@
+[
+  { "title": "Alliance Strategy", "href": "/pages/alliances.html" },
+  { "title": "Alliance Rules", "href": "/pages/rules.html" },
+  { "title": "Base Building", "href": "/pages/base-building.html" },
+  { "title": "Black Market Guide", "href": "/pages/black-market-S1.html" },
+  { "title": "Discord Community", "href": "/pages/discord.html" },
+  { "title": "Events Guide", "href": "/pages/events.html" },
+  { "title": "Heroes & Tier List", "href": "/pages/heroes.html" },
+  { "title": "Offline", "href": "/pages/offline.html" },
+  { "title": "Protein Farm Calculator", "href": "/pages/protein-farm-calculator.html" },
+  { "title": "Resources", "href": "/pages/resources.html" },
+  { "title": "S1 Champion Duel Report", "href": "/pages/S1-champion-duel-report.html" },
+  { "title": "Season 2 Guide", "href": "/pages/Season2.html" },
+  { "title": "Season 4 Guide", "href": "/pages/season4.html" },
+  { "title": "Seasons Overview", "href": "/pages/seasons.html" },
+  { "title": "T10 Research Calculator", "href": "/pages/T10-calculator.html" },
+  { "title": "Team Builder", "href": "/pages/team-builder.html" },
+  { "title": "Tips & Tricks", "href": "/pages/tips.html" }
+]
