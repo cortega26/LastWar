@@ -10,6 +10,7 @@
         nav: '/partials/nav.html',
         footer: '/partials/footer.html'
     };
+    const pagesUrl = '/assets/pages.json';
 
     let partialsLoaded = false;
 
@@ -42,7 +43,7 @@
                         $("#themeToggle").attr("aria-pressed", savedTheme === "dark");
                     }
 
-                    initNavigationInteractions();
+                    buildNavFromJson().always(initNavigationInteractions);
                 });
 
                 // Load footer
@@ -58,7 +59,24 @@
                 });
             });
     }
-    
+
+    function buildNavFromJson() {
+        return $.getJSON(pagesUrl)
+            .done(pages => {
+                const navMenu = $('#navMenu');
+                if (!navMenu.length) return;
+                navMenu.empty();
+                pages.forEach(page => {
+                    navMenu.append(
+                        `<li class="nav-item"><a class="nav-link" href="${page.href}">${page.title}</a></li>`
+                    );
+                });
+            })
+            .fail(() => {
+                console.warn('pages.json not found, using static navigation');
+            });
+    }
+
     // Navigation interaction handlers
     function initNavigationInteractions() {
         // Mobile navigation toggle
