@@ -13,51 +13,112 @@
 
     let partialsLoaded = false;
 
-    // Enhanced jQuery-based partial loader
+    // Partial loader that works with or without jQuery
     function loadPartials() {
         if (partialsLoaded) return;
         partialsLoaded = true;
 
         const savedTheme = localStorage.getItem("theme");
 
-        $.getJSON(configUrl)
-            .done(cfg => {
-                partialPaths.nav = cfg.nav || partialPaths.nav;
-                partialPaths.footer = cfg.footer || partialPaths.footer;
-            })
-            .always(() => {
-                // Load navigation
-                $("#nav-placeholder").load(partialPaths.nav, function(response, status, xhr) {
-                    if (status === "error") {
-                        console.error("Failed to load navigation:", xhr.status, xhr.statusText);
-                        $("#nav-placeholder").html(`
-                            <nav style="background:#1a1a2e;padding:1rem;">
-                                <a href="/index.html" style="color:#fff;text-decoration:none;font-weight:bold;">Home</a>
-                            </nav>
-                        `);
-                        return;
-                    }
+        if (window.$) {
+            $.getJSON(configUrl)
+                .done(cfg => {
+                    partialPaths.nav = cfg.nav || partialPaths.nav;
+                    partialPaths.footer = cfg.footer || partialPaths.footer;
+                })
+                .always(() => {
+                    // Load navigation
+                    $("#nav-placeholder").load(partialPaths.nav, function(response, status, xhr) {
+                        if (status === "error") {
+                            console.error("Failed to load navigation:", xhr.status, xhr.statusText);
+                            $("#nav-placeholder").html(`
+                                <nav style="background:#1a1a2e;padding:1rem;">
+                                    <a href="/index.html" style="color:#fff;text-decoration:none;font-weight:bold;">Home</a>
+                                </nav>
+                            `);
+                            return;
+                        }
 
-                    if (savedTheme === "dark" || savedTheme === "light") {
-                        $("#themeToggle").attr("aria-pressed", savedTheme === "dark");
-                    }
+                        if (savedTheme === "dark" || savedTheme === "light") {
+                            $("#themeToggle").attr("aria-pressed", savedTheme === "dark");
+                        }
 
-                    markCurrentNav();
-                    initNavigationInteractions();
+                        markCurrentNav();
+                        initNavigationInteractions();
+                    });
+
+                    // Load footer
+                    $("#footer-placeholder").load(partialPaths.footer, function(response, status, xhr) {
+                        if (status === "error") {
+                            console.error("Failed to load footer:", xhr.status, xhr.statusText);
+                            $("#footer-placeholder").html(`
+                                <footer style="background:#f8fafc;text-align:center;padding:1rem;border-top:1px solid #e5e7eb;">
+                                    <nav><a href="/index.html">Home</a></nav>
+                                </footer>
+                            `);
+                        }
+                    });
                 });
+        } else {
+            fetch(configUrl)
+                .then(r => r.json())
+                .then(cfg => {
+                    partialPaths.nav = cfg.nav || partialPaths.nav;
+                    partialPaths.footer = cfg.footer || partialPaths.footer;
+                })
+                .catch(() => {})
+                .finally(() => {
+                    fetch(partialPaths.nav)
+                        .then(r => {
+                            if (!r.ok) throw r;
+                            return r.text();
+                        })
+                        .then(html => {
+                            const navContainer = document.getElementById('nav-placeholder');
+                            if (navContainer) {
+                                navContainer.insertAdjacentHTML('afterbegin', html);
+                            }
+                            if (savedTheme === "dark" || savedTheme === "light") {
+                                const toggle = document.getElementById('themeToggle');
+                                if (toggle) {
+                                    toggle.setAttribute('aria-pressed', savedTheme === "dark");
+                                }
+                            }
+                        })
+                        .catch(() => {
+                            const navContainer = document.getElementById('nav-placeholder');
+                            if (navContainer) {
+                                navContainer.innerHTML = `
+                                    <nav style="background:#1a1a2e;padding:1rem;">
+                                        <a href="/index.html" style="color:#fff;text-decoration:none;font-weight:bold;">Home</a>
+                                    </nav>
+                                `;
+                            }
+                        });
 
-                // Load footer
-                $("#footer-placeholder").load(partialPaths.footer, function(response, status, xhr) {
-                    if (status === "error") {
-                        console.error("Failed to load footer:", xhr.status, xhr.statusText);
-                        $("#footer-placeholder").html(`
-                            <footer style="background:#f8fafc;text-align:center;padding:1rem;border-top:1px solid #e5e7eb;">
-                                <nav><a href="/index.html">Home</a></nav>
-                            </footer>
-                        `);
-                    }
+                    fetch(partialPaths.footer)
+                        .then(r => {
+                            if (!r.ok) throw r;
+                            return r.text();
+                        })
+                        .then(html => {
+                            const footerContainer = document.getElementById('footer-placeholder');
+                            if (footerContainer) {
+                                footerContainer.insertAdjacentHTML('afterbegin', html);
+                            }
+                        })
+                        .catch(() => {
+                            const footerContainer = document.getElementById('footer-placeholder');
+                            if (footerContainer) {
+                                footerContainer.innerHTML = `
+                                    <footer style="background:#f8fafc;text-align:center;padding:1rem;border-top:1px solid #e5e7eb;">
+                                        <nav><a href="/index.html">Home</a></nav>
+                                    </footer>
+                                `;
+                            }
+                        });
                 });
-            });
+        }
     }
 
     function markCurrentNav() {
@@ -183,8 +244,7 @@
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = api;
     } else {
-        // Initialize when document is ready
-        $(document).ready(function() {
+        const init = () => {
             const savedTheme = localStorage.getItem("theme");
             if (savedTheme === "dark" || savedTheme === "light") {
                 document.documentElement.setAttribute("data-theme", savedTheme);
@@ -195,20 +255,12 @@
             if (typeof window.SiteSearch !== 'undefined') {
                 new window.SiteSearch();
             }
-        });
+        };
 
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                if (typeof $ === 'undefined') {
-                    console.error('jQuery not loaded - navigation may not work properly');
-                    return;
-                }
-                loadPartials();
-            });
+        if (window.$) {
+            $(document).ready(init);
         } else {
-            if (typeof $ !== 'undefined') {
-                loadPartials();
-            }
+            document.addEventListener('DOMContentLoaded', init);
         }
 
         // Expose for manual triggering (idempotent)
