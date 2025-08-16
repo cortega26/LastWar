@@ -304,7 +304,11 @@ class LastWarAnalytics {
     getOrCreateUserId() {
         let userId = localStorage.getItem('lw_user_id');
         if (!userId) {
-            userId = 'lw_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            // Use cryptographically secure random values for user ID
+            const array = new Uint8Array(8);
+            window.crypto.getRandomValues(array);
+            const randomStr = Array.from(array).map(b => b.toString(16).padStart(2, '0')).join('');
+            userId = 'lw_' + Date.now() + '_' + randomStr;
             localStorage.setItem('lw_user_id', userId);
         }
 
