@@ -406,6 +406,12 @@ code {
   transform: translateY(0);
 }
 
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
 .nav-item.dropdown:hover .dropdown-arrow {
   transform: rotate(180deg);
 }
