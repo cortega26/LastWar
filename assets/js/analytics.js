@@ -320,7 +320,11 @@ class LastWarAnalytics {
     }
 
     generateSessionId() {
-        return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+        // Use cryptographically secure random values for session ID
+        const array = new Uint8Array(5);
+        window.crypto.getRandomValues(array);
+        const randomStr = Array.from(array).map(b => b.toString(36).padStart(2, '0')).join('');
+        return 'session_' + Date.now() + '_' + randomStr;
     }
 
     getPlatform() {
