@@ -127,6 +127,12 @@
   font-weight: 500;
 }
 
+.error-message {
+  color: #b00020;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
 .farm-item.active .production-info {
   color: var(--primary);
 }

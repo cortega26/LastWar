@@ -51,6 +51,7 @@
 
           <img src="../assets/images/mip.png" alt="Immune Protein Progress" class="progress-image" loading="lazy" />
 
+          <form id="proteinFarmForm" novalidate>
           <div class="target-section">
             <label class="control-label">Missing Immune Protein for Next Upgrade</label>
             <div class="control-description">
@@ -58,8 +59,9 @@
               represents how much immune protein you still need to collect for
               your next upgrade.
             </div>
-            <input type="number" id="targetAmount" class="form-input"
-              placeholder="Enter the red number from your progress bar" min="1" />
+            <input type="number" id="targetAmount" class="form-input" data-validate required
+              placeholder="Enter the red number from your progress bar" min="1" aria-describedby="targetAmountError" />
+            <div class="error-message" id="targetAmountError" aria-live="polite"></div>
           </div>
 
           <div class="farm-grid">
@@ -107,6 +109,8 @@
               <div class="production-info" id="farm5-info"></div>
             </div>
           </div>
+          <button type="submit">Calculate</button>
+          </form>
         </div>
       </div>
 
@@ -135,6 +139,12 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="../assets/js/validate.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      attachValidation(document.getElementById('proteinFarmForm'));
+    });
+  </script>
   <script src="../assets/js/storage-utils.js"></script>
   <script src="../assets/js/script.js"></script>
   <script src="../assets/js/analytics.js"></script>
