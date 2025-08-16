@@ -5,6 +5,15 @@ $(document).ready(function() {
     'use strict';
     
     const VisualEnhancements = {
+        // Escape HTML to prevent XSS
+        escapeHTML(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        },
         // Configuration
         config: {
             animationDuration: 300,
@@ -89,11 +98,12 @@ $(document).ready(function() {
             duration = duration || this.config.toastDuration;
             
             const toastId = 'toast_' + Date.now();
+            const safeMessage = this.escapeHTML(message);
             const toast = $(`
                 <div class="toast ${type}" id="${toastId}">
                     <div style="display: flex; align-items: center; gap: 0.5rem;">
                         <span class="toast-icon">${this.getToastIcon(type)}</span>
-                        <span class="toast-message">${message}</span>
+                        <span class="toast-message">${safeMessage}</span>
                         <button class="toast-close" onclick="VisualEnhancements.closeToast('${toastId}')" style="margin-left: auto; background: none; border: none; color: var(--text-muted); cursor: pointer;">×</button>
                     </div>
                 </div>
