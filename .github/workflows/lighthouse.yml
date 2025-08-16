@@ -34,6 +34,7 @@ jobs:
         with:
           name: lighthouse-report
           path: .lighthouseci/*.html
+          include-hidden-files: true
 
       - name: Fail if Lighthouse assertions failed
         if: steps.lhci.outcome != 'success'
