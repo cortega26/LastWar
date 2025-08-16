@@ -8,7 +8,9 @@ What changed and why.
 
 - [ ] Tests added/updated
 - [ ] Docs updated (README/GOALS/SCOREBOARD as needed)
-- [ ] Lighthouse (key pages) within targets
+- [ ] SW cache bumped?
+- [ ] Lighthouse CI ≥ threshold?
+- [ ] A11y ≥ 90?
 - [ ] No console errors; no broken links
 - [ ] GA4 events verified (if applicable)
 - [ ] Follows `COMMIT_CONVENTION.md`

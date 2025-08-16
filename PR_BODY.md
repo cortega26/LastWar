@@ -1,14 +1,20 @@
-# chore(process): add AI-first docs & templates (non-destructive)
+# docs: harden contributor guides
 
 ## What changed
+- Define code areas (pages, assets, partials, pwa, seo)
+- Add checklist items for service-worker cache, Lighthouse threshold, and A11y
 
-- Add AI-first delivery addendum, prompt playbook, and sprint backlog
-- Add goals and merged scoreboard
-- Add AI Task issue template and AI PR template
-- Add process index and contributing
+## Code Areas
+- **pages** – HTML files and page-level templates under `/pages`
+- **assets** – static resources like images and fonts under `/assets`
+- **partials** – reusable fragments in `/partials`
+- **pwa** – service worker, manifest, and offline assets
+- **seo** – metadata, structured data, and search optimizations
+
+## Checklist
+- [ ] SW cache bumped?
+- [ ] Lighthouse CI ≥ threshold?
+- [ ] A11y ≥ 90?
 
 ## Validation
-
-- Inspect files under `/docs` and `/.github`
-- Create an AI Task issue and open an AI PR using templates
-- Confirm SCOREBOARD top items match current priorities
+- Open a sample PR and verify new checklist items appear
