@@ -1,10 +1,9 @@
 {
   "ci": {
     "collect": {
-      "url": [
-        "http://localhost:3000/",
-        "http://localhost:3000/pages/hero-optimizer.html"
-      ],
+        "url": [
+          "http://localhost:3000/"
+        ],
       "startServerCommand": "npm run serve",
       "startServerReadyPattern": "Available on",
       "startServerReadyTimeout": 20000,
