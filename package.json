@@ -4,7 +4,7 @@
   "description": "Last War: Survival Game tools and guides",
   "scripts": {
     "serve": "http-server . -p 3000 -c-1",
-    "lighthouse": "lhci autorun",
+    "lighthouse": "lhci autorun --config=.lighthouserc.json",
     "perf-check": "node scripts/performance-monitor.js --check",
     "perf-report": "node scripts/performance-monitor.js --report",
     "test": "node tests/url-normalize.test.js && npm run perf-check"
