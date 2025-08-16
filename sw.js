@@ -1,7 +1,8 @@
 // Service Worker for Last War Tools PWA
-const CACHE_VERSION = 'v3';
-const STATIC_CACHE = `static-${CACHE_VERSION}`;
-const DYNAMIC_CACHE = `dynamic-${CACHE_VERSION}`;
+importScripts('/assets/js/sw.version.js');
+
+const STATIC_CACHE = `static-${self.SW_VERSION}`;
+const DYNAMIC_CACHE = `dynamic-${self.SW_VERSION}`;
 
 // Critical resources to precache
 const STATIC_ASSETS = [
