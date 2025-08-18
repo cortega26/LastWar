@@ -1,5 +1,13 @@
 [
   {
+    "title": "All Calculators - Coming Soon",
+    "href": "/pages/calculators.html"
+  },
+  {
+    "title": "All Guides - Coming Soon",
+    "href": "/pages/guides.html"
+  },
+  {
     "title": "Alliance Rules - Last War: Survival",
     "href": "/pages/rules.html"
   },
@@ -10,6 +18,10 @@
   {
     "title": "Base Building - Last War Tools",
     "href": "/pages/base-building.html"
+  },
+  {
+    "title": "Event Tracker - Coming Soon",
+    "href": "/pages/event-tracker.html"
   },
   {
     "title": "Events - Last War Tools",
@@ -52,12 +64,24 @@
     "href": "/pages/offline.html"
   },
   {
+    "title": "Pre-Season - Coming Soon",
+    "href": "/pages/pre-season.html"
+  },
+  {
     "title": "Protein Farm Production Calculator",
     "href": "/pages/protein-farm-calculator.html"
   },
   {
     "title": "Resources - Last War Tools",
     "href": "/pages/resources.html"
+  },
+  {
+    "title": "Season 1 - Coming Soon",
+    "href": "/pages/season1.html"
+  },
+  {
+    "title": "Season 3 - Coming Soon",
+    "href": "/pages/season3.html"
   },
   {
     "title": "Seasons - Last War Tools",

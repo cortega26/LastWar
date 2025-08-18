@@ -3,84 +3,135 @@
  * Handles dynamic loading of nav/footer with proper path resolution
  */
 
-(function() {
+(function(global) {
     'use strict';
     const configUrl = '/assets/js/partials.config.json';
     const partialPaths = {
         nav: '/partials/nav.html',
         footer: '/partials/footer.html'
     };
-    const pagesUrl = '/assets/pages.json';
 
     let partialsLoaded = false;
 
-    // Enhanced jQuery-based partial loader
+    // Partial loader that works with or without jQuery
     function loadPartials() {
         if (partialsLoaded) return;
         partialsLoaded = true;
 
         const savedTheme = localStorage.getItem("theme");
 
-        $.getJSON(configUrl)
-            .done(cfg => {
-                partialPaths.nav = cfg.nav || partialPaths.nav;
-                partialPaths.footer = cfg.footer || partialPaths.footer;
-            })
-            .always(() => {
-                // Load navigation
-                $("#nav-placeholder").load(partialPaths.nav, function(response, status, xhr) {
-                    if (status === "error") {
-                        console.error("Failed to load navigation:", xhr.status, xhr.statusText);
-                        $("#nav-placeholder").html(`
-                            <nav style="background:#1a1a2e;padding:1rem;">
-                                <a href="/index.html" style="color:#fff;text-decoration:none;font-weight:bold;">Home</a>
-                            </nav>
-                        `);
-                        return;
-                    }
+        if (window.$) {
+            $.getJSON(configUrl)
+                .done(cfg => {
+                    partialPaths.nav = cfg.nav || partialPaths.nav;
+                    partialPaths.footer = cfg.footer || partialPaths.footer;
+                })
+                .always(() => {
+                    // Load navigation
+                    $("#nav-placeholder").load(partialPaths.nav, function(response, status, xhr) {
+                        if (status === "error") {
+                            console.error("Failed to load navigation:", xhr.status, xhr.statusText);
+                            $("#nav-placeholder").html(`
+                                <nav style="background:#1a1a2e;padding:1rem;">
+                                    <a href="/index.html" style="color:#fff;text-decoration:none;font-weight:bold;">Home</a>
+                                </nav>
+                            `);
+                            return;
+                        }
 
-                    if (savedTheme === "dark" || savedTheme === "light") {
-                        $("#themeToggle").attr("aria-pressed", savedTheme === "dark");
-                    }
+                        if (savedTheme === "dark" || savedTheme === "light") {
+                            $("#themeToggle").attr("aria-pressed", savedTheme === "dark");
+                        }
 
-                    buildNavFromJson().finally(initNavigationInteractions);
+                        markCurrentNav();
+                        initNavigationInteractions();
+                    });
+
+                    // Load footer
+                    $("#footer-placeholder").load(partialPaths.footer, function(response, status, xhr) {
+                        if (status === "error") {
+                            console.error("Failed to load footer:", xhr.status, xhr.statusText);
+                            $("#footer-placeholder").html(`
+                                <footer style="background:#f8fafc;text-align:center;padding:1rem;border-top:1px solid #e5e7eb;">
+                                    <nav><a href="/index.html">Home</a></nav>
+                                </footer>
+                            `);
+                        }
+                    });
                 });
+        } else {
+            fetch(configUrl)
+                .then(r => r.json())
+                .then(cfg => {
+                    partialPaths.nav = cfg.nav || partialPaths.nav;
+                    partialPaths.footer = cfg.footer || partialPaths.footer;
+                })
+                .catch(() => {})
+                .finally(() => {
+                    fetch(partialPaths.nav)
+                        .then(r => {
+                            if (!r.ok) throw r;
+                            return r.text();
+                        })
+                        .then(html => {
+                            const navContainer = document.getElementById('nav-placeholder');
+                            if (navContainer) {
+                                navContainer.insertAdjacentHTML('afterbegin', html);
+                            }
+                            if (savedTheme === "dark" || savedTheme === "light") {
+                                const toggle = document.getElementById('themeToggle');
+                                if (toggle) {
+                                    toggle.setAttribute('aria-pressed', savedTheme === "dark");
+                                }
+                            }
+                        })
+                        .catch(() => {
+                            const navContainer = document.getElementById('nav-placeholder');
+                            if (navContainer) {
+                                navContainer.innerHTML = `
+                                    <nav style="background:#1a1a2e;padding:1rem;">
+                                        <a href="/index.html" style="color:#fff;text-decoration:none;font-weight:bold;">Home</a>
+                                    </nav>
+                                `;
+                            }
+                        });
 
-                // Load footer
-                $("#footer-placeholder").load(partialPaths.footer, function(response, status, xhr) {
-                    if (status === "error") {
-                        console.error("Failed to load footer:", xhr.status, xhr.statusText);
-                        $("#footer-placeholder").html(`
-                            <footer style="background:#f8fafc;text-align:center;padding:1rem;border-top:1px solid #e5e7eb;">
-                                <nav><a href="/index.html">Home</a></nav>
-                            </footer>
-                        `);
-                    }
+                    fetch(partialPaths.footer)
+                        .then(r => {
+                            if (!r.ok) throw r;
+                            return r.text();
+                        })
+                        .then(html => {
+                            const footerContainer = document.getElementById('footer-placeholder');
+                            if (footerContainer) {
+                                footerContainer.insertAdjacentHTML('afterbegin', html);
+                            }
+                        })
+                        .catch(() => {
+                            const footerContainer = document.getElementById('footer-placeholder');
+                            if (footerContainer) {
+                                footerContainer.innerHTML = `
+                                    <footer style="background:#f8fafc;text-align:center;padding:1rem;border-top:1px solid #e5e7eb;">
+                                        <nav><a href="/index.html">Home</a></nav>
+                                    </footer>
+                                `;
+                            }
+                        });
                 });
-            });
+        }
     }
 
-    function buildNavFromJson() {
-        return fetch(pagesUrl)
-            .then(res => {
-                if (!res.ok) throw new Error('Failed to load pages.json');
-                return res.json();
-            })
-            .then(pages => {
-                const navMenu = $('#navMenu');
-                if (!navMenu.length) return;
-                navMenu.empty();
-                const normalize = p => p.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
-                const currentPath = normalize(window.location.pathname);
-                pages.forEach(page => {
-                    const normalizedHref = normalize(page.href);
-                    const isCurrent = normalizedHref === currentPath;
-                    navMenu.append(`<li class="nav-item"><a class="nav-link" href="${page.href}"${isCurrent ? ' aria-current="page"' : ''}>${page.title}${isCurrent ? '<span class="sr-only"> (current)</span>' : ''}</a></li>`);
-                });
-            })
-            .catch(() => {
-                console.warn('pages.json not found, using static navigation');
-            });
+    function markCurrentNav() {
+        const navMenu = $('#navMenu');
+        if (!navMenu.length) return;
+        const normalize = p => p.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
+        const currentPath = normalize(window.location.pathname);
+        navMenu.find('a.nav-link').each(function() {
+            const normalizedHref = normalize($(this).attr('href'));
+            if (normalizedHref === currentPath) {
+                $(this).attr('aria-current', 'page');
+            }
+        });
     }
 
     // Navigation interaction handlers
@@ -103,9 +154,68 @@
                 e.preventDefault();
                 const dropdown = $(this).parent();
                 const dropdownMenu = dropdown.find('.dropdown-menu');
-                
+
                 dropdown.toggleClass('active');
                 dropdownMenu.toggleClass('show');
+                $(this).attr('aria-expanded', dropdown.hasClass('active'));
+            }
+        });
+
+        // Desktop hover aria sync
+        $(document).off('mouseenter.nav mouseleave.nav', '.nav-item.dropdown').on('mouseenter.nav mouseleave.nav', '.nav-item.dropdown', function(e) {
+            if (window.innerWidth > 768) {
+                const link = $(this).children('.nav-link');
+                link.attr('aria-expanded', e.type === 'mouseenter');
+            }
+        });
+
+        // Keyboard navigation
+        $(document).off('keydown', '.nav-item > .nav-link').on('keydown', '.nav-item > .nav-link', function(e) {
+            const key = e.key;
+            const parentItem = $(this).parent();
+            const dropdown = parentItem.hasClass('dropdown') ? parentItem : null;
+            if (key === 'ArrowRight') {
+                e.preventDefault();
+                parentItem.next().find('> .nav-link').focus();
+            } else if (key === 'ArrowLeft') {
+                e.preventDefault();
+                parentItem.prev().find('> .nav-link').focus();
+            } else if (dropdown && (key === 'Enter' || key === ' ' || key === 'ArrowDown')) {
+                e.preventDefault();
+                dropdown.addClass('active');
+                dropdown.find('.dropdown-menu').addClass('show');
+                $(this).attr('aria-expanded', 'true');
+                dropdown.find('.dropdown-menu a').first().focus();
+            } else if (key === 'Escape') {
+                if (dropdown) {
+                    dropdown.removeClass('active');
+                    dropdown.find('.dropdown-menu').removeClass('show');
+                    $(this).attr('aria-expanded', 'false');
+                }
+            }
+        });
+
+        $(document).off('keydown', '.dropdown-menu a').on('keydown', '.dropdown-menu a', function(e) {
+            const items = $(this).closest('.dropdown-menu').find('a');
+            const index = items.index(this);
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                items.eq((index + 1) % items.length).focus();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                items.eq((index - 1 + items.length) % items.length).focus();
+            } else if (e.key === 'Escape') {
+                const dropdown = $(this).closest('.nav-item.dropdown');
+                dropdown.removeClass('active');
+                dropdown.find('.dropdown-menu').removeClass('show');
+                const link = dropdown.children('.nav-link');
+                link.attr('aria-expanded', 'false').focus();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                $(this).closest('.nav-item.dropdown').next().find('> .nav-link').focus();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                $(this).closest('.nav-item.dropdown').prev().find('> .nav-link').focus();
             }
         });
         
@@ -115,6 +225,7 @@
                 $('.nav-menu').removeClass('active');
                 $('#navToggle').attr('aria-expanded', 'false');
                 $('.nav-item.dropdown').removeClass('active');
+                $('.nav-item.dropdown > .nav-link').attr('aria-expanded', 'false');
                 $('.dropdown-menu').removeClass('show');
             }
         });
@@ -128,45 +239,37 @@
         });
     }
     
-    // Initialize when document is ready
-    $(document).ready(function() {
-        // Apply theme immediately
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme === "dark" || savedTheme === "light") {
-            document.documentElement.setAttribute("data-theme", savedTheme);
-        }
-        
-        // Load partials
-        loadPartials();
-        
-        // Initialize search if available
-        if (typeof window.SiteSearch !== 'undefined') {
-            new window.SiteSearch();
-        }
-    });
-    
-    // Fallback initialization for older browsers
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof $ === 'undefined') {
-                console.error('jQuery not loaded - navigation may not work properly');
-                return;
-            }
-            loadPartials();
-        });
+    const api = { loadPartials, initNavigationInteractions, markCurrentNav };
+
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = api;
     } else {
-        if (typeof $ !== 'undefined') {
+        const init = () => {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme === "dark" || savedTheme === "light") {
+                document.documentElement.setAttribute("data-theme", savedTheme);
+            }
+
             loadPartials();
+
+            if (typeof window.SiteSearch !== 'undefined') {
+                new window.SiteSearch();
+            }
+        };
+
+        if (window.$) {
+            $(document).ready(init);
+        } else {
+            document.addEventListener('DOMContentLoaded', init);
         }
+
+        // Expose for manual triggering (idempotent)
+        global.loadPartials = loadPartials;
+        // Legacy compatibility exports
+        global.loadComponents = function() {
+            console.warn('loadComponents() is deprecated. Partials load automatically.');
+            global.loadPartials();
+        };
     }
-    
-    // Expose for manual triggering (idempotent)
-    window.loadPartials = loadPartials;
 
-})();
-
-// Legacy compatibility exports
-window.loadComponents = function() {
-    console.warn('loadComponents() is deprecated. Partials load automatically.');
-    window.loadPartials();
-};
+})(typeof window !== 'undefined' ? window : this);

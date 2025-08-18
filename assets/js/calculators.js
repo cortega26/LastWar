@@ -1,5 +1,17 @@
 // Enhanced Calculator System for Last War Tools
 class LastWarCalculators {
+    // Escape HTML meta-characters to prevent XSS
+    escapeHTML(str) {
+        if (typeof str !== 'string') return str;
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/`/g, '&#96;');
+    }
+
     constructor() {
         this.savedData = this.loadSavedData();
         this.init();
@@ -367,7 +379,7 @@ class LastWarCalculators {
 
         resultsDiv.innerHTML = `
             <div class="optimization-results">
-                <h3>Optimization Results for ${optimization.hero.charAt(0).toUpperCase() + optimization.hero.slice(1)}</h3>
+                <h3>Optimization Results for ${this.escapeHTML(optimization.hero.charAt(0).toUpperCase() + optimization.hero.slice(1))}</h3>
                 <div class="results-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0;">
                     <div class="result-item">
                         <strong>Shards Needed:</strong><br>

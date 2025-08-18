@@ -1,3 +1,5 @@
+permissions:
+  contents: write
 name: Generate Sitemap
 
 on:
