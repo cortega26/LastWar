@@ -780,7 +780,7 @@ footer {
 
 /* Brand styling updates */
 .nav-brand .brand-link {
-  cursor: default;
+  cursor: pointer;
   text-decoration: none;
 }
 

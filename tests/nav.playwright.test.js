@@ -12,12 +12,12 @@ const { chromium } = require('playwright');
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   await page.goto(baseUrl);
-  await page.waitForSelector('.nav-container a');
+  await page.waitForSelector('.nav-container a', { state: 'attached' });
   const desktopHeight = await page.evaluate(() => document.querySelector('.nav-container').offsetHeight);
   assert(desktopHeight > 0, 'desktop navbar should be visible');
 
   await page.setViewportSize({ width: 375, height: 667 });
-  await page.waitForSelector('.nav-container a');
+  await page.waitForSelector('.nav-container a', { state: 'attached' });
   const mobileHeight = await page.evaluate(() => document.querySelector('.nav-container').offsetHeight);
   assert(mobileHeight > 0, 'mobile navbar should be visible');
 
