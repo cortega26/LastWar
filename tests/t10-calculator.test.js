@@ -60,9 +60,9 @@ async function run() {
   const initialValor = parse('totalValorRemainingDiv');
 
   assert.strictEqual(initialGold, 7936800000);
-  assert.strictEqual(initialValor, 67841);
-  assert.strictEqual(initialBread, 2654800001);
-  assert.strictEqual(initialIron, 2654800001);
+  assert.strictEqual(initialValor, 67840);
+  assert.strictEqual(initialBread, 2654800000);
+  assert.strictEqual(initialIron, 2654800000);
 
   const setAndTrigger = (id, value) => {
     const el = document.getElementById(id);

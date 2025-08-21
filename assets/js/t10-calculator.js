@@ -60,9 +60,9 @@ export function initT10Calculator() {
         },
         defense: {
             gold: guardianOutfitterGold,
-            valor: [...guardianOutfitterValor.slice(0, -1), guardianOutfitterValor[guardianOutfitterValor.length - 1] + 1],
-            bread: [...guardianOutfitterBread.slice(0, -1), guardianOutfitterBread[guardianOutfitterBread.length - 1] + 1],
-            iron: [...guardianOutfitterBread.slice(0, -1), guardianOutfitterBread[guardianOutfitterBread.length - 1] + 1]
+            valor: guardianOutfitterValor,
+            bread: guardianOutfitterBread,
+            iron: guardianOutfitterBread
         }
     };
 
