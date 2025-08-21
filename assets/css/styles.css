@@ -56,7 +56,12 @@
   --border-light: #374151;
   --glow: 0 0 20px rgba(255, 107, 53, 0.3);
   --glow-secondary: 0 0 15px rgba(100, 255, 218, 0.2);
-  
+
+  /* Feedback */
+  --warning-bg: rgba(253, 230, 138, 0.1);
+  --warning-border: rgba(253, 230, 138, 0.4);
+  --warning-text: #fde68a;
+
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
@@ -91,6 +96,9 @@
   --border: #e2e8f0;
   --border-light: #edf2f7;
   --glow: 0 0 20px rgba(255, 107, 53, 0.1);
+  --warning-bg: #fff3cd;
+  --warning-border: #ffeaa7;
+  --warning-text: #856404;
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);

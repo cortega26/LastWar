@@ -29,7 +29,7 @@
 }
 
 .tech-node {
-  background: var(--card-bg);
+  background: var(--bg-card);
   padding: 24px;
   border-radius: 12px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -53,7 +53,7 @@
   display: block;
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--text);
+  color: var(--text-primary);
   margin-bottom: 16px;
   text-align: center;
 }
@@ -68,10 +68,10 @@ select {
   border: 1px solid var(--border);
   border-radius: 8px;
   font-size: 0.95rem;
-  background: var(--card-bg);
+  background: var(--bg-card);
   cursor: pointer;
   transition: all 0.2s ease;
-  color: var(--text);
+  color: var(--text-primary);
 }
 
 select:focus {
@@ -120,7 +120,7 @@ select:focus {
 }
 
 .totals-section {
-  background: var(--card-bg);
+  background: var(--bg-card);
   padding: 32px;
   border-radius: 16px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -175,7 +175,7 @@ select:focus {
 .total-value {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--text);
+  color: var(--text-primary);
 }
 
 .reset-button {
