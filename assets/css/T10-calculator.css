@@ -107,7 +107,7 @@ select:focus {
   border: 1px solid #fca5a5;
 }
 
-.food-result {
+.bread-result {
   background: #dcfce7;
   color: #166534;
   border: 1px solid #86efac;
@@ -155,7 +155,7 @@ select:focus {
   border-color: #fca5a5;
 }
 
-.total-food {
+.total-bread {
   background: #f0fdf4;
   border-color: #86efac;
 }

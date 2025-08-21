@@ -1,28 +1,68 @@
 export function initT10Calculator() {
+    const boostThreeGold = [
+        0,
+        50063000,
+        71530000,
+        71530000,
+        122446000,
+        122446000,
+        171269000,
+        171269000,
+        222417000,
+        222417000,
+        312313000
+    ];
+    const boostThreeValor = [
+        0,
+        656,
+        738,
+        738,
+        820,
+        820,
+        923,
+        923,
+        1025,
+        1025,
+        1025
+    ];
+    const boostThreeBread = [
+        0,
+        16493000,
+        23561000,
+        23561000,
+        40282000,
+        40282000,
+        56242000,
+        56242000,
+        72963000,
+        72963000,
+        101844333
+    ];
+
     const costTables = {
         advProt: {
-            gold: [0,100,200,300,400,500,600,700,800,900,1000],
-            valor: [0,10,20,30,40,50,60,70,80,90,100],
-            food: [0,1000,2000,3000,4000,5000,6000,7000,8000,9000,10000],
-            iron: [0,500,1000,1500,2000,2500,3000,3500,4000,4500,5000]
+            gold: [0,64600000,92300000,92300000,158000000,158000000,221000000,221000000,287000000,287000000,403000000],
+            valor: [0,1280,1440,1440,1600,1600,1800,1800,2000,2000,2000],
+            bread: [0,21700000,31000000,31000000,53000000,53000000,74000000,74000000,96000000,96000000,134000000],
+            iron: [0,21700000,31000000,31000000,53000000,53000000,74000000,74000000,96000000,96000000,134000000]
         },
         health: {
-            gold: [0,80,160,240,320,400,480,560,640,720,800],
-            valor: [0,8,16,24,32,40,48,56,64,72,80],
-            food: [0,800,1600,2400,3200,4000,4800,5600,6400,7200,8000],
-            iron: [0,400,800,1200,1600,2000,2400,2800,3200,3600,4000]
+            gold: boostThreeGold,
+            valor: boostThreeValor,
+            bread: boostThreeBread,
+            iron: boostThreeBread
         },
         attack: {
-            gold: [0,90,180,270,360,450,540,630,720,810,900],
-            valor: [0,9,18,27,36,45,54,63,72,81,90],
-            food: [0,900,1800,2700,3600,4500,5400,6300,7200,8100,9000],
-            iron: [0,450,900,1350,1800,2250,2700,3150,3600,4050,4500]
+            gold: boostThreeGold,
+            valor: boostThreeValor,
+            bread: boostThreeBread,
+            iron: boostThreeBread
         },
         defense: {
-            gold: [0,70,140,210,280,350,420,490,560,630,700],
-            valor: [0,7,14,21,28,35,42,49,56,63,70],
-            food: [0,700,1400,2100,2800,3500,4200,4900,5600,6300,7000],
-            iron: [0,350,700,1050,1400,1750,2100,2450,2800,3150,3500]
+            gold: boostThreeGold,
+            valor: [...boostThreeValor.slice(0, -1), 1026],
+            bread: [...boostThreeBread.slice(0, -1), 101844334],
+            iron: [...boostThreeBread.slice(0, -1), 101844334]
         }
     };
 
@@ -37,34 +77,34 @@ export function initT10Calculator() {
         advProt: {
             gold: document.getElementById('advProtGoldResultDiv'),
             valor: document.getElementById('advProtValorResultDiv'),
-            food: document.getElementById('advProtFoodResultDiv'),
+            bread: document.getElementById('advProtBreadResultDiv'),
             iron: document.getElementById('advProtIronResultDiv')
         },
         health: {
             gold: document.getElementById('healthGoldResultDiv'),
             valor: document.getElementById('healthValorResultDiv'),
-            food: document.getElementById('healthFoodResultDiv'),
+            bread: document.getElementById('healthBreadResultDiv'),
             iron: document.getElementById('healthIronResultDiv')
         },
         attack: {
             gold: document.getElementById('attackGoldResultDiv'),
             valor: document.getElementById('attackValorResultDiv'),
-            food: document.getElementById('attackFoodResultDiv'),
+            bread: document.getElementById('attackBreadResultDiv'),
             iron: document.getElementById('attackIronResultDiv')
         },
         defense: {
             gold: document.getElementById('defenseGoldResultDiv'),
             valor: document.getElementById('defenseValorResultDiv'),
-            food: document.getElementById('defenseFoodResultDiv'),
+            bread: document.getElementById('defenseBreadResultDiv'),
             iron: document.getElementById('defenseIronResultDiv')
         }
     };
 
     const totalDivs = {
         gold: document.getElementById('totalGoldRemainingDiv'),
-        valor: document.getElementById('totalValorRemainingDiv'),
-        food: document.getElementById('totalFoodRemainingDiv'),
-        iron: document.getElementById('totalIronRemainingDiv')
+        iron: document.getElementById('totalIronRemainingDiv'),
+        bread: document.getElementById('totalBreadRemainingDiv'),
+        valor: document.getElementById('totalValorRemainingDiv')
     };
 
     const computeRemaining = (arr, level) => {
@@ -78,32 +118,32 @@ export function initT10Calculator() {
     };
 
     const update = () => {
-        const totals = { gold: 0, valor: 0, food: 0, iron: 0 };
+        const totals = { gold: 0, valor: 0, bread: 0, iron: 0 };
         Object.keys(selectors).forEach(key => {
             const level = parseInt(selectors[key]?.value || '0', 10);
             const table = costTables[key];
             const remaining = {
                 gold: computeRemaining(table.gold, level),
                 valor: computeRemaining(table.valor, level),
-                food: computeRemaining(table.food, level),
+                bread: computeRemaining(table.bread, level),
                 iron: computeRemaining(table.iron, level)
             };
 
             resultDivs[key].gold.textContent = remaining.gold.toLocaleString();
-            resultDivs[key].valor.textContent = remaining.valor.toLocaleString();
-            resultDivs[key].food.textContent = remaining.food.toLocaleString();
             resultDivs[key].iron.textContent = remaining.iron.toLocaleString();
+            resultDivs[key].bread.textContent = remaining.bread.toLocaleString();
+            resultDivs[key].valor.textContent = remaining.valor.toLocaleString();
 
             totals.gold += remaining.gold;
             totals.valor += remaining.valor;
-            totals.food += remaining.food;
+            totals.bread += remaining.bread;
             totals.iron += remaining.iron;
         });
 
         totalDivs.gold.textContent = totals.gold.toLocaleString();
-        totalDivs.valor.textContent = totals.valor.toLocaleString();
-        totalDivs.food.textContent = totals.food.toLocaleString();
         totalDivs.iron.textContent = totals.iron.toLocaleString();
+        totalDivs.bread.textContent = totals.bread.toLocaleString();
+        totalDivs.valor.textContent = totals.valor.toLocaleString();
     };
 
     Object.values(selectors).forEach(sel => {
