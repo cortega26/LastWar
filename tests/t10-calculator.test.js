@@ -47,11 +47,9 @@ global.document = dom.window.document;
 // stub analytics to avoid errors
 window.lastWarAnalytics = { trackEvent: () => {} };
 
-const LastWarCalculators = require('../assets/js/calculators.js');
+const { initT10Calculator } = require('../assets/js/t10-calculator.js');
 
-LastWarCalculators.prototype.init = function() {};
-const calc = new LastWarCalculators();
-calc.enhanceT10Calculator();
+initT10Calculator();
 
 const setAndTrigger = (id, value) => {
   const el = document.getElementById(id);
