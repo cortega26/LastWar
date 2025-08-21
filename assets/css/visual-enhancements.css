@@ -52,12 +52,19 @@
 }
 
 .tool-icon {
-  font-size: 3.5rem;
   margin-bottom: 1.5rem;
-  display: block;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.4s ease;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.tool-icon svg {
+  width: 3.5rem;
+  height: 3.5rem;
+  stroke: currentColor;
+  fill: none;
 }
 
 .tool-category {
@@ -129,7 +136,7 @@
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.02em;
   font-size: 0.9rem;
 }
 
@@ -162,32 +169,33 @@
 
 /* ===== HERO SECTION ENHANCEMENTS ===== */
 .hero-enhanced {
-  background: url('/assets/images/base-hero.png') center/cover no-repeat;
+  background: url('/assets/images/hero-placeholder.jpg') center/cover no-repeat;
   position: relative;
   overflow: hidden;
-  padding: 4rem 0;
+  padding: 3rem 0;
 }
 
 .hero-enhanced::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(10, 14, 26, 0.6);
+  background: rgba(10, 14, 26, 0.4);
 }
 
 .hero-content-enhanced {
   position: relative;
   z-index: 2;
-  text-align: left;
+  text-align: center;
   max-width: 40rem;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .hero-title-enhanced {
-  font-size: 3.5rem;
+  font-size: 3rem;
   line-height: 1.1;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin: 0 auto 1rem;
+  max-width: 30rem;
   background: linear-gradient(135deg, var(--text-primary), var(--primary), var(--secondary));
   background-size: 200% 200%;
   background-clip: text;
@@ -202,11 +210,11 @@
 }
 
 .hero-subtitle {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   color: var(--text-secondary);
-  max-width: 40rem;
-  margin: 0 0 2rem 0;
-  line-height: 1.6;
+  max-width: 30rem;
+  margin: 0 auto 2rem;
+  line-height: 1.5;
 }
 
 .hero-stats {
@@ -283,9 +291,14 @@
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1.2rem;
   color: var(--text-muted);
   transition: all 0.3s ease;
+}
+
+.search-icon-enhanced svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  stroke: currentColor;
 }
 
 .search-input-enhanced:focus + .search-icon-enhanced {
@@ -339,8 +352,9 @@
 
 .hero-actions {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-top: 2rem;
+  justify-content: center;
 }
 
 .hero-actions svg {
@@ -357,7 +371,7 @@
   border-radius: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.02em;
   font-size: 0.9rem;
   transition: all 0.3s ease;
   text-decoration: none;
@@ -373,6 +387,11 @@
   background: var(--primary-hover);
 }
 
+.btn-primary:active {
+  background: var(--primary-active);
+  border-color: var(--primary-active);
+}
+
 .btn-outline {
   background: transparent;
   color: var(--primary);
@@ -381,6 +400,23 @@
 
 .btn-outline:hover {
   background: rgba(255, 107, 53, 0.1);
+}
+
+.btn-outline:active {
+  color: var(--primary-active);
+  border-color: var(--primary-active);
+}
+
+.hero-link {
+  align-self: center;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.hero-link:hover {
+  color: var(--primary-hover);
 }
 
 /* ===== PROGRESS INDICATORS ===== */
