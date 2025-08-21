@@ -243,21 +243,28 @@ class SiteSearch {
             const resultsHTML = results.map(result => {
                 const doc = this.documents.find(d => d.id === result.ref);
                 return `
-                    <div class="search-result-item" data-url="${doc.url}">
+                    <a class="search-result-item" href="${doc.url}">
                         <div class="search-result-category">${doc.category}</div>
                         <div class="search-result-title">${this.highlightQuery(doc.title, query)}</div>
                         <div class="search-result-url">${doc.url}</div>
-                    </div>
+                    </a>
                 `;
             }).join('');
-            
+
             this.searchResults.innerHTML = resultsHTML;
-            
-            // Add click handlers
+
+            // Add interaction handlers
             this.searchResults.querySelectorAll('.search-result-item').forEach(item => {
                 item.addEventListener('click', (e) => {
-                    const url = e.currentTarget.dataset.url;
-                    this.handleResultClick(url, query);
+                    e.preventDefault();
+                    this.handleResultClick(e.currentTarget.href, query);
+                });
+
+                item.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        item.click();
+                    }
                 });
             });
         }
