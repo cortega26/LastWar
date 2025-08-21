@@ -272,7 +272,8 @@
   border-radius: 50px;
   color: var(--text-primary);
   font-size: 1rem;
-  outline: none;
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
   transition: all 0.3s ease;
   backdrop-filter: blur(20px);
 }
