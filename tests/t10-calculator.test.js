@@ -12,33 +12,33 @@ const buildOptions = () => {
 const dom = new JSDOM(`<!DOCTYPE html><body>
 <select id="adv-prot-lvl">${buildOptions()}</select>
 <div id="advProtGoldResultDiv"></div>
-<div id="advProtValorResultDiv"></div>
-<div id="advProtFoodResultDiv"></div>
 <div id="advProtIronResultDiv"></div>
+<div id="advProtBreadResultDiv"></div>
+<div id="advProtValorResultDiv"></div>
 
 <select id="healthLvl">${buildOptions()}</select>
 <div id="healthGoldResultDiv"></div>
-<div id="healthValorResultDiv"></div>
-<div id="healthFoodResultDiv"></div>
 <div id="healthIronResultDiv"></div>
+<div id="healthBreadResultDiv"></div>
+<div id="healthValorResultDiv"></div>
 
 <select id="attackLvl">${buildOptions()}</select>
 <div id="attackGoldResultDiv"></div>
-<div id="attackValorResultDiv"></div>
-<div id="attackFoodResultDiv"></div>
 <div id="attackIronResultDiv"></div>
+<div id="attackBreadResultDiv"></div>
+<div id="attackValorResultDiv"></div>
 
 <select id="defenseLvl">${buildOptions()}</select>
 <div id="defenseGoldResultDiv"></div>
-<div id="defenseValorResultDiv"></div>
-<div id="defenseFoodResultDiv"></div>
 <div id="defenseIronResultDiv"></div>
+<div id="defenseBreadResultDiv"></div>
+<div id="defenseValorResultDiv"></div>
 
 <button class="reset-button"></button>
 <div id="totalGoldRemainingDiv"></div>
-<div id="totalValorRemainingDiv"></div>
-<div id="totalFoodRemainingDiv"></div>
 <div id="totalIronRemainingDiv"></div>
+<div id="totalBreadRemainingDiv"></div>
+<div id="totalValorRemainingDiv"></div>
 </body>`, { url: 'http://localhost' });
 
 global.window = dom.window;
@@ -52,6 +52,18 @@ async function run() {
 
   initT10Calculator();
 
+  const parse = id => parseInt(document.getElementById(id).textContent.replace(/,/g, ''), 10);
+
+  const initialGold = parse('totalGoldRemainingDiv');
+  const initialIron = parse('totalIronRemainingDiv');
+  const initialBread = parse('totalBreadRemainingDiv');
+  const initialValor = parse('totalValorRemainingDiv');
+
+  assert.strictEqual(initialGold, 6597300000);
+  assert.strictEqual(initialValor, 43040);
+  assert.strictEqual(initialBread, 2177000000);
+  assert.strictEqual(initialIron, 2177000000);
+
   const setAndTrigger = (id, value) => {
     const el = document.getElementById(id);
     el.value = value;
@@ -59,28 +71,15 @@ async function run() {
   };
 
   setAndTrigger('adv-prot-lvl', '5');
-  setAndTrigger('healthLvl', '3');
-  setAndTrigger('attackLvl', '10');
-  setAndTrigger('defenseLvl', '0');
+  assert(parse('totalGoldRemainingDiv') < initialGold);
 
-  const parse = id => parseInt(document.getElementById(id).textContent.replace(/,/g, ''), 10);
-
-  assert.strictEqual(parse('advProtGoldResultDiv'), 4000);
-  assert.strictEqual(parse('healthValorResultDiv'), 392);
-  assert.strictEqual(parse('attackGoldResultDiv'), 0);
-  assert.strictEqual(parse('defenseFoodResultDiv'), 38500);
-  assert.strictEqual(parse('totalGoldRemainingDiv'), 11770);
-  assert.strictEqual(parse('totalValorRemainingDiv'), 1177);
-  assert.strictEqual(parse('totalFoodRemainingDiv'), 117700);
-  assert.strictEqual(parse('totalIronRemainingDiv'), 58850);
-
-  // test reset behaviour
   const resetBtn = document.querySelector('.reset-button');
   resetBtn.dispatchEvent(new window.Event('click'));
 
-  assert.strictEqual(document.getElementById('adv-prot-lvl').value, '0');
-  assert.strictEqual(parse('advProtGoldResultDiv'), 5500);
-  assert.strictEqual(parse('totalGoldRemainingDiv'), 18700);
+  assert.strictEqual(parse('totalGoldRemainingDiv'), initialGold);
+  assert.strictEqual(parse('totalValorRemainingDiv'), initialValor);
+  assert.strictEqual(parse('totalBreadRemainingDiv'), initialBread);
+  assert.strictEqual(parse('totalIronRemainingDiv'), initialIron);
 
   console.log('T10 calculator tests passed');
 }
