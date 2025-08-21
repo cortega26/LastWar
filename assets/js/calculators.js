@@ -39,19 +39,17 @@ class LastWarCalculators {
 
     // ENHANCED PROTEIN CALCULATOR
     enhanceProteinCalculator() {
-        const calculator = this;
-
         // Add advanced features
         this.addProteinAdvancedOptions();
         this.addProteinOptimizationSuggestions();
-        this.addProteinProgressTracking();
 
-        // Enhance existing calculation with more data
-        const originalCalculate = window.initProteinCalculator;
-        if (originalCalculate) {
-            // Override with enhanced version
-            this.initEnhancedProteinCalculator();
+        // Basic global hook for backwards compatibility
+        if (!window.initProteinCalculator) {
+            window.initProteinCalculator = () => {};
         }
+
+        // Initialize the enhanced calculator directly
+        this.initEnhancedProteinCalculator();
     }
 
     initEnhancedProteinCalculator() {
@@ -64,17 +62,43 @@ class LastWarCalculators {
             26: 18720, 27: 19440, 28: 20160, 29: 20880, 30: 21600
         };
 
-        // Enhanced production calculation with bonuses
-        const enhancedRates = this.calculateEnhancedRates(productionRates);
+        // Populate farm level options
+        for (let i = 1; i <= 5; i++) {
+            const select = document.getElementById(`farm${i}`);
+            if (!select) continue;
+            for (let level = 1; level <= 30; level++) {
+                const option = document.createElement('option');
+                option.value = level;
+                option.textContent = `Level ${level}`;
+                select.appendChild(option);
+            }
+        }
 
-        // Add bonus system
-        this.addProteinBonusCalculator(enhancedRates);
+        const form = document.getElementById('proteinFarmForm');
+        const resultsDiv = document.getElementById('results-content');
+        if (!form || !resultsDiv) return;
 
-        // Add efficiency recommendations
-        this.addProteinEfficiencyAnalysis(enhancedRates);
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-        // Real-time optimization suggestions
-        this.addProteinOptimizationEngine(enhancedRates);
+            const farms = this.getCurrentFarmConfiguration();
+            const targetAmount = parseInt(document.getElementById('targetAmount')?.value || 0);
+            const enhancedRates = this.calculateEnhancedRates(productionRates);
+            const totalProduction = this.calculateTotalProduction(farms, enhancedRates);
+
+            if (totalProduction <= 0 || targetAmount <= 0) {
+                resultsDiv.innerHTML = '<p>Please enter valid farm levels and target amount.</p>';
+                return;
+            }
+
+            const hours = targetAmount / totalProduction;
+            const formatted = this.formatTime(hours);
+            resultsDiv.innerHTML = `<p>Estimated Time: <strong>${formatted}</strong></p>`;
+
+            if (window.lastWarAnalytics) {
+                window.lastWarAnalytics.trackEvent('calc_run', { calculator: 'protein_farm' });
+            }
+        });
     }
 
     addProteinAdvancedOptions() {
@@ -581,6 +605,10 @@ class LastWarCalculators {
             return {};
         }
     }
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = LastWarCalculators;
 }
 
 // Initialize enhanced calculators
