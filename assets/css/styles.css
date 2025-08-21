@@ -42,6 +42,7 @@
   --bg-tertiary: #252a3a;
   --bg-card: #1e2330;
   --bg-hover: #2a2f3f;
+  --nav-bg: rgba(10, 14, 26, 0.95);
   
   /* Text Colors */
   --text-primary: #ffffff;
@@ -80,6 +81,7 @@
   --bg-tertiary: #f1f5f9;
   --bg-card: #ffffff;
   --bg-hover: #f8fafc;
+  --nav-bg: rgba(255, 255, 255, 0.95);
   --text-primary: #1a202c;
   --text-secondary: #4a5568;
   --text-muted: #718096;
@@ -171,7 +173,7 @@ code {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(10, 14, 26, 0.95);
+    background: var(--nav-bg);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     box-shadow: var(--shadow-md);
