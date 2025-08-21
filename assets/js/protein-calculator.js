@@ -52,8 +52,7 @@ export function initProteinCalculator() {
     const resultsDiv = document.getElementById('results-content');
     if (!form || !resultsDiv || !calculateTotalProduction || !formatTime) return;
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+    function updateResults() {
         const farms = getCurrentFarmConfiguration();
         const targetAmount = parseInt(document.getElementById('targetAmount')?.value || 0);
         const enhancedRates = calculateEnhancedRates(productionRates);
@@ -71,7 +70,23 @@ export function initProteinCalculator() {
         if (window.lastWarAnalytics) {
             window.lastWarAnalytics.trackEvent('calc_run', { calculator: 'protein_farm' });
         }
+    }
+
+    const targetInput = document.getElementById('targetAmount');
+    if (targetInput) targetInput.addEventListener('input', updateResults);
+
+    for (let i = 1; i <= 5; i++) {
+        const select = document.getElementById(`farm${i}`);
+        if (select) select.addEventListener('change', updateResults);
+    }
+
+    const bonusFields = ['vipBonus', 'allianceTechBonus', 'heroBonus', 'equipmentBonus', 'eventBonus', 'decorationBonus'];
+    bonusFields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', updateResults);
     });
+
+    updateResults();
 }
 
 if (typeof document !== 'undefined') {
