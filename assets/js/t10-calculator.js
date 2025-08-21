@@ -1,5 +1,5 @@
 export function initT10Calculator() {
-    const guardianOutfitterGold = [
+    const advancedProtectionGold = [
         0,
         64600000,
         92300000,
@@ -12,7 +12,7 @@ export function initT10Calculator() {
         287000000,
         403000000
     ];
-    const guardianOutfitterValor = [
+    const advancedProtectionValor = [
         0,
         1280,
         1440,
@@ -25,7 +25,7 @@ export function initT10Calculator() {
         2000,
         2000
     ];
-    const guardianOutfitterBread = [
+    const advancedProtectionBread = [
         0,
         21700000,
         31000000,
@@ -39,30 +39,70 @@ export function initT10Calculator() {
         134000000
     ];
 
+    const boostThreeGold = [
+        0,
+        92300000,
+        158000000,
+        158000000,
+        221000000,
+        221000000,
+        287000000,
+        287000000,
+        403000000,
+        403000000,
+        563000000
+    ];
+    const boostThreeValor = [
+        0,
+        1440,
+        1600,
+        1600,
+        1800,
+        1800,
+        2000,
+        2000,
+        2200,
+        2200,
+        2400
+    ];
+    const boostThreeBread = [
+        0,
+        31000000,
+        53000000,
+        53000000,
+        74000000,
+        74000000,
+        96000000,
+        96000000,
+        134000000,
+        134000000,
+        175000000
+    ];
+
     const costTables = {
         advProt: {
-            gold: [0,64600000,92300000,92300000,158000000,158000000,221000000,221000000,287000000,287000000,403000000],
-            valor: [0,1280,1440,1440,1600,1600,1800,1800,2000,2000,2000],
-            bread: [0,21700000,31000000,31000000,53000000,53000000,74000000,74000000,96000000,96000000,134000000],
-            iron: [0,21700000,31000000,31000000,53000000,53000000,74000000,74000000,96000000,96000000,134000000]
+            gold: advancedProtectionGold,
+            valor: advancedProtectionValor,
+            bread: advancedProtectionBread,
+            iron: advancedProtectionBread
         },
         health: {
-            gold: guardianOutfitterGold,
-            valor: guardianOutfitterValor,
-            bread: guardianOutfitterBread,
-            iron: guardianOutfitterBread
+            gold: boostThreeGold,
+            valor: boostThreeValor,
+            bread: boostThreeBread,
+            iron: boostThreeBread
         },
         attack: {
-            gold: guardianOutfitterGold,
-            valor: guardianOutfitterValor,
-            bread: guardianOutfitterBread,
-            iron: guardianOutfitterBread
+            gold: boostThreeGold,
+            valor: boostThreeValor,
+            bread: boostThreeBread,
+            iron: boostThreeBread
         },
         defense: {
-            gold: guardianOutfitterGold,
-            valor: guardianOutfitterValor,
-            bread: guardianOutfitterBread,
-            iron: guardianOutfitterBread
+            gold: boostThreeGold,
+            valor: boostThreeValor,
+            bread: boostThreeBread,
+            iron: boostThreeBread
         }
     };
 
@@ -107,10 +147,10 @@ export function initT10Calculator() {
         valor: document.getElementById('totalValorRemainingDiv')
     };
 
-    // Base tier-10 research costs (placeholder values)
-    const tier10Gold = 0;
-    const tier10Valor = 0;
-    const tier10BreadIron = 0;
+    // Base tier-10 research costs
+    const tier10Gold = 563000000;
+    const tier10Valor = 2400;
+    const tier10BreadIron = 188000000;
 
     const computeRemaining = (arr, level) => {
         if (!Array.isArray(arr)) return 0;
