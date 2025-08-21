@@ -101,13 +101,6 @@ class LastWarAnalytics {
             });
         }
 
-        // Track calculation completion
-        const calculateBtn = document.getElementById('calculateBtn');
-        if (calculateBtn) {
-            calculateBtn.addEventListener('click', () => {
-                calculator.trackCalculatorCompletion('protein_farm');
-            });
-        }
     }
 
     setupT10CalculatorEvents() {
@@ -454,21 +447,6 @@ function trackDiscordClick() {
 
 // Auto-track calculator usage
 $(document).ready(function () {
-    // Track protein farm calculator usage
-    $('#calculateBtn').on('click', function () {
-        const farmLevels = [];
-        for (let i = 1; i <= 5; i++) {
-            const level = parseInt($(`#farm${i}`).val()) || 0;
-            if (level > 0) farmLevels.push(level);
-        }
-        const targetAmount = parseInt($('#targetAmount').val()) || 0;
-
-        trackCalculatorRun('protein_farm', {
-            active_farms: farmLevels.length,
-            target_amount: targetAmount > 100000 ? 'high' : targetAmount > 10000 ? 'medium' : 'low'
-        });
-    });
-
     // Track T10 calculator usage
     $('.tech-node select').on('change', function () {
         const techType = $(this).attr('id');
