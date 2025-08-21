@@ -107,6 +107,11 @@ export function initT10Calculator() {
         valor: document.getElementById('totalValorRemainingDiv')
     };
 
+    // Base tier-10 research costs (placeholder values)
+    const tier10Gold = 0;
+    const tier10Valor = 0;
+    const tier10BreadIron = 0;
+
     const computeRemaining = (arr, level) => {
         if (!Array.isArray(arr)) return 0;
         if (level >= arr.length - 1) return 0;
@@ -139,6 +144,11 @@ export function initT10Calculator() {
             totals.bread += remaining.bread;
             totals.iron += remaining.iron;
         });
+
+        totals.gold += tier10Gold;
+        totals.valor += tier10Valor;
+        totals.bread += tier10BreadIron;
+        totals.iron += tier10BreadIron;
 
         totalDivs.gold.textContent = totals.gold.toLocaleString();
         totalDivs.iron.textContent = totals.iron.toLocaleString();
