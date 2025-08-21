@@ -109,12 +109,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tooltician.com/pages/nav.html</loc>
-    <lastmod>2025-08-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://tooltician.com/pages/offline.html</loc>
     <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
@@ -188,12 +182,6 @@
   </url>
   <url>
     <loc>https://tooltician.com/partials/footer.html</loc>
-    <lastmod>2025-08-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://tooltician.com/partials/nav.html</loc>
     <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
