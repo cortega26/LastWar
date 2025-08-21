@@ -40,10 +40,21 @@
 .tool-card:hover {
   border-color: var(--primary);
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 
+  box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.2),
     0 0 0 1px rgba(255, 107, 53, 0.2),
     0 0 30px rgba(255, 107, 53, 0.15);
+}
+
+.tool-card:focus-visible {
+  border-color: var(--primary);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 107, 53, 0.2),
+    0 0 30px rgba(255, 107, 53, 0.15);
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 .tool-card:hover .tool-icon {
