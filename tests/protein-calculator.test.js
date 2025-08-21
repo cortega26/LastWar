@@ -27,17 +27,26 @@ global.document = dom.window.document;
 // Stub analytics to avoid errors
 window.lastWarAnalytics = { trackEvent: () => {} };
 
-const { initProteinCalculator } = require('../assets/js/protein-calculator.js');
+async function run() {
+  const { initProteinCalculator } = await import('../assets/js/protein-calculator.js');
 
-initProteinCalculator();
+  initProteinCalculator();
 
-document.getElementById('farm1').value = '1';
-document.getElementById('targetAmount').value = '1000';
-document.getElementById('vipBonus').value = '10';
+  document.getElementById('farm1').value = '1';
+  document.getElementById('targetAmount').value = '1000';
+  document.getElementById('vipBonus').value = '10';
 
-document.getElementById('proteinFarmForm').dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
+  document.getElementById('proteinFarmForm').dispatchEvent(
+    new window.Event('submit', { bubbles: true, cancelable: true })
+  );
 
-const resultText = document.getElementById('results-content').textContent.trim();
-assert(resultText.includes('1h 15m'), `Expected time to include "1h 15m" but got "${resultText}"`);
+  const resultText = document.getElementById('results-content').textContent.trim();
+  assert(
+    resultText.includes('1h 15m'),
+    `Expected time to include "1h 15m" but got "${resultText}"`
+  );
 
-console.log('Protein calculator regression test passed');
+  console.log('Protein calculator regression test passed');
+}
+
+run();
