@@ -24,7 +24,8 @@
     border-radius: 25px;
     color: #ffffff;
     font-size: 14px;
-    outline: none;
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
 }

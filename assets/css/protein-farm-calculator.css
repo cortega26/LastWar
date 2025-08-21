@@ -73,7 +73,8 @@
 }
 
 .form-input:focus {
-  outline: none;
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(184, 18, 18, 0.1);
 }
@@ -117,7 +118,8 @@
 }
 
 .form-select:focus {
-  outline: none;
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
   border-color: var(--primary);
 }
 
