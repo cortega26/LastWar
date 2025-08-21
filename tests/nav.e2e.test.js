@@ -15,23 +15,23 @@ global.$ = $;
 const { initNavigationInteractions } = require('../assets/js/script.js');
 initNavigationInteractions();
 
-const seasons = $('.nav-item.dropdown').first();
+const tools = $('.nav-item.dropdown').first();
 
 // Hover test
-seasons.trigger('mouseenter');
-assert.strictEqual(seasons.find('> .nav-link').attr('aria-expanded'), 'true');
-seasons.trigger('mouseleave');
-assert.strictEqual(seasons.find('> .nav-link').attr('aria-expanded'), 'false');
+tools.trigger('mouseenter');
+assert.strictEqual(tools.find('> .nav-link').attr('aria-expanded'), 'true');
+tools.trigger('mouseleave');
+assert.strictEqual(tools.find('> .nav-link').attr('aria-expanded'), 'false');
 
 // Mobile click test
 window.innerWidth = 500;
-const link = seasons.find('> .nav-link');
+const link = tools.find('> .nav-link');
 link.trigger('click');
-assert(seasons.hasClass('active') && seasons.find('.dropdown-menu').hasClass('show'));
+assert(tools.hasClass('active') && tools.find('.dropdown-menu').hasClass('show'));
 
 // Keyboard navigation
 window.innerWidth = 1200;
-seasons.find('> .nav-link').trigger($.Event('keydown', { key: 'ArrowDown' }));
-assert(document.activeElement.textContent.trim().startsWith('Season 4'));
+tools.find('> .nav-link').trigger($.Event('keydown', { key: 'ArrowDown' }));
+assert(document.activeElement.textContent.trim().startsWith('Protein Farm'));
 
 console.log('Navbar E2E test passed');
