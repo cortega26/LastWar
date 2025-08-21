@@ -146,7 +146,11 @@
   </script>
   <script src="../assets/js/storage-utils.js"></script>
   <script src="../assets/js/script.js"></script>
-  <script src="../assets/js/calculators.js"></script>
+  <script type="module">
+    import('../assets/js/calculator-utils.js').then(() =>
+      import('../assets/js/protein-calculator.js')
+    );
+  </script>
   <script src="../assets/js/analytics.js"></script>
 </body>
 

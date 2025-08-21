@@ -27,15 +27,9 @@ global.document = dom.window.document;
 // Stub analytics to avoid errors
 window.lastWarAnalytics = { trackEvent: () => {} };
 
-const LastWarCalculators = require('../assets/js/calculators.js');
+const { initProteinCalculator } = require('../assets/js/protein-calculator.js');
 
-// Prevent automatic initialization side effects
-LastWarCalculators.prototype.init = function() {};
-LastWarCalculators.prototype.addProteinAdvancedOptions = function() {};
-LastWarCalculators.prototype.addProteinOptimizationSuggestions = function() {};
-
-const calc = new LastWarCalculators();
-calc.initEnhancedProteinCalculator();
+initProteinCalculator();
 
 document.getElementById('farm1').value = '1';
 document.getElementById('targetAmount').value = '1000';
