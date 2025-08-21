@@ -407,7 +407,7 @@
   border-color: var(--primary-active);
 }
 
-.hero-link {
+.cta-link {
   align-self: center;
   color: var(--primary);
   font-weight: 600;
@@ -415,7 +415,7 @@
   transition: color 0.3s ease;
 }
 
-.hero-link:hover {
+.cta-link:hover {
   color: var(--primary-hover);
 }
 
