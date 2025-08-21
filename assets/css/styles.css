@@ -43,6 +43,7 @@
   --bg-card: #1e2330;
   --bg-hover: #2a2f3f;
   --nav-bg: rgba(10, 14, 26, 0.95);
+  --overlay-bg: rgba(10, 14, 26, 0.9);
   
   /* Text Colors */
   --text-primary: #ffffff;
@@ -82,6 +83,7 @@
   --bg-card: #ffffff;
   --bg-hover: #f8fafc;
   --nav-bg: rgba(255, 255, 255, 0.95);
+  --overlay-bg: rgba(255, 255, 255, 0.9);
   --text-primary: #1a202c;
   --text-secondary: #4a5568;
   --text-muted: #718096;
