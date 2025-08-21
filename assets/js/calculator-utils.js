@@ -1,4 +1,4 @@
-function calculateTotalProduction(farms, rates) {
+export function calculateTotalProduction(farms, rates) {
     let total = 0;
     for (const [farmNum, level] of Object.entries(farms)) {
         if (level > 0) {
@@ -8,7 +8,7 @@ function calculateTotalProduction(farms, rates) {
     return total;
 }
 
-function formatTime(hours) {
+export function formatTime(hours) {
     const days = Math.floor(hours / 24);
     const remainingHours = Math.floor(hours % 24);
     const minutes = Math.floor((hours % 1) * 60);
@@ -20,12 +20,4 @@ function formatTime(hours) {
     } else {
         return `${minutes}m`;
     }
-}
-
-if (typeof window !== 'undefined') {
-    window.calculatorUtils = { calculateTotalProduction, formatTime };
-}
-
-if (typeof module !== 'undefined') {
-    module.exports = { calculateTotalProduction, formatTime };
 }
