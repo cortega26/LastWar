@@ -43,6 +43,6 @@
 
 .stats {
   margin-top: 0.5rem;
-  color: var(--text-light);
+  color: var(--text-secondary);
   font-style: italic;
 }

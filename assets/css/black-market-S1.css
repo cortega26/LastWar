@@ -1,8 +1,8 @@
 .container {
   max-width: 900px;
   margin: 0 auto;
-  background: var(--card-bg);
-  box-shadow: var(--shadow);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-md);
 }
 
 .subtitle {
@@ -28,7 +28,7 @@
 }
 
 .section h3 {
-  color: var(--text);
+  color: var(--text-primary);
   font-size: 1.2rem;
   margin: 0 0 0 0;
   font-weight: 600;
@@ -50,14 +50,14 @@
 }
 
 .item-card {
-  background: var(--card-bg);
+  background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 20px;
 }
 
 .item-card h4 {
-  color: var(--text);
+  color: var(--text-primary);
   font-size: 1.1rem;
   margin-bottom: 12px;
   font-weight: 600;
@@ -65,7 +65,7 @@
 
 .item-card p {
   font-size: 14px;
-  color: var(--text-light);
+  color: var(--text-secondary);
   margin-bottom: 8px;
 }
 
@@ -88,7 +88,7 @@
 }
 
 .priority-item {
-  background: var(--card-bg);
+  background: var(--bg-card);
   margin: 12px 0;
   padding: 16px 20px;
   border-radius: 6px;
@@ -112,7 +112,7 @@
 }
 
 .priority-item h4 {
-  color: var(--text);
+  color: var(--text-primary);
   font-size: 1.1rem;
   margin-bottom: 8px;
   font-weight: 600;
@@ -120,7 +120,7 @@
 
 .priority-item p {
   font-size: 14px;
-  color: var(--text-light);
+  color: var(--text-secondary);
   margin-bottom: 4px;
 }
 
@@ -153,7 +153,7 @@ li {
 }
 
 strong {
-  color: var(--text);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
