@@ -1,42 +1,42 @@
 export function initT10Calculator() {
-    const boostThreeGold = [
+    const guardianOutfitterGold = [
         0,
-        50063000,
-        71530000,
-        71530000,
-        122446000,
-        122446000,
-        171269000,
-        171269000,
-        222417000,
-        222417000,
-        312313000
+        64600000,
+        92300000,
+        92300000,
+        158000000,
+        158000000,
+        221000000,
+        221000000,
+        287000000,
+        287000000,
+        403000000
     ];
-    const boostThreeValor = [
+    const guardianOutfitterValor = [
         0,
-        656,
-        738,
-        738,
-        820,
-        820,
-        923,
-        923,
-        1025,
-        1025,
-        1025
+        1280,
+        1440,
+        1440,
+        1600,
+        1600,
+        1800,
+        1800,
+        2000,
+        2000,
+        2000
     ];
-    const boostThreeBread = [
+    const guardianOutfitterBread = [
         0,
-        16493000,
-        23561000,
-        23561000,
-        40282000,
-        40282000,
-        56242000,
-        56242000,
-        72963000,
-        72963000,
-        101844333
+        21700000,
+        31000000,
+        31000000,
+        53000000,
+        53000000,
+        74000000,
+        74000000,
+        96000000,
+        96000000,
+        134000000
     ];
 
     const costTables = {
@@ -47,22 +47,22 @@ export function initT10Calculator() {
             iron: [0,21700000,31000000,31000000,53000000,53000000,74000000,74000000,96000000,96000000,134000000]
         },
         health: {
-            gold: boostThreeGold,
-            valor: boostThreeValor,
-            bread: boostThreeBread,
-            iron: boostThreeBread
+            gold: guardianOutfitterGold,
+            valor: guardianOutfitterValor,
+            bread: guardianOutfitterBread,
+            iron: guardianOutfitterBread
         },
         attack: {
-            gold: boostThreeGold,
-            valor: boostThreeValor,
-            bread: boostThreeBread,
-            iron: boostThreeBread
+            gold: guardianOutfitterGold,
+            valor: guardianOutfitterValor,
+            bread: guardianOutfitterBread,
+            iron: guardianOutfitterBread
         },
         defense: {
-            gold: boostThreeGold,
-            valor: [...boostThreeValor.slice(0, -1), 1026],
-            bread: [...boostThreeBread.slice(0, -1), 101844334],
-            iron: [...boostThreeBread.slice(0, -1), 101844334]
+            gold: guardianOutfitterGold,
+            valor: [...guardianOutfitterValor.slice(0, -1), guardianOutfitterValor[guardianOutfitterValor.length - 1] + 1],
+            bread: [...guardianOutfitterBread.slice(0, -1), guardianOutfitterBread[guardianOutfitterBread.length - 1] + 1],
+            iron: [...guardianOutfitterBread.slice(0, -1), guardianOutfitterBread[guardianOutfitterBread.length - 1] + 1]
         }
     };
 
