@@ -78,11 +78,17 @@
     }
 
     if (typeof document !== 'undefined') {
-        document.addEventListener('DOMContentLoaded', () => {
+        const runInit = () => {
             if (document.getElementById('proteinFarmForm')) {
                 initProteinCalculator();
             }
-        });
+        };
+
+        if (document.readyState !== 'loading') {
+            runInit();
+        } else {
+            document.addEventListener('DOMContentLoaded', runInit);
+        }
     }
 
     if (typeof module !== 'undefined') {

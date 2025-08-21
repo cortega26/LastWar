@@ -124,11 +124,17 @@
     }
 
     if (typeof document !== 'undefined') {
-        document.addEventListener('DOMContentLoaded', () => {
+        const runInit = () => {
             if (document.getElementById('adv-prot-lvl')) {
                 initT10Calculator();
             }
-        });
+        };
+
+        if (document.readyState !== 'loading') {
+            runInit();
+        } else {
+            document.addEventListener('DOMContentLoaded', runInit);
+        }
     }
 
     if (typeof module !== 'undefined') {
