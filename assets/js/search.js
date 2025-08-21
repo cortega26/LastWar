@@ -138,9 +138,10 @@ class SiteSearch {
         searchContainer.innerHTML = `
             <div class="search-wrapper">
                 <div class="search-input-wrapper">
-                    <input 
-                        type="text" 
-                        id="site-search" 
+                    <label for="site-search" class="sr-only">Search the site</label>
+                    <input
+                        type="text"
+                        id="site-search"
                         placeholder="Search tools, guides..."
                         autocomplete="off"
                         class="search-input"
