@@ -5,6 +5,7 @@ AI-first workflow with human operator.
 - Read `AGENT_WORK_CONTRACT.md` and `docs/process/AI_FIRST_DELIVERY.md`.
 - Follow `COMMIT_CONVENTION.md`.
 - Use the AI Task issue template and AI PR template.
+- Review `docs/goals/GOALS.md` and `docs/scoreboard/SCOREBOARD.md` for current priorities.
 
 ## Code Areas
 

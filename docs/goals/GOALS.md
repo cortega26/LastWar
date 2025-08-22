@@ -16,9 +16,9 @@ _Strategic goals grouped by area, with top next actions pulled from the scoreboa
 **Top Next Actions:**
 | Task                        | Impact   |   Score (0-10) | Next Step                               | Due   |
 |:----------------------------|:---------|---------------:|:----------------------------------------|:------|
-| GA4 + Google Search Console | H        |              8 | Submit sitemap to GSC; verify real-time events |       |
+| GA4 + Google Search Console | H        |              0 | Install GA4; verify GSC; submit sitemap |       |
 | Event Tracking (tools/CTAs) | H        |              1 | Track tool_open/calc_run/discord_click  |       |
-| A/B Testing Framework       | M        |              0 | Pick first test & wire toggles          |       |
+| KPI Dashboard (weekly)      | M        |              0 | Create report for WAU/CTR/CVR           |       |
 
 **Definition of Done (DoD):**
 - GA4 + GSC connected- Events for CTAs/tools firing- KPI dashboard updated
@@ -29,9 +29,9 @@ _Strategic goals grouped by area, with top next actions pulled from the scoreboa
 **Top Next Actions:**
 | Task                   | Impact   |   Score (0-10) | Next Step                             | Due   |
 |:-----------------------|:---------|---------------:|:--------------------------------------|:------|
-| Discord Server         | H        |              6 | Create server; generate invite; replace placeholder |       |
+| Discord Server         | H        |              0 | Publish invite link and banner        |       |
 | Feedback Form → Issues | M        |              0 | Embed form and route to GitHub issues |       |
-| Newsletter (bi-weekly) | M        |              0 | Add signup block & send v1            |       |
+| UGC Submissions Workflow | M      |              0 | Create submission template & review queue |       |
 
 **Definition of Done (DoD):**
 - Feedback form + triage- UGC guidelines published- Responses within 48h
@@ -55,8 +55,8 @@ _Strategic goals grouped by area, with top next actions pulled from the scoreboa
 **Top Next Actions:**
 | Task                     | Impact   |   Score (0-10) | Next Step                         | Due   |
 |:-------------------------|:---------|---------------:|:----------------------------------|:------|
-| Content Calendar         | H        |              5 | Begin Q1 production; adjust for events |       |
 | Pillar: Base Building    | H        |              0 | Approve outline & add screenshots |       |
+| Pillar: Heroes & Tier List | H     |              0 | Define hero attributes CSV        |       |
 | Pillar: Events & Seasons | H        |              0 | Add upcoming dates                |       |
 
 **Definition of Done (DoD):**
@@ -105,12 +105,12 @@ _Strategic goals grouped by area, with top next actions pulled from the scoreboa
 **Goal:** Institutionalize weekly checks for links/errors/regressions.  
 
 **Top Next Actions:**
-| Task                                     | Impact   |   Score (0-10) | Next Step                                                                    | Due   |
-|:-----------------------------------------|:---------|---------------:|:-----------------------------------------------------------------------------|:------|
-| Audit: Monthly Accessibility (axe/pa11y) | H        |            nan | Scan site; fix WCAG AA criticals; add regression tests                       |       |
-| Audit: Monthly Rendering & Content QA    | H        |            nan | Check images (alt/size/srcset), tables on mobile, typos, code block overflow |       |
-| Audit: Weekly Lighthouse & Web Vitals    | H        |            nan | Add Lighthouse CI budgets (LCP/CLS/TBT); run on PR & main                    |       |
 
+| Task | Impact |   Score (0-10) | Next Step | Due |
+|:--|:--|---------------:|:--------------------------------------|:--|
+| Audit: Weekly Smoke Test & Visual Regression | H | 0 | Record baseline screenshots (top 20 pages) & add Playwright tests | |
+| Audit: Weekly Lighthouse & Web Vitals | H | 0 | Add Lighthouse CI budgets (LCP/CLS/TBT); run on PR & main | |
+| Audit: Monthly Accessibility (axe/pa11y) | H | 0 | Scan site; fix WCAG AA criticals; add regression tests | |
 **Definition of Done (DoD):**
 - Weekly smoke + visual regression: 0 criticals- Link & console error sweeps pass- Actions documented
 
@@ -133,8 +133,8 @@ _Strategic goals grouped by area, with top next actions pulled from the scoreboa
 **Top Next Actions:**
 | Task                       | Impact   |   Score (0-10) | Next Step                                   | Due   |
 |:---------------------------|:---------|---------------:|:--------------------------------------------|:------|
-| Accessibility (a11y) Fixes | H        |              0 | Run Lighthouse/axe and fix criticals        |       |
 | On-Site Search             | H        |              0 | Implement Lunr/Pagefind search box          |       |
+| Accessibility (a11y) Fixes | H        |              0 | Run Lighthouse/axe and fix criticals        |       |
 | Navigation IA & Hub Pages  | H        |              1 | Approve IA map for Heroes/Base/Events/Tools |       |
 
 **Definition of Done (DoD):**
