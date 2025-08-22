@@ -1,11 +1,11 @@
 [
   {
-    "title": "All Tools - Coming Soon",
-    "href": "/pages/tools.html"
-  },
-  {
     "title": "All Guides - Coming Soon",
     "href": "/pages/guides.html"
+  },
+  {
+    "title": "All Tools - Coming Soon",
+    "href": "/pages/tools.html"
   },
   {
     "title": "Alliance Rules - Last War: Survival",
@@ -84,7 +84,7 @@
     "href": "/pages/season3.html"
   },
   {
-    "title": "Season Guides - Last War Tools",
+    "title": "Seasons - Last War Tools",
     "href": "/pages/seasons.html"
   },
   {
