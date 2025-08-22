@@ -3,9 +3,6 @@ Allow: /
 
 # Block common bot/crawler noise while allowing important crawling
 Disallow: /*.json$
-Disallow: /*.xml$
-Disallow: /assets/js/
-Disallow: /assets/css/
 
 # Allow important assets for indexing
 Allow: /assets/images/
