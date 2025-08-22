@@ -18,3 +18,9 @@ Categorize changes with one of these scopes:
 
 Check the PR template to ensure the service-worker cache is bumped and
 performance/a11y thresholds are met before submitting.
+
+## Images
+
+- Provide an `alt` attribute for every image. Use the template `"<context>: <concise description>"`.
+- Decorative images should use an empty `alt=""`.
+- Include explicit `width` and `height` or an `aspect-ratio` to prevent layout shift.

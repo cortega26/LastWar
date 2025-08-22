@@ -281,7 +281,7 @@
             <div class="hero-card" data-hero="${hero.name}">
                 <div class="hero-tier ${hero.tier.toLowerCase()}">${hero.tier}</div>
                 <div class="hero-image">
-                    <img src="../assets/images/heroes/${hero.image}" alt="${hero.name}" loading="lazy" onerror="this.src='../assets/images/hero-placeholder.jpg'">
+                    <img src="../assets/images/heroes/${hero.image}" alt="${hero.name}" width="128" height="128" loading="lazy" onerror="this.src='../assets/images/hero-placeholder.jpg'">
                 </div>
                 <h3>${hero.name}</h3>
                 <div class="hero-details">
@@ -348,7 +348,7 @@
                     slot.innerHTML = `
                     <div class="slot-number">${index + 1}</div>
                     <div class="hero-in-slot">
-                        <img src="../assets/images/heroes/${hero.image}" alt="${hero.name}" loading="lazy" onerror="this.src='../assets/images/hero-placeholder.jpg'">
+                        <img src="../assets/images/heroes/${hero.image}" alt="${hero.name}" width="128" height="128" loading="lazy" onerror="this.src='../assets/images/hero-placeholder.jpg'">
                         <div class="hero-name">${hero.name}</div>
                         <div class="hero-role ${hero.role.toLowerCase()}">${hero.role}</div>
                     </div>
