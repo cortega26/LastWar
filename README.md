@@ -10,6 +10,11 @@ Open `index.html` in a modern web browser. The navigation links lead to addition
 
 No build step is required. Simply edit the HTML, CSS, or JavaScript files and reload your browser. The `assets/js/script.js` file uses jQuery to fetch the navigation and footer from the `partials/` directory, keeping all pages consistent.
 
+### Project Management
+
+- Current priorities: see [`docs/scoreboard/SCOREBOARD.md`](docs/scoreboard/SCOREBOARD.md).
+- Strategic goals: see [`docs/goals/GOALS.md`](docs/goals/GOALS.md).
+
 ## Monetization Ideas
 
 - Add a "Buy Me a Coffee" button to let visitors donate.
