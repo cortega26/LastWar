@@ -6,6 +6,10 @@ const path = require('path');
 // Configuration
 const baseURL = 'https://tooltician.com/';
 const outputPath = 'sitemap.xml';
+// Directories to exclude from the sitemap
+const excludedDirs = ['node_modules', 'backups', 'partials'];
+// Specific HTML files to exclude
+const excludedFiles = ['404.html'];
 
 // Priority mappings based on page type
 const priorityMap = {
@@ -51,10 +55,10 @@ function scanForHTMLFiles(dir, baseDir = '') {
         const relativePath = path.join(baseDir, item);
         const stat = fs.statSync(fullPath);
 
-        if (stat.isDirectory() && !item.startsWith('.') && item !== 'node_modules') {
+        if (stat.isDirectory() && !item.startsWith('.') && !excludedDirs.includes(item)) {
             // Recursively scan subdirectories
             files.push(...scanForHTMLFiles(fullPath, relativePath));
-        } else if (stat.isFile() && item.endsWith('.html')) {
+        } else if (stat.isFile() && item.endsWith('.html') && !excludedFiles.includes(relativePath)) {
             files.push({
                 path: relativePath,
                 fullPath: fullPath,
