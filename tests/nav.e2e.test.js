@@ -6,32 +6,30 @@ const navHtml = fs.readFileSync(path.join(__dirname, '../partials/nav.html'), 'u
 
 const dom = new JSDOM(`<div class="nav-container">${navHtml}</div>`, { url: 'http://example.com/', pretendToBeVisual: true });
 const window = dom.window;
-const $ = require('jquery')(window);
 
 global.window = window;
 global.document = window.document;
-global.$ = $;
 
 const { initNavigationInteractions } = require('../assets/js/script.js');
 initNavigationInteractions();
 
-const tools = $('.nav-item.dropdown').first();
+const tools = window.document.querySelector('.nav-item.dropdown');
 
 // Hover test
-tools.trigger('mouseenter');
-assert.strictEqual(tools.find('> .nav-link').attr('aria-expanded'), 'true');
-tools.trigger('mouseleave');
-assert.strictEqual(tools.find('> .nav-link').attr('aria-expanded'), 'false');
+tools.dispatchEvent(new window.Event('mouseover', { bubbles: true }));
+assert.strictEqual(tools.querySelector('.nav-link').getAttribute('aria-expanded'), 'true');
+tools.dispatchEvent(new window.Event('mouseout', { bubbles: true }));
+assert.strictEqual(tools.querySelector('.nav-link').getAttribute('aria-expanded'), 'false');
 
 // Mobile click test
 window.innerWidth = 500;
-const link = tools.find('> .nav-link');
-link.trigger('click');
-assert(tools.hasClass('active') && tools.find('.dropdown-menu').hasClass('show'));
+const link = tools.querySelector('.nav-link');
+link.dispatchEvent(new window.MouseEvent('click', { bubbles: true, cancelable: true }));
+assert(tools.classList.contains('active') && tools.querySelector('.dropdown-menu').classList.contains('show'));
 
 // Keyboard navigation
 window.innerWidth = 1200;
-tools.find('> .nav-link').trigger($.Event('keydown', { key: 'ArrowDown' }));
-assert(document.activeElement.textContent.trim().startsWith('Protein Farm'));
+link.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+assert(window.document.activeElement.textContent.trim().startsWith('Protein Farm'));
 
 console.log('Navbar E2E test passed');

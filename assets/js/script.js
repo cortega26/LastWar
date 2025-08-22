@@ -13,230 +13,213 @@
 
     let partialsLoaded = false;
 
-    // Partial loader that works with or without jQuery
+    // Partial loader using fetch and vanilla DOM
     function loadPartials() {
         if (partialsLoaded) return;
         partialsLoaded = true;
 
         const savedTheme = localStorage.getItem("theme");
 
-        if (window.$) {
-            $.getJSON(configUrl)
-                .done(cfg => {
-                    partialPaths.nav = cfg.nav || partialPaths.nav;
-                    partialPaths.footer = cfg.footer || partialPaths.footer;
-                })
-                .always(() => {
-                    // Load navigation
-                    $("#nav-placeholder").load(partialPaths.nav, function(response, status, xhr) {
-                        if (status === "error") {
-                            console.error("Failed to load navigation:", xhr.status, xhr.statusText);
-                            $("#nav-placeholder").html(`
+        fetch(configUrl)
+            .then(r => r.json())
+            .then(cfg => {
+                partialPaths.nav = cfg.nav || partialPaths.nav;
+                partialPaths.footer = cfg.footer || partialPaths.footer;
+            })
+            .catch(() => {})
+            .finally(() => {
+                fetch(partialPaths.nav)
+                    .then(r => {
+                        if (!r.ok) throw r;
+                        return r.text();
+                    })
+                    .then(html => {
+                        const navContainer = document.getElementById('nav-placeholder');
+                        if (navContainer) {
+                            navContainer.insertAdjacentHTML('afterbegin', html);
+                        }
+                        if (savedTheme === "dark" || savedTheme === "light") {
+                            const toggle = document.getElementById('themeToggle');
+                            if (toggle) {
+                                toggle.setAttribute('aria-pressed', savedTheme === "dark");
+                            }
+                        }
+                        markCurrentNav();
+                        initNavigationInteractions();
+                    })
+                    .catch(() => {
+                        const navContainer = document.getElementById('nav-placeholder');
+                        if (navContainer) {
+                            navContainer.innerHTML = `
                                 <nav style="background:#1a1a2e;padding:1rem;">
                                     <a href="/index.html" style="color:#fff;text-decoration:none;font-weight:bold;">Home</a>
                                 </nav>
-                            `);
-                            return;
+                            `;
                         }
-
-                        if (savedTheme === "dark" || savedTheme === "light") {
-                            $("#themeToggle").attr("aria-pressed", savedTheme === "dark");
-                        }
-
-                        markCurrentNav();
-                        initNavigationInteractions();
                     });
 
-                    // Load footer
-                    $("#footer-placeholder").load(partialPaths.footer, function(response, status, xhr) {
-                        if (status === "error") {
-                            console.error("Failed to load footer:", xhr.status, xhr.statusText);
-                            $("#footer-placeholder").html(`
+                fetch(partialPaths.footer)
+                    .then(r => {
+                        if (!r.ok) throw r;
+                        return r.text();
+                    })
+                    .then(html => {
+                        const footerContainer = document.getElementById('footer-placeholder');
+                        if (footerContainer) {
+                            footerContainer.insertAdjacentHTML('afterbegin', html);
+                        }
+                    })
+                    .catch(() => {
+                        const footerContainer = document.getElementById('footer-placeholder');
+                        if (footerContainer) {
+                            footerContainer.innerHTML = `
                                 <footer style="background:#f8fafc;text-align:center;padding:1rem;border-top:1px solid #e5e7eb;">
                                     <nav><a href="/index.html">Home</a></nav>
                                 </footer>
-                            `);
+                            `;
                         }
                     });
-                });
-        } else {
-            fetch(configUrl)
-                .then(r => r.json())
-                .then(cfg => {
-                    partialPaths.nav = cfg.nav || partialPaths.nav;
-                    partialPaths.footer = cfg.footer || partialPaths.footer;
-                })
-                .catch(() => {})
-                .finally(() => {
-                    fetch(partialPaths.nav)
-                        .then(r => {
-                            if (!r.ok) throw r;
-                            return r.text();
-                        })
-                        .then(html => {
-                            const navContainer = document.getElementById('nav-placeholder');
-                            if (navContainer) {
-                                navContainer.insertAdjacentHTML('afterbegin', html);
-                            }
-                            if (savedTheme === "dark" || savedTheme === "light") {
-                                const toggle = document.getElementById('themeToggle');
-                                if (toggle) {
-                                    toggle.setAttribute('aria-pressed', savedTheme === "dark");
-                                }
-                            }
-                        })
-                        .catch(() => {
-                            const navContainer = document.getElementById('nav-placeholder');
-                            if (navContainer) {
-                                navContainer.innerHTML = `
-                                    <nav style="background:#1a1a2e;padding:1rem;">
-                                        <a href="/index.html" style="color:#fff;text-decoration:none;font-weight:bold;">Home</a>
-                                    </nav>
-                                `;
-                            }
-                        });
-
-                    fetch(partialPaths.footer)
-                        .then(r => {
-                            if (!r.ok) throw r;
-                            return r.text();
-                        })
-                        .then(html => {
-                            const footerContainer = document.getElementById('footer-placeholder');
-                            if (footerContainer) {
-                                footerContainer.insertAdjacentHTML('afterbegin', html);
-                            }
-                        })
-                        .catch(() => {
-                            const footerContainer = document.getElementById('footer-placeholder');
-                            if (footerContainer) {
-                                footerContainer.innerHTML = `
-                                    <footer style="background:#f8fafc;text-align:center;padding:1rem;border-top:1px solid #e5e7eb;">
-                                        <nav><a href="/index.html">Home</a></nav>
-                                    </footer>
-                                `;
-                            }
-                        });
-                });
-        }
+            });
     }
 
     function markCurrentNav() {
-        const navMenu = $('#navMenu');
-        if (!navMenu.length) return;
+        const navMenu = document.getElementById('navMenu');
+        if (!navMenu) return;
         const normalize = p => p.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
         const currentPath = normalize(window.location.pathname);
-        navMenu.find('a.nav-link').each(function() {
-            const normalizedHref = normalize($(this).attr('href'));
+        navMenu.querySelectorAll('a.nav-link').forEach(link => {
+            const normalizedHref = normalize(link.getAttribute('href'));
             if (normalizedHref === currentPath) {
-                $(this).attr('aria-current', 'page');
+                link.setAttribute('aria-current', 'page');
             }
         });
     }
 
     // Navigation interaction handlers
     function initNavigationInteractions() {
-        // Mobile navigation toggle
-        $(document).off('click', '#navToggle').on('click', '#navToggle', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const navMenu = $("#navMenu, .nav-menu");
-            const isActive = navMenu.hasClass("active");
-            
-            navMenu.toggleClass("active");
-            $(this).attr("aria-expanded", !isActive);
-        });
-        
-        // Dropdown handling for mobile
-        $(document).off('click', '.nav-item.dropdown > .nav-link').on('click', '.nav-item.dropdown > .nav-link', function(e) {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                const dropdown = $(this).parent();
-                const dropdownMenu = dropdown.find('.dropdown-menu');
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu') || document.querySelector('.nav-menu');
 
-                dropdown.toggleClass('active');
-                dropdownMenu.toggleClass('show');
-                $(this).attr('aria-expanded', dropdown.hasClass('active'));
-            }
-        });
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const isActive = navMenu.classList.contains('active');
+                navMenu.classList.toggle('active');
+                navToggle.setAttribute('aria-expanded', String(!isActive));
+            });
+        }
 
-        // Desktop hover aria sync
-        $(document).off('mouseenter.nav mouseleave.nav', '.nav-item.dropdown').on('mouseenter.nav mouseleave.nav', '.nav-item.dropdown', function(e) {
-            if (window.innerWidth > 768) {
-                const link = $(this).children('.nav-link');
-                link.attr('aria-expanded', e.type === 'mouseenter');
-            }
-        });
-
-        // Keyboard navigation
-        $(document).off('keydown', '.nav-item > .nav-link').on('keydown', '.nav-item > .nav-link', function(e) {
-            const key = e.key;
-            const parentItem = $(this).parent();
-            const dropdown = parentItem.hasClass('dropdown') ? parentItem : null;
-            if (key === 'ArrowRight') {
-                e.preventDefault();
-                parentItem.next().find('> .nav-link').focus();
-            } else if (key === 'ArrowLeft') {
-                e.preventDefault();
-                parentItem.prev().find('> .nav-link').focus();
-            } else if (dropdown && (key === 'Enter' || key === ' ' || key === 'ArrowDown')) {
-                e.preventDefault();
-                dropdown.addClass('active');
-                dropdown.find('.dropdown-menu').addClass('show');
-                $(this).attr('aria-expanded', 'true');
-                dropdown.find('.dropdown-menu a').first().focus();
-            } else if (key === 'Escape') {
-                if (dropdown) {
-                    dropdown.removeClass('active');
-                    dropdown.find('.dropdown-menu').removeClass('show');
-                    $(this).attr('aria-expanded', 'false');
+        document.querySelectorAll('.nav-item.dropdown > .nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const dropdown = link.parentElement;
+                    const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                    dropdown.classList.toggle('active');
+                    dropdownMenu.classList.toggle('show');
+                    link.setAttribute('aria-expanded', String(dropdown.classList.contains('active')));
                 }
+            });
+        });
+
+        document.querySelectorAll('.nav-item.dropdown').forEach(item => {
+            const handleEnter = () => {
+                if (window.innerWidth > 768) {
+                    const link = item.querySelector('.nav-link');
+                    link.setAttribute('aria-expanded', 'true');
+                }
+            };
+            const handleLeave = () => {
+                if (window.innerWidth > 768) {
+                    const link = item.querySelector('.nav-link');
+                    link.setAttribute('aria-expanded', 'false');
+                }
+            };
+            item.addEventListener('mouseenter', handleEnter);
+            item.addEventListener('mouseleave', handleLeave);
+            item.addEventListener('mouseover', handleEnter);
+            item.addEventListener('mouseout', handleLeave);
+        });
+
+        document.querySelectorAll('.nav-item > .nav-link').forEach(link => {
+            link.addEventListener('keydown', (e) => {
+                const key = e.key;
+                const parentItem = link.parentElement;
+                const dropdown = parentItem.classList.contains('dropdown') ? parentItem : null;
+                if (key === 'ArrowRight') {
+                    e.preventDefault();
+                    const next = parentItem.nextElementSibling;
+                    if (next) next.querySelector('> .nav-link').focus();
+                } else if (key === 'ArrowLeft') {
+                    e.preventDefault();
+                    const prev = parentItem.previousElementSibling;
+                    if (prev) prev.querySelector('> .nav-link').focus();
+                } else if (dropdown && (key === 'Enter' || key === ' ' || key === 'ArrowDown')) {
+                    e.preventDefault();
+                    dropdown.classList.add('active');
+                    dropdown.querySelector('.dropdown-menu').classList.add('show');
+                    link.setAttribute('aria-expanded', 'true');
+                    const first = dropdown.querySelector('.dropdown-menu a');
+                    if (first) first.focus();
+                } else if (key === 'Escape') {
+                    if (dropdown) {
+                        dropdown.classList.remove('active');
+                        dropdown.querySelector('.dropdown-menu').classList.remove('show');
+                        link.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.dropdown-menu a').forEach(a => {
+            a.addEventListener('keydown', (e) => {
+                const items = Array.from(a.closest('.dropdown-menu').querySelectorAll('a'));
+                const index = items.indexOf(a);
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    items[(index + 1) % items.length].focus();
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    items[(index - 1 + items.length) % items.length].focus();
+                } else if (e.key === 'Escape') {
+                    const dropdown = a.closest('.nav-item.dropdown');
+                    dropdown.classList.remove('active');
+                    dropdown.querySelector('.dropdown-menu').classList.remove('show');
+                    const link = dropdown.querySelector('.nav-link');
+                    link.setAttribute('aria-expanded', 'false');
+                    link.focus();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    const next = a.closest('.nav-item.dropdown').nextElementSibling;
+                    if (next) next.querySelector('> .nav-link').focus();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    const prev = a.closest('.nav-item.dropdown').previousElementSibling;
+                    if (prev) prev.querySelector('> .nav-link').focus();
+                }
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                if (navMenu) navMenu.classList.remove('active');
+                if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+                document.querySelectorAll('.nav-item.dropdown').forEach(dd => dd.classList.remove('active'));
+                document.querySelectorAll('.nav-item.dropdown > .nav-link').forEach(link => link.setAttribute('aria-expanded', 'false'));
+                document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('show'));
             }
         });
 
-        $(document).off('keydown', '.dropdown-menu a').on('keydown', '.dropdown-menu a', function(e) {
-            const items = $(this).closest('.dropdown-menu').find('a');
-            const index = items.index(this);
-            if (e.key === 'ArrowDown') {
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', (e) => {
                 e.preventDefault();
-                items.eq((index + 1) % items.length).focus();
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                items.eq((index - 1 + items.length) % items.length).focus();
-            } else if (e.key === 'Escape') {
-                const dropdown = $(this).closest('.nav-item.dropdown');
-                dropdown.removeClass('active');
-                dropdown.find('.dropdown-menu').removeClass('show');
-                const link = dropdown.children('.nav-link');
-                link.attr('aria-expanded', 'false').focus();
-            } else if (e.key === 'ArrowRight') {
-                e.preventDefault();
-                $(this).closest('.nav-item.dropdown').next().find('> .nav-link').focus();
-            } else if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                $(this).closest('.nav-item.dropdown').prev().find('> .nav-link').focus();
-            }
-        });
-        
-        // Close mobile menu when clicking outside
-        $(document).off('click.navClose').on('click.navClose', function(e) {
-            if (!$(e.target).closest('.nav-container').length) {
-                $('.nav-menu').removeClass('active');
-                $('#navToggle').attr('aria-expanded', 'false');
-                $('.nav-item.dropdown').removeClass('active');
-                $('.nav-item.dropdown > .nav-link').attr('aria-expanded', 'false');
-                $('.dropdown-menu').removeClass('show');
-            }
-        });
-        
-        // Theme toggle handler
-        $(document).off('click', '#themeToggle').on('click', '#themeToggle', function(e) {
-            e.preventDefault();
-            if (typeof window.toggleDarkMode === 'function') {
-                window.toggleDarkMode();
-            }
-        });
+                if (typeof window.toggleDarkMode === 'function') {
+                    window.toggleDarkMode();
+                }
+            });
+        }
     }
     
     const api = { loadPartials, initNavigationInteractions, markCurrentNav };
@@ -257,11 +240,7 @@
             }
         };
 
-        if (window.$) {
-            $(document).ready(init);
-        } else {
-            document.addEventListener('DOMContentLoaded', init);
-        }
+        document.addEventListener('DOMContentLoaded', init);
 
         // Expose for manual triggering (idempotent)
         global.loadPartials = loadPartials;

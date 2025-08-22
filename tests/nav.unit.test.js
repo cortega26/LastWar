@@ -9,11 +9,9 @@ const dom = new JSDOM(`
 `, { url: 'http://example.com/bar.html' });
 
 const window = dom.window;
-const $ = require('jquery')(window);
 
 global.window = window;
 global.document = window.document;
-global.$ = $;
 
 const { markCurrentNav } = require('../assets/js/script.js');
 
