@@ -4,6 +4,8 @@
 (function() {
     'use strict';
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     // Defer non-critical operations
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initEnhancements);
@@ -14,9 +16,9 @@
     function initEnhancements() {
         const VisualEnhancements = {
             config: {
-                animationDuration: 300,
-                toastDuration: 4000,
-                loadingMinDuration: 800
+                animationDuration: prefersReducedMotion ? 0 : 300,
+                toastDuration: prefersReducedMotion ? 0 : 4000,
+                loadingMinDuration: prefersReducedMotion ? 0 : 800
             },
 
             init() {
@@ -45,9 +47,13 @@
                     if (textEl) textEl.textContent = message;
                     overlay.classList.add('active');
 
-                    setTimeout(() => {
+                    if (prefersReducedMotion) {
                         overlay.classList.remove('active');
-                    }, this.config.loadingMinDuration);
+                    } else {
+                        setTimeout(() => {
+                            overlay.classList.remove('active');
+                        }, this.config.loadingMinDuration);
+                    }
                 }
             },
 
@@ -74,7 +80,7 @@
                 if (!container) return;
 
                 const toast = document.createElement('div');
-                toast.className = `toast toast-${type} fade-in`;
+                toast.className = `toast toast-${type}${prefersReducedMotion ? '' : ' fade-in'}`;
                 toast.innerHTML = `
                     <span class="toast-icon">${this.getToastIcon(type)}</span>
                     <span class="toast-message">${message}</span>
@@ -86,10 +92,16 @@
                 const closeBtn = toast.querySelector('.toast-close');
                 closeBtn.addEventListener('click', () => toast.remove());
 
-                setTimeout(() => {
-                    toast.classList.add('fade-out');
-                    setTimeout(() => toast.remove(), 300);
-                }, duration || this.config.toastDuration);
+                const displayDuration = duration || this.config.toastDuration;
+
+                if (prefersReducedMotion) {
+                    setTimeout(() => toast.remove(), displayDuration);
+                } else {
+                    setTimeout(() => {
+                        toast.classList.add('fade-out');
+                        setTimeout(() => toast.remove(), 300);
+                    }, displayDuration);
+                }
             },
 
             getToastIcon(type) {
@@ -112,10 +124,15 @@
                                 fill.classList.add('animated');
                                 const width = fill.style.width;
                                 fill.style.width = '0';
-                                requestAnimationFrame(() => {
-                                    fill.style.transition = 'width 1.5s ease-out';
+                                if (prefersReducedMotion) {
+                                    fill.style.transition = 'none';
                                     fill.style.width = width;
-                                });
+                                } else {
+                                    requestAnimationFrame(() => {
+                                        fill.style.transition = 'width 1.5s ease-out';
+                                        fill.style.width = width;
+                                    });
+                                }
                             }
                         }
                     });
@@ -127,6 +144,7 @@
             },
 
             setupHoverEffects() {
+                if (prefersReducedMotion) return;
                 document.addEventListener('mouseover', (e) => {
                     const card = e.target.closest('.tool-card, .guide-card');
                     if (card && !card.classList.contains('hover-enhanced')) {
@@ -153,7 +171,7 @@
                         func.apply(this, args);
                     };
                     clearTimeout(timeout);
-                    timeout = setTimeout(later, wait);
+                    timeout = setTimeout(later, prefersReducedMotion ? 0 : wait);
                 };
             }
         };
@@ -165,9 +183,11 @@
         window.VisualEnhancements = VisualEnhancements;
 
         // Welcome message after a short delay
-        setTimeout(() => {
-            VisualEnhancements.showToast(
-                'Welcome to LastWar Tools! 🎮', 'success', 3000);
-        }, 1000);
+        if (!prefersReducedMotion) {
+            setTimeout(() => {
+                VisualEnhancements.showToast(
+                    'Welcome to LastWar Tools! 🎮', 'success', 3000);
+            }, 1000);
+        }
     }
 })();
