@@ -26,33 +26,33 @@
 
 /* ===== CSS VARIABLES ===== */
 :root {
-  /* Colors - Dark Theme Primary */
-  --primary: #ff6b35;
-  --primary-hover: #e55a2b;
-  --primary-active: #c43f15;
-  --secondary: #64ffda;
-  --accent: #ffd54f;
+  /* Colors - refined professional palette */
+  --primary: #ff7a45;
+  --primary-hover: #e96a39;
+  --primary-active: #c9562e;
+  --secondary: #2dd4bf; /* toned teal */
+  --accent: #fbbf24; /* softer accent */
   
   /* Dark Theme Colors */
-  --bg: #0a0e1a;
-  --bg-secondary: #1e2330;
-  --bg-tertiary: #252a3a;
-  --bg-card: #141824;
-  --bg-hover: #252a3a;
-  --nav-bg: rgba(10, 14, 26, 0.95);
-  --overlay-bg: rgba(10, 14, 26, 0.9);
+  --bg: #0b0f14;
+  --bg-secondary: #111827;
+  --bg-tertiary: #0f172a;
+  --bg-card: #0f172a;
+  --bg-hover: #111827;
+  --nav-bg: rgba(11, 15, 20, 0.92);
+  --overlay-bg: rgba(11, 15, 20, 0.9);
   
   /* Text Colors */
-  --text-primary: #ffffff;
-  --text-secondary: #b8bcc8;
-  --text-muted: #9ca3af;
-  --text-dim: #7a8191;
+  --text-primary: #e6edf3;
+  --text-secondary: #b6c2cf;
+  --text-muted: #94a3b8;
+  --text-dim: #7b8696;
   
   /* Border & Effects */
-  --border: #2d3748;
-  --border-light: #374151;
-  --glow: 0 0 20px rgba(255, 107, 53, 0.3);
-  --glow-secondary: 0 0 15px rgba(100, 255, 218, 0.2);
+  --border: #1f2937;
+  --border-light: #243244;
+  --glow: 0 0 12px rgba(255, 122, 69, 0.18);
+  --glow-secondary: 0 0 10px rgba(45, 212, 191, 0.15);
 
   /* Feedback */
   --warning-bg: rgba(253, 230, 138, 0.1);
@@ -114,11 +114,11 @@
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
   --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.25);
   /* Accessible colors on light backgrounds */
-  --primary: #c43f15;
-  --primary-hover: #b2411a;
-  --primary-active: #9f3513;
-  --secondary: #00796b;
-  --accent: #986400;
+  --primary: #ff7a45;
+  --primary-hover: #e96a39;
+  --primary-active: #c9562e;
+  --secondary: #2dd4bf;
+  --accent: #f59e0b;
 }
 
 /* ===== RESET & BASE ===== */
@@ -152,9 +152,9 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
 }
 
-h1 { font-size: 2.5rem; font-weight: 700; }
-h2 { font-size: 2rem; font-weight: 600; }
-h3 { font-size: 1.5rem; font-weight: 600; }
+h1 { font-size: clamp(2rem, 3vw, 3.25rem); font-weight: 700; }
+h2 { font-size: clamp(1.5rem, 2.2vw, 2.25rem); font-weight: 600; }
+h3 { font-size: clamp(1.25rem, 1.5vw, 1.75rem); font-weight: 600; }
 h4 { font-size: 1.25rem; }
 h5 { font-size: 1.125rem; }
 h6 { font-size: 1rem; }
@@ -177,6 +177,15 @@ a {
 
 a:hover {
   color: var(--primary-hover);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Accessible focus outline */
+:where(a, button, input, select, textarea, [tabindex="0"]) :focus { outline: none; }
+:where(a, button, input, select, textarea, [tabindex]) :focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 code {
@@ -243,16 +252,16 @@ code {
 .brand-icon {
   margin-right: 0.5rem;
   font-size: 1.8rem;
-  filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.5));
+  filter: drop-shadow(0 0 4px rgba(255, 122, 69, 0.25));
 }
 
 .brand-text {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: linear-gradient(135deg, var(--text-primary), var(--primary));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 200% 200%;
-  animation: brandGlow 3s ease-in-out infinite alternate;
+  animation: none;
 }
 
 .brand-accent {
@@ -1395,7 +1404,7 @@ footer {
 /* ===== ENHANCED BUTTONS ===== */
 .btn-enhanced {
   background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-  color: white;
+  color: var(--text-primary);
   padding: 0.8rem 2rem;
   border: none;
   border-radius: 12px;
@@ -1405,10 +1414,10 @@ footer {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
   text-transform: uppercase;
   letter-spacing: 0.02em;
   font-size: 0.9rem;
@@ -1465,23 +1474,19 @@ footer {
 }
 
 .hero-title-enhanced {
-  font-size: 3rem;
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
   line-height: 1.1;
   font-weight: 700;
   margin: 0 auto 1rem;
   max-width: 30rem;
-  background: linear-gradient(135deg, var(--text-primary), var(--primary), var(--secondary));
-  background-size: 200% 200%;
+  background: linear-gradient(135deg, var(--text-primary), var(--primary));
+  background-size: 100% 100%;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: titleGlow 4s ease-in-out infinite alternate;
+  animation: none;
 }
 
-@keyframes titleGlow {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
 
 .hero-subtitle {
   font-size: 1.25rem;
@@ -1731,12 +1736,12 @@ footer {
 
 /* ===== MICRO-INTERACTIONS ===== */
 .pulse-effect {
-  animation: pulse 2s infinite;
+  animation: pulse 2.4s ease-in-out infinite;
 }
 
 @keyframes pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  50% { transform: scale(1.02); }
   100% { transform: scale(1); }
 }
 
@@ -1751,14 +1756,8 @@ footer {
   100% { transform: scale(1) translateY(0); opacity: 1; }
 }
 
-.float-animation {
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
+.float-animation { animation: float 4s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
 
 /* ===== NOTIFICATION TOASTS ===== */
 .toast-container {
@@ -1860,29 +1859,12 @@ footer {
 }
 
 .holographic-effect {
-  background: linear-gradient(45deg, 
-    rgba(255, 107, 53, 0.1) 0%,
-    rgba(100, 255, 218, 0.1) 25%,
-    rgba(255, 213, 79, 0.1) 50%,
-    rgba(255, 107, 53, 0.1) 75%,
-    rgba(100, 255, 218, 0.1) 100%
-  );
-  background-size: 200% 200%;
-  animation: holographic 3s ease-in-out infinite;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  background-size: auto;
+  animation: none;
 }
 
-@keyframes holographic {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-.neon-glow {
-  box-shadow: 
-    0 0 5px var(--primary),
-    0 0 10px var(--primary),
-    0 0 15px var(--primary),
-    0 0 20px var(--primary);
-}
+.neon-glow { box-shadow: 0 12px 24px rgba(0,0,0,0.35), 0 0 1px var(--border); }
 
 /* ===== UTILITY CLASSES ===== */
 .fade-in {
