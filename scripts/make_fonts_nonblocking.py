@@ -82,11 +82,18 @@ def replace_stylesheet_with_preload(block: str) -> str:
 
 def process_html(content: str) -> str:
     original = content
+    # Remove any direct font file preloads (often TTF) that are brittle/unnecessary
+    content = PRELOAD_FONT_FILE_RE.sub("", content)
+
+    # If no Google Fonts stylesheet is present, do NOT add preconnects; also remove any stale ones
+    if not GOOGLE_FONTS_STYLESHEET_RE.search(content):
+        content = PRECONNECT_GOOGLEAPIS_RE.sub('', content)
+        content = PRECONNECT_GSTATIC_RE.sub('', content)
+        return content if content != original else original
+
+    # There is a Google Fonts stylesheet: normalize preconnects and make non-blocking
     content = canonical_preconnects(content)
     content = add_missing_preconnects(content)
-    # Remove any font file preloads (often TTF) that are brittle/unnecessary
-    content = PRELOAD_FONT_FILE_RE.sub("", content)
-    # Convert render-blocking stylesheet to non-blocking preload+onload
     content = replace_stylesheet_with_preload(content)
     return content if content != original else original
 
