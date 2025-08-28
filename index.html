@@ -186,11 +186,11 @@
             gtag('config', 'G-TV9L6C3VN7', { transport_type: 'beacon', anonymize_ip: true });
           }
           // Load on first interaction for best performance metrics
-          ['pointerdown','keydown','scroll','touchstart'].forEach(function(type){
+          ['pointerdown','keydown','touchstart'].forEach(function(type){
             window.addEventListener(type, loadGA, { once: true, passive: true });
           });
-          // Fallback: still load after 10s for users who do not interact
-          window.addEventListener('load', function(){ setTimeout(loadGA, 10000); });
+          // Fallback: still load after 15s for users who do not interact
+          window.addEventListener('load', function(){ setTimeout(loadGA, 15000); });
         })();
     </script>
     <script type="application/ld+json">

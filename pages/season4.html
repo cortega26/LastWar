@@ -197,10 +197,10 @@
         gtag('js', new Date());
         gtag('config', 'G-TV9L6C3VN7', { transport_type: 'beacon', anonymize_ip: true });
       }
-      ['pointerdown','keydown','scroll','touchstart'].forEach(function(type){
+      ['pointerdown','keydown','touchstart'].forEach(function(type){
         window.addEventListener(type, loadGA, { once: true, passive: true });
       });
-      window.addEventListener('load', function(){ setTimeout(loadGA, 10000); });
+      window.addEventListener('load', function(){ setTimeout(loadGA, 15000); });
     })();
   </script>
     <script type="application/ld+json">
