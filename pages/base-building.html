@@ -169,14 +169,26 @@
   <meta name="description" content="Comprehensive guide to base building and development in Last War: Survival." />
   <title>Base Building - Last War Tools</title>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TV9L6C3VN7"></script>
+  <!-- Google Analytics (interaction-gated) -->
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-TV9L6C3VN7');
+    function gtag(){ dataLayer.push(arguments); }
+    (function(){
+      var loaded=false;
+      function loadGA(){
+        if(loaded) return; loaded = true;
+        var s=document.createElement('script');
+        s.src='https://www.googletagmanager.com/gtag/js?id=G-TV9L6C3VN7';
+        s.async=true;
+        document.head.appendChild(s);
+        gtag('js', new Date());
+        gtag('config', 'G-TV9L6C3VN7', { transport_type: 'beacon', anonymize_ip: true });
+      }
+      ['pointerdown','keydown','scroll','touchstart'].forEach(function(type){
+        window.addEventListener(type, loadGA, { once: true, passive: true });
+      });
+      window.addEventListener('load', function(){ setTimeout(loadGA, 10000); });
+    })();
   </script>
   <script type="application/ld+json">
   {
