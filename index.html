@@ -174,17 +174,24 @@
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){ dataLayer.push(arguments); }
-        window.addEventListener('load', function(){
-            // Delay GA load slightly to keep initial metrics and audits clean
-            setTimeout(function(){
-                var s = document.createElement('script');
-                s.src = 'https://www.googletagmanager.com/gtag/js?id=G-TV9L6C3VN7';
-                s.async = true;
-                document.head.appendChild(s);
-                gtag('js', new Date());
-                gtag('config', 'G-TV9L6C3VN7', { transport_type: 'beacon', anonymize_ip: true });
-            }, 3000);
-        });
+        (function(){
+          var loaded = false;
+          function loadGA(){
+            if(loaded) return; loaded = true;
+            var s = document.createElement('script');
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-TV9L6C3VN7';
+            s.async = true;
+            document.head.appendChild(s);
+            gtag('js', new Date());
+            gtag('config', 'G-TV9L6C3VN7', { transport_type: 'beacon', anonymize_ip: true });
+          }
+          // Load on first interaction for best performance metrics
+          ['pointerdown','keydown','scroll','touchstart'].forEach(function(type){
+            window.addEventListener(type, loadGA, { once: true, passive: true });
+          });
+          // Fallback: still load after 10s for users who do not interact
+          window.addEventListener('load', function(){ setTimeout(loadGA, 10000); });
+        })();
     </script>
     <script type="application/ld+json">
     {
