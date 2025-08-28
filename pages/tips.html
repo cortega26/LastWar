@@ -191,6 +191,41 @@
     })();
   </script>
 
+  <style>
+    /* Tips & Tricks page styles (scoped) */
+    :root{--tips-gap:1rem}
+    .tips-hero{padding:2rem 0 1rem}
+    .tips-hero h1{font-size:clamp(2rem,4vw,3rem);margin:0 0 .5rem}
+    .tips-hero p{color:var(--text-secondary);max-width:60ch}
+
+    .tips-controls{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin:1rem 0 1.25rem}
+    .tips-search{flex:1 1 260px;position:relative}
+    .tips-search input{width:100%;padding:.7rem .9rem;border-radius:var(--border-radius);border:1px solid var(--border);background:var(--bg-tertiary);color:var(--text-primary)}
+    .tips-search input::placeholder{color:var(--text-muted)}
+    .chip-bar{display:flex;flex-wrap:wrap;gap:.5rem}
+    .chip{background:var(--bg-tertiary);border:1px solid var(--border);color:var(--text-secondary);padding:.45rem .7rem;border-radius:999px;cursor:pointer;transition:var(--transition-fast);font-size:.9rem}
+    .chip:hover{background:var(--bg-hover);color:var(--text-primary)}
+    .chip[aria-pressed="true"]{background:var(--primary);border-color:var(--primary-active);color:#fff;box-shadow:var(--glow)}
+
+    .tips-meta{margin:.25rem 0 0;color:var(--text-muted);font-size:.9rem}
+
+    .tips-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--tips-gap)}
+    @media (max-width: 1200px){.tips-grid{grid-template-columns:repeat(8,1fr)}}
+    @media (max-width: 768px){.tips-grid{grid-template-columns:repeat(4,1fr)}}
+    .tip-card{grid-column:span 6;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--border-radius);padding:1rem;display:flex;flex-direction:column;gap:.5rem;box-shadow:var(--shadow-sm)}
+    @media (max-width: 768px){.tip-card{grid-column:span 4}}
+    .tip-header{display:flex;gap:.5rem;align-items:flex-start;justify-content:space-between}
+    .tip-title{font-size:1.05rem;font-weight:600;margin:0;color:var(--text-primary)}
+    .tip-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+    .tag{font-size:.75rem;line-height:1;padding:.3rem .5rem;border-radius:999px;background:var(--bg-hover);color:var(--text-secondary);border:1px solid var(--border-light)}
+    .tip-body{color:var(--text-secondary)}
+    .tip-actions{display:flex;gap:.5rem;align-items:center;margin-top:.25rem}
+    .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text-secondary);padding:.4rem .6rem;border-radius:8px;cursor:pointer}
+    .btn-ghost:hover{background:var(--bg-hover);color:var(--text-primary)}
+    details.tip-details{margin-top:.25rem}
+    details.tip-details summary{cursor:pointer;color:var(--text-primary)}
+    .no-results{display:none;margin:1rem 0;color:var(--text-muted)}
+  </style>
   <script defer src="../assets/js/theme.js?v=20250828"></script>
 </head>
 
@@ -200,132 +235,369 @@
     <div id="nav-placeholder"></div>
   </header>
   <main class="container content" role="main" id="main-content">
-    <div class="hero">
-      <h1>Hidden Tips &amp; Tricks</h1>
-    </div>
-    <p>
-      This collection of tips and tricks covers lesser‑known strategies that
-      seasoned commanders use to gain an edge. Some focus on maximising event
-      rewards, others on optimising everyday tasks. Use them wisely!
-    </p>
+    <section class="tips-hero">
+      <h1>Tips &amp; Tricks</h1>
+      <p>Curated, practical strategies for Last War: Survival — filter by keyword or tag to find what helps you right now.</p>
+    </section>
 
-    <h2>Event &amp; Reward Tricks</h2>
-    <ul>
-      <li>
-        <strong>Bullseye Loot &amp; Ammo Bonanza:</strong> Save up ammunition
-        from daily tasks and packs until a Bullseye Loot event arrives. Use
-        your entire stash in one session to reach the higher reward tiers,
-        including the rare super prizes.
-      </li>
-      <li>
-        <strong>Zombie Invasion Cross‑Server:</strong> During Zombie Invasion,
-        teleport to another server where the event is active. After the
-        ten‑minute protection ends, rally with an ally and attack the zombie
-        boss to earn gold bars and courage medals. This
-        method avoids competition on your home server.
-      </li>
-      <li>
-        <strong>Daily 90 diamonds:</strong> In the 3v3 Brawl (arena), tap the
-        thumbs‑up icons under any three players once per day to receive 30
-        diamonds each, for a total of 90 diamonds.
-      </li>
-      <li>
-        <strong>Extra diamonds from tasks:</strong> After you collect your
-        daily task chests, continue completing tasks like recruiting heroes,
-        attacking commanders and plundering secret missions. Each grants 10
-        bonus diamonds, adding up quickly.
-      </li>
-    </ul>
+    <section class="tips-controls" aria-label="Filters">
+      <div class="tips-search" role="search">
+        <input id="tipsSearch" type="search" placeholder="Filter tips by keyword or tag (e.g., boss, VIP, early)" aria-label="Search tips">
+      </div>
+      <div class="chip-bar" id="tagFilters" role="group" aria-label="Tag filters">
+        <button class="chip" data-tag="early" aria-pressed="false">Early Game</button>
+        <button class="chip" data-tag="combat" aria-pressed="false">Combat</button>
+        <button class="chip" data-tag="boss" aria-pressed="false">Boss</button>
+        <button class="chip" data-tag="heroes" aria-pressed="false">Heroes</button>
+        <button class="chip" data-tag="events" aria-pressed="false">Events</button>
+        <button class="chip" data-tag="economy" aria-pressed="false">Economy</button>
+        <button class="chip" data-tag="alliance" aria-pressed="false">Alliance</button>
+        <button class="chip" data-tag="base" aria-pressed="false">Base</button>
+        <button class="chip" data-tag="daily" aria-pressed="false">Daily</button>
+      </div>
+      <div class="tips-meta" id="tipsCount" aria-live="polite"></div>
+    </section>
 
-    <h2>Combat &amp; Efficiency Tricks</h2>
-    <ul>
-      <li>
-        <strong>War fever stacking:</strong> Scouting or attacking another
-        commander (not zombies) triggers a small damage bonus that lasts for
-        fifteen minutes. You can retrigger it to keep the buff active, which is
-        especially useful during Alliance Exercise and World Boss events.
-      </li>
-      <li>
-        <strong>World Boss damage boost:</strong> Place Mason and Violet in the
-        front row to activate their passive bonuses for the back‑row heroes;
-        this setup increases your overall DPS against bosses.
-      </li>
-      <li>
-        <strong>Operation Falcon timing:</strong> Wait until your barracks are
-        at a high level before tackling Special Ops. The event rewards free
-        troops equal to your highest trainable tier, so delaying gives you
-        stronger reinforcements.
-      </li>
-      <li>
-        <strong>Honorable Campaign farming:</strong> If you can’t beat the
-        next stage, repeatedly clear previous levels. You still earn
-        experience and resources, and you can test different hero setups. Use
-        the back arrow after starting a fight to skip the combat animation and
-        see the result instantly.
-      </li>
-      <li>
-        <strong>VIP timing:</strong> Leveling your VIP grants an extra hour of
-        VIP time. Purchase a small amount of VIP points when you’re about to
-        log in for a long session so that the bonus time doesn’t go to waste.
-      </li>
-    </ul>
+    <section class="tips-grid" id="tipsGrid">
+      <!-- Event & Rewards -->
+      <article class="tip-card" data-tags="events economy daily early">
+        <div class="tip-header">
+          <h3 class="tip-title">Stack daily tasks for bonus diamonds</h3>
+          <div class="tip-tags"><span class="tag">Daily</span><span class="tag">Economy</span></div>
+        </div>
+        <div class="tip-body">
+          Finish your daily chests, then keep completing tasks (recruit, attack, missions). Each extra task grants a small diamond bonus that adds up.
+        </div>
+      </article>
 
-    <h2>Base &amp; Survivor Management</h2>
-    <ul>
-      <li>
-        <strong>Alliance healing:</strong> When healing troops, queue exactly as
-        many hours as you can receive alliance helps. After your allies reduce
-        the timer, finish the remainder with speed‑ups. This makes each help
-        count.
-      </li>
-      <li>
-        <strong>Emergency hospital cooldown:</strong> After rescuing troops in
-        the emergency hospital, leave them in the queue. The two‑day cooldown
-        begins immediately even if you don’t claim them, freeing the queue for
-        another rescue.
-      </li>
-      <li>
-        <strong>Swap survivors between buildings:</strong> Start a research or
-        building upgrade with your best survivors in one facility, then move
-        them to another building before starting a second project. This lets
-        you reuse their bonuses multiple times.
-      </li>
-      <li>
-        <strong>Use resource tiles for speed and stealth:</strong> Marching
-        troops to resource tiles is faster than marching on open ground and
-        does not send a notification to enemies. During wars, use these tiles
-        to relocate quickly or hide your armies.
-      </li>
-      <li>
-        <strong>Remove wall troops judiciously:</strong> Having no defensive
-        troops on your wall means you lose fewer units per attack. This tactic
-        is situational - decide whether you want to trade wall troops for
-        enemy time or protect your resources.
-      </li>
-      <li>
-        <strong>Send trucks wisely:</strong> To reduce the chance of your
-        trucks being plundered, delay sending them until most players have
-        exhausted their attacks or dispatch them with only your first and
-        second squads.
-      </li>
-      <li>
-        <strong>Dispose of troops before training day:</strong> Prior to troop
-        training day in a duel week, march your weakest squad repeatedly
-        against zombies or join alliance exercises until they are wiped. This
-        frees space to train higher‑level troops for points.
-      </li>
-      <li>
-        <strong>Secret mission views:</strong> In the Secret Missions event
-        interface, a small number appears next to each mission showing how
-        many commanders have viewed it. A high number means there may be
-        plunderers waiting.
-      </li>
-    </ul>
+      <article class="tip-card" data-tags="events boss combat heroes">
+        <div class="tip-header">
+          <h3 class="tip-title">Optimize World Boss lineups</h3>
+          <div class="tip-tags"><span class="tag">Boss</span><span class="tag">Heroes</span></div>
+        </div>
+        <div class="tip-body">
+          Prioritize mixed damage amplification over raw power. Use front‑row supports whose passives boost your back‑row DPS heroes.
+        </div>
+      </article>
 
-    <!-- References removed as citations are no longer displayed -->
+      <article class="tip-card" data-tags="events economy">
+        <div class="tip-header">
+          <h3 class="tip-title">Time resource spending to event windows</h3>
+          <div class="tip-tags"><span class="tag">Events</span><span class="tag">Economy</span></div>
+        </div>
+        <div class="tip-body">
+          Hoard speedups and materials, then dump during Train/Build/Research events to double‑dip points from both personal and alliance rankings.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="events economy boss">
+        <div class="tip-header">
+          <h3 class="tip-title">Save ammo for Bullseye Loot tiers</h3>
+          <div class="tip-tags"><span class="tag">Events</span></div>
+        </div>
+        <div class="tip-body">
+          Use ammunition in one burst during Bullseye Loot to reach higher milestone tiers more efficiently than spending daily.
+        </div>
+      </article>
+
+      <!-- Combat & Strategy -->
+      <article class="tip-card" data-tags="combat boss events">
+        <div class="tip-header">
+          <h3 class="tip-title">Maintain war fever for sustained damage</h3>
+          <div class="tip-tags"><span class="tag">Combat</span></div>
+        </div>
+        <div class="tip-body">
+          Lightly engage opponents to refresh the short‑term attack buff before major objectives like Alliance Exercise or server events.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="combat heroes early">
+        <div class="tip-header">
+          <h3 class="tip-title">Focus hero upgrades on core squads</h3>
+          <div class="tip-tags"><span class="tag">Heroes</span></div>
+        </div>
+        <div class="tip-body">
+          Concentrate shards and gear on one PvE and one PvP squad first. A few strong teams outperform many mediocre ones for events and map clears.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="combat base">
+        <div class="tip-header">
+          <h3 class="tip-title">Use resource tiles for stealth movement</h3>
+          <div class="tip-tags"><span class="tag">Combat</span><span class="tag">Base</span></div>
+        </div>
+        <div class="tip-body">
+          March through nearby resource tiles to move faster and reduce alerts to enemies during wars and relocations.
+        </div>
+      </article>
+
+      <!-- Base & Economy -->
+      <article class="tip-card" data-tags="base economy alliance">
+        <div class="tip-header">
+          <h3 class="tip-title">Align heal queues with alliance helps</h3>
+          <div class="tip-tags"><span class="tag">Alliance</span><span class="tag">Base</span></div>
+        </div>
+        <div class="tip-body">
+          Queue just enough hospital time to get full help reductions, then finish with speedups to stretch healing efficiency.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="base economy">
+        <div class="tip-header">
+          <h3 class="tip-title">Swap survivors to stack building bonuses</h3>
+          <div class="tip-tags"><span class="tag">Base</span></div>
+        </div>
+        <div class="tip-body">
+          Start an upgrade with your best specialists, then reassign them to start a second project elsewhere. Their bonuses apply to both timers.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="base economy early">
+        <div class="tip-header">
+          <h3 class="tip-title">Delay Special Ops until higher troop tier</h3>
+          <div class="tip-tags"><span class="tag">Events</span><span class="tag">Base</span></div>
+        </div>
+        <div class="tip-body">
+          Rewards often scale with your highest trainable tier, so waiting yields stronger free troops when you do the milestone.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="economy daily early">
+        <div class="tip-header">
+          <h3 class="tip-title">Use VIP boosts when you can be active</h3>
+          <div class="tip-tags"><span class="tag">Economy</span><span class="tag">Daily</span></div>
+        </div>
+        <div class="tip-body">
+          Activating VIP before a long play session maximizes the hourly bonus time and yields more value than toggling it sporadically.
+        </div>
+      </article>
+
+      <!-- Heroes & Progression -->
+      <article class="tip-card" data-tags="heroes early economy">
+        <div class="tip-header">
+          <h3 class="tip-title">Targeted shard spending beats random pulls</h3>
+          <div class="tip-tags"><span class="tag">Heroes</span></div>
+        </div>
+        <div class="tip-body">
+          Save summons and selector shards until a rate‑up or a focused rotation for your core team, accelerating star levels without waste.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="heroes combat boss">
+        <div class="tip-header">
+          <h3 class="tip-title">Test lineups on repeatable stages</h3>
+          <div class="tip-tags"><span class="tag">Heroes</span><span class="tag">Combat</span></div>
+        </div>
+        <div class="tip-body">
+          Repeatedly clear earlier Honorable Campaign stages to compare formations and skill timings. Use instant result to iterate quickly.
+        </div>
+      </article>
+
+      <!-- Alliance & Social -->
+      <article class="tip-card" data-tags="alliance daily economy">
+        <div class="tip-header">
+          <h3 class="tip-title">Maximize alliance helps daily</h3>
+          <div class="tip-tags"><span class="tag">Alliance</span><span class="tag">Daily</span></div>
+        </div>
+        <div class="tip-body">
+          Chain small upgrades or research to keep help slots flowing for your alliance and to receive consistent reductions yourself.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="alliance combat base">
+        <div class="tip-header">
+          <h3 class="tip-title">Coordinate relocations before server events</h3>
+          <div class="tip-tags"><span class="tag">Alliance</span><span class="tag">Combat</span></div>
+        </div>
+        <div class="tip-body">
+          Agree on rally points and safe routes using tiles to avoid traffic and reduce exposure to snipes during mass moves.
+        </div>
+      </article>
+
+      <!-- Daily & Quality-of-life -->
+      <article class="tip-card" data-tags="daily early economy">
+        <div class="tip-header">
+          <h3 class="tip-title">Thumbs‑up in Brawl for quick diamonds</h3>
+          <div class="tip-tags"><span class="tag">Daily</span></div>
+        </div>
+        <div class="tip-body">
+          In the 3v3 Brawl, endorse three players daily to claim small diamond rewards with almost no time commitment.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="daily economy events">
+        <div class="tip-header">
+          <h3 class="tip-title">Check mission popularity before plundering</h3>
+          <div class="tip-tags"><span class="tag">Daily</span><span class="tag">Events</span></div>
+        </div>
+        <div class="tip-body">
+          In Secret Missions, the small number beside a mission indicates recent views. High numbers often attract ambushes — pick low‑traffic targets.
+        </div>
+      </article>
+
+      <!-- Additional practical tips -->
+      <article class="tip-card" data-tags="base daily economy">
+        <div class="tip-header">
+          <h3 class="tip-title">Emergency Hospital management</h3>
+          <div class="tip-tags"><span class="tag">Base</span><span class="tag">Daily</span></div>
+        </div>
+        <div class="tip-body">
+          After rescuing troops, you can leave them queued so the cooldown starts immediately. Claim them later when you need power back.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="economy events base">
+        <div class="tip-header">
+          <h3 class="tip-title">Prepare for Train/Build days</h3>
+          <div class="tip-tags"><span class="tag">Events</span><span class="tag">Economy</span></div>
+        </div>
+        <div class="tip-body">
+          Before event reset, clear barracks queues and line up cheap upgrades. When the event starts, speed them to score early and claim momentum rewards.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="economy early base">
+        <div class="tip-header">
+          <h3 class="tip-title">Match speedups to the task type</h3>
+          <div class="tip-tags"><span class="tag">Economy</span></div>
+        </div>
+        <div class="tip-body">
+          Use training/building/research speedups on their specific tasks and save universal speedups for events where you need flexibility.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="economy daily early">
+        <div class="tip-header">
+          <h3 class="tip-title">Spend stamina before reset</h3>
+          <div class="tip-tags"><span class="tag">Daily</span></div>
+        </div>
+        <div class="tip-body">
+          Keep stamina near zero before daily reset to avoid overcapping. Convert it into campaign clears or elite fights for steady progress.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="alliance economy early">
+        <div class="tip-header">
+          <h3 class="tip-title">Prioritize alliance tech donations</h3>
+          <div class="tip-tags"><span class="tag">Alliance</span></div>
+        </div>
+        <div class="tip-body">
+          Daily donations compound into powerful buffs. Coordinate focus with leadership to avoid splitting points across low‑impact branches.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="combat alliance daily">
+        <div class="tip-header">
+          <h3 class="tip-title">Scout before committing</h3>
+          <div class="tip-tags"><span class="tag">Combat</span><span class="tag">Alliance</span></div>
+        </div>
+        <div class="tip-body">
+          Quick scouts reveal traps and rally timers. Share intel in alliance chat so others don’t repeat risky attacks.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="combat base daily">
+        <div class="tip-header">
+          <h3 class="tip-title">Park troops smartly before logging off</h3>
+          <div class="tip-tags"><span class="tag">Combat</span><span class="tag">Daily</span></div>
+        </div>
+        <div class="tip-body">
+          Send vulnerable squads to gather on safe tiles or shelter them via events, reducing losses from surprise raids while you’re offline.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="base economy early">
+        <div class="tip-header">
+          <h3 class="tip-title">Hit key upgrade breakpoints</h3>
+          <div class="tip-tags"><span class="tag">Base</span></div>
+        </div>
+        <div class="tip-body">
+          Focus upgrades that unlock new troop tiers, formation slots, or building synergies before chasing small stat increases.
+        </div>
+      </article>
+
+      <article class="tip-card" data-tags="events boss combat">
+        <div class="tip-header">
+          <h3 class="tip-title">Sync alliance buffs with boss windows</h3>
+          <div class="tip-tags"><span class="tag">Boss</span><span class="tag">Alliance</span></div>
+        </div>
+        <div class="tip-body">
+          Time damage or march buffs so multiple members hit key boss thresholds together, pushing the alliance further up the ranking brackets.
+        </div>
+      </article>
+    </section>
+
+    <p class="no-results" id="noResults">No tips match your filters.</p>
   </main>
   <div id="footer-placeholder"></div>
     <script src="../assets/js/storage-utils.js?v=20250828" defer></script>
+  <script>
+    (function(){
+      const $ = (s, r=document) => r.querySelector(s);
+      const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+      const grid = $('#tipsGrid');
+      const search = $('#tipsSearch');
+      const chips = $$('#tagFilters .chip');
+      const count = $('#tipsCount');
+      const noResults = $('#noResults');
+      const state = { q:'', tags:new Set() };
+
+      function normalize(s){ return s.toLowerCase().trim(); }
+
+      function applyFilters(){
+        const q = normalize(state.q);
+        let visible = 0;
+        $$('.tip-card', grid).forEach(card => {
+          const text = normalize(card.textContent || '');
+          const tags = (card.getAttribute('data-tags')||'').split(/\s+/);
+          const matchesText = !q || text.includes(q);
+          const matchesTags = state.tags.size===0 || [...state.tags].every(t => tags.includes(t));
+          const show = matchesText && matchesTags;
+          card.style.display = show ? '' : 'none';
+          if(show) visible++;
+        });
+        count.textContent = visible + ' tip' + (visible===1?'':'s');
+        noResults.style.display = visible===0 ? 'block' : 'none';
+      }
+
+      function toggleTag(tag, pressed){
+        if(pressed){ state.tags.add(tag); } else { state.tags.delete(tag); }
+        persist();
+        applyFilters();
+      }
+
+      function persist(){
+        try{ localStorage.setItem('tips.filters', JSON.stringify({q:state.q, tags:[...state.tags]})); }catch(e){}
+      }
+
+      function restore(){
+        try{
+          const raw = localStorage.getItem('tips.filters');
+          if(!raw) return;
+          const saved = JSON.parse(raw);
+          if(saved.q){ state.q = saved.q; search.value = saved.q; }
+          if(Array.isArray(saved.tags)){
+            saved.tags.forEach(t => state.tags.add(t));
+            chips.forEach(ch => { const t = ch.getAttribute('data-tag'); ch.setAttribute('aria-pressed', state.tags.has(t) ? 'true' : 'false'); });
+          }
+        }catch(e){}
+      }
+
+      // Wire up UI
+      search.addEventListener('input', e => { state.q = e.target.value; persist(); applyFilters(); });
+      chips.forEach(ch => {
+        ch.addEventListener('click', () => {
+          const t = ch.getAttribute('data-tag');
+          const pressed = ch.getAttribute('aria-pressed') !== 'true';
+          ch.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+          toggleTag(t, pressed);
+        });
+      });
+
+      restore();
+      applyFilters();
+    })();
+  </script>
   <script src="../assets/js/script.js?v=20250828" defer></script>
 </body>
 
