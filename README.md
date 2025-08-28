@@ -20,4 +20,3 @@ No build step is required. Simply edit the HTML, CSS, or JavaScript files and re
 - Add a "Buy Me a Coffee" button to let visitors donate.
 - Offer premium calculator features or ad-free browsing for supporters.
 - Display unobtrusive advertisements from a network such as Google AdSense.
-
