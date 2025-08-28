@@ -195,6 +195,7 @@ code {
 }
 
 /* ===== NAVIGATION ===== */
+.site-header{min-height:var(--nav-height)}
 .nav-container {
     position: sticky;
     top: 0;
