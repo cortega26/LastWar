@@ -12,6 +12,14 @@ FONTS_DIR = ROOT / 'assets' / 'fonts'
 CSS_DIR = ROOT / 'assets' / 'css'
 LOCAL_FONTS_CSS = CSS_DIR / 'fonts.css'
 
+# Keep only these families (trim unused)
+ALLOWED_FAMILIES = {"Inter", "JetBrains Mono"}
+# Minimal weights to include when no Google URLs are present in HTML
+DEFAULT_WEIGHTS = {
+    "Inter": ["400", "600", "700"],
+    "JetBrains Mono": ["400"],
+}
+
 UA = (
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
     'AppleWebKit/537.36 (KHTML, like Gecko) '
@@ -68,6 +76,14 @@ def collect_google_css_urls(html_text: str) -> list[str]:
     return sorted(urls)
 
 
+def build_seed_google_url() -> str:
+    parts = []
+    for fam, weights in DEFAULT_WEIGHTS.items():
+        fam_q = fam.replace(' ', '+')
+        parts.append(f"family={fam_q}:wght@{';'.join(weights)}")
+    return canonicalize_css_url("https://fonts.googleapis.com/css2?" + "&".join(parts))
+
+
 def parse_css_blocks(css_text: str):
     blocks = []
     for m in AT_FONT_FACE_BLOCK_RE.finditer(css_text):
@@ -84,6 +100,8 @@ def parse_css_blocks(css_text: str):
         weight = weight_m.group(1).strip()
         url = src_m.group(1).strip().strip('"\'')
         unicode_range = ur_m.group(1).strip() if ur_m else None
+        if family not in ALLOWED_FAMILIES:
+            continue
         blocks.append({
             'family': family,
             'style': style,
@@ -212,11 +230,26 @@ def update_csp_meta(html: str) -> str:
     )
 
 
+def cleanup_unused_fonts():
+    """Remove font files in assets/fonts/ that are not referenced in fonts.css."""
+    if not LOCAL_FONTS_CSS.exists():
+        return
+    css = LOCAL_FONTS_CSS.read_text(encoding='utf-8', errors='ignore')
+    used = set(re.findall(r"/assets/fonts/([^'\"]+)", css))
+    for p in FONTS_DIR.glob('*.woff2'):
+        if p.name not in used:
+            try:
+                p.unlink()
+                print(f"Removed unused font: {p}")
+            except Exception as e:
+                print(f"Failed to remove {p}: {e}")
+
+
 def main():
     FONTS_DIR.mkdir(parents=True, exist_ok=True)
     CSS_DIR.mkdir(parents=True, exist_ok=True)
 
-    html_files = [p for p in ROOT.rglob('*.html') if not any(part in {'.venv', 'node_modules', 'backups'} for part in p.parts)]
+    html_files = [p for p in ROOT.rglob('*.html') if not any(part in {'.venv', 'node_modules', 'backups', '.lighthouseci'} for part in p.parts)]
 
     # Collect all Google CSS URLs from all files
     all_urls = set()
@@ -230,9 +263,11 @@ def main():
             file_to_urls[f] = urls
             all_urls.update(urls)
 
+    seed = build_seed_google_url()
     if not all_urls:
-        print('No Google Fonts URLs found. Nothing to do.')
-        return
+        print('No Google Fonts URLs found in HTML; using seed:', seed)
+    # Always include seed for allowed families
+    all_urls.add(seed)
 
     # Fetch and parse CSS for each URL, download fonts, and build local CSS
     combined_blocks = []
@@ -248,37 +283,56 @@ def main():
         combined_blocks.append(local_css)
         url_to_files[url] = files
 
-    # Write combined fonts.css
+    # Write combined fonts.css (only allowed families)
     LOCAL_FONTS_CSS.write_text("\n".join(combined_blocks), encoding='utf-8')
+    # Remove any font files not referenced anymore
+    cleanup_unused_fonts()
     print(f"Wrote {LOCAL_FONTS_CSS}")
 
-    # Update HTML files to self-host
+    # Update HTML files to self-host (and ensure local preloads exist)
     for f, text in texts.items():
         new_text, urls = remove_google_font_links(text)
-        if urls:
-            preload_files = []
-            for u in urls:
-                preload_files.extend(url_to_files.get(u, []))
-            # de-duplicate while preserving order
-            seen = set()
-            def key(entry):
-                return entry['file'] if isinstance(entry, dict) else str(entry)
-            filtered = []
-            for e in preload_files:
-                k = key(e)
-                if k not in seen:
-                    seen.add(k)
-                    filtered.append(e)
-            preload_files = filtered
+        preload_files = []
+        # If a file referenced Google Fonts before, map to downloaded files
+        for u in urls:
+            preload_files.extend(url_to_files.get(u, []))
+        # If there were no URLs (already cleaned), preload the seed set
+        if not preload_files and url_to_files:
+            # Take the first entry (seed or otherwise) to get allowed families
+            first_key = next(iter(url_to_files.keys()))
+            preload_files = url_to_files.get(first_key, [])
+        # de-duplicate while preserving order
+        seen = set()
+        def key(entry):
+            return entry['file'] if isinstance(entry, dict) else str(entry)
+        filtered = []
+        for e in preload_files:
+            k = key(e)
+            if k not in seen:
+                seen.add(k)
+                filtered.append(e)
+        preload_files = filtered
+        if preload_files:
             new_text = insert_fonts_css_and_preloads(new_text, preload_files)
             new_text = update_csp_meta(new_text)
-            # Final cleanups: remove any residual Google Fonts noscripts and empty noscripts
-            # (Run remove_google_font_links again for robustness)
+            # Final cleanups
             new_text, _ = remove_google_font_links(new_text)
             new_text = re.sub(r"<noscript>\s*</noscript>", '', new_text, flags=re.IGNORECASE)
         if new_text != text:
             f.write_text(new_text, encoding='utf-8')
             print(f"Updated: {f}")
+
+    # Remove any preload tags for disallowed families across all HTML files
+    disallowed_prefix = r"/assets/fonts/(?:Montserrat|Open-Sans|Bebas-Neue|Rajdhani)-"
+    disallowed_re = re.compile(rf"<link[^>]+rel=\"preload\"[^>]+href=\"{disallowed_prefix}[^\"]+\"[^>]*>\s*\n?", re.IGNORECASE)
+    for f in ROOT.rglob('*.html'):
+        if any(part in {'.venv','node_modules','backups','.lighthouseci'} for part in f.parts):
+            continue
+        t = f.read_text(encoding='utf-8', errors='ignore')
+        nt = disallowed_re.sub('', t)
+        if nt != t:
+            f.write_text(nt, encoding='utf-8')
+            print(f"Cleaned preloads in: {f}")
 
     print('Done.')
 
