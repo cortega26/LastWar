@@ -192,8 +192,10 @@
     <div class="hero">
       <h1>Resource Management</h1>
     </div>
-    <img src="../assets/images/resources.png" alt="Stylised game resources (crystals, gears, gems)" width="1536" height="1024" class="responsive-img"
-      style="max-width:100%;height:auto;margin:1rem 0;border-radius:8px;" loading="lazy" />
+    <picture>
+      <source type="image/webp" srcset="../assets/images/resources.webp">
+      <img src="../assets/images/resources.png" alt="Stylised game resources (crystals, gears, gems)" width="1536" height="1024" class="responsive-img" style="max-width:100%;height:auto;margin:1rem 0;border-radius:8px;" loading="eager" decoding="async" fetchpriority="high" />
+    </picture>
     <p>
       Resources fuel everything you do in <em>Last War: Survival</em> - from
       constructing buildings to recruiting heroes and powering your base
@@ -275,8 +277,8 @@
     <!-- References removed as citations are no longer displayed -->
   </main>
   <div id="footer-placeholder"></div>
-    <script src="../assets/js/storage-utils.js"></script>
-  <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/storage-utils.js" defer></script>
+  <script src="../assets/js/script.js" defer></script>
 </body>
 
 </html>

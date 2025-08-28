@@ -213,8 +213,11 @@
     <div class="hero">
       <h1>Base Building &amp; Development</h1>
     </div>
-    <img src="../assets/images/base-hero.png" alt="Stylised survivors overlooking a base" width="1024" height="1024" class="responsive-img"
-      style="max-width:100%;height:auto;margin:1rem 0;border-radius:8px;" loading="lazy" />
+    <picture>
+      <source type="image/webp" srcset="../assets/images/base-hero.webp">
+      <img src="../assets/images/base-hero.png" alt="Stylised survivors overlooking a base" width="1024" height="1024" class="responsive-img"
+        style="max-width:100%;height:auto;margin:1rem 0;border-radius:8px;" loading="eager" decoding="async" fetchpriority="high" />
+    </picture>
     <p>
       Your base is your lifeline in <em>Last War: Survival</em>. Building and
       upgrading structures unlocks new features, increases production and
@@ -306,8 +309,8 @@
     <!-- Reference section removed -->
   </main>
   <div id="footer-placeholder"></div>
-    <script src="../assets/js/storage-utils.js"></script>
-  <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/storage-utils.js" defer></script>
+  <script src="../assets/js/script.js" defer></script>
 </body>
 
 </html>
