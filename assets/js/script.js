@@ -224,10 +224,10 @@
     
     const api = { loadPartials, initNavigationInteractions, markCurrentNav };
 
-    if (typeof module !== 'undefined' && module.exports) {
-        module.exports = api;
-    } else {
-        const init = () => {
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = api;
+  } else {
+    const init = () => {
             const savedTheme = localStorage.getItem("theme");
             if (savedTheme === "dark" || savedTheme === "light") {
                 document.documentElement.setAttribute("data-theme", savedTheme);
@@ -235,12 +235,21 @@
 
             loadPartials();
 
-            if (typeof window.SiteSearch !== 'undefined') {
-                new window.SiteSearch();
-            }
-        };
+      if (typeof window.SiteSearch !== 'undefined') {
+        new window.SiteSearch();
+      }
 
-        document.addEventListener('DOMContentLoaded', init);
+      // Register Service Worker for better repeat-visit performance
+      if ('serviceWorker' in navigator) {
+        // Delay slightly to avoid competing with initial rendering
+        window.addEventListener('load', () => {
+          const swUrl = '/sw.js?v=20250828';
+          navigator.serviceWorker.register(swUrl).catch(() => {});
+        });
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', init);
 
         // Expose for manual triggering (idempotent)
         global.loadPartials = loadPartials;
