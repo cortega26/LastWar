@@ -123,8 +123,6 @@
     
     
     
-    <link rel="preconnect" href="https://www.googletagmanager.com">
-    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <!-- Preload LCP hero image with high priority -->
     <link rel="preload" as="image" href="/assets/images/base-hero.webp?v=20250828" fetchpriority="high">
@@ -145,22 +143,37 @@
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
 
     <link rel="manifest" href="/manifest.json">
+    <!-- App icons (generated locally below to avoid 404s) -->
     <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/icon-512.png">
 
     <style>:root{--primary:#ff6b35;--primary-hover:#e55a2b;--primary-active:#c43f15;--secondary:#64ffda;--accent:#ffd54f;--bg:#0a0e1a;--bg-secondary:#1e2330;--bg-tertiary:#252a3a;--bg-card:#141824;--bg-hover:#252a3a;--nav-bg:rgba(10,14,26,.95);--overlay-bg:rgba(10,14,26,.9);--text-primary:#fff;--text-secondary:#b8bcc8;--text-muted:#9ca3af;--text-dim:#7a8191;--border:#2d3748;--border-light:#374151;--glow:0 0 20px rgba(255,107,53,.3);--glow-secondary:0 0 15px rgba(100,255,218,.2);--warning-bg:rgba(253,230,138,.1);--warning-border:rgba(253,230,138,.4);--warning-text:#fde68a;--shadow-sm:0 2px 4px rgba(0,0,0,.3);--shadow-md:0 4px 12px rgba(0,0,0,.4);--shadow-lg:0 8px 24px rgba(0,0,0,.5);--shadow-xl:0 16px 32px rgba(0,0,0,.6);--transition-fast:.15s ease-out;--transition-normal:.3s ease-out;--transition-slow:.5s ease-out;--nav-height:70px;--container-max:80rem;--border-radius:12px;--border-radius-sm:8px;--space-0:0;--space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;--space-16:4rem;}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.6;letter-spacing:.01em;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}.site-header{min-height:var(--nav-height)}</style>
     <!-- Stylesheets -->
-    <link rel="preload" href="/assets/css/styles.min.css?v=20250829" as="style" onload="this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/assets/css/styles.min.css?v=20250829"></noscript>
+    <link rel="preload" href="/assets/css/styles.min.css?v=20250829-CLS1" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/assets/css/styles.min.css?v=20250829-CLS1"></noscript>
 
     <!-- Override hero background after external CSS to prevent placeholder fetch -->
     <!-- Align background URLs with preload (same cache-busting query) for proper LCP discovery -->
     <!-- Also set explicit font-size for <h1> inside section to avoid deprecation warning -->
     <style>
+      /* Reserve space for nav to avoid CLS when partial loads */
+      header.site-header{min-height:var(--nav-height)}
+
+      /* Loading overlay should not affect layout; hidden by default */
+      #loadingOverlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:var(--overlay-bg);z-index:2000}
+      #loadingOverlay.active{display:flex}
+
       .hero-enhanced{background:center/cover no-repeat;background-image:url('/assets/images/base-hero.png?v=20250828');background-image:image-set(url('/assets/images/base-hero.webp?v=20250828') type('image/webp'), url('/assets/images/base-hero.png?v=20250828') type('image/png'));position:relative;overflow:hidden;padding:3rem 0}
       .hero-enhanced::before{content:'';position:absolute;inset:0;background:rgba(10,14,26,.4)}
       /* Explicit font-size for <h1> within hero section to satisfy heading-size deprecation */
       .hero-title-enhanced{font-size:3rem;line-height:1.1;font-weight:700}
+
+      /* Stabilize hero stats number width and avoid layout-shift-causing animations */
+      .hero-stat-number{display:inline-block;min-width:3ch}
+      .tool-icon.float-animation{animation:floatY 3s ease-in-out infinite alternate;will-change:transform}
+      @keyframes floatY{from{transform:translateY(0)}to{transform:translateY(-4px)}}
+      .tool-stat{animation:none!important}
+      .search-icon-enhanced{animation:none!important}
     </style>
 
     <!-- Open Graph -->
@@ -222,8 +235,10 @@
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- Navigation -->
-    <div id="nav-placeholder"></div>
+    <!-- Navigation (wrapped to reserve height and prevent CLS) -->
+    <header class="site-header">
+        <div id="nav-placeholder" aria-label="Site Navigation"></div>
+    </header>
 
     <!-- Main Content -->
     <main role="main" class="content" id="main-content">

@@ -201,6 +201,7 @@ code {
 
 /* ===== NAVIGATION ===== */
 .site-header{min-height:var(--nav-height)}
+#nav-placeholder{min-height:var(--nav-height);display:block}
 .nav-container {
     position: sticky;
     top: 0;
@@ -809,7 +810,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
   background: var(--bg-hover, rgba(0, 0, 0, 0.05));
   min-width: 44px;
   min-height: 44px;
@@ -827,7 +828,7 @@ footer {
 
 .theme-icon {
   font-size: 1.2rem;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, color 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -882,7 +883,7 @@ footer {
     font-size: 14px;
     outline: 2px solid var(--primary);
     outline-offset: 2px;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
     backdrop-filter: blur(10px);
 }
 
@@ -1177,7 +1178,7 @@ footer {
     border-radius: 8px;
     color: #ffffff;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .related-content-card:hover {
@@ -1382,7 +1383,7 @@ footer {
   font-size: 0.75rem;
   color: var(--text-muted);
   border: 1px solid var(--border-light);
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .tool-card:hover .tool-stat {
@@ -1404,7 +1405,7 @@ footer {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
@@ -1509,6 +1510,7 @@ footer {
   color: var(--primary);
   display: block;
   margin-bottom: 0.5rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .hero-stat-label {
@@ -1547,7 +1549,7 @@ footer {
   font-size: 1rem;
   outline: 2px solid var(--primary);
   outline-offset: 2px;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
   backdrop-filter: blur(20px);
 }
 
@@ -1566,7 +1568,7 @@ footer {
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .search-icon-enhanced svg {
@@ -1594,7 +1596,7 @@ footer {
   z-index: 9999;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
   backdrop-filter: blur(10px);
 }
 
@@ -1647,7 +1649,7 @@ footer {
   text-transform: uppercase;
   letter-spacing: 0.02em;
   font-size: 0.9rem;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   text-decoration: none;
 }
 
@@ -1776,7 +1778,7 @@ footer {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   transform: translateX(400px);
   opacity: 0;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   pointer-events: auto;
   backdrop-filter: blur(20px);
 }
