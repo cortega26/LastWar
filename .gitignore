@@ -7,3 +7,6 @@ logs/
 requirements.txt
 backups/
 node_modules/
+!
+!scripts/
+!scripts/*.py
