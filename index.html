@@ -153,7 +153,13 @@
 
     <!-- Override hero background after external CSS to prevent placeholder fetch -->
     <!-- Align background URLs with preload (same cache-busting query) for proper LCP discovery -->
-    <style>.hero-enhanced{background:center/cover no-repeat;background-image:url('/assets/images/base-hero.png?v=20250828');background-image:image-set(url('/assets/images/base-hero.webp?v=20250828') type('image/webp'), url('/assets/images/base-hero.png?v=20250828') type('image/png'));position:relative;overflow:hidden;padding:3rem 0}.hero-enhanced::before{content:'';position:absolute;inset:0;background:rgba(10,14,26,.4)}</style>
+    <!-- Also set explicit font-size for <h1> inside section to avoid deprecation warning -->
+    <style>
+      .hero-enhanced{background:center/cover no-repeat;background-image:url('/assets/images/base-hero.png?v=20250828');background-image:image-set(url('/assets/images/base-hero.webp?v=20250828') type('image/webp'), url('/assets/images/base-hero.png?v=20250828') type('image/png'));position:relative;overflow:hidden;padding:3rem 0}
+      .hero-enhanced::before{content:'';position:absolute;inset:0;background:rgba(10,14,26,.4)}
+      /* Explicit font-size for <h1> within hero section to satisfy heading-size deprecation */
+      .hero-title-enhanced{font-size:3rem;line-height:1.1;font-weight:700}
+    </style>
 
     <!-- Open Graph -->
     <meta property="og:title" content="LastWar Tools – Strategy Center">
