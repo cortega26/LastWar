@@ -11,31 +11,42 @@ RewriteRule . %1/%2 [R=301,L]
     AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
 </IfModule>
 
-# Browser caching
+## Browser caching
 <IfModule mod_expires.c>
     ExpiresActive On
-    
-    # Images
-    ExpiresByType image/jpg "access plus 1 month"
-    ExpiresByType image/jpeg "access plus 1 month"
-    ExpiresByType image/gif "access plus 1 month"
-    ExpiresByType image/png "access plus 1 month"
-    ExpiresByType image/webp "access plus 1 month"
-    ExpiresByType image/svg+xml "access plus 1 month"
-    ExpiresByType image/x-icon "access plus 1 month"
-    
-    # CSS and JavaScript
-    ExpiresByType text/css "access plus 1 week"
-    ExpiresByType application/javascript "access plus 1 week"
-    ExpiresByType text/javascript "access plus 1 week"
-    
+
+    # Images (long-lived)
+    ExpiresByType image/jpg  "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif  "access plus 1 year"
+    ExpiresByType image/png  "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+
+    # CSS and JavaScript (versioned via querystring)
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+
     # Fonts
     ExpiresByType font/woff2 "access plus 1 year"
-    ExpiresByType font/woff "access plus 1 year"
-    ExpiresByType font/ttf "access plus 1 year"
-    
-    # HTML
-    ExpiresByType text/html "access plus 1 hour"
+    ExpiresByType font/woff  "access plus 1 year"
+    ExpiresByType font/ttf   "access plus 1 year"
+
+    # HTML (short)
+    ExpiresByType text/html "access plus 5 minutes"
+</IfModule>
+
+<IfModule mod_headers.c>
+    # Strong caching for versioned static assets
+    <FilesMatch "\.(?:css|js|png|jpg|jpeg|gif|webp|svg|ico|woff2|woff|ttf)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    # HTML short cache
+    <FilesMatch "\.(?:html)$">
+        Header set Cache-Control "public, max-age=300, must-revalidate"
+    </FilesMatch>
 </IfModule>
 
 # Security headers
