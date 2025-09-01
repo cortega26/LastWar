@@ -1,6 +1,10 @@
 title: "LastWar Tools"
 description: "Strategy Center for Last War: Survival"
 
+# URL used by the `jekyll-feed` plugin and for canonical links.
+# Update this if the site's domain changes.
+url: "https://tooltician.com"
+
 # Use the Minimal Mistakes Jekyll theme hosted on GitHub.  Pinning
 # to a specific version helps avoid unexpected changes when the theme
 # updates.  The dark skin provides a similar look to the original
@@ -13,6 +17,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-include-cache
+  - jekyll-remote-theme
 
 # Exclude non‑site files from the build.  These files are only used
 # locally and should not be published.
