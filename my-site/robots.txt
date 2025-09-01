@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Block common bot/crawler noise while allowing important crawling
+Disallow: /*.json$
+
+# Allow important assets for indexing
+Allow: /assets/images/
+Allow: /assets/img/
+
+# Sitemap location - Updated with correct domain
+Sitemap: https://www.tooltician.com/sitemap.xml
+
+# Crawl-delay for politeness
+Crawl-delay: 1
