@@ -1,0 +1,11 @@
+main:
+  - title: "Home"
+    url: "/"
+  - title: "Heroes"
+    url: "/pages/heroes.html"
+  - title: "Base Building"
+    url: "/pages/base-building.html"
+  - title: "Alliances"
+    url: "/pages/alliances.html"
+  - title: "Alliance Rules"
+    url: "/pages/rules.html"
