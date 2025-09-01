@@ -14,6 +14,8 @@ main:
         url: /tools/
   - title: "📚 Guides"
     children:
+      - title: "Season 2 Guide"
+        url: /guides/season2/
       - title: "Season 4 Guide"
         url: /guides/season4/
       - title: "Heroes & Tier List"
@@ -48,6 +50,8 @@ tools:
 guides:
   - title: "Strategy Guides"
     children:
+      - title: "Season 2 Polar Storm Guide"
+        url: /guides/season2/
       - title: "Season 4 Complete Guide"
         url: /guides/season4/
       - title: "Heroes & Tier List"
