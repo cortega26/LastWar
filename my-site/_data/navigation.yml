@@ -2,6 +2,7 @@ main:
   - title: "Home"
     url: "/"
   - title: "Tools"
+    url: "/pages/tools.html"
     children:
       - title: "Protein Farm Calculator"
         url: "/pages/protein-farm-calculator.html"
@@ -14,6 +15,7 @@ main:
       - title: "All Tools"
         url: "/pages/tools.html"
   - title: "Guides"
+    url: "/pages/guides.html"
     children:
       - title: "Heroes & Tier List"
         url: "/pages/heroes.html"
@@ -40,6 +42,7 @@ main:
       - title: "All Guides"
         url: "/pages/guides.html"
   - title: "Community"
+    url: "/pages/discord.html"
     children:
       - title: "Join Discord"
         url: "/pages/discord.html"
