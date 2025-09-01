@@ -1,0 +1,285 @@
+---
+# Custom styles for Tooltician.com
+---
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
+@import "minimal-mistakes";
+
+// Custom color scheme for Last War theme
+:root {
+  --primary-color: #667eea;
+  --secondary-color: #764ba2;
+  --accent-color: #f093fb;
+  --success-color: #4facfe;
+  --warning-color: #ffecd2;
+  --danger-color: #ff6b6b;
+  --dark-bg: #2c3e50;
+  --light-bg: #f8f9fa;
+}
+
+// Header customization
+.masthead {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  
+  .site-title {
+    font-weight: 700;
+    font-size: 1.8rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  }
+}
+
+// Navigation enhancements
+.greedy-nav {
+  .visible-links {
+    a {
+      font-weight: 600;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        color: var(--accent-color);
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+// Button customizations
+.btn {
+  border-radius: 25px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  }
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  border: none;
+  
+  &:hover {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+  }
+}
+
+.btn--success {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  border: none;
+  
+  &:hover {
+    background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  }
+}
+
+// Feature row enhancements
+.feature__item {
+  border: 1px solid #e1e8ed;
+  border-radius: 15px;
+  padding: 2rem;
+  background: #ffffff;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+  
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    border-color: var(--primary-color);
+  }
+  
+  .archive__item-title {
+    color: var(--dark-bg);
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  
+  .archive__item-excerpt {
+    color: #6c757d;
+    line-height: 1.6;
+  }
+}
+
+// Splash page hero section
+.page__hero {
+  &::before {
+    background: linear-gradient(45deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+  }
+  
+  .page__title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+    margin-bottom: 1rem;
+  }
+  
+  .page__lead {
+    font-size: 1.3rem;
+    font-weight: 400;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    margin-bottom: 2rem;
+  }
+}
+
+// Content sections
+.page__content {
+  h2 {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--accent-color);
+  }
+  
+  h3 {
+    color: var(--secondary-color);
+    font-weight: 600;
+    margin-top: 2rem;
+  }
+}
+
+// Calculator-specific styles
+.calculator-specific {
+  .result-section {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: rgba(102, 126, 234, 0.05);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 5px;
+    
+    h4 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+  }
+  
+  .result-item.highlight {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  
+  .optimization-tips {
+    background: var(--light-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+    
+    .tip {
+      margin: 0.5rem 0;
+      color: #495057;
+      line-height: 1.6;
+    }
+  }
+}
+
+// Responsive design improvements
+@media (max-width: 768px) {
+  .page__hero {
+    .page__title {
+      font-size: 2.5rem;
+    }
+    
+    .page__lead {
+      font-size: 1.1rem;
+    }
+  }
+  
+  .feature__item {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .btn {
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}
+
+// Dark mode enhancements
+@media (prefers-color-scheme: dark) {
+  .feature__item {
+    background: var(--dark-bg);
+    border-color: #34495e;
+    color: #ecf0f1;
+    
+    .archive__item-title {
+      color: #ecf0f1;
+    }
+    
+    .archive__item-excerpt {
+      color: #bdc3c7;
+    }
+  }
+}
+
+// Animation enhancements
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feature__item {
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+  
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.3s; }
+}
+
+// Loading states
+.loading {
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: loading 1.5s infinite;
+  }
+}
+
+@keyframes loading {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+// Utility classes
+.text-gradient {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.border-gradient {
+  border: 2px solid;
+  border-image: linear-gradient(135deg, var(--primary-color), var(--accent-color)) 1;
+}

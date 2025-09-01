@@ -1,0 +1,62 @@
+# Main navigation links
+main:
+  - title: "🏠 Home"
+    url: /
+  - title: "🛠️ Tools"
+    children:
+      - title: "Protein Calculator"
+        url: /calculators/protein-farm-calculator/
+      - title: "T10 Research"
+        url: /calculators/t10-calculator/
+      - title: "Team Builder"
+        url: /calculators/team-builder/
+      - title: "All Tools"
+        url: /tools/
+  - title: "📚 Guides"
+    children:
+      - title: "Season 4 Guide"
+        url: /guides/season4/
+      - title: "Heroes & Tier List"
+        url: /guides/heroes/
+      - title: "Base Building"
+        url: /guides/base-building/
+      - title: "Alliance Warfare"
+        url: /guides/alliances/
+      - title: "All Guides"
+        url: /guides/
+  - title: "💬 Community"
+    url: /community/
+  - title: "☕ Support"
+    url: /support/
+
+# Tools navigation
+tools:
+  - title: "Calculators"
+    children:
+      - title: "Protein Farm"
+        url: /calculators/protein-farm-calculator/
+      - title: "T10 Research"
+        url: /calculators/t10-calculator/
+      - title: "Team Builder"
+        url: /calculators/team-builder/
+      - title: "Resource Planner"
+        url: /calculators/resource-planner/
+      - title: "Combat Simulator"
+        url: /calculators/combat-simulator/
+
+# Guides navigation
+guides:
+  - title: "Strategy Guides"
+    children:
+      - title: "Season 4 Complete Guide"
+        url: /guides/season4/
+      - title: "Heroes & Tier List"
+        url: /guides/heroes/
+      - title: "Base Building Mastery"
+        url: /guides/base-building/
+      - title: "Alliance Warfare"
+        url: /guides/alliances/
+      - title: "Event Strategies"
+        url: /guides/events/
+      - title: "Beginner's Guide"
+        url: /guides/beginners/

@@ -1,0 +1,76 @@
+title: "LastWar Tools"
+subtitle: "Strategy Center"
+name: "Tooltician"
+description: "Strategic Command Center for Last War: Survival"
+
+url: "https://cortega26.github.io"
+baseurl: "/LastWar"
+repository: "cortega26/LastWar"
+
+theme: minimal-mistakes-jekyll
+minimal_mistakes_skin: "dark"
+
+author:
+  name: "Tooltician Team"
+  bio: "Master strategists for Last War: Survival"
+  location: "The Battlefield"
+
+markdown: kramdown
+highlighter: rouge
+permalink: /:categories/:title/
+paginate: 5
+paginate_path: /page:num/
+timezone: UTC
+
+collections:
+  calculators:
+    output: true
+    permalink: /:collection/:name/
+  guides:
+    output: true
+    permalink: /:collection/:name/
+
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jekyll-include-cache
+  - jemoji
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: false
+      share: true
+      related: true
+  - scope:
+      path: "_pages"
+      type: pages
+    values:
+      layout: single
+      author_profile: false
+      read_time: false
+      comments: false
+      share: true
+      related: false
+  - scope:
+      path: ""
+      type: calculators
+    values:
+      layout: single
+      author_profile: false
+      read_time: false
+      comments: false
+      share: true
+      related: false
+
+compress_html:
+  clippings: all
+  ignore:
+    envs: development
