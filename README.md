@@ -1,14 +1,23 @@
 # Last War Tools
 
-This repository contains a small static website that provides calculators, rules, and guides for **Last War: Survival Game**. The pages are written in HTML, styled with CSS, and rely on a little JavaScript to load the navigation bar and footer on every page.
+This repository contains a small static website that provides calculators, rules, and guides for **Last War: Survival Game**. The site now uses the [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/) Jekyll theme for a maintainable and consistent design.
 
 ## Usage
 
-Open `index.html` in a modern web browser. The navigation links lead to additional calculators and information.
+Install Ruby gems and start the Jekyll development server:
+
+```bash
+cd my-site
+bundle install
+cd ..
+npm run serve
+```
+
+The site will be available at `http://localhost:3000`.
 
 ## Development
 
-No build step is required. Simply edit the HTML, CSS, or JavaScript files and reload your browser. The `assets/js/script.js` file uses jQuery to fetch the navigation and footer from the `partials/` directory, keeping all pages consistent.
+Content is written in Markdown within the `my-site` directory and built by Jekyll. For the previous hand-built HTML version, run `npm run serve:legacy`.
 
 ### Project Management
 
