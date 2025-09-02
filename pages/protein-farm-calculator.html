@@ -204,6 +204,11 @@
   <div class="header">
     <h1>Protein Farm Production Calculator</h1>
     <p>Calculate production time for Virus Research Institute upgrades</p>
+    <!-- metric:CTR nav/CTA -->
+    <div class="header-actions">
+      <a href="#main-content" class="btn-primary">Start Now</a>
+      <button class="btn-secondary" id="shareCalc" onclick="navigator.share && navigator.share({title: 'Protein Farm Calculator', url: location.href});">Share</button>
+    </div>
   </div>
 
   <main class="container content" role="main" id="main-content">
@@ -216,6 +221,7 @@
 
           <img src="../assets/images/mip.png" alt="Immune Protein Progress" width="648" height="114" class="progress-image" loading="lazy" />
 
+          <!-- metric:form start -->
           <form id="proteinFarmForm" novalidate>
           <div class="target-section">
             <label for="targetAmount" class="control-label">Missing Immune Protein for Next Upgrade</label>
@@ -278,6 +284,7 @@
         </div>
       </div>
 
+      <!-- metric:form completion -->
       <div class="results-section">
         <div class="results-panel">
           <div class="results-header">Production Analysis</div>
