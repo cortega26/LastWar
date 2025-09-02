@@ -26,12 +26,14 @@
 - About
 
 ## Before / After
+-Dropdown menus replace the old index pages that listed links vertically.
 <!-- TODO: add screenshots showing previous index pages and new dropdown navigation -->
 
 ## Accessibility
 - Keyboard navigation with arrow keys and Escape
 - Clear focus outlines
 - ARIA labels (`aria-expanded`, `aria-controls`)
+- Menus close when clicking or tabbing outside
 
 ## Index pages
-Existing category index pages remain available and can be converted to rich collections if needed.
+Existing category index pages remain available for SEO and may be converted into richer collections if needed.
