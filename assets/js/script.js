@@ -159,7 +159,7 @@
             item.addEventListener('mouseover', handleEnter);
             item.addEventListener('mouseout', handleLeave);
 
-            const link = item.querySelector('> .nav-link');
+            const link = item.querySelector(':scope > .nav-link');
             if (link) {
                 link.addEventListener('click', (e) => {
                     const dropdown = item;
@@ -193,11 +193,11 @@
                 if (key === 'ArrowRight') {
                     e.preventDefault();
                     const next = parentItem.nextElementSibling;
-                    if (next) next.querySelector('> .nav-link').focus();
+                    if (next) next.querySelector(':scope > .nav-link').focus();
                 } else if (key === 'ArrowLeft') {
                     e.preventDefault();
                     const prev = parentItem.previousElementSibling;
-                    if (prev) prev.querySelector('> .nav-link').focus();
+                    if (prev) prev.querySelector(':scope > .nav-link').focus();
                 } else if (dropdown && (key === 'Enter' || key === ' ' || key === 'ArrowDown')) {
                     e.preventDefault();
                     dropdown.classList.add('active');
@@ -240,11 +240,11 @@
                 } else if (e.key === 'ArrowRight') {
                     e.preventDefault();
                     const next = a.closest('.nav-item.dropdown').nextElementSibling;
-                    if (next) next.querySelector('> .nav-link').focus();
+                if (next) next.querySelector(':scope > .nav-link').focus();
                 } else if (e.key === 'ArrowLeft') {
                     e.preventDefault();
                     const prev = a.closest('.nav-item.dropdown').previousElementSibling;
-                    if (prev) prev.querySelector('> .nav-link').focus();
+                if (prev) prev.querySelector(':scope > .nav-link').focus();
                 }
             });
         });
