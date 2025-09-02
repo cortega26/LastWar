@@ -30,9 +30,15 @@ bundle exec jekyll serve
 ### Styling overrides
 
 Minimal Mistakes can be customised through SCSS overrides. Add new partials
-under `_sass/` and import them from `assets/css/main.scss`.
+under `_sass/` and import them from `assets/css/styles.scss`.
 This keeps custom styles separate from the theme and makes future updates
 easier.
+
+After building the site you can check for broken links and images with:
+
+```bash
+bundle exec htmlproofer ./_site
+```
 
 ## Development
 

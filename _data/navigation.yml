@@ -12,8 +12,6 @@ main:
         url: "/pages/team-builder.html"
       - title: "Event Tracker"
         url: "/pages/event-tracker.html"
-      - title: "All Tools"
-        url: "/pages/tools.html"
   - title: "Guides"
     url: "/pages/guides.html"
     children:
@@ -39,8 +37,6 @@ main:
         url: "/pages/season1.html"
       - title: "Pre-Season"
         url: "/pages/pre-season.html"
-      - title: "All Guides"
-        url: "/pages/guides.html"
   - title: "Community"
     url: "/pages/discord.html"
     children:
@@ -48,3 +44,5 @@ main:
         url: "/pages/discord.html"
       - title: "Community Rules"
         url: "/pages/rules.html"
+  - title: "About"
+    url: "/about/"
