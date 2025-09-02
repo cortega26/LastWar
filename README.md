@@ -8,10 +8,10 @@ Install Ruby gems and start the Jekyll development server:
 
 ```bash
 bundle install
-npm run serve
+bundle exec jekyll serve
 ```
 
-The site will be available at `http://localhost:3000`.
+The site will be available at `http://localhost:4000`.
 
 ### Building the site
 
@@ -21,18 +21,11 @@ To generate the static site without starting the development server run:
 bundle exec jekyll build
 ```
 
-You can also serve the site directly with Jekyll:
-
-```bash
-bundle exec jekyll serve
-```
-
 ### Styling overrides
 
 Minimal Mistakes can be customised through SCSS overrides. Add new partials
-under `_sass/` and import them from `assets/css/styles.scss`.
-This keeps custom styles separate from the theme and makes future updates
-easier.
+under `_sass/overrides/` and import them from `assets/css/main.scss`.
+This keeps custom styles separate from the theme and makes future updates easier.
 
 After building the site you can check for broken links and images with:
 
