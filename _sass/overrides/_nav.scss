@@ -76,6 +76,10 @@
         }
       }
 
+      &:hover > .dropdown-menu {
+        display: block;
+      }
+
       &.active .dropdown-menu,
       .dropdown-menu.show {
         display: block;
