@@ -8,6 +8,8 @@ requirements.txt
 backups/*
 !backups/legacy-site/
 !backups/legacy-site/**
+!backups/scripts/
+!backups/scripts/**
 node_modules/
 !scripts/
 !scripts/*.py

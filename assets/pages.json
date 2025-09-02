@@ -1,94 +1,11 @@
+---
+layout: null
+permalink: /assets/pages.json
+---
 [
-  {
-    "title": "All Guides - Coming Soon",
-    "href": "/pages/guides.html"
-  },
-  {
-    "title": "All Tools - Last War Tools",
-    "href": "/pages/tools.html"
-  },
-  {
-    "title": "Alliance Rules - Last War: Survival",
-    "href": "/pages/rules.html"
-  },
-  {
-    "title": "Alliances - Last War Tools",
-    "href": "/pages/alliances.html"
-  },
-  {
-    "title": "Base Building - Last War Tools",
-    "href": "/pages/base-building.html"
-  },
-  {
-    "title": "Event Tracker - Coming Soon",
-    "href": "/pages/event-tracker.html"
-  },
-  {
-    "title": "Events - Last War Tools",
-    "href": "/pages/events.html"
-  },
-  {
-    "title": "Heroes &amp; Tier List - Last War Tools",
-    "href": "/pages/heroes.html"
-  },
-  {
-    "title": "Join Our Discord Community - Last War Tools",
-    "href": "/pages/discord.html"
-  },
-  {
-    "title": "Last War: S1 Champion Duel Report",
-    "href": "/pages/S1-champion-duel-report.html"
-  },
-  {
-    "title": "Last War: Survival - Black Market Guide",
-    "href": "/pages/black-market-S1.html"
-  },
-  {
-    "title": "Last War: Survival - Season 2 Guide",
-    "href": "/pages/Season2.html"
-  },
-  {
-    "title": "Last War: Survival - Tier 10 Progress Calculator",
-    "href": "/pages/T10-calculator.html"
-  },
-  {
-    "title": "Last War: Survival Team Builder - Interactive Formation Tool & Hero Calculator",
-    "href": "/pages/team-builder.html"
-  },
-  {
-    "title": "Offline - Last War Tools",
-    "href": "/pages/offline.html"
-  },
-  {
-    "title": "Pre-Season - Coming Soon",
-    "href": "/pages/pre-season.html"
-  },
-  {
-    "title": "Protein Farm Production Calculator",
-    "href": "/pages/protein-farm-calculator.html"
-  },
-  {
-    "title": "Resources - Last War Tools",
-    "href": "/pages/resources.html"
-  },
-  {
-    "title": "Season 1 - Coming Soon",
-    "href": "/pages/season1.html"
-  },
-  {
-    "title": "Season 3 - Coming Soon",
-    "href": "/pages/season3.html"
-  },
-  {
-    "title": "Season 4 Evernight Isle Guide – Last War: Survival",
-    "href": "/pages/season4.html"
-  },
-  {
-    "title": "Seasons - Last War Tools",
-    "href": "/pages/seasons.html"
-  },
-  {
-    "title": "Tips &amp; Tricks - Last War Tools",
-    "href": "/pages/tips.html"
-  }
+{%- assign pages = site.pages | where_exp: "p", "p.path contains '/pages/' and p.title" | sort: "title" -%}
+{%- for p in pages -%}
+  {"title": {{ p.title | jsonify }}, "href": {{ p.url | jsonify }} }{%- unless forloop.last -%},{%- endunless -%}
+{%- endfor -%}
 ]
+
