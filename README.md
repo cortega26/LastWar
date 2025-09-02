@@ -15,6 +15,29 @@ npm run serve
 
 The site will be available at `http://localhost:3000`.
 
+### Building the site
+
+To generate the static site without starting the development server run:
+
+```bash
+cd my-site
+bundle exec jekyll build
+```
+
+You can also serve the site directly with Jekyll:
+
+```bash
+cd my-site
+bundle exec jekyll serve
+```
+
+### Styling overrides
+
+Minimal Mistakes can be customised through SCSS overrides. Add new partials
+under `my-site/_sass/` and import them from `my-site/assets/css/main.scss`.
+This keeps custom styles separate from the theme and makes future updates
+easier.
+
 ## Development
 
 Content is written in Markdown within the `my-site` directory and built by Jekyll. For the previous hand-built HTML version, run `npm run serve:legacy`.
