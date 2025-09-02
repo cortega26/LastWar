@@ -20,6 +20,8 @@
 
         const savedTheme = localStorage.getItem("theme");
 
+        const navExists = document.querySelector('.nav-container');
+
         fetch(configUrl)
             .then(r => r.json())
             .then(cfg => {
@@ -28,35 +30,46 @@
             })
             .catch(() => {})
             .finally(() => {
-                fetch(partialPaths.nav)
-                    .then(r => {
-                        if (!r.ok) throw r;
-                        return r.text();
-                    })
-                    .then(html => {
-                        const navContainer = document.getElementById('nav-placeholder');
-                        if (navContainer) {
-                            navContainer.insertAdjacentHTML('afterbegin', html);
-                        }
-                        if (savedTheme === "dark" || savedTheme === "light") {
-                            const toggle = document.getElementById('themeToggle');
-                            if (toggle) {
-                                toggle.setAttribute('aria-pressed', savedTheme === "dark");
+                if (!navExists) {
+                    fetch(partialPaths.nav)
+                        .then(r => {
+                            if (!r.ok) throw r;
+                            return r.text();
+                        })
+                        .then(html => {
+                            const navContainer = document.getElementById('nav-placeholder');
+                            if (navContainer) {
+                                navContainer.insertAdjacentHTML('afterbegin', html);
                             }
-                        }
-                        markCurrentNav();
-                        initNavigationInteractions();
-                    })
-                    .catch(() => {
-                        const navContainer = document.getElementById('nav-placeholder');
-                        if (navContainer) {
-                            navContainer.innerHTML = `
+                            if (savedTheme === "dark" || savedTheme === "light") {
+                                const toggle = document.getElementById('themeToggle');
+                                if (toggle) {
+                                    toggle.setAttribute('aria-pressed', savedTheme === "dark");
+                                }
+                            }
+                            markCurrentNav();
+                            initNavigationInteractions();
+                        })
+                        .catch(() => {
+                            const navContainer = document.getElementById('nav-placeholder');
+                            if (navContainer) {
+                                navContainer.innerHTML = `
                                 <nav style="background:#1a1a2e;padding:1rem;">
                                     <a href="/index.html" style="color:#fff;text-decoration:none;font-weight:bold;">Home</a>
                                 </nav>
                             `;
+                            }
+                        });
+                } else {
+                    if (savedTheme === "dark" || savedTheme === "light") {
+                        const toggle = document.getElementById('themeToggle');
+                        if (toggle) {
+                            toggle.setAttribute('aria-pressed', savedTheme === "dark");
                         }
-                    });
+                    }
+                    markCurrentNav();
+                    initNavigationInteractions();
+                }
 
                 fetch(partialPaths.footer)
                     .then(r => {
