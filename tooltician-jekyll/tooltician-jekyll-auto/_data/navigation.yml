@@ -1,9 +1,0 @@
-main:
-  - title: "Home"
-    url: /
-  - title: "Tools"
-    url: /tools/
-  - title: "Guides" 
-    url: /guides/
-  - title: "Community"
-    url: /community/
