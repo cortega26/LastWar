@@ -16,18 +16,25 @@ jobs:
           node-version: '20'
       - name: Check pages.json
         run: node scripts/generate-pages-json.js
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+      - name: Build site
+        run: bundle exec jekyll build
       - name: Check internal links
         run: |
           node - <<'NODE'
           const fs = require('fs');
           const path = require('path');
           const repo = process.cwd();
-          const pagesDir = path.join(repo, 'pages');
-          const files = [path.join(repo, 'index.html'), ...fs.readdirSync(pagesDir).filter(f => f.endsWith('.html')).map(f => path.join(pagesDir, f))];
+          const siteDir = path.join(repo, '_site');
+          const pagesDir = path.join(siteDir, 'pages');
+          const files = [path.join(siteDir, 'index.html'), ...fs.readdirSync(pagesDir).filter(f => f.endsWith('.html')).map(f => path.join(pagesDir, f))];
           const missing = [];
           for (const file of files) {
             const html = fs.readFileSync(file, 'utf8');
-            const regex = /<a\s+[^>]*href=["']([^"'#]+)["']/g;
+            const regex = /<a\s+[^>]*href=['"]([^'"#]+)['"]/g;
             let match;
             while ((match = regex.exec(html)) !== null) {
               let href = match[1];
@@ -36,9 +43,9 @@ jobs:
               href = href.split('#')[0].split('?')[0];
               if (href.startsWith('/')) href = href.slice(1);
               if (href === '') href = 'index.html';
-              const target = path.join(repo, href);
+              const target = path.join(siteDir, href);
               if (!fs.existsSync(target)) {
-                missing.push(`${file.replace(repo + path.sep, '')} -> ${match[1]}`);
+                missing.push(`${file.replace(siteDir + path.sep, '')} -> ${match[1]}`);
               }
             }
           }
@@ -47,4 +54,3 @@ jobs:
             process.exit(1);
           }
           NODE
-
