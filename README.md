@@ -30,7 +30,7 @@ This keeps custom styles separate from the theme and makes future updates easier
 After building the site you can check for broken links and images with:
 
 ```bash
-bundle exec htmlproofer ./_site
+bundle exec htmlproofer ./_site --disable-external
 ```
 
 ## Development
