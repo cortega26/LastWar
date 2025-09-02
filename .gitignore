@@ -9,10 +9,14 @@ backups/*
 !backups/legacy-site/
 !backups/legacy-site/**
 node_modules/
-!
 !scripts/
 !scripts/*.py
-my-site/assets/fonts/
-my-site/assets/images/
+assets/fonts/
+assets/images/
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+vendor/
 backups/legacy-site/assets/fonts/
 backups/legacy-site/assets/images/
