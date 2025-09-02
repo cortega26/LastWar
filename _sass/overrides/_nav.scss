@@ -1,19 +1,47 @@
 /* Navigation overrides */
+
 .nav-container {
   font-size: 1rem;
 
-  .nav-link,
-  .submenu-toggle {
+  .nav-link {
     padding: 0.625rem 0.875rem;
-    line-height: 1.5;
+    line-height: 1.4;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--mm-color-fg, #ffffff);
+    text-decoration: none;
+    transition: background 0.2s ease;
+
+    &:hover,
+    &:focus {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--mm-color-fg, #ffffff);
+    }
+
+    &:active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    &[aria-current="page"] {
+      background: var(--mm-color-primary, #00ff88);
+      color: var(--mm-color-bg, #000000);
+    }
   }
 
   .submenu-toggle {
+    padding: 0.625rem 0.875rem;
+    line-height: 1.4;
     background: none;
     border: none;
     cursor: pointer;
     min-width: 40px;
     min-height: 40px;
+    transition: background 0.2s ease;
+
+    &:hover,
+    &:focus {
+      background: rgba(255, 255, 255, 0.1);
+    }
   }
 
   .nav-item {
@@ -31,12 +59,20 @@
         padding: 0.375rem;
         list-style: none;
         min-width: 12rem;
+        z-index: 1000;
 
         li > a {
           display: block;
           padding: 0.5rem 0.75rem;
           line-height: 1.45;
           font-size: 0.875rem;
+          color: var(--mm-color-fg, #ffffff);
+          border-radius: 0.25rem;
+
+          &:hover,
+          &:focus {
+            background: rgba(255, 255, 255, 0.1);
+          }
         }
       }
 
