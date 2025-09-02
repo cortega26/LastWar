@@ -27,6 +27,9 @@ exclude:
   - Gemfile.lock
   - node_modules
   - vendor
+  - backups
+  - tests
+  - docs
 
 # Collections and defaults can be added here in the future to organise
 # posts or other content.  For now we rely on individual pages.
