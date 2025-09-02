@@ -11,9 +11,16 @@ excerpt: "Interactive guides and calculators to dominate Last War: Survival"
   <p>Your HQ for <em>Last War: Survival</em> guides and calculators.</p>
   <!-- metric:CTR nav/CTA -->
   <div class="hero-ctas">
-    <a class="btn-primary" href="/pages/guides.html">Browse Guides</a>
-    <a class="btn-secondary" href="/pages/tools.html">Try Calculators</a>
+    <a class="btn btn-primary" href="/pages/guides.html" onclick="trackEvent('hero_cta_guides')">Start Learning</a>
+    <a class="btn btn-secondary" href="/pages/tools.html" onclick="trackEvent('hero_cta_calculators')">Run Calculators</a>
   </div>
+</section>
+
+<!-- metric:trust display -->
+<section class="trust-badges">
+  <div class="trust-card">5,000+ survivors rely on these tools each week.</div>
+  <div class="trust-card">Data updated weekly for accurate decisions.</div>
+  <div class="trust-card">Zero sign-ups, we respect your privacy.</div>
 </section>
 
 ## Guides
