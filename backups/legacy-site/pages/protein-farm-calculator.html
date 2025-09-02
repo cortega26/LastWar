@@ -1,0 +1,317 @@
+﻿<!doctype html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/gh/cortega26/LastWar@e6954c315fed2f40b76d09a6f3c2ebcda72bda26/assets/fonts/Inter-normal-400-UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/gh/cortega26/LastWar@e6954c315fed2f40b76d09a6f3c2ebcda72bda26/assets/fonts/Inter-normal-600-UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/gh/cortega26/LastWar@e6954c315fed2f40b76d09a6f3c2ebcda72bda26/assets/fonts/Inter-normal-700-UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/gh/cortega26/LastWar@e6954c315fed2f40b76d09a6f3c2ebcda72bda26/assets/fonts/JetBrains-Mono-normal-400-tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTOlOV.woff2" crossorigin>
+    <link rel="preload" as="style" href="/assets/css/fonts.css?v=20250829" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/assets/css/fonts.css?v=20250829"></noscript>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  <meta charset="UTF-8" />
+  <script>(function(){const theme = localStorage.getItem('theme') || 'dark'; document.documentElement.setAttribute('data-theme', theme);})();</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  
+  
+    
+  
+    
+  <link rel="stylesheet" href="../assets/css/styles.min.css?v=20250829-PRO1" />
+  <link rel="stylesheet" href="../assets/css/protein-farm-calculator.css?v=20250828" />
+  <meta name="description" content="Calculate time needed to gather immune proteins in Last War: Survival." />
+  <link rel="canonical" href="https://tooltician.com/pages/protein-farm-calculator.html">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://cdn.jsdelivr.net data:; connect-src 'self' https://www.google-analytics.com; base-uri 'self'; form-action 'self';">
+  <title>Protein Farm Production Calculator</title>
+
+  <!-- Google Analytics (interaction-gated) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    (function(){
+      var loaded=false;
+      function loadGA(){
+        if(loaded) return; loaded = true;
+        var s=document.createElement('script');
+        s.src='https://www.googletagmanager.com/gtag/js?id=G-TV9L6C3VN7';
+        s.async=true;
+        document.head.appendChild(s);
+        gtag('js', new Date());
+        gtag('config', 'G-TV9L6C3VN7', { transport_type: 'beacon', anonymize_ip: true });
+      }
+      ['pointerdown','keydown','touchstart'].forEach(function(type){
+        window.addEventListener(type, loadGA, { once: true, passive: true });
+      });
+      window.addEventListener('load', function(){ setTimeout(loadGA, 15000); });
+    })();
+  </script>
+
+  <script defer src="../assets/js/theme.js?v=20250828"></script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header class="site-header">
+    <div id="nav-placeholder"></div>
+  </header>
+
+  <div class="header">
+    <h1>Protein Farm Production Calculator</h1>
+    <p>Calculate production time for Virus Research Institute upgrades</p>
+  </div>
+
+  <main class="container content" role="main" id="main-content">
+    <div class="main-content">
+      <div class="input-section">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Farm Configuration</h2>
+          </div>
+
+          <img src="../assets/images/mip.png" alt="Immune Protein Progress" width="648" height="114" class="progress-image" loading="lazy" />
+
+          <form id="proteinFarmForm" novalidate>
+          <div class="target-section">
+            <label for="targetAmount" class="control-label">Missing Immune Protein for Next Upgrade</label>
+            <div class="control-description">
+              Enter the amount shown in red letters on your progress bar. This
+              represents how much immune protein you still need to collect for
+              your next upgrade.
+            </div>
+            <input type="number" id="targetAmount" class="form-input" data-validate required
+              placeholder="Enter the red number from your progress bar" min="1" aria-describedby="targetAmountError" />
+            <div class="error-message" id="targetAmountError" aria-live="polite"></div>
+          </div>
+
+          <div class="farm-grid">
+            <div class="farm-item" id="farm1-container">
+              <label for="farm1" class="farm-name">Protein Farm I</label>
+              <select id="farm1" class="form-select">
+                <!-- Options populated by JavaScript -->
+              </select>
+              <div class="production-info" id="farm1-info"></div>
+            </div>
+
+            <div class="farm-item" id="farm2-container">
+              <label for="farm2" class="farm-name">Protein Farm II</label>
+              <select id="farm2" class="form-select">
+                <option value="0">Not Built</option>
+                <!-- Options populated by JavaScript -->
+              </select>
+              <div class="production-info" id="farm2-info"></div>
+            </div>
+
+            <div class="farm-item" id="farm3-container">
+              <label for="farm3" class="farm-name">Protein Farm III</label>
+              <select id="farm3" class="form-select">
+                <option value="0">Not Built</option>
+                <!-- Options populated by JavaScript -->
+              </select>
+              <div class="production-info" id="farm3-info"></div>
+            </div>
+
+            <div class="farm-item" id="farm4-container">
+              <label for="farm4" class="farm-name">Protein Farm IV</label>
+              <select id="farm4" class="form-select">
+                <option value="0">Not Built</option>
+                <!-- Options populated by JavaScript -->
+              </select>
+              <div class="production-info" id="farm4-info"></div>
+            </div>
+
+            <div class="farm-item" id="farm5-container">
+              <label for="farm5" class="farm-name">Protein Farm V</label>
+              <select id="farm5" class="form-select">
+                <option value="0">Not Built</option>
+                <!-- Options populated by JavaScript -->
+              </select>
+              <div class="production-info" id="farm5-info"></div>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="results-section">
+        <div class="results-panel">
+          <div class="results-header">Production Analysis</div>
+          <div class="results-content" id="results-content">
+            <div class="empty-state">
+              <div class="empty-state-icon">ðŸ“Š</div>
+              <p>Configure your farms and enter target amount</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>Note:</strong> This calculation is based solely on protein farm
+      production. The estimated time does not include proteins from mines,
+      zombie hunting, events, or any other sources that could reduce the
+      actual time required.
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+    <script src="../assets/js/validate.js?v=20250828" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      attachValidation(document.getElementById('proteinFarmForm'));
+    });
+  </script>
+  <script src="../assets/js/storage-utils.js?v=20250828" defer></script>
+  <script src="../assets/js/script.js?v=20250828" defer></script>
+  <script type="module" src="../assets/js/protein-calculator.js?v=20250828" defer></script>
+  <script src="../assets/js/analytics.js?v=20250828" defer></script>
+</body>
+
+</html>
+

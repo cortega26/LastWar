@@ -3,8 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const { JSDOM } = require('jsdom');
 
-const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
-const dom = new JSDOM(html, { url: 'http://localhost/', pretendToBeVisual: true });
+const html = fs.readFileSync(path.join(__dirname, '../my-site/pages/guides.html'), 'utf8');
+const dom = new JSDOM(html, { url: 'http://localhost/pages/guides.html', pretendToBeVisual: true });
 const { window } = dom;
 
 global.window = window;
@@ -12,7 +12,7 @@ global.document = window.document;
 global.localStorage = window.localStorage;
 
 global.fetch = (url) => {
-  const filePath = path.join(__dirname, '..', url.replace(/^\//, ''));
+  const filePath = path.join(__dirname, '../my-site', url.replace(/^\//, ''));
   const data = fs.readFileSync(filePath, 'utf8');
   return Promise.resolve({
     ok: true,
@@ -21,7 +21,7 @@ global.fetch = (url) => {
   });
 };
 
-const { loadPartials } = require('../assets/js/script.js');
+const { loadPartials } = require('../my-site/assets/js/script.js');
 
 function waitForNav() {
   return new Promise(resolve => {

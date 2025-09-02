@@ -4,14 +4,14 @@ const httpServer = require('http-server');
 const { chromium } = require('playwright');
 
 (async () => {
-  const server = httpServer.createServer({ root: path.join(__dirname, '..') });
+  const server = httpServer.createServer({ root: path.join(__dirname, '../my-site') });
   await new Promise(resolve => server.listen(0, resolve));
   const port = server.server.address().port;
   const baseUrl = `http://localhost:${port}/`;
 
   const browser = await chromium.launch();
   const page = await browser.newPage();
-  await page.goto(baseUrl);
+  await page.goto(baseUrl + 'pages/tools.html');
   await page.waitForSelector('.tool-grid a.tool-card', { state: 'attached' });
 
   // Ensure no tabindex attributes

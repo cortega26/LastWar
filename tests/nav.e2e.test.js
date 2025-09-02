@@ -2,7 +2,7 @@ const assert = require('assert');
 const { JSDOM } = require('jsdom');
 const fs = require('fs');
 const path = require('path');
-const navHtml = fs.readFileSync(path.join(__dirname, '../partials/nav.html'), 'utf8');
+const navHtml = fs.readFileSync(path.join(__dirname, '../my-site/partials/nav.html'), 'utf8');
 
 const dom = new JSDOM(`<div class="nav-container">${navHtml}</div>`, { url: 'http://example.com/', pretendToBeVisual: true });
 const window = dom.window;
@@ -10,7 +10,7 @@ const window = dom.window;
 global.window = window;
 global.document = window.document;
 
-const { initNavigationInteractions } = require('../assets/js/script.js');
+const { initNavigationInteractions } = require('../my-site/assets/js/script.js');
 initNavigationInteractions();
 
 const tools = window.document.querySelector('.nav-item.dropdown');

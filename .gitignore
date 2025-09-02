@@ -5,8 +5,14 @@ logs/
 .venv/
 .json
 requirements.txt
-backups/
+backups/*
+!backups/legacy-site/
+!backups/legacy-site/**
 node_modules/
 !
 !scripts/
 !scripts/*.py
+my-site/assets/fonts/
+my-site/assets/images/
+backups/legacy-site/assets/fonts/
+backups/legacy-site/assets/images/

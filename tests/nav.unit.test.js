@@ -13,7 +13,7 @@ const window = dom.window;
 global.window = window;
 global.document = window.document;
 
-const { markCurrentNav } = require('../assets/js/script.js');
+const { markCurrentNav } = require('../my-site/assets/js/script.js');
 
 markCurrentNav();
 
