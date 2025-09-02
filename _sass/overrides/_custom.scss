@@ -20,3 +20,9 @@
   z-index: 10000;
   border-radius: 0 0 4px 0;
 }
+
+/* Global focus style */
+:focus-visible {
+  outline: 3px solid var(--mm-color-primary, #00ff88);
+  outline-offset: 3px;
+}
