@@ -1,8 +1,10 @@
 main:
   - title: "Home"
     url: "/"
+    icon: "🏠"
   - title: "Tools"
     url: "/pages/tools.html"
+    icon: "🛠️"
     children:
       - title: "Protein Farm Calculator"
         url: "/pages/protein-farm-calculator.html"
@@ -14,6 +16,7 @@ main:
         url: "/pages/event-tracker.html"
   - title: "Guides"
     url: "/pages/guides.html"
+    icon: "📚"
     children:
       - title: "Heroes & Tier List"
         url: "/pages/heroes.html"
@@ -39,6 +42,7 @@ main:
         url: "/pages/pre-season.html"
   - title: "Community"
     url: "/pages/discord.html"
+    icon: "💡"
     children:
       - title: "Join Discord"
         url: "/pages/discord.html"
@@ -46,5 +50,7 @@ main:
         url: "/pages/rules.html"
   - title: "Blog"
     url: "/blog/"
+    icon: "📝"
   - title: "About"
     url: "/about/"
+    icon: "ℹ️"

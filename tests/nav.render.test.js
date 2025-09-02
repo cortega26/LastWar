@@ -2,6 +2,8 @@ const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 const { JSDOM } = require('jsdom');
+const { Liquid } = require('liquidjs');
+const yaml = require('js-yaml');
 
 const html = fs.readFileSync(path.join(__dirname, '../pages/guides.html'), 'utf8');
 const dom = new JSDOM(html, { url: 'http://localhost/pages/guides.html', pretendToBeVisual: true });
@@ -11,9 +13,16 @@ global.window = window;
 global.document = window.document;
 global.localStorage = window.localStorage;
 
+const engine = new Liquid();
+const navData = yaml.load(fs.readFileSync(path.join(__dirname, '../_data/navigation.yml'), 'utf8'));
+
 global.fetch = (url) => {
-  const filePath = path.join(__dirname, '..', url.replace(/^\//, ''));
-  const data = fs.readFileSync(filePath, 'utf8');
+  const rel = url.replace(/^\//, '');
+  const abs = path.join(__dirname, '..', rel);
+  let data = fs.readFileSync(abs, 'utf8');
+  if (rel === 'partials/nav.html') {
+    data = engine.parseAndRenderSync(data, { site: { data: { navigation: navData } } });
+  }
   return Promise.resolve({
     ok: true,
     text: () => Promise.resolve(data),

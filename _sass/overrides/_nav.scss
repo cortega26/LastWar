@@ -1,0 +1,55 @@
+/* Navigation overrides */
+.nav-container {
+  font-size: 1rem;
+
+  .nav-link,
+  .submenu-toggle {
+    padding: 0.625rem 0.875rem;
+    line-height: 1.5;
+  }
+
+  .submenu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .nav-item {
+    position: relative;
+
+    &.dropdown {
+      .dropdown-menu {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        display: none;
+        background: var(--mm-color-bg, #1e1e1e);
+        border-radius: 0.5rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        padding: 0.375rem;
+        list-style: none;
+        min-width: 12rem;
+
+        li > a {
+          display: block;
+          padding: 0.5rem 0.75rem;
+          line-height: 1.45;
+          font-size: 0.875rem;
+        }
+      }
+
+      &.active .dropdown-menu,
+      .dropdown-menu.show {
+        display: block;
+      }
+    }
+  }
+
+  a:focus,
+  .submenu-toggle:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+}

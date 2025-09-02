@@ -1,6 +1,9 @@
+---
+layout: null
+---
 <div class="nav-container">
   <nav class="main-nav" aria-label="Primary">
-    <!-- Logo/Brand (links home) -->
+    <!-- Logo/Brand -->
     <div class="nav-brand">
       <a href="/" class="brand-link">
         <span class="brand-icon">⚔️</span>
@@ -10,7 +13,7 @@
 
     <!-- Search Integration -->
     <div class="nav-search" id="nav-search">
-      <!-- Search will be injected here by search.js -->
+      <!-- Search injected by search.js -->
     </div>
 
     <!-- Mobile Toggle -->
@@ -22,66 +25,24 @@
 
     <!-- Navigation Menu -->
     <ul class="nav-menu" id="navMenu">
-      <li class="nav-item">
-        <a class="nav-link" href="/" aria-current="page">
-          <span class="nav-icon">🏠</span>
-          <span class="nav-text">Home</span>
+      {% for item in site.data.navigation.main %}
+      <li class="nav-item{% if item.children %} dropdown{% endif %}">
+        <a class="nav-link" href="{{ item.url }}">
+          {% if item.icon %}<span class="nav-icon">{{ item.icon }}</span>{% endif %}
+          <span class="nav-text">{{ item.title }}</span>
         </a>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link" href="#" aria-haspopup="true" aria-expanded="false">
-          <span class="nav-icon">🛠️</span>
-          <span class="nav-text">Tools</span>
+        {% if item.children %}
+        <button class="submenu-toggle" aria-expanded="false" aria-controls="submenu-{{ forloop.index }}" aria-label="Toggle {{ item.title }} menu">
           <span class="dropdown-arrow">▼</span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="/pages/protein-farm-calculator.html">Protein Farm Calculator</a></li>
-          <li><a href="/pages/T10-calculator.html">T10 Research Calculator</a></li>
-          <li><a href="/pages/team-builder.html">Team Builder</a></li>
-          <li><a href="/pages/event-tracker.html">Event Tracker</a></li>
-          <li class="dropdown-divider" role="separator"></li>
-          <li><a href="/pages/tools.html">All Tools</a></li>
+        </button>
+        <ul class="dropdown-menu" id="submenu-{{ forloop.index }}" role="menu">
+          {% for child in item.children %}
+          <li role="none"><a href="{{ child.url }}" role="menuitem">{{ child.title }}</a></li>
+          {% endfor %}
         </ul>
+        {% endif %}
       </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link" href="#" aria-haspopup="true" aria-expanded="false">
-          <span class="nav-icon">📚</span>
-          <span class="nav-text">Guides</span>
-          <span class="dropdown-arrow">▼</span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="/pages/heroes.html">Heroes &amp; Tier List</a></li>
-          <li><a href="/pages/base-building.html">Base Building</a></li>
-          <li><a href="/pages/alliances.html">Alliance Strategy</a></li>
-          <li><a href="/pages/resources.html">Resource Management</a></li>
-          <li><a href="/pages/events.html">Events Guide</a></li>
-          <li><a href="/pages/tips.html">Tips &amp; Tricks</a></li>
-          <li class="dropdown-divider" role="separator"></li>
-          <li><a href="/pages/season4.html">Season 4 <span class="badge current">Current</span></a></li>
-          <li><a href="/pages/season3.html">Season 3</a></li>
-          <li><a href="/pages/Season2.html">Season 2</a></li>
-          <li><a href="/pages/season1.html">Season 1</a></li>
-          <li><a href="/pages/pre-season.html">Pre-Season</a></li>
-          <li><a href="/pages/seasons.html">All Season Guides</a></li>
-          <li class="dropdown-divider" role="separator"></li>
-          <li><a href="/pages/guides.html">All Guides</a></li>
-        </ul>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link" href="#" aria-haspopup="true" aria-expanded="false">
-          <span class="nav-icon">💡</span>
-          <span class="nav-text">Community</span>
-          <span class="dropdown-arrow">▼</span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="/pages/discord.html" class="featured-link">💬 Join Discord</a></li>
-          <li><a href="/pages/rules.html">Community Rules</a></li>
-        </ul>
-      </li>
-
+      {% endfor %}
     </ul>
 
     <div class="theme-toggle-container">
@@ -90,5 +51,4 @@
       </button>
     </div>
   </nav>
-  </div>
-
+</div>
