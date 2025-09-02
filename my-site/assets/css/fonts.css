@@ -1,0 +1,3 @@
+/* Load fonts from Google Fonts to avoid bundling binary font files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
