@@ -48,7 +48,7 @@ global.document = dom.window.document;
 window.lastWarAnalytics = { trackEvent: () => {} };
 
 async function run() {
-  const { initT10Calculator } = await import('../my-site/assets/js/t10-calculator.js');
+  const { initT10Calculator } = await import('../assets/js/t10-calculator.js');
 
   initT10Calculator();
 

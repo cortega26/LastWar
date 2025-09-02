@@ -4,7 +4,7 @@ const httpServer = require('http-server');
 const { chromium } = require('playwright');
 
 (async () => {
-  const server = httpServer.createServer({ root: path.join(__dirname, '../my-site') });
+  const server = httpServer.createServer({ root: path.join(__dirname, '..') });
   await new Promise(resolve => server.listen(0, resolve));
   const port = server.server.address().port;
   const baseUrl = `http://localhost:${port}/`;

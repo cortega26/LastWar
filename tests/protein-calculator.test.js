@@ -27,7 +27,7 @@ global.document = dom.window.document;
 window.lastWarAnalytics = { trackEvent: () => {} };
 
 async function run() {
-  const { initProteinCalculator } = await import('../my-site/assets/js/protein-calculator.js');
+  const { initProteinCalculator } = await import('../assets/js/protein-calculator.js');
 
   initProteinCalculator();
 

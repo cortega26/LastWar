@@ -4,6 +4,7 @@ description: "Strategy Center for Last War: Survival"
 # URL used by the `jekyll-feed` plugin and for canonical links.
 # Update this if the site's domain changes.
 url: "https://tooltician.com"
+baseurl: ""
 
 # Use the Minimal Mistakes Jekyll theme hosted on GitHub.  Pinning
 # to a specific version helps avoid unexpected changes when the theme
