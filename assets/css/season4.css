@@ -1,0 +1,226 @@
+    /* Season 4 specific styles */
+    .guide-intro {
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        color: white;
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+    }
+
+    .key-changes {
+        margin-top: 1.5rem;
+        padding: 1.5rem;
+        background: rgba(184, 18, 18, 0.1);
+        border-radius: 8px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .tier-section {
+        margin-bottom: 2rem;
+    }
+
+    .hero-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin: 1rem 0;
+    }
+
+    .hero-card {
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        transition: var(--transition);
+    }
+
+    .hero-card:hover {
+        border-color: var(--primary);
+        transform: translateY(-2px);
+    }
+
+    .hero-card h4 {
+        margin-top: 0;
+        color: var(--primary);
+        font-size: 1.2rem;
+    }
+
+    .formation-layout {
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+        border: 1px solid var(--border);
+    }
+
+    .formation-row {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-slot {
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        min-width: 80px;
+        text-align: center;
+    }
+
+    .hero-slot.tank {
+        background: #4a90e2;
+        color: white;
+    }
+
+    .hero-slot.dps {
+        background: #e24a4a;
+        color: white;
+    }
+
+    .hero-slot.support {
+        background: #50c878;
+        color: white;
+    }
+
+    .checklist {
+        margin: 1rem 0;
+    }
+
+    .checklist-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.75rem;
+        padding: 0.75rem;
+        background: var(--card-bg);
+        border-radius: 6px;
+        border: 1px solid var(--border);
+    }
+
+    .checklist-item input[type="checkbox"] {
+        margin-right: 1rem;
+        transform: scale(1.2);
+    }
+
+    .allocation-bar {
+        display: flex;
+        height: 30px;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        margin-top: 0.5rem;
+    }
+
+    .allocation-segment {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: white;
+    }
+
+    .allocation-segment.hero {
+        background: #e24a4a;
+    }
+
+    .allocation-segment.tower {
+        background: #4a90e2;
+    }
+
+    .allocation-segment.buff {
+        background: #50c878;
+    }
+
+    .timeline {
+        position: relative;
+        margin: 2rem 0;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 2rem;
+        width: 2px;
+        height: 100%;
+        background: var(--primary);
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 2rem;
+        padding-left: 5rem;
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        top: 0.5rem;
+        left: 1.5rem;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background: var(--primary);
+    }
+
+    .timeline-date {
+        font-weight: 600;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .tips-sidebar {
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        margin-top: 2rem;
+    }
+
+    .tip-item {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .tip-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
+    .tip-item h4 {
+        margin: 0 0 0.5rem 0;
+        color: var(--primary);
+        font-size: 1rem;
+    }
+
+    .tip-item p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--text-light);
+    }
+
+    @media (max-width: 768px) {
+        .formation-row {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-slot {
+            min-width: 120px;
+        }
+
+        .timeline::before {
+            left: 1rem;
+        }
+
+        .timeline-item {
+            padding-left: 3rem;
+        }
+
+        .timeline-item::before {
+            left: 0.5rem;
+        }
+    }
