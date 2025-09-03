@@ -26,3 +26,28 @@
   outline: 3px solid var(--mm-color-primary, #00ff88);
   outline-offset: 3px;
 }
+
+/* Dropdown navigation */
+.masthead__menu-item { position: relative; }
+.masthead__menu-item .subnav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #1f242c;
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0;
+  min-width: 12rem;
+  border: 1px solid #343a40;
+  z-index: 1000;
+}
+.masthead__menu-item .subnav li { margin: 0; }
+.masthead__menu-item .subnav a {
+  display: block;
+  padding: 0.25rem 0.75rem;
+}
+.masthead__menu-item:hover > .subnav,
+.masthead__menu-item:focus-within > .subnav {
+  display: block;
+}
