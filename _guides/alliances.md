@@ -1,7 +1,8 @@
 ---
 layout: single
 title: "Alliances & Social Play"
-permalink: /pages/alliances.html
+toc: true
+breadcrumbs: true
 ---
 
 The world of *Last War: Survival* is harsh, but you don’t have to face it alone.  Alliances are cooperatives of commanders who share resources, technology and protection.  Joining an active alliance early unlocks many of the game’s systems and helps you progress faster.

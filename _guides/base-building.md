@@ -1,7 +1,8 @@
 ---
 layout: single
 title: "Base Building & Development"
-permalink: /pages/base-building.html
+toc: true
+breadcrumbs: true
 ---
 
 ![Stylised survivors overlooking a base](https://raw.githubusercontent.com/cortega26/LastWar/c6e2d5b32b326faeb218c5a80f65db6bd58e6e35/assets/images/base-hero.png)

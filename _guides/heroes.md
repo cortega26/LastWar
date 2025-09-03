@@ -1,7 +1,8 @@
 ---
 layout: single
 title: "Heroes & Tier List"
-permalink: /pages/heroes.html
+toc: true
+breadcrumbs: true
 ---
 
 Heroes lead your squads into battle and provide powerful bonuses. Each hero belongs to a class (tank, damage dealer or support) and wields unique skills that synergise with certain troops. Investing in the right heroes is key to dominating PvE and PvP content.
