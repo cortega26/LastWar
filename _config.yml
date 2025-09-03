@@ -45,6 +45,9 @@ collections:
   guides:
     output: true
     permalink: /guides/:name/
+  calculators:
+    output: true
+    permalink: /calculators/:name/
 jekyll-archives:
   enabled:
     - categories
@@ -75,6 +78,13 @@ defaults:
   - scope:
       path: "_guides"
       type: guides
+    values:
+      layout: single
+      toc: true
+      breadcrumbs: true
+  - scope:
+      path: "_calculators"
+      type: calculators
     values:
       layout: single
       toc: true
