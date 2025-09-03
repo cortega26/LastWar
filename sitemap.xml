@@ -7,12 +7,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://tooltician.com/index.html</loc>
-    <lastmod>2025-09-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
     <loc>https://tooltician.com/offline.html</loc>
     <lastmod>2025-09-03</lastmod>
     <changefreq>monthly</changefreq>
@@ -68,12 +62,6 @@
   </url>
   <url>
     <loc>https://tooltician.com/pages/events.html</loc>
-    <lastmod>2025-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tooltician.com/pages/guides.html</loc>
     <lastmod>2025-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
