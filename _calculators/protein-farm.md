@@ -11,7 +11,7 @@ permalink: /calculators/protein-farm/
             <h2 class="card-title">Farm Configuration</h2>
           </div>
 
-          <img src="{{ "/assets/images/mip.png" | relative_url }}" alt="Immune Protein Progress" width="648" height="114" class="progress-image" loading="lazy" />
+          {% include figure image_path="/assets/images/mip.png" alt="Immune Protein Progress" %}
 
           <!-- metric:form start -->
           <form id="proteinFarmForm" novalidate>
