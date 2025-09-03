@@ -13,6 +13,11 @@ baseurl: ""
 # Minimal Mistakes.
 remote_theme: "mmistakes/minimal-mistakes@4.27.3"
 minimal_mistakes_skin: "dark"
+search: true
+search_provider: lunr
+breadcrumbs: true
+paginate: 10
+paginate_path: "/page:num/"
 
 plugins:
   - jekyll-feed
@@ -20,10 +25,8 @@ plugins:
   - jekyll-include-cache
   - jekyll-remote-theme
   - jekyll-redirect-from
-
-# Load site-wide scripts after the main bundle
-after_footer_scripts:
-  - /assets/js/script.js
+  - jekyll-seo-tag
+  - jekyll-archives
 
 # Exclude non‑site files from the build.  These files are only used
 # locally and should not be published.
@@ -38,3 +41,22 @@ exclude:
 
 # Collections and defaults can be added here in the future to organise
 # posts or other content.  For now we rely on individual pages.
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+  layouts:
+    category: archive
+    tag: archive
+  permalinks:
+    category: /categories/:name/
+    tag: /tags/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      toc: true
+      breadcrumbs: true
