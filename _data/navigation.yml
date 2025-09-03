@@ -2,7 +2,6 @@ main:
   - title: "Home"
     url: "/"
   - title: "Calculators"
-    url: "/calculators/"
     children:
       - title: "Protein Farm Calculator"
         url: "/calculators/protein-farm/"
@@ -13,7 +12,6 @@ main:
       - title: "Event Tracker"
         url: "/calculators/event-tracker/"
   - title: "Guides"
-    url: "/guides/"
     children:
       - title: "Hero Tier List"
         url: "/guides/heroes/"
