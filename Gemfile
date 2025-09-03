@@ -8,6 +8,7 @@ source "https://rubygems.org"
 gem "github-pages", group: :jekyll_plugins
 gem "jekyll-include-cache", group: :jekyll_plugins
 gem "jekyll-redirect-from", group: :jekyll_plugins
+gem "jekyll-archives", group: :jekyll_plugins
 
 # HTMLProofer is used in development to verify links and images in the
 # generated site. It is not part of the runtime build but helps catch
