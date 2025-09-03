@@ -2,8 +2,11 @@
 layout: null
 permalink: /assets/pages.json
 ---
-[
-{%- assign pages = site.pages | where_exp: "p", "p.path contains '/pages/' and p.title" | sort: "title" -%}
+[ 
+{%- assign pages = site.pages
+     | where_exp: "p", "p.path contains '/pages/'"
+     | where_exp: "p", "p.title"
+     | sort: "title" -%}
 {%- for p in pages -%}
   {"title": {{ p.title | jsonify }}, "href": {{ p.url | jsonify }} }{%- unless forloop.last -%},{%- endunless -%}
 {%- endfor -%}
