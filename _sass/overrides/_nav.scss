@@ -1,7 +1,19 @@
 /* Navigation overrides */
 
+/* Hide default theme masthead to use custom navigation */
+.masthead {
+  display: none;
+}
+
 .nav-container {
   font-size: 1rem;
+
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
 
   .nav-link {
     padding: 0.625rem 0.875rem;
