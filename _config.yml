@@ -42,6 +42,9 @@ collections:
   pages:
     output: true
     permalink: /pages/:name.html
+  guides:
+    output: true
+    permalink: /guides/:name/
 jekyll-archives:
   enabled:
     - categories
@@ -67,5 +70,12 @@ defaults:
     values:
       layout: single
       author_profile: false
+      toc: true
+      breadcrumbs: true
+  - scope:
+      path: "_guides"
+      type: guides
+    values:
+      layout: single
       toc: true
       breadcrumbs: true
