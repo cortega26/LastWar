@@ -1,208 +1,10 @@
-﻿<!doctype html>
-<html lang="en" data-theme="dark">
+---
+layout: single
+title: "Tier 10 Research Calculator"
+permalink: /calculators/t10-research/
+---
 
-<head>
-    <link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/gh/cortega26/LastWar@e6954c315fed2f40b76d09a6f3c2ebcda72bda26/assets/fonts/Inter-normal-400-UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" crossorigin>
-    <link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/gh/cortega26/LastWar@e6954c315fed2f40b76d09a6f3c2ebcda72bda26/assets/fonts/Inter-normal-600-UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" crossorigin>
-    <link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/gh/cortega26/LastWar@e6954c315fed2f40b76d09a6f3c2ebcda72bda26/assets/fonts/Inter-normal-700-UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" crossorigin>
-    <link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/gh/cortega26/LastWar@e6954c315fed2f40b76d09a6f3c2ebcda72bda26/assets/fonts/JetBrains-Mono-normal-400-tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTOlOV.woff2" crossorigin>
-    <link rel="preload" as="style" href="/assets/css/fonts.css?v=20250829" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/assets/css/fonts.css?v=20250829"></noscript>
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-  <meta charset="UTF-8" />
-  <script>(function(){const theme = localStorage.getItem('theme') || 'dark'; document.documentElement.setAttribute('data-theme', theme);})();</script>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  
-    
-  
-    
-  <link rel="stylesheet" href="../assets/css/main.css?v=20250829-PRO1" />
-  <link rel="stylesheet" href="../assets/css/T10-calculator.css?v=20250829" />
-  <meta name="description" content="Calculate resources needed to unlock Tier 10 troops in Last War: Survival." />
-  <link rel="canonical" href="https://tooltician.com/pages/T10-calculator.html">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://cdn.jsdelivr.net data:; connect-src 'self' https://www.google-analytics.com; base-uri 'self'; form-action 'self';">
-  <title>Last War: Survival - Tier 10 Progress Calculator</title>
-
-  <!-- Google Analytics (interaction-gated) -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    (function(){
-      var loaded=false;
-      function loadGA(){
-        if(loaded) return; loaded = true;
-        var s=document.createElement('script');
-        s.src='https://www.googletagmanager.com/gtag/js?id=G-TV9L6C3VN7';
-        s.async=true;
-        document.head.appendChild(s);
-        gtag('js', new Date());
-        gtag('config', 'G-TV9L6C3VN7', { transport_type: 'beacon', anonymize_ip: true });
-      }
-      ['pointerdown','keydown','touchstart'].forEach(function(type){
-        window.addEventListener(type, loadGA, { once: true, passive: true });
-      });
-      window.addEventListener('load', function(){ setTimeout(loadGA, 15000); });
-    })();
-  </script>
-
-  <script defer src="../assets/js/theme.js?v=20250828"></script>
-</head>
-
-<body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-  <header class="site-header">
-    <div id="nav-placeholder"></div>
-  </header>
-  <main class="container content" role="main" id="main-content">
     <div class="header">
-      <h1>Last War: Survival</h1>
       <h2>Tier 10 Research Calculator</h2>
       <p>
         Enter your current research levels, including those in progress, to
@@ -345,7 +147,6 @@
         </div>
       </div>
     </div>
-  </main>
 
   <div id="footer-placeholder"></div>
 
@@ -353,7 +154,5 @@
   <script src="../assets/js/script.js?v=20250828" defer></script>
   <script type="module" src="../assets/js/t10-calculator.js?v=20250828" defer></script>
   <script src="../assets/js/analytics.js?v=20250828" defer></script>
-</body>
 
-</html>
 
