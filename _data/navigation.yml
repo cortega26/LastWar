@@ -1,7 +1,6 @@
 main:
   - title: "Home"
     url: "/"
-  # metric:CTR nav
   - title: "Calculators"
     url: "/pages/tools.html"
     children:
@@ -13,7 +12,6 @@ main:
         url: "/pages/team-builder.html"
       - title: "Event Tracker"
         url: "/pages/event-tracker.html"
-  # metric:CTR nav
   - title: "Guides"
     url: "/pages/guides.html"
     children:
@@ -31,7 +29,6 @@ main:
         url: "/pages/tips.html"
       - title: "Season Guides"
         url: "/pages/seasons.html"
-  # metric:CTR nav
   - title: "Community"
     url: "/pages/discord.html"
     children:
@@ -39,6 +36,5 @@ main:
         url: "/pages/discord.html"
       - title: "Community Rules"
         url: "/pages/rules.html"
-  # metric:CTR nav
   - title: "Blog"
     url: "/blog/"

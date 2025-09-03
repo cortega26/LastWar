@@ -9,8 +9,6 @@ const PRECACHE_URLS = [
   '/index.html',
   '/assets/css/main.css',
   '/assets/css/fonts.css',
-  '/assets/js/visual-interactions-optimized.js',
-  '/assets/js/theme.js',
 ];
 
 self.addEventListener('install', (event) => {
