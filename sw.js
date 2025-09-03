@@ -7,12 +7,10 @@ const HTML_CACHE = `html-${VERSION}`;
 const PRECACHE_URLS = [
   '/',
   '/index.html',
-  '/assets/css/styles.min.css',
+  '/assets/css/main.css',
   '/assets/css/fonts.css',
-  '/assets/js/script.js',
   '/assets/js/visual-interactions-optimized.js',
   '/assets/js/theme.js',
-  '/assets/images/base-hero.webp',
 ];
 
 self.addEventListener('install', (event) => {

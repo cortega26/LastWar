@@ -20,6 +20,7 @@ paginate: 10
 paginate_path: "/page:num/"
 
 plugins:
+  - jekyll-paginate
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-include-cache
