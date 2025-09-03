@@ -31,6 +31,18 @@
             .catch(() => {})
             .finally(() => {
                 if (!navExists) {
+                    let navContainer = document.getElementById('nav-placeholder');
+                    if (!navContainer) {
+                        const masthead = document.querySelector('.masthead');
+                        if (masthead) masthead.remove();
+                        const header = document.createElement('header');
+                        header.className = 'site-header';
+                        navContainer = document.createElement('div');
+                        navContainer.id = 'nav-placeholder';
+                        header.appendChild(navContainer);
+                        document.body.prepend(header);
+                    }
+
                     fetch(partialPaths.nav)
                         .then(r => {
                             if (!r.ok) throw r;
