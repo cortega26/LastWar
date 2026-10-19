@@ -1,49 +1,70 @@
 # Last War Tools
 
-This repository contains a small static website that provides calculators, rules, and guides for **Last War: Survival Game**. The site now uses the [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/) Jekyll theme for a maintainable and consistent design.
+> **Stop doing Last War math in your head.**
+> Practical calculators, concise guides, and reference tools for **Last War: Survival Game**.
 
-## Usage
+[![GitHub stars](https://img.shields.io/github/stars/cortega26/LastWar?style=flat&logo=github)](https://github.com/cortega26/LastWar/stargazers)
+[![Last commit](https://img.shields.io/github/last-commit/cortega26/LastWar)](https://github.com/cortega26/LastWar/commits/main)
 
-Install Ruby gems and start the Jekyll development server:
+## What you get
+
+This repo turns recurring in-game decisions into reusable tools instead of guesswork.
+
+| Need | Tool |
+|:---|:---|
+| Plan event timing | **Event Tracker** |
+| Estimate protein production | **Protein Farm Calculator** |
+| Plan T10 progression | **T10 Research Calculator** |
+| Compare team compositions | **Team Builder** |
+| Improve alliance play | **Alliance Guide** |
+| Prioritize upgrades | **Base Building Guide** |
+| Understand hero choices | **Heroes Guide** |
+
+### Why this exists
+
+Last War has lots of small optimization decisions. Individually they look simple; together they create repeated arithmetic, scattered notes, and easy-to-miss tradeoffs. **Last War Tools puts those decisions in one searchable, reusable place.**
+
+> If one of the calculators saves you time, consider starring the repo — it helps other players discover it.
+
+## For contributors
+
+The site is a static Jekyll project using the [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/) theme.
+
+### Run locally
 
 ```bash
 bundle install
 bundle exec jekyll serve
 ```
 
-The site will be available at `http://localhost:4000`.
+Open `http://localhost:4000`.
 
-### Building the site
-
-To generate the static site without starting the development server run:
+### Build
 
 ```bash
 bundle exec jekyll build
 ```
 
-### Styling overrides
-
-Minimal Mistakes can be customised through SCSS overrides. Add new partials
-under `_sass/overrides/` and import them from `assets/css/main.scss`.
-This keeps custom styles separate from the theme and makes future updates easier.
-
-After building the site you can check for broken links and images with:
+### Verify links and assets
 
 ```bash
 bundle exec htmlproofer ./_site --disable-external
 ```
 
-## Development
+### Content structure
 
-Content is written in Markdown in the repository root and built by Jekyll. For the previous hand-built HTML version, run `npm run serve:legacy`.
+- Calculators: `_calculators/`
+- Guides: `_guides/`
+- General pages: `_pages/`
+- Strategic priorities: [`docs/scoreboard/SCOREBOARD.md`](docs/scoreboard/SCOREBOARD.md)
+- Strategic goals: [`docs/goals/GOALS.md`](docs/goals/GOALS.md)
 
-### Project Management
+Styling overrides live under `_sass/overrides/` and are imported from `assets/css/main.scss`, keeping custom code separate from the upstream theme.
 
-- Current priorities: see [`docs/scoreboard/SCOREBOARD.md`](docs/scoreboard/SCOREBOARD.md).
-- Strategic goals: see [`docs/goals/GOALS.md`](docs/goals/GOALS.md).
+## Contributing
 
-## Monetization Ideas
+Contributions that improve calculator accuracy, explain mechanics more clearly, or add high-value tools are welcome. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-- Add a "Buy Me a Coffee" button to let visitors donate.
-- Offer premium calculator features or ad-free browsing for supporters.
-- Display unobtrusive advertisements from a network such as Google AdSense.
+## License / game ownership
+
+This is an independent community project. **Last War: Survival Game** and related trademarks belong to their respective owners.
